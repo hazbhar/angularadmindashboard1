@@ -25,7 +25,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -406,7 +406,7 @@
       ]
     }]
   });
-  
+
 //Echart
 var EareaChart = echarts.init(document.querySelector("#EareaChart")).setOption({
   xAxis: {
@@ -417,7 +417,7 @@ var EareaChart = echarts.init(document.querySelector("#EareaChart")).setOption({
   yAxis: {
     type: 'value'
   },
-  
+
   series: [{
     data: [820, 932, 901, 934, 1290, 1330, 1320],
     type: 'line',
@@ -478,9 +478,9 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
   ]
 });
 
-  
-  
-  
+
+
+
   }, 1);
   new ApexCharts(document.querySelector("#reportsChart"), {
     series: [{
@@ -940,26 +940,7 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
     }
   }).render();
   //Chart.js
-  new Chart(document.querySelector('#lineChart'), {
-    type: 'line',
-    data: {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [{
-        label: 'Line Chart',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+
   new Chart(document.querySelector('#barChart'), {
     type: 'bar',
     data: {
@@ -1212,5 +1193,5 @@ var verticalBarChart = echarts.init(document.querySelector("#verticalBarChart"))
     }
   });
 
- 
+
 })();

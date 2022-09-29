@@ -26,14 +26,14 @@ import { TablesGeneralComponent } from './components/tables-general/tables-gener
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TooltipsComponent } from './components/tooltips/tooltips.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
-import { PagesContactComponent } from './pages/pages-contact/pages-contact.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
-import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
-import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
 import {AddEmployeeComponent} from "./pages/employee/add-employee/add-employee.component";
 import {ListEmployeeComponent} from "./pages/employee/list-employee/list-employee.component";
+import { ListUserComponent } from './pages/User/list-user/list-user.component';
+import { DetailsUserComponent } from './pages/User/details-user/details-user.component';
+import { AddUserComponent } from './pages/User/add-user/add-user.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -63,12 +63,15 @@ const routes: Routes = [
   { path: 'tabs', component: TabsComponent },
   { path: 'tooltips', component: TooltipsComponent },
   { path: 'pages-blank', component: PagesBlankComponent },
-  { path: 'pages-contact', component: PagesContactComponent },
+
   { path: 'pages-error404', component: PagesError404Component },
-  { path: 'pages-faq', component: PagesFaqComponent },
+
   { path: 'pages-login', component: PagesLoginComponent },
-  { path: 'pages-register', component: PagesRegisterComponent },
+
   { path: 'user-profile', component: UsersProfileComponent },
+  { path: 'listusers', component: ListUserComponent },
+  { path: 'userdetails/:id', component: DetailsUserComponent },
+  { path: 'adduser', component: AddUserComponent },
   { path: 'employee-add', component: AddEmployeeComponent },
   { path: 'employee-list', component: ListEmployeeComponent },
 ];

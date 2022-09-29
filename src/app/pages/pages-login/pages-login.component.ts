@@ -18,8 +18,9 @@ export class PagesLoginComponent implements OnInit {
   }
 
   postLoginForm(){
-    this.authService.login(this.loginInput,'password').subscribe({
+    this.authService.login(this.loginInput.userName,this.loginInput.password,'password').subscribe({
       next: apiReponse => {
+        console.log()
         console.warn(apiReponse);
   }})
 }

@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
 import { ILogin } from '../models/login.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   addHttpOption = {
@@ -19,11 +18,15 @@ export class AuthService {
 
   constructor(private http: HttpClient,private config : Constants) { }
 
-  login(input: ILogin,typeauth:any){
+  login(username:any,password:any,typeauth:any): Observable<any>{
     return this.http.post(
-      this.config.API_USER + 'signin?authSelected='+typeauth,
-      input,
-      this.addHttpOption
+      this.config.API_AUTH + 'signin?authSelected='+typeauth,
+      JSON.stringify({username,password}),this.addHttpOption
+
     );
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(this.config.API_USER  + 'signout', { });
   }
 }
