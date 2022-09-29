@@ -42,6 +42,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Constants } from './config/constant';
+import { AddEmployeeComponent } from './pages/employee/add-employee/add-employee.component';
+import { ListEmployeeComponent } from './pages/employee/list-employee/list-employee.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { Constants } from './config/constant';
     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
+    AddEmployeeComponent,
+    ListEmployeeComponent,
   ],
   imports: [
     BrowserModule,

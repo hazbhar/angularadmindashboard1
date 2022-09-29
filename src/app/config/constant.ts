@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class Constants {
     public readonly API_ENDPOINT: string = 'http://localhost:8082/ged/';
 
-    public readonly API_EMPLOYE: string = this.API_ENDPOINT+'employe/';
+    public readonly API_EMPLOYE: string = this.API_ENDPOINT+'employee/';
 
     public readonly API_USER: string = this.API_ENDPOINT+'user/';
 

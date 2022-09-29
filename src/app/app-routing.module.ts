@@ -32,6 +32,8 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+import {AddEmployeeComponent} from "./pages/employee/add-employee/add-employee.component";
+import {ListEmployeeComponent} from "./pages/employee/list-employee/list-employee.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -67,6 +69,8 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+  { path: 'employee-add', component: AddEmployeeComponent },
+  { path: 'employee-list', component: ListEmployeeComponent },
 ];
 
 @NgModule({
