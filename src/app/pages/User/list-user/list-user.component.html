@@ -1,0 +1,55 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+     <h1>Form Elements</h1>
+     <nav>
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+           <li class="breadcrumb-item">Forms</li>
+           <li class="breadcrumb-item active">Elements</li>
+        </ol>
+     </nav>
+  </div>
+  <section class="section">
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="username"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>User List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let user of users; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveUser(user, i)"
+      >
+        {{ user.username }}
+      </li>
+    </ul>
+
+
+  </div>
+  <div class="col-md-6">
+    <app-details-user
+      [viewMode]="true"
+      [currentUser]="currentUser"
+    ></app-details-user>
+  </div>
+</div>
+</section>
+</main>

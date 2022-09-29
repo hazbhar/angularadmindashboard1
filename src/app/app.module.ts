@@ -26,15 +26,12 @@ import { FormsLayoutsComponent } from './components/forms-layouts/forms-layouts.
 import { FormsEditorsComponent } from './components/forms-editors/forms-editors.component';
 import { TablesGeneralComponent } from './components/tables-general/tables-general.component';
 import { TablesDataComponent } from './components/tables-data/tables-data.component';
-import { ChartsChartjsComponent } from './components/charts-chartjs/charts-chartjs.component';
-import { ChartsApexchartsComponent } from './components/charts-apexcharts/charts-apexcharts.component';
+
 import { IconsBootstrapComponent } from './components/icons-bootstrap/icons-bootstrap.component';
 import { IconsRemixComponent } from './components/icons-remix/icons-remix.component';
 import { IconsBoxiconsComponent } from './components/icons-boxicons/icons-boxicons.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
-import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
-import { PagesContactComponent } from './pages/pages-contact/pages-contact.component';
-import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
+
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
@@ -42,6 +39,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Constants } from './config/constant';
+import { DetailsUserComponent } from './pages/User/details-user/details-user.component';
+import { ListUserComponent } from './pages/User/list-user/list-user.component';
+import { AddUserComponent } from './pages/User/add-user/add-user.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -69,18 +70,18 @@ import { Constants } from './config/constant';
     FormsEditorsComponent,
     TablesGeneralComponent,
     TablesDataComponent,
-    ChartsChartjsComponent,
-    ChartsApexchartsComponent,
+
     IconsBootstrapComponent,
     IconsRemixComponent,
     IconsBoxiconsComponent,
     UsersProfileComponent,
-    PagesFaqComponent,
-    PagesContactComponent,
-    PagesRegisterComponent,
+
     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
+    DetailsUserComponent,
+    ListUserComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +90,7 @@ import { Constants } from './config/constant';
     RouterModule,
     HttpClientModule
   ],
-  providers: [Constants],
+  providers: [Constants,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

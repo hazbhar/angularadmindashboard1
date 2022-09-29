@@ -1,0 +1,73 @@
+<main id="main" class="main">
+<div class="pagetitle">
+  <h1>Add User</h1>
+  <nav>
+     <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Users</li>
+        <li class="breadcrumb-item active">Add</li>
+     </ol>
+  </nav>
+</div>
+<section class="section">
+<div>
+  <div class="submit-form">
+    <h2>Add new User</h2>
+      <div *ngIf="!submitted">
+        <div class="form-group">
+
+
+          <label for="username">username :</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            required
+            [(ngModel)]="user.username"
+            name="username"
+          />
+
+
+          <label for="password">password :</label>
+          <input
+            class="form-control"
+            id="password"
+            required
+            [(ngModel)]="user.password"
+            name="password"
+          />
+
+
+        <label for="email">email :</label>
+          <input
+            class="form-control"
+            id="email"
+            required
+            [(ngModel)]="user.email"
+            name="email"
+          />
+
+
+
+  <div class="form-group">
+    <button (click)="saveUser()" class="btn btn-success">Submit</button>
+        </div>
+  </div>
+
+
+
+
+        <div *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
+          Adding User failed: {{ errorMessage }}
+        </div>
+
+      <div *ngIf="submitted">
+        <h4>User was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newUser()">Add</button>
+      </div>
+
+  </div>
+</div>
+  </div>
+</section>
+</main>
