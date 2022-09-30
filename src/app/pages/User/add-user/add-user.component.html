@@ -47,6 +47,18 @@
             name="email"
           />
 
+          <label for="Roles">Roles : </label>
+
+          <select  class="form-select"
+          id="role"
+          required
+          [(ngModel)]="user.role"
+          name="role" >
+             <option selected>Choose...</option>
+             <option value="1">Admin</option>
+             <option value="2">User</option>
+             <option value="3">RH</option>
+          </select>
 
 
   <div class="form-group">

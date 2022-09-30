@@ -25,7 +25,7 @@ export class UserService {
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_USER}${id}`, data);
+    return this.http.put(`${this.config.API_USER}update?id=${id}`, data);
   }
 
   delete(id: any): Observable<any> {

@@ -9,6 +9,8 @@ export class StorageService {
   constructor() { }
   clean(): void {
     window.sessionStorage.clear();
+    window.localStorage.clear();
+
 }
 
 public saveUser(user: any): void {
