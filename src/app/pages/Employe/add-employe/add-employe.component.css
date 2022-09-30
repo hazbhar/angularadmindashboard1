@@ -46,7 +46,7 @@
 /*buttons*/
 #msform .action-button {
   width: 100px;
-  background: #ee0979;
+  background: #4154f1;
   font-weight: bold;
   color: white;
   border: 0 none;
@@ -56,7 +56,7 @@
   margin: 10px 5px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
-  box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #4154f1;
 }
 #msform .action-button-previous {
   width: 100px;
@@ -96,10 +96,10 @@
 }
 #progressbar li {
   list-style-type: none;
-  color: white;
+  color: burlywood;
   text-transform: uppercase;
   font-size: 9px;
-  width: 33.33%;
+  width: 15%;
   float: left;
   position: relative;
   letter-spacing: 1px;
@@ -135,7 +135,7 @@
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before, #progressbar li.active:after {
-  background: #ee0979;
+  background: #4154f1;
   color: white;
 }
 #progressbar li.inactive:before{

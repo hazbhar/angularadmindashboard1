@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+.submit {
+  width: 100px;
+  background: #20832d;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+  font-size: 13px;
+}
+.submit:hover, #msform .submit:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #20832d;
+}
+.reset {
+  width: 100px;
+  background: #757575;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+  font-size: 13px;
+}
+.reset:focus, .reset:hover{
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+}

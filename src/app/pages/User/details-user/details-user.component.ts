@@ -124,15 +124,6 @@ export class DetailsUserComponent implements OnInit {
       });
   }
 
-  deleteUser(): void {
-    this.userService.delete(this.currentUser.id)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.router.navigate(['/listusers']);
-        },
-        error: (e) => console.error(e)
-      });
-  }
+
 
 }
