@@ -1,0 +1,278 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Add User</h1>
+    <nav>
+       <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item">Employes</li>
+          <li class="breadcrumb-item active">Add</li>
+       </ol>
+    </nav>
+  </div>
+  <section class="section">
+
+
+
+                   <form [formGroup]="Infosgenerales" id="msform">
+                         <!-- progressbar -->
+                <ul id="progressbar">
+                  <li [ngClass]="step>=1 ? 'active ' : 'inactive'">Infos générales</li>
+                  <li [ngClass]="step>=2 ? 'active' : 'inactive'">Infos contrat du travail</li>
+                  <li [ngClass]="step>=3 ? 'active' : 'inactive'">Infos des diplomes</li>
+                  <li [ngClass]="step>=4 ? 'active' : 'inactive'"> Competences</li>
+                  <li [ngClass]="step>=5 ? 'active' : 'inactive'">Infos de sécurité</li>
+                  <li [ngClass]="step==6 ? 'active' : 'inactive'">Roles</li>
+              </ul>
+                    <fieldset *ngIf="step == 1" >
+                      <h2 class="fs-title">Infos générales</h2>
+                    <div class="row mb-3">
+                      <label for="inputText" class="col-sm-2 col-form-label">Nom</label>
+                      <div class="col-sm-10"> <input type="text" class="form-control" name="Nom" id="Nom" placeholder="Nom..."  required>
+                      </div>
+                   </div>
+                   <div class="row mb-3">
+                      <label for="inputEmail" class="col-sm-2 col-form-label">Prenom</label>
+                      <div class="col-sm-10"> <input type="text" class="form-control" name="Prenom" id="Prenom"  placeholder="Prenom..." required>
+                      </div>
+                   </div>
+                   <div class="row mb-3">
+                      <label for="inputPassword" class="col-sm-2 col-form-label">initiale</label>
+                      <div class="col-sm-10"> <input type="text" class="form-control" name="initiale" id="initiale" placeholder="initiale..." required>
+                      </div>
+                   </div>
+                   <div class="row mb-3">
+                     <label for="inputDate" class="col-sm-2 col-form-label">Date Naissance</label>
+                     <div class="col-sm-10"> <input type="date" class="form-control" name="DateNaissance" id="DateNaissance" placeholder="Date Naissance..." required>
+                     </div>
+                  </div>
+                   <div class="row mb-3">
+                      <label for="inputNumber" class="col-sm-2 col-form-label">Cin</label>
+                      <div class="col-sm-10"> <input type="number" class="form-control" name="Cin" id="Cin"  placeholder="Cin..." required>
+                      </div>
+                   </div>
+                <input  (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+                  </fieldset>
+               </form>
+               <form [formGroup]="Infoscontratdutravail" id="msform">
+
+                <!-- fieldsets -->
+                <fieldset  *ngIf="step == 2" >
+                  <h2 class="fs-title">Infos contrat du travail</h2>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Date Debut Contrat</label>
+                  <div class="col-sm-10">  <input type="date" name="DateDebutContrat" id="DateDebutContrat" class="form-control"  placeholder="DateDebutContrat..." required >
+                  </div>
+               </div>
+               <div class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Date Fin Contrat</label>
+                  <div class="col-sm-10">  <input type="date" name="DateFinContrat" id="DateFinContrat" class="form-control" placeholder="DateFinContrat..." required>
+                  </div>
+               </div>
+               <div class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
+                <div class="col-sm-10">
+                   <div class="form-check"> <input  type="radio" name="typeContrat" id="typeContrat"> <label class="form-check-label" for="typeContrat"> CDI </label></div>
+                   <div class="form-check"> <input  type="radio" name="typeContrat" id="typeContrat" checked> <label class="form-check-label" for="typeContrat"> CDD </label></div>
+                </div>
+             </div>
+               <div class="row mb-3">
+                  <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
+                  <div class="col-sm-10">       <input type="text" name="frequence" id="frequence" class="form-control" placeholder="frequence..." required>
+                  </div>
+               </div>
+
+               <div class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">available</legend>
+                  <div class="col-sm-10">
+                     <div class="form-check"> <input  type="radio" name="available" id="available" value="yes" checked> <label class="form-check-label" for="available"> Yes </label></div>
+                     <div class="form-check"> <input  type="radio" name="available" id="available" value="no"> <label class="form-check-label" for="available"> No </label></div>
+                  </div>
+               </div>
+               <div class="row mb-3">
+                  <legend class="col-sm-2  col-form-label ">type Personnel</legend>
+                  <div class="col-sm-10"> <input class="form-control" type="text" name="typePersonnel" id="typePersonnel" placeholder="typePersonnel..." required>
+                  </div>
+               </div>
+               <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">nom Societe</label>
+                  <div class="col-sm-10"> <input class="form-control" type="text" name="nomSociete" id="nomSociete" placeholder="nom Societe..." required>
+                  </div>
+               </div>
+               <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">unite Technique</label>
+                <div class="col-sm-10">  <input class="form-control" type="text" name="uniteTechnique" id="uniteTechnique" placeholder="unite Technique..." required>
+                </div>
+             </div>
+             <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">contrat Impartialite</label>
+              <div class="col-sm-10"> <input class="form-control" type="text" name="contratImpartialite" id="contratImpartialite" placeholder="contrat Impartialite..." required>
+              </div>
+           </div>
+           <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">contrat Confidentialite</label>
+            <div class="col-sm-10"> <input class="form-control" type="text" name="contratConfidentialite" id="contratConfidentialite" placeholder="contrat Confidentialite..." required>
+            </div>
+         </div>
+         <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">visite Medicales</label>
+          <div class="col-sm-10"> <input class="form-control" type="text" name="visiteMedicales" id="visiteMedicales" placeholder="visite Medicales..." required>
+          </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Eap</label>
+              <div class="col-sm-10">  <input class="form-control" type="text" name="eap" id="eap" placeholder="eap..." required>
+              </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">date Eap</label>
+            <div class="col-sm-10"> <input class="form-control" type="date" name="dateEap" id="dateEap" placeholder="date Eap..." required>
+            </div>
+          </div>
+             <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">site</label>
+              <div class="col-sm-10"> <input class="form-control" type="text" name="site" id="site" placeholder="site..." required>
+              </div>
+           </div>
+           <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+
+           <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+              </fieldset>
+                  </form>
+
+
+         <form [formGroup]="Infosdesdiplomes" id="msform">
+          <fieldset *ngIf="step == 3">
+
+              <h2 class="fs-title">Infos des diplomes</h2>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">diplomes</label>
+                <div class="col-sm-10"> <input class="form-control" type="text" name="diplomes" id="diplomes" placeholder="diplomes..." required>
+                </div>
+             </div>
+
+             <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">attributions</label>
+              <div class="col-sm-10"> <input class="form-control" type="text" name="attributions" id="attributions" placeholder="attributions..." required>
+              </div>
+           </div>
+              <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+
+            </fieldset>
+      </form>
+      <form [formGroup]="Competences" id="msform">
+        <fieldset *ngIf="step == 4">
+
+            <h2 class="fs-title">Competences</h2>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">formation</label>
+              <div class="col-sm-10"> <input class="form-control" type="text" name="formation" id="formation" placeholder="formation..." required>
+              </div>
+           </div>
+           <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">periodique</label>
+            <div class="col-sm-10"> <input class="form-control" type="text" name="periodique" id="periodique" placeholder="periodique..." required>
+            </div>
+         </div>
+
+         <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">date de Renouvellement</label>
+          <div class="col-sm-10"> <input class="form-control" type="date" name="dateRenouvellement" id="dateRenouvellement" placeholder="date de Renouvellement..." required>
+          </div>
+       </div>
+       <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">formation File</label>
+        <div class="col-sm-10"> <input class="form-control" type="file" name="formationFile" id="formationFile" placeholder="formation File..." required>
+        </div>
+     </div>
+     <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">habilitation</label>
+      <div class="col-sm-10"> <input class="form-control" type="text" name="habilitation" id="habilitation" placeholder="habilitation..." required>
+      </div>
+   </div>
+   <div class="row mb-3">
+    <label class="col-sm-2 col-form-label">date Habilitation</label>
+    <div class="col-sm-10"> <input class="form-control" type="date" name="dateHabilitation" id="dateHabilitation" placeholder="date Habilitation..." required>
+    </div>
+ </div>
+ <div class="row mb-3">
+  <label class="col-sm-2 col-form-label">date ReHabilitation</label>
+  <div class="col-sm-10"> <input class="form-control" type="date" name="dateRenHabi" id="dateRenHabi" placeholder="date ReHabilitation..." required>
+  </div>
+</div>
+<div class="row mb-3">
+  <label class="col-sm-2 col-form-label">habilitation File</label>
+  <div class="col-sm-10"> <input class="form-control" type="file" name="habilitationFile" id="habilitationFile" placeholder="habilitation File..." required>
+  </div>
+</div>
+
+            <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+            <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+
+          </fieldset>
+    </form>
+    <form [formGroup]="Infosdesecurite" id="msform">
+      <fieldset *ngIf="step == 5">
+
+          <h2 class="fs-title">Infos de sécurité </h2>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">user name</label>
+            <div class="col-sm-10"> <input class="form-control" type="text" name="username" id="username" placeholder="user name..." required>
+            </div>
+         </div>
+
+         <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10"> <input class="form-control" type="email" name="email" id="email" placeholder="Email..." required>
+          </div>
+       </div>
+
+       <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">confirm Email</label>
+        <div class="col-sm-10"> <input class="form-control" type="email" name="confirmEmail" id="confirmEmail" placeholder="confirm Email..." required>
+        </div>
+     </div>
+
+     <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">type Auth</label>
+      <div class="col-sm-10"> <input class="form-control" type="text" name="typeAuth" id="typeAuth" placeholder="type Auth..." required>
+      </div>
+   </div>
+   <div class="row mb-3">
+    <label class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10"> <input class="form-control" type="password" name="password" id="password" placeholder="Password..." required>
+    </div>
+ </div>
+ <div class="row mb-3">
+  <label class="col-sm-2 col-form-label">confirmPassword</label>
+  <div class="col-sm-10"> <input class="form-control" type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm Password..." required>
+  </div>
+</div>
+
+          <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+          <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+
+        </fieldset>
+  </form>
+  <form [formGroup]="Roles" id="msform">
+    <fieldset *ngIf="step == 6">
+
+        <h2 class="fs-title">Roles</h2>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">Role</label>
+          <div class="col-sm-10">
+             <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+             </select>
+          </div>
+       </div>
+
+        <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+        <input (click)="submit()"type="submit" name="submit" class="submit action-button" value="Submit"/>
+    </fieldset>
+</form>
+  </section>
+</main>

@@ -7,4 +7,6 @@ export class User{
   validity?: boolean ;
   visibility?: boolean ;
   enabled?: boolean ;
+  role?: any[] ;
+  privilage ?:any[];
 }

@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './details-user.component.html',
   styleUrls: ['./details-user.component.css']
 })
+
 export class DetailsUserComponent implements OnInit {
 
   @Input() viewMode = false;
@@ -22,6 +23,7 @@ export class DetailsUserComponent implements OnInit {
     visibility: undefined,
     enabled: undefined
   };
+
   message = '';
 
   constructor(

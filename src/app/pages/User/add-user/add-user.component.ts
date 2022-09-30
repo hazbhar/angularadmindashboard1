@@ -20,8 +20,10 @@ export class AddUserComponent implements OnInit {
     lastconnection: undefined,
     validity: false,
     visibility: false,
-    enabled: false
+    enabled: false,
+    role : undefined
   };
+
   submitted = false;
 
   constructor(private userservice: UserService, private storageService: StorageService) { }
