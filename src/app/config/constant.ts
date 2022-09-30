@@ -9,4 +9,6 @@ export class Constants {
     public readonly API_USER: string = this.API_ENDPOINT+'user/';
 
     public readonly API_AUTH: string = this.API_ENDPOINT+'auth/';
+
+    public readonly API_FORMATION: string = this.API_ENDPOINT+'formation/';
 }
