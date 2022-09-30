@@ -34,6 +34,7 @@ import {ListEmployeeComponent} from "./pages/employee/list-employee/list-employe
 import { ListUserComponent } from './pages/User/list-user/list-user.component';
 import { DetailsUserComponent } from './pages/User/details-user/details-user.component';
 import { AddUserComponent } from './pages/User/add-user/add-user.component';
+import {DetailsEmployeeComponent} from "./pages/employee/details-employee/details-employee.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -74,6 +75,7 @@ const routes: Routes = [
   { path: 'adduser', component: AddUserComponent },
   { path: 'employee-add', component: AddEmployeeComponent },
   { path: 'employee-list', component: ListEmployeeComponent },
+  { path: 'employee-details/:id', component: DetailsEmployeeComponent },
 ];
 
 @NgModule({

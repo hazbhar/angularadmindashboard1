@@ -45,6 +45,7 @@ import { AddUserComponent } from './pages/User/add-user/add-user.component';
 import { AuthService } from './services/auth.service';
 import { AddEmployeeComponent } from './pages/employee/add-employee/add-employee.component';
 import { ListEmployeeComponent } from './pages/employee/list-employee/list-employee.component';
+import { DetailsEmployeeComponent } from './pages/employee/details-employee/details-employee.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { ListEmployeeComponent } from './pages/employee/list-employee/list-emplo
     DetailsUserComponent,
     ListUserComponent,
     AddUserComponent,
+    DetailsEmployeeComponent,
   ],
   imports: [
     BrowserModule,

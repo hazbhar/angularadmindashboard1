@@ -1,1 +1,54 @@
-<p>list-employee works!</p>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>List of employees</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+
+        <li class="breadcrumb-item active">Employees</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="list row">
+      <div class="col-md-8">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search by name"
+            [(ngModel)]="username"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="let employee of employeeList; let i = index"
+            [class.active]="i == currentIndex"
+            (click)="setActiveEmployee(employee, i)"
+          >
+            {{ employee.firstName }}
+          </li>
+        </ul>
+
+
+      </div>
+     <div class="col-md-6">
+        <app-details-employee
+          [viewMode]="true"
+          [currentEmployee]="currentEmployee"
+        ></app-details-employee>
+      </div>
+    </div>
+  </section>
+</main>
