@@ -1,0 +1,110 @@
+<main id="main" class="main" >
+  <div class="pagetitle">
+     <h1>Users Details</h1>
+     <nav>
+        <ol class="breadcrumb">
+           <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+           <li class="breadcrumb-item">User</li>
+           <li class="breadcrumb-item active">Details</li>
+        </ol>
+     </nav>
+  </div>
+  <section class="section">
+    <div class="card">
+    <div class="card-body">
+       <h5 class="card-title">User Details</h5>
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentUser.id">
+    <h4>User</h4>
+    <div>
+      <label><strong>user name:</strong></label> {{ currentUser.username }}
+    </div>
+    <div>
+      <label><strong>Email:</strong></label>
+      {{ currentUser.email }}
+    </div>
+
+
+    <div>
+      <label><strong>enabled:</strong></label>
+      {{ currentUser.enabled ? "enabled" : "disable" }}
+    </div>
+    <div>
+      <label><strong>validity:</strong></label>
+      {{ currentUser.validity ? "valid" : "unvalid" }}
+
+    </div>
+
+
+  </div>
+
+  <div *ngIf="!currentUser">
+    <br />
+    <p>Please click on a User...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentUser.id" class="edit-form">
+
+    <form>
+      <div class="form-group">
+        <label for="username">user name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          [(ngModel)]="currentUser.username"
+          name="username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="currentUser.email"
+          name="email"
+        />
+      </div>
+
+
+      <div class="form-group">
+        <label><strong>enable:</strong></label>
+        <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" > <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label></div>
+
+      </div>
+
+      <div class="form-group">
+        <label><strong>valide: </strong></label>
+          <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" > <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label></div>
+
+      </div>
+
+    </form>
+
+
+
+    <div class="text-center">
+    <button
+      type="submit"
+      class="submit"
+      (click)="updateUser()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  </div>
+  <div *ngIf="!currentUser.id">
+    <br />
+    <div class="text-center">
+    <p>Cannot access this User...</p>
+  </div>
+  </div>
+</ng-template>
+    </div>
+    </div>
+</section>
+</main>

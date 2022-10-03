@@ -1,6 +1,6 @@
 export class Employe{
   /**** Infos générales ****/
-  id:any;
+  id?:any;
   nom?:string;
   prenom?:string;
   initiale?:string;
