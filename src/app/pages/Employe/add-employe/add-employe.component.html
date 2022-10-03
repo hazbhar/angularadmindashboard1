@@ -135,11 +135,6 @@
               <div class="col-sm-10"> <input class="form-control" type="text" name="site" id="site" placeholder="site..." required>
               </div>
            </div>
-           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label">materiels</label>
-            <div class="col-sm-10">  <input class="form-control" type="text" name="materiels" id="materiels" placeholder="materiels..." required>
-            </div>
-        </div>
            <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
 
            <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
@@ -150,8 +145,10 @@
 
          <form [formGroup]="Infosdesdiplomes" id="msform">
           <fieldset *ngIf="step == 3">
-
-              <h2 class="fs-title">Infos des diplomes</h2>
+              <div formArrayName="diplom">
+                <div *ngFor="let item of diplom.controls;let i=index">
+                  <div [formGroupName]="i">
+              <h2 class="fs-title">Infos des diplomes {{i}}</h2>
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">diplomes</label>
                 <div class="col-sm-10"> <input class="form-control" type="text" name="diplomes" id="diplomes" placeholder="diplomes..." required>
@@ -163,10 +160,14 @@
               <div class="col-sm-10"> <input class="form-control" type="text" name="attributions" id="attributions" placeholder="attributions..." required>
               </div>
            </div>
-              <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
-              <button   type="reset" name="next" class="reset" >reset</button>
 
+            </div>
+          </div>
+          </div>
+          <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+              <button   type="reset" name="next" class="reset"  >reset</button>
+          <button (click)="addnewdipl()" class="add">add (+)</button>
             </fieldset>
       </form>
       <form [formGroup]="Competences" id="msform">
@@ -272,7 +273,7 @@
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">Role</label>
           <div class="col-sm-10">
-             <select class="form-select" aria-label="Default select example" id="role" name="role">
+             <select class="form-select" aria-label="Default select example">
                 <option selected>Open this select menu</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
