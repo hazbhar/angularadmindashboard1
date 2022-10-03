@@ -58,8 +58,7 @@ import { ListEmployeComponent } from './pages/Employe/list-employe/list-employe.
     DetailsDiplomeComponent,
     ListDiplomesComponent,
     AddDiplomeComponent,
-    EditDiplomeComponent
-
+    EditDiplomeComponent,
     DetailsUserComponent,
     ListUserComponent,
     AddUserComponent,

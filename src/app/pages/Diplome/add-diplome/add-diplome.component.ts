@@ -1,5 +1,6 @@
 import { Diplome } from './../../../models/Diplome';
 import { Component, OnInit } from '@angular/core';
+import { FormationService } from 'src/app/services/formation.service';
 
 @Component({
   selector: 'app-add-diplome',
@@ -10,24 +11,24 @@ export class AddDiplomeComponent implements OnInit {
 
   formation: Diplome = {
     title : '',
-    description : '',
-    periodec : true,
-    enabled : true,
-    visibility : true
+    speciality : '',
+    mention : '',
+    geted : true,
+    dateObtained : undefined
   }
-  
+
   submitted = false ;
   constructor(private formationService : FormationService) { }
-  
+
     ngOnInit(): void {
     }
-  
+
     addFormation(): void {
       const data = {
         title: this.formation.title,
-        description: this.formation.description
+        description: this.formation.speciality
       };
-  
+
       this.formationService.create(data,1)
         .subscribe({
           next: (res: any) => {

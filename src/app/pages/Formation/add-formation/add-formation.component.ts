@@ -42,6 +42,6 @@ constructor(private formationService : FormationService) { }
       });
   }
 
- 
+
 
 }
