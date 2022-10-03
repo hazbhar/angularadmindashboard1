@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Employe } from 'src/app/models/Employe';
 
 @Component({
   selector: 'app-list-employe',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-employe.component.css']
 })
 export class ListEmployeComponent implements OnInit {
-
+  employees?:Employe[];
+  currentIndex = -1;
+  empname = '';
   constructor() { }
 
   ngOnInit(): void {

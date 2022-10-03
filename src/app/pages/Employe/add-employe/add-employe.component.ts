@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Employe } from 'src/app/models/Employe';
 
 @Component({
   selector: 'app-add-employe',
@@ -13,9 +14,9 @@ export class AddEmployeComponent implements OnInit {
   Infosdesdiplomes!: FormGroup;
   Competences!: FormGroup;
   Roles!: FormGroup;
-
+  employe!:Employe;
   step = 1;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private formArray : FormArray) { }
 
   ngOnInit(): void {
     this.Infosgenerales = this.formBuilder.group({
@@ -43,24 +44,30 @@ export class AddEmployeComponent implements OnInit {
     site: ['',Validators.required]
   });
   this.Infosdesecurite = this.formBuilder.group({
-      highest_qualification: ['', Validators.required],
-      university: ['', Validators.required],
-      total_marks: ['',Validators.required]
+    username: ['', Validators.required],
+    email: ['', Validators.required],
+    confirmEmail: ['',Validators.required],
+    typeAuth: ['',Validators.required],
+    password: ['',Validators.required],
+    confirmPassword: ['',Validators.required]
   });
   this.Infosdesdiplomes = this.formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    phone: ['',Validators.required]
+    diplomes: ['', Validators.required],
+    attributions: ['', Validators.required]
 });
 this.Competences = this.formBuilder.group({
-  name: ['', Validators.required],
-  email: ['', Validators.required],
-  phone: ['',Validators.required]
+  formation: ['', Validators.required],
+  periodique: ['', Validators.required],
+  dateRenouvellement: ['',Validators.required],
+  formationFile: ['',Validators.required],
+  habilitation: ['',Validators.required],
+  dateHabilitation: ['',Validators.required],
+  dateRenHabi: ['',Validators.required],
+  habilitationFile: ['',Validators.required]
 });
 this.Roles = this.formBuilder.group({
-  name: ['', Validators.required],
-  email: ['', Validators.required],
-  phone: ['',Validators.required]
+  role: ['', Validators.required]
+
 });
 }
 get Infosgénérale() { return this.Infosgenerales.controls; }
