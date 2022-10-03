@@ -1,0 +1,34 @@
+
+<main id="main" class="main">
+  <section class="section">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let formation of formations">
+        <th scope="row">{{formation.id}}</th>
+        <td>{{formation.title}}</td>
+        <td>{{formation.description}}</td>
+        <td>
+          <div>
+            <button class="btn btn-sm btn-warning" routerLink="/edit-formation/{{formation.id}}">
+              <i class="fa fa-edit"></i>Update</button>
+            <button class="btn btn-sm btn-danger"> 
+              <i class="fa fa-remove"(click)="deleteFormation(formation)">Delete </i></button>
+        </div>
+
+        </td>
+
+       
+      </tr>
+    
+    </tbody>
+  </table>
+  </section>
+  </main>

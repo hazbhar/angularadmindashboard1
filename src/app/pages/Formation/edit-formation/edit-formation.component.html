@@ -1,0 +1,40 @@
+
+<main id="main" class="main">
+  <section class="section">
+<form>
+    
+      <h4>Formation</h4>
+      
+        <div class="form-group">
+          <label for="title">Titre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="formation.title"
+            name="title"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="formation.description"
+            name="description"
+          />
+        </div>
+        <div class="form-group">
+    
+          <button class="btn btn-sm btn-danger"> 
+            <i class="fa fa-remove"(click)="editFormation(formation)">Mettre à jour </i></button>
+
+
+      </div>
+
+       
+
+ </form>       
+ </section>
+ </main>
