@@ -23,7 +23,6 @@ export class DetailsEmployeeComponent implements OnInit {
     availability: undefined,
     companyName: undefined,
     impartialityContract: undefined,
-    user: undefined,
     contractList: undefined,
     medicalVisitList: undefined,
     handedOverList: undefined,

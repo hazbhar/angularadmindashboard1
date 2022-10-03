@@ -10,14 +10,19 @@ import { UserService } from 'src/app/services/user.service';
 export class ListUserComponent implements OnInit {
   users?: User[];
   currentUser: User = {
+    id:undefined,
     username: undefined,
     password: undefined,
+    confPassword: undefined,
     email: undefined,
-    id: undefined,
+    confEmail:undefined,
     lastconnection: undefined,
     validity: undefined,
-    visibility: undefined,
-    enabled: undefined
+    enabled: undefined,
+    authentifications:undefined,
+    employee:undefined,
+    roles: undefined,
+    privileges:undefined
   };
   currentIndex = -1;
   username = '';
@@ -40,14 +45,19 @@ export class ListUserComponent implements OnInit {
   refreshList(): void {
     this.retrieveUsers();
     this.currentUser = {
+      id:undefined,
       username: undefined,
-    password: undefined,
-    email: undefined,
-    id: undefined,
-    lastconnection: undefined,
-    validity: undefined,
-    visibility: undefined,
-    enabled: undefined
+      password: undefined,
+      confPassword: undefined,
+      email: undefined,
+      confEmail:undefined,
+      lastconnection: undefined,
+      validity: undefined,
+      enabled: undefined,
+      authentifications:undefined,
+      employee:undefined,
+      roles: undefined,
+      privileges:undefined
     };
     this.currentIndex = -1;
   }
