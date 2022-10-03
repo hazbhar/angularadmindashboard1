@@ -48,6 +48,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { Constants } from './config/constant';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DetailsDiplomeComponent } from './pages/Diplome/details-diplome/details-diplome.component';
+import { ListDiplomesComponent } from './pages/Diplome/list-diplomes/list-diplomes.component';
+import { AddDiplomeComponent } from './pages/Diplome/add-diplome/add-diplome.component';
+import { EditDiplomeComponent } from './pages/Diplome/edit-diplome/edit-diplome.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +94,11 @@ import { RouterModule } from '@angular/router';
     AddFormationComponent,
     DetailsFormationComponent,
     EditFormationComponent,
-    ListFormationsComponent
+    ListFormationsComponent,
+    DetailsDiplomeComponent,
+    ListDiplomesComponent,
+    AddDiplomeComponent,
+    EditDiplomeComponent
   ],
   imports: [
     BrowserModule,
