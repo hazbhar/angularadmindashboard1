@@ -1,6 +1,6 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Add User</h1>
+    <h1>Add Employe</h1>
     <nav>
        <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -51,6 +51,8 @@
                       </div>
                    </div>
                 <input  (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+                <button   type="reset" name="next" class="reset" >reset</button>
+
                   </fieldset>
                </form>
                <form [formGroup]="Infoscontratdutravail" id="msform2">
@@ -136,14 +138,17 @@
            <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
 
            <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+           <button   type="reset" name="next" class="reset" >reset</button>
               </fieldset>
                   </form>
 
 
          <form [formGroup]="Infosdesdiplomes" id="msform3">
           <fieldset *ngIf="step == 3">
-
-              <h2 class="fs-title">Infos des diplomes</h2>
+              <div formArrayName="diplom">
+                <div *ngFor="let item of diplom.controls;let i=index">
+                  <div [formGroupName]="i">
+              <h2 class="fs-title">Infos des diplomes {{i}}</h2>
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">diplomes</label>
                 <div class="col-sm-10"> <input class="form-control" type="text" name="diplomes" id="diplomes" placeholder="diplomes..." required>
@@ -155,9 +160,14 @@
               <div class="col-sm-10"> <input class="form-control" type="text" name="attributions" id="attributions" placeholder="attributions..." required>
               </div>
            </div>
-              <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
 
+            </div>
+          </div>
+          </div>
+          <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+              <button   type="reset" name="next" class="reset"  >reset</button>
+          <button (click)="addnewdipl()" class="add">add (+)</button>
             </fieldset>
       </form>
       <form [formGroup]="Competences" id="msform4">
@@ -208,6 +218,7 @@
 
             <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
             <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+            <button   type="reset" name="next" class="reset" >reset</button>
 
           </fieldset>
     </form>
@@ -251,6 +262,7 @@
 
           <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
           <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+          <button   type="reset" name="next" class="reset" >reset</button>
 
         </fieldset>
   </form>
@@ -271,7 +283,9 @@
        </div>
 
         <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-        <input (click)="submit()"type="submit" name="submit" class="submit action-button" value="Submit"/>
+        <button   type="reset" name="next" class="reset" >reset</button>
+        <button (click)="submit()"type="submit" name="submit" class="submit" >Submit</button>
+
     </fieldset>
 </form>
   </section>

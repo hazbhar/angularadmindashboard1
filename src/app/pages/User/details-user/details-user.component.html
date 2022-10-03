@@ -1,15 +1,18 @@
-<main id="main" class="main">
+<main id="main" class="main" >
   <div class="pagetitle">
-     <h1>Form Elements</h1>
+     <h1>Users Details</h1>
      <nav>
         <ol class="breadcrumb">
            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-           <li class="breadcrumb-item">Users</li>
+           <li class="breadcrumb-item">User</li>
            <li class="breadcrumb-item active">Details</li>
         </ol>
      </nav>
   </div>
   <section class="section">
+    <div class="card">
+    <div class="card-body">
+       <h5 class="card-title">User Details</h5>
 <div *ngIf="viewMode; else editable">
   <div *ngIf="currentUser.id">
     <h4>User</h4>
@@ -21,10 +24,7 @@
       {{ currentUser.email }}
     </div>
 
-<!--    <div>
-      <label><strong>visibility:</strong></label>
-      {{ currentUser.visibility ? "visibile" : "unvisible" }}
-    </div>-->
+
     <div>
       <label><strong>enabled:</strong></label>
       {{ currentUser.enabled ? "enabled" : "disable" }}
@@ -35,12 +35,7 @@
 
     </div>
 
-    <button
-      class="btn btn-info"
-      routerLink="/userdetails/{{ currentUser.id }}"
-    >
-      Edit
-  </button>
+
   </div>
 
   <div *ngIf="!currentUser">
@@ -51,7 +46,7 @@
 
 <ng-template #editable>
   <div *ngIf="currentUser.id" class="edit-form">
-    <h4>User</h4>
+
     <form>
       <div class="form-group">
         <label for="username">user name</label>
@@ -82,60 +77,34 @@
       </div>
 
       <div class="form-group">
-        <label><strong>valide: <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckCheckedd" > <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label></div>
-        </strong></label>
+        <label><strong>valide: </strong></label>
+          <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" > <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label></div>
+
       </div>
 
     </form>
-<!--
-    <button
-      class="btn btn-danger"
-      *ngIf="currentUser.enabled"
-      (click)="updateEnability(false)"
-    >
-      Disable
-    </button>
-    <button
-      *ngIf="!currentUser.enabled"
-      class="btn btn-success"
-      (click)="updateEnability(true)"
-    >
-      Enable
-    </button>
 
-    <button
-      class="btn btn-danger"
-      *ngIf="currentUser.enabled"
-      (click)="updateValidity(false)"
-    >
-      Valide
-    </button>
-    <button
-      *ngIf="!currentUser.enabled"
-      class="btn btn-success"
-      (click)="updateValidity(true)"
-    >
-      Unvalide
-    </button>-->
 
-    <button class="btn btn-danger" (click)="deleteUser()">
-      Delete
-    </button>
 
+    <div class="text-center">
     <button
       type="submit"
-      class="btn btn-success"
+      class="submit"
       (click)="updateUser()"
     >
       Update
     </button>
     <p>{{ message }}</p>
   </div>
-
+  </div>
   <div *ngIf="!currentUser.id">
     <br />
+    <div class="text-center">
     <p>Cannot access this User...</p>
   </div>
+  </div>
 </ng-template>
+    </div>
+    </div>
 </section>
 </main>

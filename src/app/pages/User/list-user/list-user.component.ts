@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 
@@ -26,7 +27,7 @@ export class ListUserComponent implements OnInit {
   };
   currentIndex = -1;
   username = '';
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private router: Router) { }
 
   ngOnInit(): void {
     this.retrieveUsers();
@@ -61,7 +62,16 @@ export class ListUserComponent implements OnInit {
     };
     this.currentIndex = -1;
   }
-
+  deleteUser(id:any): void {
+    this.userService.delete(id)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigate(['/listusers']);
+        },
+        error: (e) => console.error(e)
+      });
+  }
   setActiveUser(user: User, index: number): void {
     this.currentUser = user;
     this.currentIndex = index;

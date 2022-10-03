@@ -13,7 +13,19 @@ import { UsersProfileComponent } from './pages/users-profile/users-profile.compo
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
+
+import { AddFormationComponent } from './pages/Formation/add-formation/add-formation.component';
+import { EditFormationComponent } from './pages/Formation/edit-formation/edit-formation.component';
+import { ListFormationsComponent } from './pages/Formation/list-formations/list-formations.component';
+import { DetailsFormationComponent } from './pages/Formation/details-formation/details-formation.component';
 import { HttpClientModule } from "@angular/common/http";
+
+
+import { DetailsDiplomeComponent } from './pages/Diplome/details-diplome/details-diplome.component';
+import { ListDiplomesComponent } from './pages/Diplome/list-diplomes/list-diplomes.component';
+import { AddDiplomeComponent } from './pages/Diplome/add-diplome/add-diplome.component';
+import { EditDiplomeComponent } from './pages/Diplome/edit-diplome/edit-diplome.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Constants } from './config/constant';
@@ -38,11 +50,21 @@ import { DetailsEmployeeComponent } from './pages/Employe/details-employe/detail
     PagesError404Component,
     PagesBlankComponent,
     ListEmployeeComponent,
+
+    AddFormationComponent,
+    DetailsFormationComponent,
+    EditFormationComponent,
+    ListFormationsComponent,
+    DetailsDiplomeComponent,
+    ListDiplomesComponent,
+    AddDiplomeComponent,
+    EditDiplomeComponent,
     DetailsUserComponent,
     ListUserComponent,
     AddUserComponent,
     AddEmployeComponent,
     DetailsEmployeeComponent,
+
   ],
   imports: [
     BrowserModule,

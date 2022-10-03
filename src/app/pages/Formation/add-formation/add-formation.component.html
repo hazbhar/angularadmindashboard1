@@ -1,0 +1,76 @@
+
+<main id="main" class="main">
+<section class="section">
+
+
+  <div *ngIf="!submitted">
+    <div class="form-group">
+      <div class="d-flex justify-content-between">
+
+      <label for="title">Titre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        required
+        [(ngModel)]="formation.title"
+        name="title"
+      />
+
+      <label for="description">Description</label>
+      <input
+        class="form-control"
+        id="password"
+        required
+        [(ngModel)]="formation.description"
+        name="password"
+      />
+
+   
+
+  
+      <div>
+          <button class="btn btn-success" (click)="addFormation()">Add</button>
+      </div>
+    
+    
+
+
+      </div></div>
+</div>
+</section>
+<!--
+<form>
+<div class="form-group">
+  <label for="firstname">Firstname</label>
+  <div class="input-group">
+    <input id="fname" class="form-control">
+  </div>
+</div>
+<div class="form-group">
+  <label for="lastname">Lastname</label>
+  <div class="input-group">
+    <input id="lname" class="form-control">
+  </div>
+</div>
+<div class="form-group">
+  <label for="department">Department</label>
+  <div class="input-group">
+    <input id="dept" class="form-control">
+  </div>
+</div>
+<div class="form-group">
+  <label>Email</label>
+  <div class="input-group">
+    <input id="email2" class="form-control">
+  </div>
+</div>
+<div class="form-group">
+  <label> Country</label>
+  <div class="input-group">
+    <input id="cntry" class="form-control">
+  </div>
+</div>
+</form>
+
+-->
