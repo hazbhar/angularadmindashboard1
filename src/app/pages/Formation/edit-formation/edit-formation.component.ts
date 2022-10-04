@@ -17,14 +17,16 @@ export class EditFormationComponent implements OnInit {
   submitted = false ;
   constructor(private formationService : FormationService,private route:ActivatedRoute,private router:Router) { }
   formation: Formation = {
-    id:'',
-    title : '',
-    description : '',
-    periodec : true,
-    enabled : true,
-    visibility : true
+    id: 0,
+    title: undefined,
+    description: undefined,
+    periodec: undefined,
+    enabled: undefined,
+    employeeFormationList: undefined,
+    habilitationList: undefined,
+    attachedDocsList: undefined
   }
-  
+
 
 
 
@@ -64,7 +66,7 @@ export class EditFormationComponent implements OnInit {
       next:(data: any)=>{
         this.formation=data;
       },error: (e: any) =>console.error(e)
-      
+
     });
   }
 

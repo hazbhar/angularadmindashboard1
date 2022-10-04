@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ILogin } from 'src/app/models/login.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
+import {LoginRequest} from "../../models/LoginRequest";
 
 @Component({
   selector: 'app-pages-login',
@@ -19,7 +20,8 @@ isLoggedIn = false;
 isLoginFailed = true;
 errorMessage = '';
 roles: string[] = [];
-    loginInput:ILogin={userName:'',password:''}
+    loginInput:LoginRequest;
+
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -29,7 +31,7 @@ roles: string[] = [];
   }
 
   postLoginForm(){
-    this.authService.login(this.loginInput.userName,this.loginInput.password,'password').subscribe({
+    this.authService.login(this.loginInput.username,this.loginInput.password,'password').subscribe({
       next: apiReponse => {
         console.log("authh");
         console.warn(apiReponse);

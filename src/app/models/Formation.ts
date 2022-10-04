@@ -3,12 +3,12 @@ import {EmployeeFormation} from "./EmployeeFormation";
 
 export class Formation{
   id:number;
-  title:string;
+  title?:string;
   description?:string;
-  periodec:boolean;
-  enabled:boolean;
-  employeeFormationList:Array<EmployeeFormation>;
-  habilitationList:Array<any>
+  periodec?:boolean;
+  enabled?:boolean;
+  employeeFormationList?:Array<EmployeeFormation>;
+  habilitationList?:Array<any>
   attachedDocsList?:Array<AttachedDocs>;
 
 

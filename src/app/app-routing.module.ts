@@ -18,8 +18,9 @@ import { DetailsUserComponent } from './pages/User/details-user/details-user.com
 import { AddUserComponent } from './pages/User/add-user/add-user.component';
 import {DetailsEmployeeComponent} from "./pages/Employe/details-employe/details-employee.component";
 import { AddEmployeComponent } from './pages/Employe/add-employe/add-employe.component';
-import { DetailsEmployeComponent } from './pages/Employe/details-employe/details-employe.component';
-import { ListEmployeComponent } from './pages/Employe/list-employe/list-employe.component';
+import {AddDiplomeComponent} from "./pages/Diplome/add-diplome/add-diplome.component";
+import {ListDiplomesComponent} from "./pages/Diplome/list-diplomes/list-diplomes.component";
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -46,6 +47,9 @@ const routes: Routes = [
   { path: 'employe-add', component: AddEmployeComponent },
   { path: 'employe-details/:id', component: DetailsEmployeeComponent },
   { path: 'employe-list', component: ListEmployeeComponent },
+
+  { path: 'add-diplome', component: AddDiplomeComponent },
+  { path: 'list-diplome', component: ListDiplomesComponent },
 
 ];
 
