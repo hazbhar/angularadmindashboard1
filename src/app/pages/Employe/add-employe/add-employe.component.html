@@ -27,28 +27,37 @@
                       <h2 class="fs-title">Infos générales</h2>
                     <div class="row mb-3">
                       <label for="inputText" class="col-sm-2 col-form-label">Nom</label>
-                      <div class="col-sm-10"> <input type="text" class="form-control" name="Nom" id="Nom" placeholder="Nom..."  required>
+                      <div class="col-sm-10"> <input type="text" class="form-control" name="Nom" id="Nom" placeholder="Nom..." formControlName="Nom"  />
+
                       </div>
+                      <div *ngIf=" Infosgenerale['Nom'].errors">
+                        <div *ngIf="Infosgenerale['Nom'].errors">insert valid Nom </div>
+                    </div>
                    </div>
                    <div class="row mb-3">
                       <label for="inputEmail" class="col-sm-2 col-form-label">Prenom</label>
-                      <div class="col-sm-10"> <input type="text" class="form-control" name="Prenom" id="Prenom"  placeholder="Prenom..." required>
+                      <div class="col-sm-10"> <input type="text" class="form-control" name="Prenom" id="Prenom" formControlName="Prenom" placeholder="Prenom..." required>
                       </div>
+                      <div *ngIf=" Infosgenerale['Prenom'].errors">
+                        <div *ngIf="Infosgenerale['Prenom'].errors">Prenom est unvalid</div>
+                    </div>
                    </div>
-                   <div class="row mb-3">
-                      <label for="inputPassword" class="col-sm-2 col-form-label">initiale</label>
-                      <div class="col-sm-10"> <input type="text" class="form-control" name="initiale" id="initiale" placeholder="initiale..." required>
-                      </div>
-                   </div>
+
                    <div class="row mb-3">
                      <label for="inputDate" class="col-sm-2 col-form-label">Date Naissance</label>
-                     <div class="col-sm-10"> <input type="date" class="form-control" name="DateNaissance" id="DateNaissance" placeholder="Date Naissance..." required>
+                     <div class="col-sm-10"> <input type="date" class="form-control" name="DateNaissance" id="DateNaissance" formControlName="DateNaissance" placeholder="Date Naissance..." required>
                      </div>
+                     <div *ngIf=" Infosgenerale['DateNaissance'].errors">
+                      <div *ngIf="Infosgenerale['DateNaissance'].errors">DateNaissance est unvalid</div>
+                  </div>
                   </div>
                    <div class="row mb-3">
                       <label for="inputNumber" class="col-sm-2 col-form-label">Cin</label>
-                      <div class="col-sm-10"> <input type="number" class="form-control" name="Cin" id="Cin"  placeholder="Cin..." required>
+                      <div class="col-sm-10"> <input type="number" class="form-control" name="Cin" id="Cin"  formControlName="Cin" placeholder="Cin..." required>
                       </div>
+                      <div *ngIf=" Infosgenerale['Cin'].errors">
+                        <div *ngIf="Infosgenerale['Cin'].errors">Cin est unvalid</div>
+                    </div>
                    </div>
                 <input  (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
                 <button   type="reset" name="next" class="reset" >reset</button>
@@ -59,28 +68,44 @@
 
                 <!-- fieldsets -->
                 <fieldset  *ngIf="step == 2" >
+                  <div formArrayName="contrats">
+                    <div *ngFor="let item of contrats.controls;let i=index">
+                      <div [formGroupName]="i">
+
                   <h2 class="fs-title">Infos contrat du travail</h2>
+                  <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
+                    <div class="col-sm-10">
+                    <select class="form-select"  name="typecontrat" id="typecontrat" aria-label="Default select example" >
+                      <option *ngFor="let typcont of typecontrat; let i = index"  [value]="typcont.id" >{{typcont.title}}</option>
+                   </select>
+                  </div>
+
+                 </div>
                 <div class="row mb-3">
                   <label for="inputNumber" class="col-sm-2 col-form-label">Date Debut Contrat</label>
-                  <div class="col-sm-10">  <input type="date" name="DateDebutContrat" id="DateDebutContrat" class="form-control"  placeholder="DateDebutContrat..." required >
+                  <div class="col-sm-10">  <input type="date" name="DateDebutContrat" id="DateDebutContrat" formControlName="DateDebutContrat" class="form-control"  placeholder="DateDebutContrat..." required >
                   </div>
-               </div>
-               <div class="row mb-3">
-                  <label for="inputDate" class="col-sm-2 col-form-label">Date Fin Contrat</label>
-                  <div class="col-sm-10">  <input type="date" name="DateFinContrat" id="DateFinContrat" class="form-control" placeholder="DateFinContrat..." required>
-                  </div>
-               </div>
-               <div class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
-                <div class="col-sm-10">
-                   <div class="form-check"> <input  type="radio" name="typeContrat" id="typeContrat"> <label class="form-check-label" for="typeContrat"> CDI </label></div>
-                   <div class="form-check"> <input  type="radio" name="typeContrat" id="typeContrat" checked> <label class="form-check-label" for="typeContrat"> CDD </label></div>
+                  <div *ngIf=" Infoscontrattravail['DateDebutContrat'].errors">
+                    <div *ngIf="Infoscontrattravail['DateDebutContrat'].errors">Date Debut Contrat est unvalid</div>
                 </div>
-             </div>
-               <div class="row mb-3">
-                  <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
-                  <div class="col-sm-10">       <input type="text" name="frequence" id="frequence" class="form-control" placeholder="frequence..." required>
+               </div>
+               <div *ngIf="Infoscontratdutravail.value.typecontrat==2" class="row mb-3">
+                  <label for="inputDate" class="col-sm-2 col-form-label">Date Fin Contrat</label>
+                  <div class="col-sm-10">  <input type="date" name="DateFinContrat" id="DateFinContrat" formControlName="DateFinContrat" class="form-control" placeholder="DateFinContrat..." required>
                   </div>
+                  <div *ngIf=" Infoscontrattravail['DateFinContrat'].errors">
+                    <div *ngIf="Infoscontrattravail['DateFinContrat'].errors">Date Debut Contrat est unvalid</div>
+                </div>
+               </div>
+
+               <div *ngIf="Infoscontratdutravail.value.typecontrat==3" class="row mb-3">
+                  <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
+                  <div class="col-sm-10">       <input type="text" name="frequence" id="frequence" formControlName="frequence" class="form-control" placeholder="frequence..." required>
+                  </div>
+                  <div *ngIf=" Infoscontrattravail['frequence'].errors">
+                    <div *ngIf="Infoscontrattravail['frequence'].errors">Date Debut Contrat est unvalid</div>
+                </div>
                </div>
 
                <div class="row mb-3">
@@ -92,8 +117,13 @@
                </div>
                <div class="row mb-3">
                   <legend class="col-sm-2  col-form-label ">type Personnel</legend>
-                  <div class="col-sm-10"> <input class="form-control" type="text" name="typePersonnel" id="typePersonnel" placeholder="typePersonnel..." required>
+                  <div class="col-sm-10">
+                    <select class="form-select"  name="typePersonnel" id="typePersonnel" aria-label="Default select example" >
+                      <option *ngFor="let typcont of typecontrat; let i = index"  [value]="typcont.id" >{{typcont.title}}</option>
+                   </select>
                   </div>
+                  <!--<div class="col-sm-10"> <input class="form-control" type="text" name="typePersonnel" id="typePersonnel" placeholder="typePersonnel..." required>
+                  </div>-->
                </div>
                <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">nom Societe</label>
@@ -137,8 +167,11 @@
            </div>
            <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
 
-           <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+           <input (click)="next()" type="button" [disabled]="!Infoscontratdutravail.valid" name="next" class="next action-button" value="Next"/>
            <button   type="reset" name="next" class="reset" >reset</button>
+           </div>
+           </div>
+           </div>
               </fieldset>
                   </form>
 
@@ -148,7 +181,7 @@
               <div formArrayName="diplom">
                 <div *ngFor="let item of diplom.controls;let i=index">
                   <div [formGroupName]="i">
-              <h2 class="fs-title">Infos des diplomes {{i}}</h2>
+              <h2 class="fs-title">Infos des diplomes {{i+1}}</h2>
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">diplomes</label>
                 <div class="col-sm-10"> <input class="form-control" type="text" name="diplomes" id="diplomes" placeholder="diplomes..." required>
@@ -165,15 +198,17 @@
           </div>
           </div>
           <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+              <input (click)="next()" type="button" name="next" [disabled]="!Infosdesdiplomes.valid" class="next action-button" value="Next"/>
               <button   type="reset" name="next" class="reset"  >reset</button>
           <button (click)="addnewdipl()" class="add">add (+)</button>
             </fieldset>
       </form>
       <form [formGroup]="Competences" id="msform">
         <fieldset *ngIf="step == 4">
-
-            <h2 class="fs-title">Competences</h2>
+          <div formArrayName="formations">
+            <div *ngFor="let item of formations.controls;let i=index">
+              <div [formGroupName]="i">
+            <h2 class="fs-title">Competences {{i+1}}</h2>
             <div class="row mb-3">
               <label class="col-sm-2 col-form-label">formation</label>
               <div class="col-sm-10"> <input class="form-control" type="text" name="formation" id="formation" placeholder="formation..." required>
@@ -215,10 +250,14 @@
   <div class="col-sm-10"> <input class="form-control" type="file" name="habilitationFile" id="habilitationFile" placeholder="habilitation File..." required>
   </div>
 </div>
+</div>
+</div>
+          </div>
 
             <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-            <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+            <input (click)="next()" type="button" name="next" [disabled]="!Competences.valid" class="next action-button" value="Next"/>
             <button   type="reset" name="next" class="reset" >reset</button>
+            <button (click)="addnewformat()" class="add">add (+)</button>
 
           </fieldset>
     </form>
@@ -261,15 +300,17 @@
 </div>
 
           <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-          <input (click)="next()" type="button" name="next" class="next action-button" value="Next"/>
+          <input (click)="next()" type="button" name="next" [disabled]="!Infosdesecurite.valid" class="next action-button" value="Next"/>
           <button   type="reset" name="next" class="reset" >reset</button>
 
         </fieldset>
   </form>
   <form [formGroup]="Roles" id="msform">
     <fieldset *ngIf="step == 6">
-
-        <h2 class="fs-title">Roles</h2>
+      <div formArrayName="roles">
+        <div *ngFor="let item of roles.controls;let i=index">
+          <div [formGroupName]="i">
+        <h2 class="fs-title">Roles {{i+1}}</h2>
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">Role</label>
           <div class="col-sm-10">
@@ -281,10 +322,13 @@
              </select>
           </div>
        </div>
-
+</div>
+</div>
+</div>
         <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+        <button (click)="addnewrol()" class="add">add (+)</button>
         <button   type="reset" name="next" class="reset" >reset</button>
-        <button (click)="submit()"type="submit" name="submit" class="submit" >Submit</button>
+        <button (click)="submit()"type="submit" [disabled]="!Roles.valid" name="submit" class="submit" >Submit</button>
 
     </fieldset>
 </form>

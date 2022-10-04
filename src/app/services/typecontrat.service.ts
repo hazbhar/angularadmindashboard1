@@ -6,7 +6,8 @@ import { Constants } from '../config/constant';
 @Injectable({
   providedIn: 'root'
 })
-export class RoleService {
+export class TypecontratService {
+
   addHttpOption = {
     headers: new HttpHeaders ({
       'Content-type': 'application/json',
@@ -18,20 +19,20 @@ export class RoleService {
   constructor(private http: HttpClient ,  private config : Constants) { }
 
   getAll(): Observable<any[]>{
-    return this.http.get<any>(this.config.API_Role+'getall');
+    return this.http.get<any>(this.config.API_contractType+'getall');
   }
   get(id: any): Observable<any> {
-    return this.http.get<any>(`${this.config.API_Role}getById?id=${id}`);
+    return this.http.get<any>(`${this.config.API_contractType}getById?id=${id}`);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Role+"add?", data);
+    return this.http.post(this.config.API_contractType+"add?", data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_Role}update${id}`, data);
+    return this.http.put(`${this.config.API_contractType}update${id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.config.API_Role}delete?id=${id}`);
+    return this.http.delete(`${this.config.API_contractType}delete?id=${id}`);
   }
 }

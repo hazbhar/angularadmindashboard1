@@ -10,5 +10,13 @@ export class Constants {
 
     public readonly API_AUTH: string = this.API_ENDPOINT+'auth/';
 
+    public readonly API_Frequence: string = this.API_ENDPOINT+'frequence/';
+
+    public readonly API_Role: string = this.API_ENDPOINT+'role/';
+
+    public readonly API_Site: string = this.API_ENDPOINT+'site/';
+
+    public readonly API_contractType: string = this.API_ENDPOINT+'contractType/';
+
     public readonly API_FORMATION: string = this.API_ENDPOINT+'formation/';
 }

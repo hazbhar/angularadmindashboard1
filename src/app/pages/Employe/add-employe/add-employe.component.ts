@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Employe } from 'src/app/models/Employe';
+import { typeContrat } from 'src/app/models/TypeContrat';
+import { FrequenceService } from 'src/app/services/frequence.service';
+import { RoleService } from 'src/app/services/role.service';
+import { SiteService } from 'src/app/services/site.service';
+import { TypecontratService } from 'src/app/services/typecontrat.service';
 
 @Component({
   selector: 'app-add-employe',
@@ -16,33 +21,33 @@ export class AddEmployeComponent implements OnInit {
   Roles!: FormGroup;
   employe!:Employe;
   diplitems!:FormArray;
+  formatitems!:FormArray;
+  contratitems!:FormArray;
+  roleitems!:FormArray;
+
+  personal_step = false;
+  address_step = false;
+  education_step = false;
+
   step = 1;
-  constructor(private formBuilder: FormBuilder) { }
+  typcontrattitle="";
+  role! : any[];
+  frequence! : any[];
+  site! : any[];
+  typecontrat! : typeContrat[];
+  constructor(private formBuilder: FormBuilder , private roleService: RoleService, private typcontratService: TypecontratService, private siteService: SiteService, private frequenceService: FrequenceService) { }
 
   ngOnInit(): void {
     this.Infosgenerales = this.formBuilder.group({
-      name: ['', Validators.required],
-      Prenom: ['', Validators.required],
-      initiale: ['', Validators.required],
+      Nom: ['',[ Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]],
+      Prenom: ['',[ Validators.required,Validators.pattern('^[a-zA-Z \-\']+')]],
       DateNaissance: ['', Validators.required],
       Cin: ['', Validators.required]
 
   });
   this.Infoscontratdutravail = this.formBuilder.group({
-    DateDebutContrat: ['', Validators.required],
-    typeContrat: ['', Validators.required],
-    frequence: ['', Validators.required],
-    available: ['', Validators.required],
-    DateFinContrat: ['', Validators.required],
-    typePersonnel: ['', Validators.required],
-    nomSociete: ['', Validators.required],
-    uniteTechnique: ['', Validators.required],
-    contratImpartialite: ['', Validators.required],
-    contratConfidentialite: ['', Validators.required],
-    visiteMedicales: ['', Validators.required],
-    eap: ['', Validators.required],
-    dateEap: ['', Validators.required],
-    site: ['',Validators.required]
+    contrats:new FormArray([
+    ])
   });
   this.Infosdesecurite = this.formBuilder.group({
     username: ['', Validators.required],
@@ -56,27 +61,71 @@ export class AddEmployeComponent implements OnInit {
     diplom:new FormArray([]),
 });
 this.Competences = this.formBuilder.group({
-  formation: ['', Validators.required],
-  periodique: ['', Validators.required],
-  dateRenouvellement: ['',Validators.required],
-  formationFile: ['',Validators.required],
-  habilitation: ['',Validators.required],
-  dateHabilitation: ['',Validators.required],
-  dateRenHabi: ['',Validators.required],
-  habilitationFile: ['',Validators.required]
+  formations:new FormArray([])
+
 });
 this.Roles = this.formBuilder.group({
-  role: ['', Validators.required]
+  roles:new FormArray([])
 
 });
-
+this.addnewcontart();
     this.addnewdipl();
+    this.addnewformat();
+    this.addnewrol();
+    this.retrieveroles();
+    this.retrievetypecontrats();
 }
-get Infosgénérale() { return this.Infosgenerales.controls; }
+
+retrieveroles(): void {
+  this.roleService.getAll()
+    .subscribe({
+      next: (data: any) => {
+        this.role = data;
+        //console.log(data);
+      },
+      error: (e) => console.error(e)
+    });
+}
+//
+retrievesites(): void {
+  this.siteService.getAll()
+    .subscribe({
+      next: (data: any) => {
+        this.site = data;
+        //console.log(data);
+      },
+      error: (e) => console.error(e)
+    });
+}
+retrievefrequences(): void {
+  this.frequenceService.getAll()
+    .subscribe({
+      next: (data: any) => {
+        this.frequence = data;
+        //console.log(data);
+      },
+      error: (e) => console.error(e)
+    });
+}
+retrievetypecontrats(): void {
+  this.typcontratService.getAll()
+    .subscribe({
+      next: (data: any) => {
+        this.typecontrat = data;
+        console.log(data);
+      },
+      error: (e) => console.error(e)
+    });
+}
+
+get Infosgenerale() { return this.Infosgenerales.controls; }
 get Infoscontrattravail() { return this.Infoscontratdutravail.controls; }
 get Infosdeécurité() { return this.Infosdesecurite.controls; }
 get Infosdesdiplome() { return this.Infosdesdiplomes.controls; }
 get diplom( ){return this.Infosdesdiplomes.get("diplom") as FormArray}
+get formations( ){return this.Competences.get("formations") as FormArray}
+get roles( ){return this.Roles.get("roles") as FormArray}
+get contrats( ){return this.Infoscontratdutravail.get("contrats") as FormArray}
 get Competence() { return this.Competences.controls; }
 get Role() { return this.Roles.controls; }
 
@@ -91,13 +140,66 @@ gennewdipl():FormGroup{
     attributions:new FormControl('', Validators.required)
   })
 }
+addnewcontart(){
+  this.contratitems=this.Infoscontratdutravail.get("contrats") as FormArray;
+  this.contratitems.push(this.gennewcontrat());
+  }
+
+  gennewcontrat():FormGroup{
+    return new FormGroup({
+    DateDebutContrat:new FormControl('', Validators.required),
+    typeContrat: new FormControl('', Validators.required),
+    frequence:new FormControl('', Validators.required),
+    available:new FormControl('', Validators.required),
+    DateFinContrat:new FormControl('', Validators.required),
+    typePersonnel:new FormControl('', Validators.required),
+    nomSociete: new FormControl('', Validators.required),
+    uniteTechnique:new FormControl('', Validators.required),
+    contratImpartialite: new FormControl('', Validators.required),
+    contratConfidentialite: new FormControl('', Validators.required),
+    visiteMedicales: new FormControl('', Validators.required),
+    eap: new FormControl('', Validators.required),
+    dateEap: new FormControl('', Validators.required),
+    site: new FormControl('',Validators.required)
+    })
+  }
+addnewformat(){
+  this.formatitems=this.Competences.get("formations") as FormArray;
+  this.formatitems.push(this.gennewformat());
+  }
+
+gennewformat():FormGroup{
+  return new FormGroup({
+    formation: new FormControl('', Validators.required),
+    periodique:  new FormControl('', Validators.required),
+    dateRenouvellement:  new FormControl('',Validators.required),
+    formationFile:  new FormControl('',Validators.required),
+    habilitation: new FormControl('',Validators.required),
+    dateHabilitation:  new FormControl('',Validators.required),
+    dateRenHabi: new FormControl('',Validators.required),
+    habilitationFile:  new FormControl('',Validators.required)
+  })
+}
+
+addnewrol(){
+  this.roleitems=this.Roles.get("roles") as FormArray;
+  this.roleitems.push(this.gennewrol());
+  }
+gennewrol():FormGroup{
+  return new FormGroup({
+    role: new FormControl('', Validators.required)
+  })
+}
 
 next(){
 if(this.step!=6){
+
+    if (this.Infosgenerales.invalid) { return  }
     this.step++;
 }
+}
 
-  }
+
   previous(){
 
     if(this.step!=1){
@@ -106,50 +208,7 @@ if(this.step!=6){
 }
   submit(){
     if(this.step==6){
-    /*  this.employe ={
-        nom:this.Infosgénérale['name'].value,
-        prenom:this.Infosgénérale['prenom'].value,
-        initiale:this.Infosgénérale['initiale'].value,
-        dateNaissance:this.Infosgénérale['dateNaissance'].value,
-        etatCivil:this.Infosgénérale['etatCivil'].value,
-        cin:this.Infosgénérale['cin'].value,
-        DateDebutContrat:this.Infoscontrattravail['DateDebutContrat'].value,
-        DateFinContrat:this.Infoscontrattravail['typeContrat'].value,
-        typeContrat:this.Infoscontrattravail['typeContrat'].value,
-        frequence:this.Infoscontrattravail['frequence'].value,
-        typePersonnel:this.Infoscontrattravail['available'].value,
-        processuses:this.Infoscontrattravail['cin'].value,
-        available:this.Infoscontrattravail['typePersonnel'].value,
-        nomSociete:this.Infoscontrattravail['nomSociete'].value,
-        uniteTechnique:this.Infoscontrattravail['uniteTechnique'].value,
-        site:this.Infoscontrattravail['site'].value,
-        materiels:this.Infoscontrattravail['materiels'].value,
-        contratImpartialite:this.Infoscontrattravail['contratImpartialite'].value,
-        contratConfidentialite:this.Infoscontrattravail['contratConfidentialite'].value,
-        visiteMedicales:this.Infoscontrattravail['visiteMedicales'].value,
-        eap:this.Infoscontrattravail['eap'].value,
-        dateEap:this.Infoscontrattravail['dateEap'].value,
-        diplomes:this.Infosdesdiplome['diplomes'].value,
-        attributions:this.Infosdesdiplome['attributions'].value,
-        formation:this.Competence['formation'].value,
-        periodique:this.Competence['periodique'].value,
-        dateRenouvellement:this.Competence['dateRenouvellement'].value,
-        formationFile:this.Competence['formationFile'].value,
-        habilitation:this.Competence['habilitation'].value,
-        dateHabilitation:this.Competence['dateHabilitation'].value,
-        dateRenHabi:this.Competence['dateRenHabi'].value,
-        habilitationFile:this.Competence['habilitationFile'].value,
-        username:this.Infosdeécurité['username'].value,
-        email:this.Infosdeécurité['email'].value,
-        confirmEmail:this.Infosdeécurité['confirmEmail'].value,
-        typeAuth:this.Infosdeécurité['typeAuth'].value,
-        visibilite:this.Infosdeécurité['cin'].value,
-        confirmPassword:this.Infosdeécurité['password'].value,
-        password:this.Infosdeécurité['password'].value,
-        roles:this.Role['role'].value
 
-
-      };*/
       if (this.Roles.invalid) { return }
     }
   }
