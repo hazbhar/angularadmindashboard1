@@ -64,7 +64,7 @@
 
                   </fieldset>
                </form>
-               <form [formGroup]="Infoscontratdutravail" id="msform">
+               <form [formGroup]="Infoscontratdutravail" id="msform2">
 
                 <!-- fieldsets -->
                 <fieldset  *ngIf="step == 2" >
@@ -111,8 +111,8 @@
                <div class="row mb-3">
                   <legend class="col-form-label col-sm-2 pt-0">available</legend>
                   <div class="col-sm-10">
-                     <div class="form-check"> <input  type="radio" name="available" id="available" value="yes" checked> <label class="form-check-label" for="available"> Yes </label></div>
-                     <div class="form-check"> <input  type="radio" name="available" id="available" value="no"> <label class="form-check-label" for="available"> No </label></div>
+                     <div class="form-check"> <input  type="radio" name="available" id="availableYes" value="yes" checked> <label class="form-check-label" for="availableYes"> Yes </label></div>
+                     <div class="form-check"> <input  type="radio" name="available" id="availableNo" value="no"> <label class="form-check-label" for="availableNo"> No </label></div>
                   </div>
                </div>
                <div class="row mb-3">
@@ -176,7 +176,7 @@
                   </form>
 
 
-         <form [formGroup]="Infosdesdiplomes" id="msform">
+         <form [formGroup]="Infosdesdiplomes" id="msform3">
           <fieldset *ngIf="step == 3">
               <div formArrayName="diplom">
                 <div *ngFor="let item of diplom.controls;let i=index">
@@ -203,7 +203,7 @@
           <button (click)="addnewdipl()" class="add">add (+)</button>
             </fieldset>
       </form>
-      <form [formGroup]="Competences" id="msform">
+      <form [formGroup]="Competences" id="msform4">
         <fieldset *ngIf="step == 4">
           <div formArrayName="formations">
             <div *ngFor="let item of formations.controls;let i=index">
@@ -261,7 +261,7 @@
 
           </fieldset>
     </form>
-    <form [formGroup]="Infosdesecurite" id="msform">
+    <form [formGroup]="Infosdesecurite" id="msform5">
       <fieldset *ngIf="step == 5">
 
           <h2 class="fs-title">Infos de sécurité </h2>
@@ -305,7 +305,7 @@
 
         </fieldset>
   </form>
-  <form [formGroup]="Roles" id="msform">
+  <form [formGroup]="Roles" id="msform6">
     <fieldset *ngIf="step == 6">
       <div formArrayName="roles">
         <div *ngFor="let item of roles.controls;let i=index">

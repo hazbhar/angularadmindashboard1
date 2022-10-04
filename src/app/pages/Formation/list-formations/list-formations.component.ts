@@ -11,12 +11,14 @@ export class ListFormationsComponent implements OnInit {
 
   formations? : Formation[];
   formation: Formation = {
-    id:'',
-    title : '',
-    description : '',
-    periodec : true,
-    enabled : true,
-    visibility : true
+    id: 0,
+    title: undefined,
+    description: undefined,
+    periodec: undefined,
+    enabled: undefined,
+    employeeFormationList: undefined,
+    habilitationList: undefined,
+    attachedDocsList: undefined
   }
 
 
@@ -31,7 +33,7 @@ export class ListFormationsComponent implements OnInit {
     this.formationService.getAll().subscribe((data: any)=>
     {this.formations=data},
     (error:any)=>{ console.log(error)}
-      
+
       );
   }
 

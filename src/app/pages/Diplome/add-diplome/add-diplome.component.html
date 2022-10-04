@@ -1,1 +1,43 @@
-<p>add-diplome works!</p>
+<main id="main" class="main">
+    <section class="section">
+
+
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <div class="d-flex justify-content-between">
+
+          <label for="title">Titre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            required
+            [(ngModel)]="diplome.title"
+            name="title"
+          />
+
+          <label for="description">Spécialité</label>
+          <input
+            class="form-control"
+            id="description"
+            required
+            [(ngModel)]="diplome.speciality"
+            name="description"
+          />
+
+
+
+
+
+
+          <div>
+              <button class="btn btn-success" (click)="addDiplome()">Add</button>
+          </div>
+
+
+
+
+          </div></div>
+    </div>
+    </section>
+</main>

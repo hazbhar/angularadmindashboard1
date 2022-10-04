@@ -19,7 +19,7 @@ export class EmployeService {
   constructor(private http: HttpClient ,  private config : Constants) { }
 
   getAll(): Observable<Employe[]>{
-    return this.http.get<any>(this.config.API_EMPLOYE+'/getall');
+    return this.http.get<any>(this.config.API_EMPLOYE+'getall');
   }
   get(id: any): Observable<Employe> {
     return this.http.get<Employe>(`${this.config.API_EMPLOYE}getById?id=${id}`);

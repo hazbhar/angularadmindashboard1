@@ -34,9 +34,8 @@ import { ListUserComponent } from './pages/User/list-user/list-user.component';
 import { AddUserComponent } from './pages/User/add-user/add-user.component';
 import { AuthService } from './services/auth.service';
 import { AddEmployeComponent } from './pages/Employe/add-employe/add-employe.component';
-import { DetailsEmployeComponent } from './pages/Employe/details-employe/details-employe.component';
-import { ListEmployeComponent } from './pages/Employe/list-employe/list-employe.component';
-
+import { ListEmployeeComponent } from './pages/Employe/list-employe/list-employee.component';
+import { DetailsEmployeeComponent } from './pages/Employe/details-employe/details-employee.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +49,7 @@ import { ListEmployeComponent } from './pages/Employe/list-employe/list-employe.
     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
+    ListEmployeeComponent,
 
     AddFormationComponent,
     DetailsFormationComponent,
@@ -63,8 +63,7 @@ import { ListEmployeComponent } from './pages/Employe/list-employe/list-employe.
     ListUserComponent,
     AddUserComponent,
     AddEmployeComponent,
-    DetailsEmployeComponent,
-    ListEmployeComponent,
+    DetailsEmployeeComponent,
 
   ],
   imports: [

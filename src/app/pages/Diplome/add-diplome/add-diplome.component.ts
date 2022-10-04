@@ -1,6 +1,8 @@
-import { Diplome } from './../../../models/Diplome';
+
 import { Component, OnInit } from '@angular/core';
-import { FormationService } from 'src/app/services/formation.service';
+
+import {Diploma} from "../../../models/Diploma";
+import {DiplomaService} from "../../../services/diplome.service";
 
 @Component({
   selector: 'app-add-diplome',
@@ -9,29 +11,25 @@ import { FormationService } from 'src/app/services/formation.service';
 })
 export class AddDiplomeComponent implements OnInit {
 
-  formation: Diplome = {
-    title : '',
-    speciality : '',
-    mention : '',
-    geted : true,
-    dateObtained : undefined
-  }
+  diplome: Diploma;
 
   submitted = false ;
-  constructor(private formationService : FormationService) { }
+  constructor(private diplomeService : DiplomaService) { }
 
     ngOnInit(): void {
     }
 
-    addFormation(): void {
+    addDiplome(): void {
       const data = {
-        title: this.formation.title,
-        description: this.formation.speciality
+        title: this.diplome.title,
+        speciality: this.diplome.speciality,
+        dateObtained: this.diplome.dateObtained
       };
 
-      this.formationService.create(data,1)
+      this.diplomeService.create(data,1)
         .subscribe({
           next: (res: any) => {
+            //To do (remove data displayed in console)
             console.log(res);
             this.submitted = true;
           },

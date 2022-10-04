@@ -6,6 +6,7 @@ import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
+import {ListEmployeeComponent} from "./pages/Employe/list-employe/list-employee.component";
 
 import { AddFormationComponent } from './pages/Formation/add-formation/add-formation.component';
 import { EditFormationComponent } from './pages/Formation/edit-formation/edit-formation.component';
@@ -15,9 +16,10 @@ import { DetailsFormationComponent } from './pages/Formation/details-formation/d
 import { ListUserComponent } from './pages/User/list-user/list-user.component';
 import { DetailsUserComponent } from './pages/User/details-user/details-user.component';
 import { AddUserComponent } from './pages/User/add-user/add-user.component';
+import {DetailsEmployeeComponent} from "./pages/Employe/details-employe/details-employee.component";
 import { AddEmployeComponent } from './pages/Employe/add-employe/add-employe.component';
-import { DetailsEmployeComponent } from './pages/Employe/details-employe/details-employe.component';
-import { ListEmployeComponent } from './pages/Employe/list-employe/list-employe.component';
+import {AddDiplomeComponent} from "./pages/Diplome/add-diplome/add-diplome.component";
+import {ListDiplomesComponent} from "./pages/Diplome/list-diplomes/list-diplomes.component";
 
 
 const routes: Routes = [
@@ -42,10 +44,12 @@ const routes: Routes = [
   { path: 'userdetails/:id', component: DetailsUserComponent },
   { path: 'adduser', component: AddUserComponent },
 
-  { path: 'addemploye', component: AddEmployeComponent },
-  { path: 'employedetails/:id', component: DetailsEmployeComponent },
-  { path: 'listemployes', component: ListEmployeComponent },
+  { path: 'employe-add', component: AddEmployeComponent },
+  { path: 'employe-details/:id', component: DetailsEmployeeComponent },
+  { path: 'employe-list', component: ListEmployeeComponent },
 
+  { path: 'add-diplome', component: AddDiplomeComponent },
+  { path: 'list-diplome', component: ListDiplomesComponent },
 
 ];
 
