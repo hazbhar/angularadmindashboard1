@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
+import {Authentification} from "../../../models/Authentification";
+import {Employe} from "../../../models/Employe";
+import {Role} from "../../../models/Role";
+import {Privilege} from "../../../models/Privilege";
 
 @Component({
   selector: 'app-add-user',
@@ -13,15 +17,19 @@ export class AddUserComponent implements OnInit {
   isaddedfailed=false;
 
   user: User = {
+    id:undefined,
     username: undefined,
     password: undefined,
+    confPassword: undefined,
     email: undefined,
-    id: undefined,
+    confEmail:undefined,
     lastconnection: undefined,
-    validity: false,
-    visibility: false,
-    enabled: false,
-    role : undefined
+    validity: undefined,
+    enabled: undefined,
+    authentifications:undefined,
+    employee:undefined,
+    roles: undefined,
+    privileges:undefined
   };
 
   submitted = false;
@@ -52,14 +60,19 @@ export class AddUserComponent implements OnInit {
   newUser(): void {
     this.submitted = false;
     this.user = {
-    username: undefined,
-    password: undefined,
-    email: undefined,
-    id: undefined,
-    lastconnection: undefined,
-    validity: undefined,
-    visibility: undefined,
-    enabled: undefined
+      id:undefined,
+      username: undefined,
+      password: undefined,
+      confPassword: undefined,
+      email: undefined,
+      confEmail:undefined,
+      lastconnection: undefined,
+      validity: undefined,
+      enabled: undefined,
+      authentifications:undefined,
+      employee:undefined,
+      roles: undefined,
+      privileges:undefined
 
     };
     this.isaddedfailed=false;

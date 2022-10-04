@@ -14,14 +14,19 @@ export class DetailsUserComponent implements OnInit {
   @Input() viewMode = false;
 
   @Input() currentUser: User = {
+    id:undefined,
     username: undefined,
     password: undefined,
+    confPassword: undefined,
     email: undefined,
-    id: undefined,
+    confEmail:undefined,
     lastconnection: undefined,
     validity: undefined,
-    visibility: undefined,
-    enabled: undefined
+    enabled: undefined,
+    authentifications:undefined,
+    employee:undefined,
+    roles: undefined,
+    privileges:undefined
   };
 
   message = '';
@@ -84,7 +89,7 @@ export class DetailsUserComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log(res);
-          this.currentUser.visibility = status;
+          //this.currentUser.visibility = status;
           this.message = res.message ? res.message : 'The visibility was updated successfully!';
         },
         error: (e) => console.error(e)

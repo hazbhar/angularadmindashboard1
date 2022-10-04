@@ -1,22 +1,24 @@
-import { Diplome } from './../Model/Diplome';
+
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../config/constant';
 import { Observable } from 'rxjs';
+import {Diploma} from "../models/Diploma";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class DiplomeService {
+export class DiplomaService {
 
   constructor(private http: HttpClient,  private config : Constants) { }
 
   getAll() {
-    return this.http.get<Diplome[]>("http://localhost:8082/ged/formation/getall");
+    return this.http.get<Diploma[]>("http://localhost:8082/ged/formation/getall");
   }
 
-  get(id: any): Observable<Diplome> {
-    return this.http.get<Diplome>(this.config.API_DIPLOME+id);
+  get(id: any): Observable<Diploma> {
+    return this.http.get<Diploma>(this.config.API_DIPLOME+id);
   }
 
   create(data: any, id : any): Observable<any> {

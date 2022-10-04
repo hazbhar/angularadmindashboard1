@@ -32,7 +32,7 @@ export class FormationService {
   create(data: any, id : any): Observable<any> {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('typeForId',id)
-    return this.http.post(this.config.API_FORMATION+"add?typeForId=1", data);
+    return this.http.post(this.config.API_FORMATION+"add?typeForId="+id, data);
   }
 
   update(data:Formation): Observable<any> {
@@ -47,5 +47,5 @@ export class FormationService {
     return this.http.delete(this.config.API_FORMATION);
   }
 
- 
+
 }

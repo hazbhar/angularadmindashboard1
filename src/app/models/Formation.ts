@@ -1,8 +1,15 @@
-export class Formation {
-  id? : any;
-  title? : String;
-  description? : String;
-  periodec? : Boolean;
-  enabled? : Boolean;
-  visibility? : Boolean;
+import {AttachedDocs} from "./AttachedDocs";
+import {EmployeeFormation} from "./EmployeeFormation";
+
+export class Formation{
+  id:number;
+  title?:string;
+  description?:string;
+  periodec?:boolean;
+  enabled?:boolean;
+  employeeFormationList?:Array<EmployeeFormation>;
+  habilitationList?:Array<any>
+  attachedDocsList?:Array<AttachedDocs>;
+
+
 }
