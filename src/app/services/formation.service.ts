@@ -22,7 +22,7 @@ export class FormationService {
   constructor(private http: HttpClient,  private config : Constants) { }
 
   getAll() {
-    return this.http.get<Formation[]>("http://localhost:8082/ged/formation/getall",this.addHttpOption);
+    return this.http.get<Formation[]>(this.config.API_FORMATION+"getall",this.addHttpOption);
   }
 
   get(id: any): Observable<Formation> {

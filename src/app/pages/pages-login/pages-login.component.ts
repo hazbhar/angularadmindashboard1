@@ -31,7 +31,7 @@ roles: string[] = [];
   }
 
   postLoginForm(){
-    this.authService.login(this.loginInput.username,this.loginInput.password,'password').subscribe({
+    this.authService.login(this.username,this.password,'password').subscribe({
       next: apiReponse => {
         console.log("authh");
         console.warn(apiReponse);

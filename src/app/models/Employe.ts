@@ -14,7 +14,7 @@ import {TypeOfStaff} from "./TypeOfStaff";
 
 export class Employe {
   /**** Infos générales ****/
-  id: any;
+  id?: any;
   firstName?: string;
   lastName?: string;
   initial?: string;

@@ -14,7 +14,7 @@ export class DiplomaService {
   constructor(private http: HttpClient,  private config : Constants) { }
 
   getAll() {
-    return this.http.get<Diploma[]>("http://localhost:8082/ged/formation/getall");
+    return this.http.get<Diploma[]>(this.config.API_DIPLOME+"getall");
   }
 
   get(id: any): Observable<Diploma> {

@@ -18,7 +18,7 @@ export class SiteService {
   constructor(private http: HttpClient ,  private config : Constants) { }
 
   getAll(): Observable<any[]>{
-    return this.http.get<any>(this.config.API_Site+'/getall');
+    return this.http.get<any>(this.config.API_Site+'getall');
   }
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.config.API_Site}getById?id=${id}`);

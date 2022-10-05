@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 export class Constants {
     public readonly API_ENDPOINT: string = 'http://localhost:8082/ged/';
 
-    public readonly API_EMPLOYE: string = this.API_ENDPOINT+'employe/';
+    public readonly API_EMPLOYE: string = this.API_ENDPOINT+'employee/';
 
     public readonly API_USER: string = this.API_ENDPOINT+'user/';
 
@@ -20,4 +20,12 @@ export class Constants {
     public readonly API_contractType: string = this.API_ENDPOINT+'contractType/';
 
     public readonly API_FORMATION: string = this.API_ENDPOINT+'formation/';
+
+    public readonly API_DIPLOME: string = this.API_ENDPOINT+'diploma/';
+
+    public readonly API_PERSOTYP: string = this.API_ENDPOINT+'typeofstaff/';
+
+    public readonly API_Service: string = this.API_ENDPOINT+'service/';
+
+    public readonly API_EtatCivil: string = this.API_ENDPOINT+'civilState/';
 }

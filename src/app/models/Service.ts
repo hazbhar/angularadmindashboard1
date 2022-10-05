@@ -1,5 +1,7 @@
 export class Service{
   id:number;
-  content:string;
+  technical_term:string;
+  language_id:number;
+  content:string;;
   enabled:boolean;
 }

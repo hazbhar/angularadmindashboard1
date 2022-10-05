@@ -6,7 +6,7 @@ import { Constants } from '../config/constant';
 @Injectable({
   providedIn: 'root'
 })
-export class FrequenceService {
+export class ServiceService {
   addHttpOption = {
     headers: new HttpHeaders ({
       'Content-type': 'application/json',
@@ -18,20 +18,20 @@ export class FrequenceService {
   constructor(private http: HttpClient ,  private config : Constants) { }
 
   getAll(): Observable<any[]>{
-    return this.http.get<any>(this.config.API_Frequence+'getall');
+    return this.http.get<any>(this.config.API_Service+'getall');
   }
   get(id: any): Observable<any> {
-    return this.http.get<any>(`${this.config.API_Frequence}getById?id=${id}`);
+    return this.http.get<any>(`${this.config.API_Service}getById?id=${id}`);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Frequence+"add?", data);
+    return this.http.post(this.config.API_Service+"add?", data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_Frequence}/update${id}`, data);
+    return this.http.put(`${this.config.API_Service}/update${id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.config.API_Frequence}delete?id=${id}`);
+    return this.http.delete(`${this.config.API_Service}delete?id=${id}`);
   }
 }

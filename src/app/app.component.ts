@@ -22,7 +22,7 @@ export class AppComponent {
 
   sidebarExpanded = true;
   private roles: string[] = [];
-  isLoggedIn = true;
+  isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
