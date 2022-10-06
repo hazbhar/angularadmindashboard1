@@ -5,27 +5,26 @@ import { Constants } from '../config/constant';
 import { Employe } from '../models/Employe';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeService {
   addHttpOption = {
-    headers: new HttpHeaders ({
+    headers: new HttpHeaders({
       'Content-type': 'application/json',
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    }),
+  };
+  constructor(private http: HttpClient, private config: Constants) {}
 
-    })
-  }
-  constructor(private http: HttpClient ,  private config : Constants) { }
-
-  getAll(): Observable<Employe[]>{
-    return this.http.get<any>(this.config.API_EMPLOYE+'getall');
+  getAll(): Observable<Employe[]> {
+    return this.http.get<any>(this.config.API_EMPLOYE + 'getall');
   }
   get(id: any): Observable<Employe> {
     return this.http.get<Employe>(`${this.config.API_EMPLOYE}getById?id=${id}`);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_EMPLOYE+"add?authId="+id, data);
+    return this.http.post(this.config.API_EMPLOYE + 'add?authId=' + id, data);
   }
 
   update(id: any, data: any): Observable<any> {

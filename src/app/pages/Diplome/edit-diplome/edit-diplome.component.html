@@ -1,41 +1,42 @@
 
 <main id="main" class="main">
-    <section class="section">
-  <form>
+  <section class="section">
+    <form>
 
-        <h4>Diplome</h4>
+      <h4>Diplome</h4>
 
-          <div class="form-group">
-            <label for="title">Titre</label>
-            <input
-              type="text"
-              class="form-control"
-              id="title"
-              [(ngModel)]="diplome.title"
-              name="title"
-            />
-          </div>
-          <div class="form-group">
-            <label for="Spécialite">Spécialité</label>
-            <input
-              type="text"
-              class="form-control"
-              id="Spécialite"
-              [(ngModel)]="diplome.speciality"
-              name="Spécialite"
-            />
-          </div>
+      <div class="form-group">
+        <label for="title">Titre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="diplome.title"
+          name="title"
+          />
+      </div>
+      <div class="form-group">
+        <label for="Spécialite">Spécialité</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Spécialite"
+          [(ngModel)]="diplome.speciality"
+          name="Spécialite"
+          />
+      </div>
 
-          <div class="form-group">
+      <div class="form-group">
 
-            <button class="btn btn-sm btn-danger">
-              <i class="fa fa-remove"(click)="editDiplome(diplome)">Mettre à jour </i></button>
-
-
-        </div>
+        <button class="btn btn-sm btn-danger">
+          <i class="fa fa-remove"(click)="editDiplome(diplome)">Mettre à jour
+          </i></button>
 
 
+      </div>
 
-   </form>
-   </section>
-   </main>
+
+
+    </form>
+  </section>
+</main>

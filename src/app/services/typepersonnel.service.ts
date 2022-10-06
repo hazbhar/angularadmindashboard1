@@ -4,15 +4,13 @@ import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TypepersonnelService {
-
-  constructor(private http: HttpClient,  private config : Constants) { }
+  constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<any[]> {
-
-    return this.http.get<any[]>(this.config.API_PERSOTYP+"getall");
+    return this.http.get<any[]>(this.config.API_PERSOTYP + 'getall');
   }
 
   get(id: any): Observable<any> {
@@ -20,7 +18,7 @@ export class TypepersonnelService {
   }
 
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_PERSOTYP+"add", data);
+    return this.http.post(this.config.API_PERSOTYP + 'add', data);
   }
 
   update(id: any, data: any): Observable<any> {

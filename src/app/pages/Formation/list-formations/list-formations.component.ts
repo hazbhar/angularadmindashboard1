@@ -5,11 +5,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-list-formations',
   templateUrl: './list-formations.component.html',
-  styleUrls: ['./list-formations.component.css']
+  styleUrls: ['./list-formations.component.css'],
 })
 export class ListFormationsComponent implements OnInit {
-
-  formations? : Formation[];
+  formations?: Formation[];
   formation: Formation = {
     id: 0,
     title: undefined,
@@ -18,33 +17,35 @@ export class ListFormationsComponent implements OnInit {
     enabled: undefined,
     employeeFormationList: undefined,
     habilitationList: undefined,
-    attachedDocsList: undefined
-  }
+    attachedDocsList: undefined,
+  };
 
-
-
-  constructor(private formationService : FormationService) { }
+  constructor(private formationService: FormationService) {}
 
   ngOnInit(): void {
     this.getFormations();
   }
 
   getFormations(): any {
-    this.formationService.getAll().subscribe((data: any)=>
-    {this.formations=data},
-    (error:any)=>{ console.log(error)}
-
-      );
+    this.formationService.getAll().subscribe(
+      (data: any) => {
+        this.formations = data;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
-  deleteFormation(formation:Formation): void {
+  deleteFormation(formation: Formation): void {
     // this.formationService.get(1);
-     this.formationService.delete(formation.id).subscribe(
-       (data)=>{
+    this.formationService.delete(formation.id).subscribe(
+      (data) => {
         window.location.reload();
-       },
-       (err)=>{console.log(err)}
-     ) ;
-   }
-
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

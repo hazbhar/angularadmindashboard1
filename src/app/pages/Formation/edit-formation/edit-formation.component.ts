@@ -6,16 +6,18 @@ import { catchError } from 'rxjs';
 import { Formation } from 'src/app/models/Formation';
 import { FormationService } from 'src/app/services/formation.service';
 
-
 @Component({
   selector: 'app-edit-formation',
   templateUrl: './edit-formation.component.html',
-  styleUrls: ['./edit-formation.component.css']
+  styleUrls: ['./edit-formation.component.css'],
 })
 export class EditFormationComponent implements OnInit {
-
-  submitted = false ;
-  constructor(private formationService : FormationService,private route:ActivatedRoute,private router:Router) { }
+  submitted = false;
+  constructor(
+    private formationService: FormationService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   formation: Formation = {
     id: 0,
     title: undefined,
@@ -24,50 +26,44 @@ export class EditFormationComponent implements OnInit {
     enabled: undefined,
     employeeFormationList: undefined,
     habilitationList: undefined,
-    attachedDocsList: undefined
-  }
-
-
-
+    attachedDocsList: undefined,
+  };
 
   ngOnInit(): void {
-    this.getFormationById(this.route.snapshot.params["id"])
+    this.getFormationById(this.route.snapshot.params['id']);
   }
 
   formationform = new FormGroup({
-    title:new FormControl(),
-    description:new FormControl(),
-  })
+    title: new FormControl(),
+    description: new FormControl(),
+  });
 
-
-  editFormation(formation:Formation): void {
-    console.log("test ")
+  editFormation(formation: Formation): void {
+    console.log('test ');
     //const data = {
-      //title: this.formation.title,
-      //description: this.formation.description
+    //title: this.formation.title,
+    //description: this.formation.description
     //};
 
-    this.formationService.update(formation)
-      .subscribe({
-        next: (res: any) => {
-          console.log(res);
-          this.submitted = true;
-        },
-        error: (e: any) => console.error(e)
-      });
-  }
-
-  test(){
-    window.alert('teswt')
-  }
-
-  getFormationById(id:any){
-    this.formationService.get(id).subscribe({
-      next:(data: any)=>{
-        this.formation=data;
-      },error: (e: any) =>console.error(e)
-
+    this.formationService.update(formation).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.submitted = true;
+      },
+      error: (e: any) => console.error(e),
     });
   }
 
+  test() {
+    window.alert('teswt');
+  }
+
+  getFormationById(id: any) {
+    this.formationService.get(id).subscribe({
+      next: (data: any) => {
+        this.formation = data;
+      },
+      error: (e: any) => console.error(e),
+    });
+  }
 }

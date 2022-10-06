@@ -1,10 +1,10 @@
 <main id="main" class="main">
-    <section class="section">
+  <section class="section">
 
 
-      <div *ngIf="!submitted">
-        <div class="form-group">
-          <div class="d-flex justify-content-between">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <div class="d-flex justify-content-between">
 
           <label for="title">Titre</label>
           <input
@@ -14,7 +14,7 @@
             required
             [(ngModel)]="diplome.title"
             name="title"
-          />
+            />
 
           <label for="description">Spécialité</label>
           <input
@@ -23,21 +23,14 @@
             required
             [(ngModel)]="diplome.speciality"
             name="description"
-          />
-
-
-
-
-
+            />
 
           <div>
-              <button class="btn btn-success" (click)="addDiplome()">Add</button>
+            <button class="btn btn-success" (click)="addDiplome()">Add</button>
           </div>
 
-
-
-
-          </div></div>
+        </div>
+      </div>
     </div>
-    </section>
+  </section>
 </main>

@@ -5,15 +5,13 @@ import { Constants } from '../config/constant';
 import { User } from '../models/User';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(private http: HttpClient,  private config : Constants) { }
+  constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<User[]> {
-
-    return this.http.get<User[]>(this.config.API_USER+"getall");
+    return this.http.get<User[]>(this.config.API_USER + 'getall');
   }
 
   get(id: any): Observable<User> {
@@ -21,7 +19,7 @@ export class UserService {
   }
 
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_USER+"add?authId="+id, data);
+    return this.http.post(this.config.API_USER + 'add?authId=' + id, data);
   }
 
   update(id: any, data: any): Observable<any> {

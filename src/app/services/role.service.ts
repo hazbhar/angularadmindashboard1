@@ -4,27 +4,26 @@ import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RoleService {
   addHttpOption = {
-    headers: new HttpHeaders ({
+    headers: new HttpHeaders({
       'Content-type': 'application/json',
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    }),
+  };
+  constructor(private http: HttpClient, private config: Constants) {}
 
-    })
-  }
-  constructor(private http: HttpClient ,  private config : Constants) { }
-
-  getAll(): Observable<any[]>{
-    return this.http.get<any>(this.config.API_Role+'getall');
+  getAll(): Observable<any[]> {
+    return this.http.get<any>(this.config.API_Role + 'getall');
   }
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.config.API_Role}getById?id=${id}`);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Role+"add?", data);
+    return this.http.post(this.config.API_Role + 'add?', data);
   }
 
   update(id: any, data: any): Observable<any> {
