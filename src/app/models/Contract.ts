@@ -3,7 +3,7 @@ import {Frequence} from "./Frequence";
 import {ContractType} from "./ContractType";
 
 export class Contract{
-  id:number;
+  id!:number;
   startDate?:Date;
   endDate?:Date;
   frequence:Frequence;

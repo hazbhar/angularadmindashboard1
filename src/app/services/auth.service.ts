@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
-import { ILogin } from '../models/login.interface';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +14,10 @@ export class AuthService {
   };
 
   constructor(private http: HttpClient, private config: Constants) {}
+
+  getAll() {
+    return this.http.get<any[]>(this.config.API_AUTH + 'getall',this.addHttpOption);
+  }
 
   login(username: any, password: any, typeauth: any): Observable<any> {
     return this.http.post(

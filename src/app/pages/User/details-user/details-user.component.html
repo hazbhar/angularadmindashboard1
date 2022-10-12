@@ -1,4 +1,4 @@
-<main id="main" class="main">
+<main id="main" class="main" style="position: fixed">
   <div class="pagetitle">
     <h1>Users Details</h1>
     <nav>
@@ -74,17 +74,17 @@
               <div class="form-group">
                 <label><strong>enable:</strong></label>
                 <div class="form-check form-switch"> <input
-                    class="form-check-input" type="checkbox"
-                    id="flexSwitchCheckChecked"> <label class="form-check-label"
-                    for="flexSwitchCheckChecked">Checked switch checkbox input</label></div>
+                    class="form-check-input" type="checkbox" name="enabled"
+                    id="enable" [(ngModel)]="currentUser.enabled" [checked]="currentUser.enabled"> <label class="form-check-label"
+                    for="enable">switch to change </label></div>
               </div>
 
               <div class="form-group">
                 <label><strong>valide: </strong></label>
                 <div class="form-check form-switch"> <input
-                    class="form-check-input" type="checkbox"
-                    id="flexSwitchCheckChecked"> <label class="form-check-label"
-                    for="flexSwitchCheckChecked">Checked switch checkbox input</label></div>
+                    class="form-check-input" type="checkbox" name="valide"
+                    id="valide" [(ngModel)]="currentUser.validity" [checked]="currentUser.validity"> <label class="form-check-label"
+                    for="valide"> switch to change</label></div>
               </div>
 
             </form>

@@ -32,6 +32,15 @@
   color: #2C3E50;
   font-size: 13px;
 }
+
+#msform .ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+#msform  .ng-invalid[required]:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
 #msform input:focus, #msform textarea:focus {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;

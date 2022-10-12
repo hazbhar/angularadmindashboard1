@@ -23,8 +23,10 @@ export class EmployeService {
   get(id: any): Observable<Employe> {
     return this.http.get<Employe>(`${this.config.API_EMPLOYE}getById?id=${id}`);
   }
-  create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_EMPLOYE + 'add?authId=' + id, data);
+  create(id: any,siteid: any,civilStateId: any,typeStaffId: any, data: any): Observable<any> {
+    console.log(JSON.stringify(data));
+    return this.http.post(this.config.API_EMPLOYE + 'add?userId=' + id+"&siteid="+siteid+"&civilStateId="+civilStateId+"&typeStaffId="+typeStaffId,JSON.stringify(data),this.addHttpOption);
+
   }
 
   update(id: any, data: any): Observable<any> {

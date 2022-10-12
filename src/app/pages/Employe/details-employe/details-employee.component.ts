@@ -11,29 +11,7 @@ import { EmployeService } from '../../../services/employe.service';
 export class DetailsEmployeeComponent implements OnInit {
   @Input() viewMode = false;
 
-  @Input() currentEmployee: Employe = {
-    id: undefined,
-    firstName: undefined,
-    lastName: undefined,
-    initial: undefined,
-    dateOfBirth: undefined,
-    natioIdCard: undefined,
-    availability: undefined,
-    companyName: undefined,
-    impartialityContract: undefined,
-    contractList: undefined,
-    medicalVisitList: undefined,
-    handedOverList: undefined,
-    serviceList: undefined,
-    processList: undefined,
-    site: undefined,
-    eapList: undefined,
-    employeeFormationList: undefined,
-    employeeDiplomaList: undefined,
-    employeeAttributionList: undefined,
-    civilState: undefined,
-    typeOfStaff: undefined,
-  };
+  @Input() currentEmployee: Employe ;
   message = '';
   constructor(
     private employeeService: EmployeService,
@@ -74,13 +52,5 @@ export class DetailsEmployeeComponent implements OnInit {
       });
   }
 
-  deleteEmployee(): void {
-    this.employeeService.delete(this.currentEmployee.id).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.router.navigate(['/employee-list']);
-      },
-      error: (e) => console.error(e),
-    });
-  }
+
 }

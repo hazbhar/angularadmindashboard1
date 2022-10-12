@@ -30,5 +30,11 @@ export class Constants {
 
   public readonly API_EtatCivil: string = this.API_ENDPOINT + 'civilState/';
 
+  public readonly API_Privilege: string = this.API_ENDPOINT + 'privilege/';
+
   public readonly API_Process: string = this.API_ENDPOINT + 'process/';
+
+  public readonly API_UploadFile: string = this.API_ENDPOINT + 'upload/';
+
+
 }

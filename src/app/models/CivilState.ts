@@ -4,5 +4,5 @@ export class CivilState{
   id:number;
   state:string;
   enabled:boolean;
-  employeeList:Array<Employe>;
+  employeeList!:Array<any>;
 }

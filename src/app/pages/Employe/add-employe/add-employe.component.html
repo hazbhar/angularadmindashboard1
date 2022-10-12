@@ -50,7 +50,8 @@
         <div class="row mb-3">
           <label for="inputText" class="col-sm-2 col-form-label">Nom *</label>
           <div class="col-sm-10"> <input type="text" class="form-control"
-              name="Nom" id="Nom" placeholder="Nom..." formControlName="Nom" />
+              name="Nom" id="Nom" placeholder="Nom..." formControlName="Nom"
+              required>
           </div>
 
         </div>
@@ -58,7 +59,7 @@
           <label for="inputEmail" class="col-sm-2 col-form-label">Prenom *</label>
           <div class="col-sm-10"> <input type="text" class="form-control"
               name="Prenom" id="Prenom" formControlName="Prenom"
-              placeholder="Prenom...">
+              placeholder="Prenom..." required>
           </div>
 
         </div>
@@ -68,22 +69,26 @@
             *</label>
           <div class="col-sm-10"> <input type="date" class="form-control"
               name="DateNaissance" id="DateNaissance"
-              formControlName="DateNaissance" placeholder="Date Naissance...">
+              formControlName="DateNaissance" placeholder="Date Naissance..."
+              required>
           </div>
 
         </div>
         <div class="row mb-3">
           <label for="inputNumber" class="col-sm-2 col-form-label">Cin *</label>
           <div class="col-sm-10"> <input type="number" class="form-control"
-              name="Cin" id="Cin" formControlName="Cin" placeholder="Cin...">
+              name="Cin" id="Cin" formControlName="Cin" placeholder="Cin..."
+              required>
           </div>
 
         </div>
         <div class="row mb-3">
           <legend class="col-sm-2 col-form-label ">Etat civil</legend>
           <div class="col-sm-10">
-            <select class="form-select" name="etatcivil" id="etatcivil"
+            <select class="form-select" formControlName="civilState"
+              name="etatcivil" id="etatcivil"
               aria-label="Default select example">
+              <option value="" disabled selected>Choisir de la liste</option>
               <option *ngFor="let etatciv of etatcivil ; let i index"
                 [value]="etatciv.id">{{etatciv.state}}</option>
 
@@ -92,12 +97,13 @@
 
         </div>
         <input (click)="next()" type="button" name="next"
-          (disabled)="!Infosgenerales.valid" class="next action-button"
+          [disabled]="!Infosgenerales.valid"
+          class="next action-button"
           value="Next"/>
         <button type="reset" name="next" class="reset">reset</button>
       </fieldset>
     </form>
-    <form [formGroup]="Infoscontratdutravail" id="msform">
+    <form [formGroup]="Infoscontratdutravail"  id="msform">
       <!-- fieldsets -->
       <fieldset *ngIf="step == 2">
         <h2 class="fs-title">Infos contrat du travail</h2>
@@ -108,20 +114,97 @@
           || Infoscontratdutravail.controls['idtypcont'].invalid &&
           (Infoscontratdutravail.controls['idtypcont'].dirty ||
           Infoscontratdutravail.controls['idtypcont'].touched)
-          || Infoscontratdutravail.controls['DateNaissance'].invalid &&
-          (Infoscontratdutravail.controls['DateNaissance'].dirty ||
-          Infoscontratdutravail.controls['DateNaissance'].touched)
-          || Infoscontratdutravail.controls['Cin'].invalid &&
-          (Infoscontratdutravail.controls['Cin'].dirty ||
-          Infoscontratdutravail.controls['Cin'].touched)
+          || Infoscontratdutravail.controls['frequence'].invalid &&
+          (Infoscontratdutravail.controls['frequence'].dirty ||
+          Infoscontratdutravail.controls['frequence'].touched)
+          || Infoscontratdutravail.controls['typeProcessus'].invalid &&
+          (Infoscontratdutravail.controls['typeProcessus'].dirty ||
+          Infoscontratdutravail.controls['typeProcessus'].touched)
+          || Infoscontratdutravail.controls['available'].invalid &&
+          (Infoscontratdutravail.controls['available'].dirty ||
+          Infoscontratdutravail.controls['available'].touched)||
+          Infoscontratdutravail.controls['remisemateriel'].invalid &&
+          (Infoscontratdutravail.controls['remisemateriel'].dirty ||
+          Infoscontratdutravail.controls['remisemateriel'].touched)||
+          Infoscontratdutravail.controls['DateFinContrat'].invalid &&
+          (Infoscontratdutravail.controls['DateFinContrat'].dirty ||
+          Infoscontratdutravail.controls['DateFinContrat'].touched)||
+          Infoscontratdutravail.controls['typePersonnel'].invalid &&
+          (Infoscontratdutravail.controls['typePersonnel'].dirty ||
+          Infoscontratdutravail.controls['typePersonnel'].touched)||
+          Infoscontratdutravail.controls['nomSociete'].invalid &&
+          (Infoscontratdutravail.controls['nomSociete'].dirty ||
+          Infoscontratdutravail.controls['nomSociete'].touched)||
+          Infoscontratdutravail.controls['DateVisiteMedicale'].invalid &&
+          (Infoscontratdutravail.controls['DateVisiteMedicale'].dirty ||
+          Infoscontratdutravail.controls['DateVisiteMedicale'].touched)||
+          Infoscontratdutravail.controls['DateProchVisiteMedicale'].invalid &&
+          (Infoscontratdutravail.controls['DateProchVisiteMedicale'].dirty ||
+          Infoscontratdutravail.controls['DateProchVisiteMedicale'].touched)||
+          Infoscontratdutravail.controls['uniteTechnique'].invalid &&
+          (Infoscontratdutravail.controls['uniteTechnique'].dirty ||
+          Infoscontratdutravail.controls['uniteTechnique'].touched)||
+          Infoscontratdutravail.controls['contratImpartialite'].invalid &&
+          (Infoscontratdutravail.controls['contratImpartialite'].dirty ||
+          Infoscontratdutravail.controls['contratImpartialite'].touched)||
+          Infoscontratdutravail.controls['contratConfidentialite'].invalid &&
+          (Infoscontratdutravail.controls['contratConfidentialite'].dirty ||
+          Infoscontratdutravail.controls['contratConfidentialite'].touched)||
+          Infoscontratdutravail.controls['visiteMedicales'].invalid &&
+          (Infoscontratdutravail.controls['visiteMedicales'].dirty ||
+          Infoscontratdutravail.controls['visiteMedicales'].touched)||
+          Infoscontratdutravail.controls['eap'].invalid &&
+          (Infoscontratdutravail.controls['eap'].dirty ||
+          Infoscontratdutravail.controls['eap'].touched)||
+          Infoscontratdutravail.controls['dateEap'].invalid &&
+          (Infoscontratdutravail.controls['dateEap'].dirty ||
+          Infoscontratdutravail.controls['dateEap'].touched)||
+          Infoscontratdutravail.controls['sitetid'].invalid &&
+          (Infoscontratdutravail.controls['sitetid'].dirty ||
+          Infoscontratdutravail.controls['sitetid'].touched)
           "
           class="alert alert-danger">
-          <div *ngIf="Infosgenerales.controls['Nom'].errors "> Name is required.</div>
-          <div *ngIf="Infosgenerales.controls['Prenom'].errors "> Prenom is
+          <div *ngIf="Infoscontratdutravail.controls['DateDebutContrat'].errors
+            "> DateDebutContrat is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['idtypcont'].errors ">
+            idtypcont is
             required.</div>
-          <div *ngIf="Infosgenerales.controls['DateDebutContrat'].errors ">
-            Date Debut Contrat is required.</div>
-          <div *ngIf="Infosgenerales.controls['Cin'].errors "> Cin is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['frequence'].errors ">
+            Date Debut frequence is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['typeProcessus'].errors ">
+            typeProcessus is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['available'].errors ">
+            available is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['remisemateriel'].errors ">
+            remisemateriel is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['DateFinContrat'].errors ">
+            DateFinContrat is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['typePersonnel'].errors ">
+            typePersonnel is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['nomSociete'].errors ">
+            nomSociete is required.</div>
+          <div
+            *ngIf="Infoscontratdutravail.controls['DateVisiteMedicale'].errors
+            "> DateVisiteMedicale is required.</div>
+          <div
+            *ngIf="Infoscontratdutravail.controls['DateProchVisiteMedicale'].errors
+            "> DateProchVisiteMedicale is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['uniteTechnique'].errors ">
+            uniteTechnique is required.</div>
+          <div
+            *ngIf="Infoscontratdutravail.controls['contratImpartialite'].errors
+            "> contratImpartialite is required.</div>
+          <div
+            *ngIf="Infoscontratdutravail.controls['contratConfidentialite'].errors
+            "> contratConfidentialite is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['visiteMedicales'].errors
+            "> visiteMedicales is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['eap'].errors "> eap is
+            required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['dateEap'].errors ">
+            dateEap is required.</div>
+          <div *ngIf="Infoscontratdutravail.controls['sitetid'].errors "> site
+            is required.</div>
         </div>
         <!--        formgroup       -->
 
@@ -130,7 +213,7 @@
             Contrat</label>
           <div class="col-sm-10"> <input type="date" name="DateDebutContrat"
               formControlName="DateDebutContrat" id="DateDebutContrat"
-              class="form-control" placeholder="DateDebutContrat...">
+              class="form-control" placeholder="DateDebutContrat..." required>
           </div>
 
         </div>
@@ -139,7 +222,8 @@
           <div class="col-sm-10">
             <select class="form-select" [(ngModel)]="typcontid"
               formControlName="idtypcont" name="id" id="id" aria-label="Default
-              select example">
+              select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
               <option *ngFor="let typcont of typecontrat; let i= index"
                 [value]="typcont.id">{{typcont.title}}</option>
             </select>
@@ -151,7 +235,8 @@
             Contrat</label>
           <div class="col-sm-10"> <input type="date" name="DateFinContrat"
               formControlName="DateFinContrat" id="DateFinContrat"
-              class="form-control" placeholder="DateFinContrat...">
+              class="form-control" placeholder="DateFinContrat..."
+              [required]="typcontid!=1">
           </div>
         </div>
 
@@ -160,7 +245,8 @@
           <div class="col-sm-10">
             <select class="form-select" [(ngModel)]="freque"
               formControlName="frequence" name="frequence" id="frequence"
-              aria-label="Default select example">
+              aria-label="Default select example" [required]="typcontid==3">
+              <option value="-1" disabled selected>Choisir de la liste</option>
               <option *ngFor="let frequ of frequence; let i= index"
                 [value]="frequ.id">{{frequ.description}}</option>
             </select>
@@ -172,7 +258,8 @@
           <div class="col-sm-10">
             <select class="form-select" [(ngModel)]="typePersonnel"
               formControlName="typePersonnel" name="typePersonnel"
-              id="typePersonnel" aria-label="Default select example">
+              id="typePersonnel" aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
               <option *ngFor="let typepers of typeperso; let i= index"
                 [value]="typepers.id">{{typepers.job}}</option>
             </select>
@@ -186,14 +273,14 @@
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input"
                   formControlName="available" name="available" id="available"
-                  value="true" mdbInput>
+                  value="true" [required]="typePersonnel==2">
                 <label class="custom-control-label" for="defaultInline1">Oui</label>
               </div>
               <!-- Default inline 2-->
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input"
                   formControlName="available" name="available" id="available"
-                  value="false" mdbInput>
+                  value="false" [required]="typePersonnel==2">
                 <label class="custom-control-label" for="defaultInline2">Non</label>
               </div>
             </div>
@@ -204,7 +291,8 @@
           <label class="col-sm-2 col-form-label">nom Societe</label>
           <div class="col-sm-10"> <input class="form-control"
               formControlName="nomSociete" type="text" name="nomSociete"
-              id="nomSociete" placeholder="nom Societe..." required>
+              id="nomSociete" placeholder="nom Societe..."
+              [required]="typePersonnel==2">
           </div>
         </div>
 
@@ -213,7 +301,8 @@
           <div class="col-sm-10">
             <select multiple class="form-select" name="typeProcessus"
               formControlName="typeProcessus" id="typeProcessus"
-              aria-label="Default select example">
+              aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
               <option *ngFor="let typproces of typprocesus; let i= index"
                 [value]="typproces.id">{{typproces.content}}</option>
             </select>
@@ -224,7 +313,8 @@
           <label class="col-sm-2 col-form-label">unite Technique</label>
           <div class="col-sm-10"> <select class="form-select"
               formControlName="uniteTechnique" name="uniteTechnique"
-              id="uniteTechnique" aria-label="Default select example">
+              id="uniteTechnique" aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
               <option *ngFor="let unitete of unitetech; let i= index"
                 [value]="unitete.id">{{unitete.technicalTerm}}</option>
             </select>
@@ -234,8 +324,11 @@
         <div class="row mb-3">
           <legend class="col-sm-2 col-form-label ">Site</legend>
           <div class="col-sm-10">
-            <select class="form-select" [(ngModel)]="site" name="site" id="site"
-              formControlName="site" aria-label="Default select example">
+            <select class="form-select" [(ngModel)]="siteid" name="sitetid"
+              id="site"
+              formControlName="sitetid" aria-label="Default select example"
+              required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
               <option *ngFor="let sit of site; let i= index" [value]="sit.id">{{sit.siteName}}</option>
             </select>
           </div>
@@ -244,7 +337,7 @@
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">Remise de matériel</label>
           <div class="col-sm-10"> <input multiple class="form-control"
-              formControlName="remisemateriel" type="file" name="remisemateriel"
+              formControlName="remisemateriel" type="file" (change)="handleFileInputremisemateriel($event)" name="remisemateriel"
               id="remisemateriel" placeholder="Remise de matériel..." required>
           </div>
         </div>
@@ -252,7 +345,7 @@
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">contrat Impartialite</label>
           <div class="col-sm-10"> <input class="form-control" type="file"
-              formControlName="contratImpartialite" name="contratImpartialite"
+              formControlName="contratImpartialite" (change)="handleFileInputfileTocontratImpartialite($event)" name="contratImpartialite"
               id="contratImpartialite" placeholder="contrat Impartialite..."
               required>
           </div>
@@ -261,7 +354,7 @@
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">contrat Confidentialite</label>
           <div class="col-sm-10"> <input class="form-control" type="file"
-              formControlName="contratConfidentialite"
+              formControlName="contratConfidentialite" (change)="handleFileInputcontratConfidentialite($event)"
               name="contratConfidentialite" id="contratConfidentialite"
               placeholder="contrat Confidentialite..." required>
           </div>
@@ -270,7 +363,7 @@
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">visite Medicales</label>
           <div class="col-sm-10"> <input multiple class="form-control"
-              type="file" formControlName="visiteMedicales"
+              type="file" formControlName="visiteMedicales" (change)="handleFileIvisiteMedicales($event)"
               name="visiteMedicales" id="visiteMedicales" placeholder="visite
               Medicales..." required>
           </div>
@@ -281,23 +374,26 @@
             visite Medicale </label>
           <div class="col-sm-10"> <input type="date" name="DateFinContrat"
               formControlName="DateVisiteMedicale" id="DateFinContrat"
-              class="form-control" placeholder="Date visite Medicale...">
+              class="form-control" placeholder="Date visite Medicale..."
+              required>
           </div>
 
         </div>
-        <div *ngIf="typcontid!=2" class="row mb-3">
-          <label for="DateFinContrat" class="col-sm-2 col-form-label">Date
+        <div class="row mb-3">
+          <label for="DateProchVisiteMedicale" class="col-sm-2 col-form-label">Date
             Prochaine visite Medicale</label>
-          <div class="col-sm-10"> <input type="date" name="DateFinContrat"
-              formControlName="DateProchVisiteMedicale" id="DateFinContrat"
+          <div class="col-sm-10"> <input type="date"
+              name="DateProchVisiteMedicale"
+              formControlName="DateProchVisiteMedicale"
+              id="DateProchVisiteMedicale"
               class="form-control" placeholder="Date Prochaine visite
-              Medicale...">
+              Medicale..." required>
           </div>
         </div>
 
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">Eap</label>
-          <div class="col-sm-10"> <input class="form-control" type="file"
+          <div class="col-sm-10"> <input class="form-control" type="file" (change)="handleFileInputeap($event)"
               formControlName="eap" name="eap" id="eap" placeholder="eap..."
               required>
           </div>
@@ -313,54 +409,35 @@
 
         <input (click)="previous()" type="button" name="previous"
           class="previous action-button-previous" value="Previous"/>
-        <input (click)="next()" type="button" name="next" class="next
+        <input (click)="next()" [disabled]="!Infoscontratdutravail.valid"
+          type="button" name="next" class="next
           action-button" value="Next"/>
         <button type="reset" name="next" class="reset">reset</button>
       </fieldset>
     </form>
 
 
-    <form [formGroup]="Infosdesdiplomes" id="msform">
+    <form [formGroup]="Infosdesdiplomes"  id="msform">
       <fieldset *ngIf="step == 3">
-        <div formArrayName="diplom">
-          <div *ngFor="let item of diplom.controls;let i=index">
+        <div formArrayName="diploma">
+          <div *ngFor="let item of diploma.controls;let i=index">
             <div [formGroupName]="i">
               <h2 class="fs-title">Infos des diplomes {{i+1}}</h2>
+              <!--        validators       -->
 
-        <!--        validators       -->
-        <div *ngIf="Infosgenerales.controls['Nom'].invalid &&
-          (Infosgenerales.controls['Nom'].dirty ||
-          Infosgenerales.controls['Nom'].touched)
-          || Infosgenerales.controls['Prenom'].invalid &&
-          (Infosgenerales.controls['Prenom'].dirty ||
-          Infosgenerales.controls['Prenom'].touched)
-          || Infosgenerales.controls['DateNaissance'].invalid &&
-          (Infosgenerales.controls['DateNaissance'].dirty ||
-          Infosgenerales.controls['DateNaissance'].touched)
-          || Infosgenerales.controls['Cin'].invalid &&
-          (Infosgenerales.controls['Cin'].dirty ||
-          Infosgenerales.controls['Cin'].touched)
-          "
-          class="alert alert-danger">
-          <div *ngIf="Infosgenerales.controls['Nom'].errors "> Name is required.</div>
-          <div *ngIf="Infosgenerales.controls['Prenom'].errors "> Prenom is
-            required.</div>
-          <div *ngIf="Infosgenerales.controls['DateNaissance'].errors ">
-            DateNaissance is required.</div>
-          <div *ngIf="Infosgenerales.controls['Cin'].errors "> Cin is required.</div>
-        </div>
-        <!--        formgroup       -->
+              <!--        formgroup       -->
 
               <div class="row mb-3">
-                <legend class="col-sm-2 col-form-label "> diplomes</legend>
+                <legend class="col-sm-2 col-form-label ">diplome</legend>
                 <div class="col-sm-10">
-                  <select class="form-select" name="diplomes"
-                    formControlName="diplomes" id="diplomes" aria-label="Default
-                    select example">
-                    <option value="1">Ingénierie</option>
-                    <option value="2">Master</option>
-                    <option value="3">Licence</option>
-                    <option value="4">Baccalauréat</option>
+                  <select class="form-select" name="title"
+                    formControlName="title" id="title" aria-label="Default
+                    select example" required>
+                    <option value="-1" disabled selected>Choisir de la liste</option>
+                    <option value="Ingénierie">Ingénierie</option>
+                    <option value="Master">Master</option>
+                    <option value="Licence">Licence</option>
+                    <option value="Baccalauréat">Baccalauréat</option>
                   </select>
                 </div>
 
@@ -375,7 +452,7 @@
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">diplome file</label>
                 <div class="col-sm-10"> <input class="form-control"
-                    formControlName="diplomefile" type="file"
+                    formControlName="diplomefile" type="file" (change)="handleFileInputdiplomefile($event)"
                     name="diplomesfile" id="diplomesfile"
                     placeholder="diplomes..." required>
                 </div>
@@ -390,7 +467,7 @@
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Attribution File</label>
                 <div class="col-sm-10"> <input class="form-control" type="file"
-                    formControlName="Attributionf" name="Attributionf"
+                    formControlName="Attributionf" name="Attributionf" (change)="handleFileInputAttributionf($event)"
                     id="Attributionf" placeholder="Attribution..." required>
                 </div>
               </div>
@@ -402,49 +479,30 @@
 
         <input (click)="previous()" type="button" name="previous"
           class="previous action-button-previous" value="Previous"/>
-        <input (click)="next()" type="button" name="next" class="next
+        <input (click)="next()" [disabled]="!diploma.valid" type="button"
+          name="next" class="next
           action-button" value="Next"/>
         <button type="reset" name="next" class="reset">reset</button>
         <button (click)="addnewdipl()" class="add">add (+)</button>
       </fieldset>
     </form>
 
-    <form [formGroup]="Competences" id="msform">
+    <form [formGroup]="Competences"  id="msform">
       <fieldset *ngIf="step == 4">
-        <div formArrayName="formations">
-          <div *ngFor="let item of formations.controls;let i=index">
+        <div formArrayName="formation">
+          <div *ngFor="let item of formation.controls;let i=index">
             <div [formGroupName]="i">
               <h2 class="fs-title">Competences {{i+1}}</h2>
 
-        <!--        validators       -->
-        <div *ngIf="Infosgenerales.controls['Nom'].invalid &&
-          (Infosgenerales.controls['Nom'].dirty ||
-          Infosgenerales.controls['Nom'].touched)
-          || Infosgenerales.controls['Prenom'].invalid &&
-          (Infosgenerales.controls['Prenom'].dirty ||
-          Infosgenerales.controls['Prenom'].touched)
-          || Infosgenerales.controls['DateNaissance'].invalid &&
-          (Infosgenerales.controls['DateNaissance'].dirty ||
-          Infosgenerales.controls['DateNaissance'].touched)
-          || Infosgenerales.controls['Cin'].invalid &&
-          (Infosgenerales.controls['Cin'].dirty ||
-          Infosgenerales.controls['Cin'].touched)
-          "
-          class="alert alert-danger">
-          <div *ngIf="Infosgenerales.controls['Nom'].errors "> Name is required.</div>
-          <div *ngIf="Infosgenerales.controls['Prenom'].errors "> Prenom is
-            required.</div>
-          <div *ngIf="Infosgenerales.controls['DateNaissance'].errors ">
-            DateNaissance is required.</div>
-          <div *ngIf="Infosgenerales.controls['Cin'].errors "> Cin is required.</div>
-        </div>
-        <!--        formgroup       -->
+              <!--        validators       -->
+
+              <!--        formgroup       -->
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">formation</label>
-                <div class="col-sm-10"> <input class="form-control"
-                    formControlName="formation" type="text" name="formation"
-                    id="formation" placeholder="formation..." required>
+                <label class="col-sm-2 col-form-label">Titre</label>
+                <div class="col-sm-10"> <input class="form-control" type="text"
+                    formControlName="title" name="title"
+                    id="title" placeholder="titre..." required>
                 </div>
               </div>
 
@@ -454,36 +512,37 @@
                   <div class="custom-control custom-radio
                     custom-control-inline">
                     <input type="radio" class="custom-control-input"
-                      formControlName="periodique" name="periodique"
-                      id="periodique" value="true"
-                      (change)="onChangeperiodique($event,i)">
-                    <label class="custom-control-label" for="periodique">Oui</label>
+                      formControlName="periodec" name="periodec"
+                      id="periodec" value="true"
+                      (change)="onChangeperiodique($event,i)" required>
+                    <label class="custom-control-label" for="periodec">Oui</label>
                   </div>
                   <!-- Default inline 2-->
                   <div class="custom-control custom-radio
                     custom-control-inline">
                     <input type="radio" class="custom-control-input"
-                      formControlName="periodique" name="periodique"
-                      id="periodique" value="false"
-                      (change)="onChangeperiodique($event,i)" checked>
-                    <label class="custom-control-label" for="periodique">Non</label>
+                      formControlName="periodec" name="periodec"
+                      id="periodec" value="false"
+                      (change)="onChangeperiodique($event,i)" required>
+                    <label class="custom-control-label" for="periodec">Non</label>
                   </div>
                 </div>
               </div>
 
-              <div *ngIf="periodiq" class="row mb-3">
+              <div *ngIf="periodiq[i]" class="row mb-3">
                 <label class="col-sm-2 col-form-label">date de Renouvellement</label>
                 <div class="col-sm-10"> <input class="form-control"
                     formControlName="dateRenouvellement" type="date"
                     name="dateRenouvellement" id="dateRenouvellement"
-                    placeholder="date de Renouvellement..." required>
+                    placeholder="date de Renouvellement..."
+                    [required]="periodiq[i]">
                 </div>
               </div>
 
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">formation File</label>
                 <div class="col-sm-10"> <input class="form-control" type="file"
-                    formControlName="formationFile" name="formationFile"
+                    formControlName="formationFile" name="formationFile" (change)="handleFileInputformationFile($event)"
                     id="formationFile" placeholder="formation File..." required>
                 </div>
               </div>
@@ -516,7 +575,7 @@
 
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">habilitation File</label>
-                <div class="col-sm-10"> <input class="form-control" type="file"
+                <div class="col-sm-10"> <input class="form-control" type="file"  (change)="handleFileInputhabilitationFile($event)"
                     formControlName="habilitationFile" name="habilitationFile"
                     id="habilitationFile" placeholder="habilitation File..."
                     required>
@@ -530,7 +589,8 @@
 
         <input (click)="previous()" type="button" name="previous"
           class="previous action-button-previous" value="Previous"/>
-        <input (click)="next()" type="button" name="next" class="next
+        <input (click)="next()" [disabled]="!Competences.valid" type="button"
+          name="next" class="next
           action-button" value="Next"/>
         <button type="reset" name="next" class="reset">reset</button>
         <button (click)="addnewformat()" class="add">add (+)</button>
@@ -541,29 +601,41 @@
       <fieldset *ngIf="step == 5">
         <h2 class="fs-title">Infos de sécurité </h2>
 
-                <!--        validators       -->
-                <div *ngIf="Infosgenerales.controls['Nom'].invalid &&
-                (Infosgenerales.controls['Nom'].dirty ||
-                Infosgenerales.controls['Nom'].touched)
-                || Infosgenerales.controls['Prenom'].invalid &&
-                (Infosgenerales.controls['Prenom'].dirty ||
-                Infosgenerales.controls['Prenom'].touched)
-                || Infosgenerales.controls['DateNaissance'].invalid &&
-                (Infosgenerales.controls['DateNaissance'].dirty ||
-                Infosgenerales.controls['DateNaissance'].touched)
-                || Infosgenerales.controls['Cin'].invalid &&
-                (Infosgenerales.controls['Cin'].dirty ||
-                Infosgenerales.controls['Cin'].touched)
-                "
-                class="alert alert-danger">
-                <div *ngIf="Infosgenerales.controls['Nom'].errors "> Name is required.</div>
-                <div *ngIf="Infosgenerales.controls['Prenom'].errors "> Prenom is
-                  required.</div>
-                <div *ngIf="Infosgenerales.controls['DateNaissance'].errors ">
-                  DateNaissance is required.</div>
-                <div *ngIf="Infosgenerales.controls['Cin'].errors "> Cin is required.</div>
-              </div>
-              <!--        formgroup       -->
+        <!--        validators       -->
+        <div *ngIf="Infosdesecurite.controls['username'].invalid &&
+          (Infosdesecurite.controls['username'].dirty ||
+          Infosdesecurite.controls['username'].touched)
+          || Infosdesecurite.controls['email'].invalid &&
+          (Infosdesecurite.controls['email'].dirty ||
+          Infosdesecurite.controls['email'].touched)
+          || Infosdesecurite.controls['confirmEmail'].invalid &&
+          (Infosdesecurite.controls['confirmEmail'].dirty ||
+          Infosdesecurite.controls['confirmEmail'].touched)
+          || Infosdesecurite.controls['typeAuth'].invalid &&
+          (Infosdesecurite.controls['typeAuth'].dirty ||
+          Infosdesecurite.controls['typeAuth'].touched)
+          || Infosdesecurite.controls['password'].invalid &&
+          (Infosdesecurite.controls['password'].dirty ||
+          Infosdesecurite.controls['password'].touched)
+          || Infosdesecurite.controls['confirmPassword'].invalid &&
+          (Infosdesecurite.controls['confirmPassword'].dirty ||
+          Infosdesecurite.controls['confirmPassword'].touched)
+          "
+          class="alert alert-danger">
+          <div *ngIf="Infosdesecurite.controls['username'].errors "> username is
+            required.</div>
+          <div *ngIf="Infosdesecurite.controls['email'].errors "> email is
+            required.</div>
+          <div *ngIf="Infosdesecurite.controls['confirmEmail'].errors ">
+            confirmEmail is required.</div>
+          <div *ngIf="Infosdesecurite.controls['typeAuth'].errors "> typeAuth is
+            required.</div>
+          <div *ngIf="Infosdesecurite.controls['password'].errors "> password is
+            required.</div>
+          <div *ngIf="Infosdesecurite.controls['confirmPassword'].errors ">
+            confirmPassword is required.</div>
+        </div>
+        <!--        formgroup       -->
 
         <div class="row mb-3">
           <label class="col-sm-2 col-form-label">user name</label>
@@ -594,14 +666,15 @@
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" name="typeAuth"
               formControlName="typeAuth" id="typeAuth" value="mdp"
-              [(ngModel)]="typeAuth" (change)="onChange($event)" checked>
+              [(ngModel)]="typeAuth" (change)="onChange($event)" checked
+              required>
             <label class="custom-control-label" for="typeAuth">Mot de passe</label>
           </div>
           <!-- Default inline 2-->
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" name="typeAuth"
               formControlName="typeAuth" id="typeAuth" value="ldap"
-              [(ngModel)]="typeAuth" (change)="onChange($event)">
+              [(ngModel)]="typeAuth" (change)="onChange($event)" required>
             <label class="custom-control-label" for="typeAuth">LDAP</label>
           </div>
 
@@ -610,7 +683,7 @@
           <label class="col-sm-2 col-form-label">Password</label>
           <div class="col-sm-10"> <input class="form-control" type="password"
               formControlName="password" name="password" id="password"
-              placeholder="Password..." required>
+              placeholder="Password..." [required]="typeAuth=='mdp'">
           </div>
         </div>
 
@@ -618,14 +691,52 @@
           <label class="col-sm-2 col-form-label">confirm Password</label>
           <div class="col-sm-10"> <input class="form-control" type="password"
               formControlName="confirmPassword" name="confirmPassword"
-              id="confirmPassword" placeholder="confirm Password..." required>
+              id="confirmPassword" placeholder="confirm Password..."
+              [required]="typeAuth=='mdp'">
           </div>
         </div>
 
+        <div class="row mb-3">
+          <legend class="col-sm-2 col-form-label ">Role</legend>
+          <div class="col-sm-10">
+            <select multiple class="form-select" name="role"
+              formControlName="role" id="role"
+              aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
+              <option *ngFor="let rol of role; let i= index"
+                [value]="rol.id">{{rol.roleName}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <legend class="col-sm-2 col-form-label ">privileges</legend>
+          <div class="col-sm-10">
+            <select multiple class="form-select" name="privilege"
+              formControlName="privilege" id="privilege"
+              aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
+              <option *ngFor="let privilege of privileges; let i= index"
+                [value]="privilege.id">{{privilege.privName}}</option>
+            </select>
+          </div>
+        </div>
+
+
+
         <input (click)="previous()" type="button" name="previous"
           class="previous action-button-previous" value="Previous"/>
-        <button (click)="submit()" type="submit" name="submit" class="submit">Submit</button>
+        <button (click)="submit()" [disabled]="!Infosdesecurite.valid"
+          type="submit" name="submit" class="submit">Submit</button>
         <button type="reset" name="next" class="reset">reset</button>
+
+        <div *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
+          Adding Employe failed: {{ errorMessage }}
+        </div>
+
+        <div *ngIf="submitted">
+          <h4>Employee was submitted successfully!</h4>
+        </div>
       </fieldset>
     </form>
 

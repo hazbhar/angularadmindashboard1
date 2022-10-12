@@ -1,77 +1,87 @@
 <main id="main" class="main" style="position: fixed">
-  <div class="pagetitle">
-    <h1>{{currentEmployee.firstName}} {{currentEmployee.lastName}}</h1>
-  </div>
-  <section class="section">
-    <div *ngIf="viewMode; else editable">
-      <div *ngIf="currentEmployee.id">
-        <h6>{{currentEmployee.initial}}</h6>
-
-        <label><strong>CIN:</strong></label> {{ currentEmployee.natioIdCard }}
-        <div>
-          <label><strong>Company Name:</strong></label>
-          {{ currentEmployee.companyName }}
-        </div>
-
-        <div>
-          <label><strong>username:</strong></label>
-          {{ currentEmployee.user!.username}}
-        </div>
-
-
-
-
-        <div *ngIf="!currentEmployee">
-          <br/>
-            <p>Please click on a User...</p>
-          </div>
-        </div>
+      <div class="pagetitle">
+        <h1>Employee Details</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item">Employee</li>
+            <li class="breadcrumb-item active">Details</li>
+          </ol>
+        </nav>
       </div>
+      <section class="section">
+        <div class="card" style=" justify-content: center;">
+          <div class="card-body">
+            <h5 class="card-title">Employee Details</h5>
+            <div *ngIf="viewMode; else editable">
+              <div *ngIf="currentEmployee.id">
+                <h4>{{currentEmployee.initial}}</h4>
+                <div>
+                <label><strong>CIN:</strong></label>
+                {{currentEmployee.natioIdCard }}
+              </div>
 
-      <!---------------------------------    ng-template   --------------------------------->
-      <ng-template #editable>
-        <div *ngIf="currentEmployee.id" class="edit-form">
-          <h6>{{currentEmployee.initial}}</h6>
-          <form>
-            <div class="form-group">
-              <label for="usernameed">First Name</label>
-              <input type="text" class="form-control" id="usernameed"
-                [(ngModel)]="currentEmployee.firstName"
-                name="usernameed"/>
+                <div>
+                  <label><strong>Company Name:</strong></label>
+                  {{ currentEmployee.companyName }}
+                </div>
+
+                <div>
+                  <label><strong>username:</strong></label>
+                  {{ currentEmployee.user!.username}}
+                </div>
+              </div>
+
+                <div *ngIf="!currentEmployee">
+                  <br/>
+                    <p>Please click on a User...</p>
+                  </div>
+                </div>
+
+              <!---------------------------------    ng-template   --------------------------------->
+              <ng-template #editable>
+                <div *ngIf="currentEmployee.id" class="edit-form">
+                  <form>
+                    <div class="form-group">
+                      <label for="usernameed">First Name</label>
+                      <input type="text" class="form-control" id="usernameed"
+                        [(ngModel)]="currentEmployee.firstName"
+                        name="usernameed"/>
+                    </div>
+                    <div class="form-group">
+                      <label for="lastNameed">Last Name</label>
+                      <input type="text" class="form-control" id="lastNameed"
+                        [(ngModel)]="currentEmployee.lastName"
+                        name="lastNameed"/>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label><strong>Date of birth:</strong></label>
+                      <input type="date" class="form-control" value="{{ currentEmployee.dateOfBirth}}"/>
+                    </div>
+
+                  </form>
+
+
+                  <div class="text-center">
+                    <button
+                      type="submit"
+                      class="submit"
+                      (click)="updateEmployee()">
+                      Update
+                    </button>
+                    <p>{{ message }}</p>
+                  </div>
+                </div>
+                <div *ngIf="!currentEmployee.id">
+                  <br />
+                  <div class="text-center">
+                    <p>Cannot access this Employee...</p>
+                  </div>
+                </div>
+                </ng-template>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="lastNameed">Last Name</label>
-              <input type="text" class="form-control" id="lastNameed"
-                [(ngModel)]="currentEmployee.lastName"
-                name="lastNameed"/>
-            </div>
-
-
-            <div class="form-group">
-              <label><strong>Date of birth:</strong></label>
-              {{ currentEmployee.dateOfBirth}}
-            </div>
-            <div class="form-group">
-              <label><strong>Date of birth:</strong></label>
-              {{ currentEmployee.natioIdCard}}
-            </div>
-          </form>
-
-
-          <button class="btn btn-danger">
-            Delete
-          </button>
-
-          <button type="submit" class="btn btn-success">
-            Update
-          </button>
-          <p>{{ message }}</p>
-        </div>
-
-        <div *ngIf="!currentEmployee.id">
-          <br/>
-            <p>Cannot access this User...</p>
-          </div>
-        </ng-template>
-      </section>
-    </main>
+          </section>
+        </main>

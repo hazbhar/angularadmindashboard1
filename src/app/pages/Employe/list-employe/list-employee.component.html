@@ -1,46 +1,50 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>List of employees</h1>
+    <h1>Employees List</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-
-        <li class="breadcrumb-item active">Employees</li>
+        <li class="breadcrumb-item">Employees</li>
+        <li class="breadcrumb-item active">List</li>
       </ol>
     </nav>
   </div>
   <section class="section">
     <div class="list row">
-      <div class="col-md-8">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Search by name"
-            [(ngModel)]="username"
-            />
-          <div class="input-group-append">
-            <button
-              class="btn btn-outline-secondary"
-              type="button">
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
+
       <div class="col-md-6">
-        <ul class="list-group">
+        <h4>Employees List</h4>
+
+        <ul class="">
           <li
             class="list-group-item"
             *ngFor="let employee of employeeList; let i= index"
             [class.active]="i == currentIndex"
             (click)="setActiveEmployee(employee, i)">
-            {{ employee.firstName }}
+            <div class="container">
+              <div class="row ">
+                <div class="col">
+                  <span> {{ employee.firstName }}</span>
+                </div>
+                <div class="col-md-auto">
+
+
+                  <a routerLink="/employe-details/{{employee.id }}"> <i
+                      class="bi bi-file-diff-fill"></i><span>EDIT</span> </a>
+                </div>
+                <div class="col col-lg-2" >
+                  <a  (click)="deleteEmployee(employee.id)" routerLink="/employe-list" >
+                  <i class="bi bi-trash-fill"></i><span   class="" >Delete</span>
+                </a>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
 
 
       </div>
+
       <div class="col-md-6">
         <app-details-employee
           [viewMode]="true"

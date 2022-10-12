@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
@@ -7,10 +7,18 @@ import { Constants } from '../config/constant';
   providedIn: 'root',
 })
 export class EtatcivilService {
+  addHttpOption = {
+    headers: new HttpHeaders({
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    }),
+  };
+
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any>(this.config.API_EtatCivil + 'getall');
+    return this.http.get<any>(this.config.API_EtatCivil + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.config.API_EtatCivil}getById?id=${id}`);

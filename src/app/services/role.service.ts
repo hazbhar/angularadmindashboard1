@@ -17,7 +17,7 @@ export class RoleService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any>(this.config.API_Role + 'getall');
+    return this.http.get<any>(this.config.API_Role + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.config.API_Role}getById?id=${id}`);

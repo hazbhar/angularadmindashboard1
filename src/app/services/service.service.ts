@@ -17,7 +17,7 @@ export class ServiceService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any>(this.config.API_Service + 'getall');
+    return this.http.get<any>(this.config.API_Service + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
     return this.http.get<any>(`${this.config.API_Service}getById?id=${id}`);

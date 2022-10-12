@@ -13,7 +13,7 @@ import {CivilState} from "./CivilState";
 import {TypeOfStaff} from "./TypeOfStaff";
 
 export class Employe {
-  /**** Infos générales ****/
+
   id?: any;
   firstName?: string;
   lastName?: string;
@@ -24,8 +24,8 @@ export class Employe {
   companyName?: string;
   impartialityContract?: string;
   privacyContract?:string
-  user?: User;
-  contractList?: Array<Contract>;
+  user!: any;
+  contractList!: any;
   medicalVisitList?: Array<MedicalVisit>;
   handedOverList?: Array<HandedOver>;
   serviceList?: Array<Service>;
@@ -37,4 +37,5 @@ export class Employe {
   employeeAttributionList?: Array<EmployeeAttribution>;
   civilState?: CivilState;
   typeOfStaff?: TypeOfStaff;
+
 }

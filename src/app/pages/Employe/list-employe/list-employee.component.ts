@@ -91,4 +91,14 @@ export class ListEmployeeComponent implements OnInit {
     this.currentEmployee = employee;
     this.currentIndex = index;
   }
+
+  deleteEmployee(id:any): void {
+    this.employeeService.delete(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(['/employee-list']);
+      },
+      error: (e) => console.error(e),
+    });
+  }
 }

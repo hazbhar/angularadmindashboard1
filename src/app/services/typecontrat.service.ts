@@ -17,7 +17,7 @@ export class TypecontratService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any>(this.config.API_contractType + 'getall');
+    return this.http.get<any>(this.config.API_contractType + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
     return this.http.get<any>(

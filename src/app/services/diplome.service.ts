@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../config/constant';
 import { Observable } from 'rxjs';
@@ -8,6 +8,15 @@ import { Diploma } from '../models/Diploma';
   providedIn: 'root',
 })
 export class DiplomaService {
+
+  addHttpOption = {
+    headers: new HttpHeaders({
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    }),
+  };
+
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll() {
