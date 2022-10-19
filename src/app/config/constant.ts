@@ -36,5 +36,9 @@ export class Constants {
 
   public readonly API_UploadFile: string = this.API_ENDPOINT + 'upload/';
 
+  public readonly API_Contrat: string = this.API_ENDPOINT + 'contract/';
+
+  public readonly API_Attrub: string = this.API_ENDPOINT + 'attribution/';
+
 
 }

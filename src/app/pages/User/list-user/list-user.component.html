@@ -10,6 +10,14 @@
     </nav>
   </div>
   <section class="section">
+    <div class="row mb-3" *ngIf="isdeletedfailed" class="alert alert-danger" role="alert">
+      Deleting User failed: {{ errorMessage }}
+    </div>
+
+    <div class="row mb-3" *ngIf="deleted">
+      <h4>User was Deleted successfully!</h4>
+    </div>
+
     <div class="list row">
 
       <div class="col-md-6">
@@ -37,7 +45,7 @@
                 </div>
                 <div class="col col-lg-2">
                    <i
-                      class="bi bi-trash-fill"></i><span class="">Delete</span>
+                      class="bi bi-trash-fill"></i><span class="" (click)="deleteUser(user.id)">Delete</span>
 
                 </div>
               </div>

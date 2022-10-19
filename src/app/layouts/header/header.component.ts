@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   logout() {
     if (this.storageService.isLoggedIn()) {
       window.sessionStorage.removeItem('auth-user');
-      this.storageService.clean;
+      this.storageService.clean();
       window.location.reload();
     }
   }

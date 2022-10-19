@@ -1,0 +1,336 @@
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Add Contrat</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Contrat</li>
+        <li class="breadcrumb-item active">Add</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add new contrat</h5>
+<form [formGroup]="Infoscontratdutravail"  id="msform">
+  <!-- fieldsets -->
+  <fieldset >
+    <h2 class="fs-title">Infos contrat du travail</h2>
+    <!--        validators       -->
+    <div *ngIf="Infoscontratdutravail.controls['DateDebutContrat'].invalid
+      && (Infoscontratdutravail.controls['DateDebutContrat'].dirty ||
+      Infoscontratdutravail.controls['DateDebutContrat'].touched)
+      || Infoscontratdutravail.controls['idtypcont'].invalid &&
+      (Infoscontratdutravail.controls['idtypcont'].dirty ||
+      Infoscontratdutravail.controls['idtypcont'].touched)
+      || Infoscontratdutravail.controls['frequence'].invalid &&
+      (Infoscontratdutravail.controls['frequence'].dirty ||
+      Infoscontratdutravail.controls['frequence'].touched)
+      || Infoscontratdutravail.controls['typeProcessus'].invalid &&
+      (Infoscontratdutravail.controls['typeProcessus'].dirty ||
+      Infoscontratdutravail.controls['typeProcessus'].touched)
+      || Infoscontratdutravail.controls['available'].invalid &&
+      (Infoscontratdutravail.controls['available'].dirty ||
+      Infoscontratdutravail.controls['available'].touched)||
+      Infoscontratdutravail.controls['remisemateriel'].invalid &&
+      (Infoscontratdutravail.controls['remisemateriel'].dirty ||
+      Infoscontratdutravail.controls['remisemateriel'].touched)||
+      Infoscontratdutravail.controls['DateFinContrat'].invalid &&
+      (Infoscontratdutravail.controls['DateFinContrat'].dirty ||
+      Infoscontratdutravail.controls['DateFinContrat'].touched)||
+      Infoscontratdutravail.controls['typePersonnel'].invalid &&
+      (Infoscontratdutravail.controls['typePersonnel'].dirty ||
+      Infoscontratdutravail.controls['typePersonnel'].touched)||
+      Infoscontratdutravail.controls['nomSociete'].invalid &&
+      (Infoscontratdutravail.controls['nomSociete'].dirty ||
+      Infoscontratdutravail.controls['nomSociete'].touched)||
+      Infoscontratdutravail.controls['DateVisiteMedicale'].invalid &&
+      (Infoscontratdutravail.controls['DateVisiteMedicale'].dirty ||
+      Infoscontratdutravail.controls['DateVisiteMedicale'].touched)||
+      Infoscontratdutravail.controls['DateProchVisiteMedicale'].invalid &&
+      (Infoscontratdutravail.controls['DateProchVisiteMedicale'].dirty ||
+      Infoscontratdutravail.controls['DateProchVisiteMedicale'].touched)||
+      Infoscontratdutravail.controls['uniteTechnique'].invalid &&
+      (Infoscontratdutravail.controls['uniteTechnique'].dirty ||
+      Infoscontratdutravail.controls['uniteTechnique'].touched)||
+      Infoscontratdutravail.controls['contratImpartialite'].invalid &&
+      (Infoscontratdutravail.controls['contratImpartialite'].dirty ||
+      Infoscontratdutravail.controls['contratImpartialite'].touched)||
+      Infoscontratdutravail.controls['contratConfidentialite'].invalid &&
+      (Infoscontratdutravail.controls['contratConfidentialite'].dirty ||
+      Infoscontratdutravail.controls['contratConfidentialite'].touched)||
+      Infoscontratdutravail.controls['visiteMedicales'].invalid &&
+      (Infoscontratdutravail.controls['visiteMedicales'].dirty ||
+      Infoscontratdutravail.controls['visiteMedicales'].touched)||
+      Infoscontratdutravail.controls['eap'].invalid &&
+      (Infoscontratdutravail.controls['eap'].dirty ||
+      Infoscontratdutravail.controls['eap'].touched)||
+      Infoscontratdutravail.controls['dateEap'].invalid &&
+      (Infoscontratdutravail.controls['dateEap'].dirty ||
+      Infoscontratdutravail.controls['dateEap'].touched)||
+      Infoscontratdutravail.controls['sitetid'].invalid &&
+      (Infoscontratdutravail.controls['sitetid'].dirty ||
+      Infoscontratdutravail.controls['sitetid'].touched)
+      "
+      class="alert alert-danger">
+      <div *ngIf="Infoscontratdutravail.controls['DateDebutContrat'].errors
+        "> DateDebutContrat is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['idtypcont'].errors ">
+        idtypcont is
+        required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['frequence'].errors ">
+        Date Debut frequence is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['typeProcessus'].errors ">
+        typeProcessus is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['available'].errors ">
+        available is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['remisemateriel'].errors ">
+        remisemateriel is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['DateFinContrat'].errors ">
+        DateFinContrat is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['typePersonnel'].errors ">
+        typePersonnel is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['nomSociete'].errors ">
+        nomSociete is required.</div>
+      <div
+        *ngIf="Infoscontratdutravail.controls['DateVisiteMedicale'].errors
+        "> DateVisiteMedicale is required.</div>
+      <div
+        *ngIf="Infoscontratdutravail.controls['DateProchVisiteMedicale'].errors
+        "> DateProchVisiteMedicale is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['uniteTechnique'].errors ">
+        uniteTechnique is required.</div>
+      <div
+        *ngIf="Infoscontratdutravail.controls['contratImpartialite'].errors
+        "> contratImpartialite is required.</div>
+      <div
+        *ngIf="Infoscontratdutravail.controls['contratConfidentialite'].errors
+        "> contratConfidentialite is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['visiteMedicales'].errors
+        "> visiteMedicales is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['eap'].errors "> eap is
+        required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['dateEap'].errors ">
+        dateEap is required.</div>
+      <div *ngIf="Infoscontratdutravail.controls['sitetid'].errors "> site
+        is required.</div>
+    </div>
+    <!--        formgroup       -->
+
+    <div class="row mb-3">
+      <label for="inputNumber" class="col-sm-2 col-form-label">Date Debut
+        Contrat</label>
+      <div class="col-sm-10"> <input type="date" name="DateDebutContrat"
+          formControlName="DateDebutContrat" id="DateDebutContrat"
+          class="form-control" placeholder="DateDebutContrat..." required>
+      </div>
+
+    </div>
+    <div class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
+      <div class="col-sm-10">
+        <select class="form-select" [(ngModel)]="typcontid"
+          formControlName="idtypcont" name="id" id="id" aria-label="Default
+          select example" required>
+          <option value="-1" disabled selected>Choisir de la liste</option>
+          <option *ngFor="let typcont of typecontrat$; let i= index"
+            [value]="typcont.id">{{typcont.title}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="typcontid!=12" class="row mb-3">
+      <label for="DateFinContrat" class="col-sm-2 col-form-label">Date Fin
+        Contrat</label>
+      <div class="col-sm-10"> <input type="date" name="DateFinContrat"
+          formControlName="DateFinContrat" id="DateFinContrat"
+          class="form-control" placeholder="DateFinContrat..."
+          [required]="typcontid!=12">
+      </div>
+    </div>
+
+    <div *ngIf="typcontid==3" class="row mb-3">
+      <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
+      <div class="col-sm-10">
+        <select class="form-select" [(ngModel)]="freque"
+          formControlName="frequence" name="frequence" id="frequence"
+          aria-label="Default select example" [required]="typcontid==3">
+          <option value="-1" disabled selected>Choisir de la liste</option>
+          <option *ngFor="let frequ of frequence$; let i= index"
+            [value]="frequ.id">{{frequ.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <legend class="col-sm-2 col-form-label ">type Personnel</legend>
+      <div class="col-sm-10">
+        <select class="form-select" [(ngModel)]="typePersonnel"
+          formControlName="typePersonnel" name="typePersonnel"
+          id="typePersonnel" aria-label="Default select example" required>
+          <option value="-1" disabled selected>Choisir de la liste</option>
+          <option *ngFor="let typepers of typeperso$; let i= index"
+            [value]="typepers.id">{{typepers.job}}</option>
+        </select>
+      </div>
+
+    </div>
+    <div *ngIf="typePersonnel==2" class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">Mise a disposition</legend>
+      <div class="col-sm-10">
+        <div class="form-check form-check-inline">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input"
+              formControlName="available" name="available" id="available"
+              value="true" [required]="typePersonnel==2">
+            <label class="custom-control-label" for="defaultInline1">Oui</label>
+          </div>
+          <!-- Default inline 2-->
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input"
+              formControlName="available" name="available" id="available"
+              value="false" [required]="typePersonnel==2">
+            <label class="custom-control-label" for="defaultInline2">Non</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="typePersonnel==2" class="row mb-3">
+      <label class="col-sm-2 col-form-label">nom Societe</label>
+      <div class="col-sm-10"> <input class="form-control"
+          formControlName="nomSociete" type="text" name="nomSociete"
+          id="nomSociete" placeholder="nom Societe..."
+          [required]="typePersonnel==2">
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <legend class="col-sm-2 col-form-label ">type Processus</legend>
+      <div class="col-sm-10">
+        <select multiple class="form-select" name="typeProcessus"
+          formControlName="typeProcessus" id="typeProcessus"
+          aria-label="Default select example" required>
+          <option value="-1" disabled selected>Choisir de la liste</option>
+          <option *ngFor="let typproces of typprocesus$; let i= index"
+            [value]="typproces.id">{{typproces.content}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">unite Technique</label>
+      <div class="col-sm-10"> <select class="form-select"
+          formControlName="uniteTechnique" name="uniteTechnique"
+          id="uniteTechnique" aria-label="Default select example" required>
+          <option value="-1" disabled selected>Choisir de la liste</option>
+          <option *ngFor="let unitete of unitetech$; let i= index"
+            [value]="unitete.id">{{unitete.technicalTerm}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <legend class="col-sm-2 col-form-label ">Site</legend>
+      <div class="col-sm-10">
+        <select class="form-select" [(ngModel)]="siteid" name="sitetid"
+          id="site"
+          formControlName="sitetid" aria-label="Default select example"
+          required>
+          <option value="-1" disabled selected>Choisir de la liste</option>
+          <option *ngFor="let sit of site$; let i= index" [value]="sit.id">{{sit.siteName}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">Remise de matériel</label>
+      <div class="col-sm-10"> <input multiple class="form-control"
+          formControlName="remisemateriel" type="file" (change)="handleFileInputremisemateriel($event)" name="remisemateriel"
+          id="remisemateriel" placeholder="Remise de matériel..." required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">contrat Impartialite</label>
+      <div class="col-sm-10"> <input class="form-control" type="file"
+          formControlName="contratImpartialite" (change)="handleFileInputfileTocontratImpartialite($event)" name="contratImpartialite"
+          id="contratImpartialite" placeholder="contrat Impartialite..."
+          required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">contrat Confidentialite</label>
+      <div class="col-sm-10"> <input class="form-control" type="file"
+          formControlName="contratConfidentialite" (change)="handleFileInputcontratConfidentialite($event)"
+          name="contratConfidentialite" id="contratConfidentialite"
+          placeholder="contrat Confidentialite..." required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">visite Medicales</label>
+      <div class="col-sm-10"> <input multiple class="form-control"
+          type="file" formControlName="visiteMedicales" (change)="handleFileIvisiteMedicales($event)"
+          name="visiteMedicales" id="visiteMedicales" placeholder="visite
+          Medicales..." required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="DateFinContrat" class="col-sm-2 col-form-label">Date
+        visite Medicale </label>
+      <div class="col-sm-10"> <input type="date" name="DateFinContrat"
+          formControlName="DateVisiteMedicale" id="DateFinContrat"
+          class="form-control" placeholder="Date visite Medicale..."
+          required>
+      </div>
+
+    </div>
+    <div class="row mb-3">
+      <label for="DateProchVisiteMedicale" class="col-sm-2 col-form-label">Date
+        Prochaine visite Medicale</label>
+      <div class="col-sm-10"> <input type="date"
+          name="DateProchVisiteMedicale"
+          formControlName="DateProchVisiteMedicale"
+          id="DateProchVisiteMedicale"
+          class="form-control" placeholder="Date Prochaine visite
+          Medicale..." required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">Eap</label>
+      <div class="col-sm-10"> <input class="form-control" type="file" (change)="handleFileInputeap($event)"
+          formControlName="eap" name="eap" id="eap" placeholder="eap..."
+          required>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">date Eap</label>
+      <div class="col-sm-10"> <input class="form-control" type="date"
+          formControlName="dateEap" name="dateEap" id="dateEap"
+          placeholder="date Eap..." required>
+      </div>
+    </div>
+    <div class="center">
+      <button (click)="savecontrat()" [disabled]="!Infoscontratdutravail.valid"
+      type="submit" name="submit" class="submit">Submit</button>
+      <button type="reset" name="next" class="reset">reset</button>
+</div>
+           <div class="row mb-3" *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
+            Adding Contrat failed: {{ errorMessage }}
+          </div>
+
+          <div class="row mb-3" *ngIf="submitted">
+            <h4>Contrat was submitted successfully!</h4>
+          </div>    </fieldset>
+</form>
+      </div>
+    </div>
+
+</section>
+</main>

@@ -20,11 +20,17 @@ import {DetailsEmployeeComponent} from "./pages/Employe/details-employe/details-
 import { AddEmployeComponent } from './pages/Employe/add-employe/add-employe.component';
 import {AddDiplomeComponent} from "./pages/Diplome/add-diplome/add-diplome.component";
 import {ListDiplomesComponent} from "./pages/Diplome/list-diplomes/list-diplomes.component";
+import { ListContratComponent } from './pages/Contrat/list-contrat/list-contrat.component';
+import { AddContratComponent } from './pages/Contrat/add-contrat/add-contrat.component';
+import { EditContratComponent } from './pages/Contrat/edit-contrat/edit-contrat.component';
+import { DashbordEmpComponent } from './pages/dashbord-emp/dashbord-emp.component';
 
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
+
+  { path: 'dashboardEmp', component: DashbordEmpComponent },
 
   { path: 'pages-blank', component: PagesBlankComponent },
 
@@ -50,6 +56,11 @@ const routes: Routes = [
 
   { path: 'add-diplome', component: AddDiplomeComponent },
   { path: 'list-diplome', component: ListDiplomesComponent },
+
+  { path: 'list-contrat', component: ListContratComponent },
+  { path: 'add-contrat', component: AddContratComponent },
+
+  { path: 'contratdetails/:id', component: EditContratComponent },
 
 ];
 

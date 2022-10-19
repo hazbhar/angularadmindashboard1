@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListFormationsComponent implements OnInit {
   formations?: Formation[];
-  formation: Formation = {
+  currentformation: Formation = {
     id: 0,
     title: undefined,
     description: undefined,
@@ -20,6 +20,10 @@ export class ListFormationsComponent implements OnInit {
     attachedDocsList: undefined,
   };
 
+  deleted=false;
+  isdeletedfailed=false;
+  errorMessage="";
+  currentIndex = -1;
   constructor(private formationService: FormationService) {}
 
   ngOnInit(): void {
@@ -37,15 +41,21 @@ export class ListFormationsComponent implements OnInit {
     );
   }
 
-  deleteFormation(formation: Formation): void {
+  deleteFormation(id: number): void {
     // this.formationService.get(1);
-    this.formationService.delete(formation.id).subscribe(
-      (data) => {
-        window.location.reload();
+    this.formationService.delete(id).subscribe({
+      next: (res) => {
+        this.deleted=true;
+        console.log(res);
       },
-      (err) => {
-        console.log(err);
-      }
-    );
+      error: (e) => {
+        this.isdeletedfailed=true;
+        this.errorMessage=e.message;
+        console.error(e)},
+    });
+  }
+  setActiveForma(formation: Formation, index: number): void {
+    this.currentformation = formation;
+    this.currentIndex = index;
   }
 }

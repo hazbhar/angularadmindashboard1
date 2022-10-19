@@ -43,6 +43,9 @@ export class ListEmployeeComponent implements OnInit {
     civilState: undefined,
     typeOfStaff: undefined,
   };
+  deleted=false;
+  isdeletedfailed=false;
+  errorMessage="";
 
   ngOnInit(): void {
     this.retrieveEmployees();
@@ -95,10 +98,13 @@ export class ListEmployeeComponent implements OnInit {
   deleteEmployee(id:any): void {
     this.employeeService.delete(id).subscribe({
       next: (res) => {
+        this.deleted=true;
         console.log(res);
-        this.router.navigate(['/employee-list']);
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        this.isdeletedfailed=true;
+        this.errorMessage=e.message;
+        console.error(e)},
     });
   }
 }

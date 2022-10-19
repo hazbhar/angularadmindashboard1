@@ -36,6 +36,10 @@ import { AuthService } from './services/auth.service';
 import { AddEmployeComponent } from './pages/Employe/add-employe/add-employe.component';
 import { ListEmployeeComponent } from './pages/Employe/list-employe/list-employee.component';
 import { DetailsEmployeeComponent } from './pages/Employe/details-employe/details-employee.component';
+import { AddContratComponent } from './pages/Contrat/add-contrat/add-contrat.component';
+import { ListContratComponent } from './pages/Contrat/list-contrat/list-contrat.component';
+import { EditContratComponent } from './pages/Contrat/edit-contrat/edit-contrat.component';
+import { DashbordEmpComponent } from './pages/dashbord-emp/dashbord-emp.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +68,10 @@ import { DetailsEmployeeComponent } from './pages/Employe/details-employe/detail
     AddUserComponent,
     AddEmployeComponent,
     DetailsEmployeeComponent,
+    AddContratComponent,
+    ListContratComponent,
+    EditContratComponent,
+    DashbordEmpComponent,
 
   ],
   imports: [

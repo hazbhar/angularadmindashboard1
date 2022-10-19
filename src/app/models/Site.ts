@@ -7,5 +7,5 @@ export class Site{
   longitude:number;
   laltitude:number;
   enabled:boolean;
-  employeeList!:Array<any>
+  employeeList!:Array<Employe>
 }

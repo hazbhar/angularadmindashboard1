@@ -13,89 +13,110 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Add new User</h5>
-        <form>
+        <form [formGroup]="Infosdesecurite">
 
 
-          <div class="submit-form">
+        <!--        validators       -->
 
-            <div *ngIf="!submitted">
-              <div class="row mb-3">
-                <label for="username" class="col-sm-2 col-form-label">user name
-                  :</label>
-                <div class="col-sm-10"> <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    required
-                    [(ngModel)]="user.username"
-                    name="username"
-                    placeholder="user name..."
-                    /></div>
-              </div>
+        <!--        formgroup       -->
 
-              <div class="row mb-3">
-                <label for="password" class="col-sm-2 col-form-label">password :</label>
-                <div class="col-sm-10"> <input
-                    class="form-control"
-                    id="password"
-                    required
-                    [(ngModel)]="user.password"
-                    name="password"
-                    placeholder="password..."
-                    />
-                </div>
-              </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">user name</label>
+          <div class="col-sm-10"> <input class="form-control" type="text"
+              formControlName="username" name="username" id="username"
+              placeholder="user name..." required>
+          </div>
+        </div>
 
-              <div class="row mb-3">
-                <label for="email" class="col-sm-2 col-form-label">email :</label>
-                <div class="col-sm-10"> <input
-                    class="form-control"
-                    id="email"
-                    required
-                    [(ngModel)]="user.email"
-                    name="email"
-                    placeholder="email..."
-                    />
-                </div>
-              </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10"> <input class="form-control" type="email"
+              formControlName="email" name="email" id="email"
+              placeholder="Email..." required>
+          </div>
+        </div>
 
-              <div class="row mb-3">
-                <label for="role" class="col-sm-2 col-form-label">Roles :
-                </label>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">confirm Email</label>
+          <div class="col-sm-10"> <input class="form-control" type="email"
+              formControlName="confirmEmail" name="confirmEmail"
+              id="confirmEmail" placeholder="confirm Email..." required>
+          </div>
+        </div>
 
-                <div class="col-sm-10"><select class="form-select"
-                    id="role"
-                    required
-                    [(ngModel)]="user.roles"
-                    name="role">
-                    <option selected>Choose...</option>
-                    <option value="1">Admin</option>
-                    <option value="2">User</option>
-                    <option value="3">RH</option>
-                  </select>
-                </div>
-              </div>
+        <div class="row mb-3">
+          <label class="col-sm-2 col-form-label">type Auth</label>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="typeAuth"
+              formControlName="typeAuth" id="typeAuth" value="mdp"
+              [(ngModel)]="typeAuth" (change)="onChange($event)" checked
+              required>
+            <label class="custom-control-label" for="typeAuth">Mot de passe</label>
+          </div>
+          <!-- Default inline 2-->
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="typeAuth"
+              formControlName="typeAuth" id="typeAuth" value="ldap"
+              [(ngModel)]="typeAuth" (change)="onChange($event)" required>
+            <label class="custom-control-label" for="typeAuth">LDAP</label>
+          </div>
 
+        </div>
+        <div *ngIf="typeAuth=='mdp'" class="row mb-3">
+          <label class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10"> <input class="form-control" type="password"
+              formControlName="password" name="password" id="password"
+              placeholder="Password..." [required]="typeAuth=='mdp'">
+          </div>
+        </div>
 
-              <div class="text-center"> <button type="submit" class="submit"
-                  (click)="saveUser()">Submit</button> <button type="reset"
-                  class="reset">Reset</button></div>
-            </div>
+        <div *ngIf="typeAuth=='mdp'" class="row mb-3">
+          <label class="col-sm-2 col-form-label">confirm Password</label>
+          <div class="col-sm-10"> <input class="form-control" type="password"
+              formControlName="confirmPassword" name="confirmPassword"
+              id="confirmPassword" placeholder="confirm Password..."
+              [required]="typeAuth=='mdp'">
+          </div>
+        </div>
 
+        <div class="row mb-3">
+          <legend class="col-sm-2 col-form-label ">Role</legend>
+          <div class="col-sm-10">
+            <select multiple class="form-select" name="role"
+              formControlName="role" id="role"
+              aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
+              <option *ngFor="let rol of role$; let i= index"
+                [value]="rol.id">{{rol.roleName}}</option>
+            </select>
+          </div>
+        </div>
 
-
-
-
-            <div *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
+        <div class="row mb-3">
+          <legend class="col-sm-2 col-form-label ">privileges</legend>
+          <div class="col-sm-10">
+            <select multiple class="form-select" name="privilege"
+              formControlName="privilege" id="privilege"
+              aria-label="Default select example" required>
+              <option value="-1" disabled selected>Choisir de la liste</option>
+              <option *ngFor="let privilege of privileges$; let i= index"
+                [value]="privilege.id">{{privilege.privName}}</option>
+            </select>
+          </div>
+        </div>
+<div class="center">
+        <button (click)="saveUser()" [disabled]="!Infosdesecurite.valid"
+        type="submit" name="submit" class="submit">Submit</button>
+        <button type="reset" name="next" class="reset">reset</button>
+</div>
+             <div class="row mb-3" *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
               Adding User failed: {{ errorMessage }}
             </div>
 
-            <div *ngIf="submitted">
+            <div class="row mb-3" *ngIf="submitted">
               <h4>User was submitted successfully!</h4>
               <button class="btn btn-success" (click)="newUser()">Add</button>
             </div>
-
-          </div>
 
         </form>
       </div>

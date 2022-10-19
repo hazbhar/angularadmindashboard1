@@ -25,7 +25,7 @@ export class EmployeService {
   }
   create(id: any,siteid: any,civilStateId: any,typeStaffId: any, data: any): Observable<any> {
     console.log(JSON.stringify(data));
-    return this.http.post(this.config.API_EMPLOYE + 'add?userId=' + id+"&siteid="+siteid+"&civilStateId="+civilStateId+"&typeStaffId="+typeStaffId,JSON.stringify(data),this.addHttpOption);
+    return this.http.post(this.config.API_EMPLOYE + 'add?siteid='+siteid+"&civilStateId="+civilStateId+"&typeStaffId="+typeStaffId,JSON.stringify(data),this.addHttpOption);
 
   }
 

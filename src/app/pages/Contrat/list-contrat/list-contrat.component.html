@@ -1,47 +1,39 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Employees List</h1>
+    <h1>Contracts List</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item">Employees</li>
+        <li class="breadcrumb-item">Contracts</li>
         <li class="breadcrumb-item active">List</li>
       </ol>
     </nav>
   </div>
   <section class="section">
-    <div class="row mb-3" *ngIf="isdeletedfailed" class="alert alert-danger" role="alert">
-      Deleting Employee failed: {{ errorMessage }}
-    </div>
-
-    <div class="row mb-3" *ngIf="deleted">
-      <h4>Employee was Deleted successfully!</h4>
-    </div>
-
     <div class="list row">
 
       <div class="col-md-6">
-        <h4>Employees List</h4>
+        <h4>Contracts List</h4>
 
         <ul class="">
           <li
             class="list-group-item"
-            *ngFor="let employee of employeeList; let i= index"
+            *ngFor="let contrat of contratList; let i= index"
             [class.active]="i == currentIndex"
-            (click)="setActiveEmployee(employee, i)">
+            (click)="setActivecontrat(contrat, i)">
             <div class="container">
               <div class="row ">
                 <div class="col">
-                  <span> {{ employee.firstName }}</span>
+                  <span> {{ contrat.contractType }}</span>
                 </div>
                 <div class="col-md-auto">
 
 
-                  <a routerLink="/employe-details/{{employee.id }}"> <i
+                  <a routerLink="/contrat-details/{{contrat.id }}"> <i
                       class="bi bi-file-diff-fill"></i><span>EDIT</span> </a>
                 </div>
                 <div class="col col-lg-2" >
-                  <a  (click)="deleteEmployee(employee.id)" routerLink="/employe-list" >
+                  <a  (click)="deletecontrat(contrat.id)" routerLink="/contrat-list" >
                   <i class="bi bi-trash-fill"></i><span   class="" >Delete</span>
                 </a>
                 </div>
@@ -54,9 +46,9 @@
       </div>
 
       <div class="col-md-6">
-        <app-details-employee
+       <!-- <app-edit-contrat
           [viewMode]="true"
-          [currentEmployee]="currentEmployee"></app-details-employee>
+          [currentContrat]="currentContrat"></app-edit-contrat>-->
       </div>
     </div>
   </section>

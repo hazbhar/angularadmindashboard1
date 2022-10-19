@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileUploadService {
   addHttpOption = {
@@ -14,14 +14,12 @@ export class FileUploadService {
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     }),
   };
-  constructor(private http:HttpClient,private config: Constants) { }
+  constructor(private http: HttpClient, private config: Constants) {}
 
   // Returns an observable
   /*upload(file:any):Observable<any> {
 
-
       // Store form name as "file" with file data
-
 
       // Make http post request over api
       // with formData as req
@@ -29,13 +27,11 @@ export class FileUploadService {
 
   }*/
 
-  upload(file:File):Observable<any> {
-
+  upload(file: FormData): Observable<any> {
     // Create form data
-    const formData = new FormData();
-    formData.append('document', file);
+
     // Make http post request over api
     // with formData as req
-    return this.http.post(this.config.API_UploadFile+"documents",formData);
-}
+    return this.http.post(this.config.API_UploadFile + 'documents', file);
+  }
 }

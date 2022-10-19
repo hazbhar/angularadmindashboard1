@@ -9,11 +9,7 @@ import {
 } from '@angular/forms';
 import { Authentification } from 'src/app/models/Authentification';
 import { CivilState } from 'src/app/models/CivilState';
-import { Contract } from 'src/app/models/Contract';
-import { Diploma } from 'src/app/models/Diploma';
-import { Employe } from 'src/app/models/Employe';
-import { filelink } from 'src/app/models/filelink';
-import { Formation } from 'src/app/models/Formation';
+
 import { Frequence } from 'src/app/models/Frequence';
 import { Privilege } from 'src/app/models/Privilege';
 import { Process } from 'src/app/models/Process';
@@ -22,7 +18,6 @@ import { Service } from 'src/app/models/Service';
 import { Site } from 'src/app/models/Site';
 import { typeContrat } from 'src/app/models/TypeContrat';
 import { TypeOfStaff } from 'src/app/models/TypeOfStaff';
-import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmployeService } from 'src/app/services/employe.service';
 import { EtatcivilService } from 'src/app/services/etatcivil.service';
@@ -44,6 +39,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-employe.component.css'],
 })
 export class AddEmployeComponent implements OnInit {
+  /**
+   * form group for every step
+   */
   Infosgenerales!: FormGroup;
   Infoscontratdutravail!: FormGroup;
   Infosdesecurite!: FormGroup;
@@ -51,72 +49,101 @@ export class AddEmployeComponent implements OnInit {
   Competences!: FormGroup;
   Roles!: FormGroup;
   contra!: FormGroup;
-
-  employe!: Employe;
-
-  newcontrat!: Contract;
-
-  newdiplome!: Diploma;
-
-  newformation!: Formation;
-  newuser: User;
-
+/**
+ * form arrays for every possible multiple same formgroup
+ */
   diplitems!: FormArray;
   formatitems!: FormArray;
   contratitems!: FormArray;
   roleitems!: FormArray;
+/**
+ * boolean array for periodic formation wich can be  multiple
+ */
+  periodiq: boolean = false;
 
-  periodiq :Array<boolean>=[];
-
+  /**
+   * variables to register from forms to test their values
+   */
   typcontid: any;
   siteid: any;
   typePersonnel: any;
   typeProcessus: any;
   freque: any;
   typeAuth: any;
+/**
+ * add employe step value
+ */
+  step = 5;
 
-  step = 1;
-  typcontrattitle = '';
-  role!: Role[];
-  privileges!: Privilege[];
-  authtypeid!: Authentification[];
-  frequence!: Frequence[];
-  site!: Site[];
-  typecontrat!: typeContrat[];
-  typeperso!: TypeOfStaff[];
-  etatcivil!: CivilState[];
-  unitetech!: Service[];
-  typprocesus!: Process[];
+/**
+ * observable variables
+ */
+  role$!: Role[];
+  privileges$!: Privilege[];
+  authtypeid$!: Authentification[];
+  frequence$!: Frequence[];
+  site$!: Site[];
+  typecontrat$!: typeContrat[];
+  typeperso$!: TypeOfStaff[];
+  etatcivil$!: CivilState[];
+  unitetech$!: Service[];
+  typprocesus$!: Process[];
+
+/**
+ * variables to define the response from services
+ */
   submitted = false;
   errorMessage: any;
   isaddedfailed: any;
-  emp!: Employe;
 
-
+/**
+ * variables to stock files from forms
+ */
   fileToUploadcontratImpartialite: File;
   fileToUploadcontratConfidentialite: File;
-  fileToUploadvisiteMedicales: File[]= [];
-  fileToUploadremisemateriel: File[]= [];
+  fileToUploadvisiteMedicales: File[] = [];
+  fileToUploadremisemateriel: File[] = [];
   fileToUploadeap: File;
-  fileToUploaddiplomefile: File[]= [];
-  fileToUploadAttributionf: File[]= [];
-  fileToUploadformationFile: File[]= [];
-  fileToUploadhabilitationFile: File[]= [];
+  fileToUploaddiplomefile: File[] = [];
+  fileToUploadAttributionf: File[] = [];
+  fileToUploadformationFile: File[] = [];
+  fileToUploadhabilitationFile: File[] = [];
 
-  // Variable to store shortLink from api response
-  shortLinkcontratConfidentialite: any;
-  shortLinkcontratImpartialite: any;
-  shortLinkhabilitationFile: any=[];
-  shortLinkformationFile: any=[];
-  shortLinkdiplomefile: any=[];
-  shortLinkAttributionf: any=[];
-  shortLinkeapf: any;
-  shortLinkvisiteMedicalesf: any=[];
-  shortLinkremisematerielf: any=[];
+  /**
+   *  Variable to store shortLink from api response
+   */
+  shortLinkcontratConfidentialite$: any;
+  shortLinkcontratImpartialite$: any;
+  shortLinkhabilitationFile$: any = [];
+  shortLinkformationFile$: any = [];
+  shortLinkdiplomefile$: any = [];
+  shortLinkAttributionf$: any = [];
+  shortLinkeapf$: any;
+  shortLinkvisiteMedicalesf$: any = [];
+  shortLinkremisematerielf$: any = [];
 
   loading: boolean = false; // Flag variable
-  user: { username: any; password: any; confPassword: any; email: any; confEmail: any; enabled: boolean; validity: boolean; visibility: boolean; roles: any; privileges: any; };
-  usr: any;
+
+  /**
+   * user to get from form step 5
+   */
+  user: {
+    username: any;
+    password: any;
+    confPassword: any;
+    email: any;
+    confEmail: any;
+    enabled: boolean;
+    validity: boolean;
+    visibility: boolean;
+    roles: any;
+    privileges: any;
+  };
+  /**
+   * observable user from add user in add employee
+   */
+  usr$: any;
+  athpassd: boolean=false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -137,6 +164,10 @@ export class AddEmployeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    /**
+     * services to get from API
+     */
     this.retrieveroles();
     this.retrievetypecontrats();
     this.retrievefrequences();
@@ -147,9 +178,9 @@ export class AddEmployeComponent implements OnInit {
     this.retrievetypprocesus();
     this.retrievePrivileges();
     this.retrievetypAuth();
-
-
-
+/**
+ * creating forms groups
+ */
     this.Infosgenerales = this.formBuilder.group({
       Nom: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+')]],
       Prenom: ['', [Validators.required, Validators.pattern("^[a-zA-Z -']+")]],
@@ -164,7 +195,7 @@ export class AddEmployeComponent implements OnInit {
       frequence: new FormControl(''),
       typeProcessus: new FormControl('', Validators.required),
       available: new FormControl(''),
-      remisemateriel: new FormControl('', Validators.required),
+      remisemateriel: new FormControl(''),
       DateFinContrat: new FormControl(''),
       typePersonnel: new FormControl('', Validators.required),
       nomSociete: new FormControl(''),
@@ -189,7 +220,9 @@ export class AddEmployeComponent implements OnInit {
       role: new FormControl('', Validators.required),
       privilege: new FormControl('', Validators.required),
     });
-
+/**
+ * from arrays that possible to be multiple
+ */
     this.Infosdesdiplomes = this.formBuilder.group({
       diploma: new FormArray([]),
     });
@@ -197,28 +230,36 @@ export class AddEmployeComponent implements OnInit {
     this.Competences = this.formBuilder.group({
       formation: new FormArray([]),
     });
-
-    this.Roles = this.formBuilder.group({
-      roles: new FormArray([]),
-    });
-
+/**
+ * creating the first form in the form arrays
+ */
     this.addnewdipl();
     this.addnewformat();
 
-    console.log(this.diploma.value);
-    console.log(this.formation.value);
-    console.log(this.Infosgenerales.value);
-    console.log(this.Infoscontratdutravail.value);
-    console.log(this.Infosdesecurite.value);
-    console.log('-------------');
-    console.log(JSON.stringify(this.emp));
-  }
+    this.Competences.valueChanges.subscribe((c) => {
+      c.formation.forEach((x:any) => {
+        console.log("subscribtion");
+          console.log(x);
+          console.log(x['periodec']);
+          if(x['periodec']){
+            x['dateRenouvellement'].setValidators([Validators.required]);
+          }else{
+            x['dateRenouvellement'].validator.reset();
+          }
+
+          // x.role.setValidators(Validators.required);
+      });
+  });
 
 
+}
+/**
+ * services functions to get from API
+ */
   retrieveroles(): void {
     this.roleService.getAll().subscribe({
       next: (data: any) => {
-        this.role = data;
+        this.role$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -228,7 +269,7 @@ export class AddEmployeComponent implements OnInit {
   retrievesites(): void {
     this.siteService.getAll().subscribe({
       next: (data: any) => {
-        this.site = data;
+        this.site$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -238,7 +279,7 @@ export class AddEmployeComponent implements OnInit {
   retrievefrequences(): void {
     this.frequenceService.getAll().subscribe({
       next: (data: any) => {
-        this.frequence = data;
+        this.frequence$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -248,7 +289,7 @@ export class AddEmployeComponent implements OnInit {
   retrievetypecontrats(): void {
     this.typcontratService.getAll().subscribe({
       next: (data: any) => {
-        this.typecontrat = data;
+        this.typecontrat$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -257,7 +298,7 @@ export class AddEmployeComponent implements OnInit {
   retrievetypeperso(): void {
     this.typepersoService.getAll().subscribe({
       next: (data: any) => {
-        this.typeperso = data;
+        this.typeperso$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -266,7 +307,7 @@ export class AddEmployeComponent implements OnInit {
   retrieveetacivil(): void {
     this.etatcivilService.getAll().subscribe({
       next: (data: any) => {
-        this.etatcivil = data;
+        this.etatcivil$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -276,7 +317,7 @@ export class AddEmployeComponent implements OnInit {
   retrieveunitetech(): void {
     this.unitetechservice.getAll().subscribe({
       next: (data: any) => {
-        this.unitetech = data;
+        this.unitetech$ = data;
         console.log(data);
         console.log('unitetech');
       },
@@ -286,7 +327,7 @@ export class AddEmployeComponent implements OnInit {
   retrievetypprocesus(): void {
     this.typrocesService.getAll().subscribe({
       next: (data: any) => {
-        this.typprocesus = data;
+        this.typprocesus$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -296,7 +337,7 @@ export class AddEmployeComponent implements OnInit {
   retrievePrivileges(): void {
     this.privilegeService.getAll().subscribe({
       next: (data: any) => {
-        this.privileges = data;
+        this.privileges$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -306,13 +347,17 @@ export class AddEmployeComponent implements OnInit {
   retrievetypAuth(): void {
     this.autheService.getAll().subscribe({
       next: (data: any) => {
-        this.authtypeid = data;
+        this.authtypeid$ = data;
         console.log('auth');
         console.log(data);
       },
       error: (e) => console.error(e),
     });
   }
+
+  /**
+   * getting values inserted in the forms
+   */
   get Infosgenerale() {
     return this.Infosgenerales.controls;
   }
@@ -348,16 +393,23 @@ export class AddEmployeComponent implements OnInit {
     return this.Roles.controls;
   }
 
+  /**
+   * function to add new form group diplome in the form array
+   */
   addnewdipl() {
     this.diplitems = this.Infosdesdiplomes.get('diploma') as FormArray;
     this.diplitems.push(this.gennewdipl());
   }
-
+/**
+   * function to delete new form group diplome from the form array
+   */
   delnewdipl(index: any) {
     this.diplitems = this.Infosdesdiplomes.get('diploma') as FormArray;
     this.diplitems.removeAt(index);
   }
-
+/**
+   * function to generate new form group diplome before adding it to the form array
+   */
   gennewdipl(): FormGroup {
     return new FormGroup({
       title: new FormControl('', Validators.required),
@@ -367,21 +419,28 @@ export class AddEmployeComponent implements OnInit {
       Attributionf: new FormControl(''),
     });
   }
-
+/**
+   * function to add new form group diplome in the form array
+   */
   addnewformat() {
     this.formatitems = this.Competences.get('formation') as FormArray;
     this.formatitems.push(this.gennewformat());
-  }
 
+  }
+/**
+   * function to add new form group diplome in the form array
+   */
   delnewformat(index: any) {
-    this.diplitems = this.Competences.get('formation') as FormArray;
-    this.diplitems.removeAt(index);
+    this.formatitems = this.Competences.get('formation') as FormArray;
+    this.formatitems.removeAt(index);
   }
-
+/**
+   * function to generate new form group diplome before adding it to the form array
+   */
   gennewformat(): FormGroup {
     return new FormGroup({
       title: new FormControl('', Validators.required),
-      periodec: new FormControl('', Validators.required),
+      periodec: new FormControl(''),
       dateRenouvellement: new FormControl(''),
       formationFile: new FormControl('', Validators.required),
       habilitation: new FormControl('', Validators.required),
@@ -393,7 +452,6 @@ export class AddEmployeComponent implements OnInit {
 
   next() {
     if (this.step != 5) {
-
       this.step++;
     }
   }
@@ -403,7 +461,6 @@ export class AddEmployeComponent implements OnInit {
       this.step--;
     }
   }
-
 
   handleFileInputfileTocontratImpartialite(event: any) {
     this.fileToUploadcontratImpartialite = <File>event.target.files[0];
@@ -419,8 +476,7 @@ export class AddEmployeComponent implements OnInit {
   handleFileInputremisemateriel(event: any) {
     for (var i = 0; i < event.target.files.length; i++) {
       this.fileToUploadremisemateriel.push(<File>event.target.files[i]);
-  }
-
+    }
   }
 
   handleFileIvisiteMedicales(event: any) {
@@ -430,220 +486,201 @@ export class AddEmployeComponent implements OnInit {
   }
 
   handleFileInputdiplomefile(event: any) {
-
-      this.fileToUploaddiplomefile.push(<File>event.target.files[0]);
-
+    this.fileToUploaddiplomefile.push(<File>event.target.files[0]);
   }
   handleFileInputformationFile(event: any) {
     this.fileToUploadformationFile.push(<File>event.target.files[0]);
-
   }
 
   handleFileInputAttributionf(event: any) {
     this.fileToUploadAttributionf.push(<File>event.target.files[0]);
-
   }
 
   handleFileInputhabilitationFile(event: any) {
     this.fileToUploadhabilitationFile.push(<File>event.target.files[0]);
-
   }
 
-  uploadcontratConfidentialite(fil: File) {
-
-
-    this.fileUploadService.upload(fil).subscribe({
-      next: (res: any) => {
-        this.shortLinkcontratConfidentialite=(res);
-      },
-      error: (err) => {
-        this.errorMessage = err.error.message;
+  async uploadcontratConfidentialite(fil: File) {
+    const formData = new FormData();
+    formData.append('document', fil);
+    await this.fileUploadService
+      .upload(formData)
+      .toPromise()
+      .then((data) => {
+        this.shortLinkcontratConfidentialite$ = data;
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
         this.isaddedfailed = true;
-      },
-    });
+      });
   }
 
-  uploadcontratImpartialite(fil: File) {
-
-
-    this.fileUploadService.upload(fil).subscribe({
-      next: (res: any) => {
-
-        this.shortLinkcontratImpartialite
-       = res;
-      },
-      error: (err) => {
-        this.errorMessage = err.error.message;
+  async uploadcontratImpartialite(fil: File) {
+    const formData = new FormData();
+    formData.append('document', fil);
+    await this.fileUploadService
+      .upload(formData)
+      .toPromise()
+      .then((res) => {
+        this.shortLinkcontratImpartialite$ = res;
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
         this.isaddedfailed = true;
-      },
-    });
+      });
   }
-  uploadeapf(fil: File) {
-
-
-    this.fileUploadService.upload(fil).subscribe({
-      next: (res: any) => {
-
-        this.shortLinkeapf=res;
-      },
-      error: (err) => {
-        this.errorMessage = err.error.message;
+  async uploadeapf(fil: File) {
+    const formData = new FormData();
+    formData.append('document', fil);
+    await this.fileUploadService
+      .upload(formData)
+      .toPromise()
+      .then((res) => {
+        this.shortLinkeapf$ = res;
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
         this.isaddedfailed = true;
-      },
-    });
+      });
   }
-  uploadhabilitationFile(fil: File[]) {
-
-    console.log("habili");
+  async uploadhabilitationFile(fil: File[]) {
+    console.log('habili');
     console.log(fil);
     console.log(fil.length);
-    let i=0;
-    while (i<fil.length) {
+    const formData = new FormData();
 
+    for (let f of fil) {
+      formData.append('document', f);
 
-      this.fileUploadService.upload(fil[i]).subscribe({
-        next: (res: any) => {
+      await this.fileUploadService
+        .upload(formData)
+        .toPromise()
+        .then((res) => {
           console.log(res);
-          console.log(fil[i]);
-          this.shortLinkhabilitationFile.push(res);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
+          this.shortLinkhabilitationFile$.push(res);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
           this.isaddedfailed = true;
-        },
-      });
-      i++;
+        });
+
+      // Store form name as "file" with file data
     }
-    // Store form name as "file" with file data
-
-
   }
 
-  uploadformationFile(fil: File[]) {
-    console.log("uploadformationFile");
+  async uploadformationFile(fil: File[]) {
+    console.log('uploadformationFile');
     console.log(fil);
     console.log(fil.length);
-    let i=0;
-    while (i<fil.length) {
 
-      this.fileUploadService.upload(fil[i]).subscribe({
-        next: (res: any) => {
+    for (let f of fil) {
+      const formData = new FormData();
+
+      formData.append('document', f);
+      await this.fileUploadService
+        .upload(formData)
+        .toPromise()
+        .then((res) => {
           console.log(res);
-          this.shortLinkformationFile.push(res);
-          console.log(fil[i]);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
+          this.shortLinkformationFile$.push(res);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
           this.isaddedfailed = true;
-        },
-      });
-      i++;
+        });
     }
-
   }
 
-  uploaddiplomefile(fil:File[]) {
-    console.log("uploaddiplomefile");
+  async uploaddiplomefile(fil: File[]) {
+    console.log('uploaddiplomefile');
     console.log(fil);
     console.log(fil.length);
-    let i=0;
-    while (i<fil.length) {
+    for (let f of fil) {
+      const formData = new FormData();
 
-      this.fileUploadService.upload(fil[i]).subscribe({
-        next: (res: any) => {
-
+      formData.append('document', f);
+      await this.fileUploadService
+        .upload(formData)
+        .toPromise()
+        .then((res) => {
           console.log(res);
-          console.log(fil[i]);
-          this.shortLinkdiplomefile.push(res);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
+          this.shortLinkdiplomefile$.push(res);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
           this.isaddedfailed = true;
-        },
-      });
-      i++;
-    // Store form name as "file" with file data
-
-
-
-  }
-}
-
-  uploadAttributionf(fil: File[]) {
-    console.log("uploadAttributionf");
-    console.log(fil);
-    console.log(fil.length);
-    let i=0;
-    while (i<fil.length) {
-
-      this.fileUploadService.upload(fil[i]).subscribe({
-        next: (res: any) => {
-          console.log(res);
-          console.log(fil[i]);
-          this.shortLinkAttributionf.push(res);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
-          this.isaddedfailed = true;
-        },
-      });
-      i++;
-    // Store form name as "file" with file data
+        });
     }
-
   }
 
-  uploadvisiteMedicalesf(fil: File[]) {
-    console.log("uploadvisiteMedicalesf");
+  async uploadAttributionf(fil: File[]) {
+    console.log('uploadAttributionf');
     console.log(fil);
     console.log(fil.length);
+    const formData = new FormData();
+    for (let f of fil) {
+      formData.append('document', f);
 
-    let i=0;
-    while (i<fil.length) {
-
-      this.fileUploadService.upload(fil[i]).subscribe({
-        next: (res: any) => {
-
+      await this.fileUploadService
+        .upload(formData)
+        .toPromise()
+        .then((res) => {
           console.log(res);
-          console.log(fil[i]);
-
-          this.shortLinkvisiteMedicalesf.push(res);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
+          this.shortLinkAttributionf$.push(res);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
           this.isaddedfailed = true;
-        },
-      });
-      i++;
+        });
     }
-
   }
-  uploadremisematerielf(fil:File[]) {
-    console.log("uploadremisematerielf");
+
+  async uploadvisiteMedicalesf(fil: File[]) {
+    console.log('uploadvisiteMedicalesf');
     console.log(fil);
     console.log(fil.length);
-    let i=0;
-    while (i<fil.length) {
+    for (let f of fil) {
+      const formData = new FormData();
 
-      this.fileUploadService.upload(fil[i]).subscribe({
-        next: (res: any) => {
+      formData.append('document', f);
+
+      await this.fileUploadService
+        .upload(formData)
+        .toPromise()
+        .then((res) => {
           console.log(res);
-          console.log(fil[i]);
-          this.shortLinkremisematerielf.push(res);
-        },
-        error: (err) => {
-          this.errorMessage = err.error.message;
+
+          this.shortLinkvisiteMedicalesf$.push(res);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
           this.isaddedfailed = true;
-        },
-      });
-      i++;
-    // Store form name as "file" with file data
+        });
     }
+  }
+  async uploadremisematerielf(fil: File[]) {
+    console.log('uploadremisematerielf');
+    console.log(fil);
+    console.log(fil.length);
+    for (let f of fil) {
+      const formData = new FormData();
 
-
+      formData.append('document', f);
+      await this.fileUploadService
+        .upload(formData)
+        .toPromise()
+        .then((res) => {
+          console.log(res);
+          this.shortLinkremisematerielf$.push(res);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
+          this.isaddedfailed = true;
+        });
+    }
   }
 
-  submit() {
+  async submit() {
     this.uploadremisematerielf(this.fileToUploadremisemateriel);
     this.uploadcontratConfidentialite(this.fileToUploadcontratConfidentialite);
     this.uploadcontratImpartialite(this.fileToUploadcontratImpartialite);
@@ -654,10 +691,25 @@ export class AddEmployeComponent implements OnInit {
     this.uploadeapf(this.fileToUploadeap);
     this.uploadvisiteMedicalesf(this.fileToUploadvisiteMedicales);
 
-
-
-
-
+    console.log('short links');
+    console.log('shortLinkcontratConfidentialite');
+    console.log(this.shortLinkcontratConfidentialite$);
+    console.log('shortLinkcontratImpartialite');
+    console.log(this.shortLinkcontratImpartialite$);
+    console.log('shortLinkhabilitationFile');
+    console.log(this.shortLinkhabilitationFile$);
+    console.log('shortLinkformationFile');
+    console.log(this.shortLinkformationFile$);
+    console.log('shortLinkdiplomefile');
+    console.log(this.shortLinkdiplomefile$);
+    console.log('shortLinkAttributionf');
+    console.log(this.shortLinkAttributionf$);
+    console.log('shortLinkeapf');
+    console.log(this.shortLinkeapf$);
+    console.log('shortLinkvisiteMedicalesf');
+    console.log(this.shortLinkvisiteMedicalesf$);
+    console.log('shortLinkremisematerielf');
+    console.log(this.shortLinkremisematerielf$);
 
     if (this.step == 5) {
       let diplo = [];
@@ -666,24 +718,24 @@ export class AddEmployeComponent implements OnInit {
 
       let prvgl = [];
       let authidty;
-      let i=0
+      let indexdiplom = 0;
       for (let dip of this.diploma.value) {
-        diplo .push( {
+        diplo.push({
           employee: null,
           diploma: {
             title: dip.title,
             speciality: dip.specialite,
-            periodic: this.periodiq[i],
+            periodec: this.periodiq,
             enabled: true,
-            attacheDocsList: this.shortLinkdiplomefile,
+            attacheDocsList: this.shortLinkdiplomefile$,
           },
         });
-        attribu .push( {
+        attribu.push({
           title: dip.attribution,
-          dateAttribution: '',
-          attacheDocsList: this.shortLinkAttributionf,
+          dateAttribution: null,
+          attacheDocsList: this.shortLinkAttributionf$,
         });
-        i++;
+        indexdiplom++;
       }
 
       let rll = [];
@@ -694,14 +746,14 @@ export class AddEmployeComponent implements OnInit {
       for (let pr of this.Infosdesecurite.value.privilege) {
         prvgl.push({ id: pr });
       }
-
+      let indexformation = 0;
       for (let format of this.formation.value) {
-        forma.push( {
+        forma.push({
           employee: null,
           formation: {
             title: format.title,
             description: format.description,
-            periodic: format.periodic,
+            periodec: format.periodic,
             enabled: true,
 
             habilitationList: [
@@ -710,51 +762,34 @@ export class AddEmployeComponent implements OnInit {
                 habilitationDate: format.dateHabilitation,
                 habilitationRenewalDate: format.dateRenHabi,
                 validity: true,
-                attacheDocsList: this.shortLinkhabilitationFile,
+                attacheDocsList:
+                  this.shortLinkhabilitationFile$,
               },
             ],
-            attacheDocsList: this.shortLinkformationFile,
+            attacheDocsList: this.shortLinkformationFile$,
           },
           formationRenewalDate: format.dateRenouvellement,
-        }
-        );
+        });
+        indexformation++;
       }
-
-      console.log('short links');
-      console.log("shortLinkcontratConfidentialite");
-      console.log(this.shortLinkcontratConfidentialite);
-      console.log("shortLinkcontratImpartialite");
-      console.log(this.shortLinkcontratImpartialite);
-      console.log("shortLinkhabilitationFile");
-      console.log(this.shortLinkhabilitationFile);
-      console.log("shortLinkformationFile");
-      console.log(this.shortLinkformationFile);
-      console.log("shortLinkdiplomefile");
-      console.log(this.shortLinkdiplomefile);
-      console.log("shortLinkAttributionf");
-      console.log(this.shortLinkAttributionf);
-      console.log("shortLinkeapf");
-      console.log(this.shortLinkeapf);
-      console.log("shortLinkvisiteMedicalesf");
-      console.log(this.shortLinkvisiteMedicalesf);
-      console.log("shortLinkremisematerielf");
-      console.log(this.shortLinkremisematerielf);
 
       const curentuser = this.storageService.getUser();
 
-      for (let i of this.authtypeid) {
+      for (let i of this.authtypeid$) {
         if (this.typeAuth == 'ldap') {
           if (i.ldap) {
             authidty = i.id;
+
           }
         } else {
           if (i.password) {
             authidty = i.id;
+
           }
         }
       }
 
-      this.user  ={
+      this.user = {
         username: this.Infosdesecurite.value.username,
         password: this.Infosdesecurite.value.password,
         confPassword: this.Infosdesecurite.value.confirmPassword,
@@ -765,103 +800,75 @@ export class AddEmployeComponent implements OnInit {
         visibility: true,
         roles: rll,
         privileges: prvgl,
-      }
+      };
 
-      this.userService.create(curentuser.id,this.user).subscribe({
-        next: (res: any) => {
+      await this.userService
+        .create(curentuser.id, this.user)
+        .toPromise()
+        .then((res) => {
           console.log(res);
-          this.usr = res;
-        },
-        error: (err) => {
+          this.usr$ = res;
+        })
+        .catch((error) => {
           console.log(this.user);
           console.log('adding user failed ');
-          this.errorMessage = err.error.message;
+          this.errorMessage = error.message;
           this.isaddedfailed = true;
-        },
-      });
-/*
-      const arrayObj = {
+        });
 
+      const arrayObj = {
         firstName: this.Infosgenerales.value.Nom,
         lastName: this.Infosgenerales.value.Prenom,
         dateOfBirth: this.Infosgenerales.value.DateNaissance,
         natioIdCard: this.Infosgenerales.value.Cin.toString(),
         companyName: this.Infoscontratdutravail.value.nomSociete,
-        availability: this.Infoscontratdutravail.value.available,
+        availability: Boolean(this.Infoscontratdutravail.value.available),
 
-        impartialityContract: this.shortLinkcontratImpartialite,
-        privacyContract: this.shortLinkcontratConfidentialite,
-        user: this.usr,
-        contractList: {
-          startDate: this.Infoscontratdutravail.value.DateDebutContrat,
-          endDate: this.Infoscontratdutravail.value.DateFinContrat,
-          contractType: {
-            id: Number(this.typcontid),
-          },
-        },
-        medicalVisitList : [{
-          dateofMv:this.Infoscontratdutravail.value.DateVisiteMedicale,
-          dateofNextMv:this.Infoscontratdutravail.value.DateProchVisiteMedicale,
-          attachedDocs:
-            this.shortLinkvisiteMedicalesf,
-
-        }
-      ],
-      handedOverList: [
-        {
-          obtained:"10-10-2022",
-          returned:"19-10-2022",
-          status:1,
-          material:{
-            id:22
-          }
-        }
-      ],
-      serviceList: [
-        {
-          technicalTerm:"tech1",
-          enabled:true,
-          language: {
-            name: "français",
-            code639_1: "FR",
-            code639_2: "FRA",
-            code639_3: "FRE",
-            enabled: true
-          }
-        }
-      ],
-      processList: [
-        {
-          content:"Methode 1",
-          description:"methode 1",
-          abreviation:"Meth 1",
-          enabled:true
-        }
-      ],
-      site:{
-        siteName:"Monplaisir",
-        city:"Borjil",
-        longitude:12.30,
-        latitude:12.30,
-        enabled:true
-      },
-        eapList : [
+        impartialityContract: this.shortLinkcontratImpartialite$,
+        privacyContract: this.shortLinkcontratConfidentialite$,
+        user: this.usr$,
+        contractList: [
           {
-
-              description: null,
-              dateEap:this.Infoscontratdutravail.value.endDate,
-              attachedDocs: this.shortLinkeapf,
-
-          }
-
-
-
+            startDate: this.Infoscontratdutravail.value.DateDebutContrat,
+            endDate: this.Infoscontratdutravail.value.DateFinContrat,
+            contractType: {
+              id: Number(this.typcontid),
+            },
+          },
         ],
-        employeeFormationList: [forma],
-        employeeDiplomaList: [diplo],
+        medicalVisitList: [
+          {
+            dateofMv: this.Infoscontratdutravail.value.DateVisiteMedicale,
+            dateofNextMv:
+              this.Infoscontratdutravail.value.DateProchVisiteMedicale,
+            attachedDocs: this.shortLinkvisiteMedicalesf$,
+          },
+        ],
+        handedOverList: [
+          {
+            attachedDocs: this.shortLinkremisematerielf$,
+          },
+        ],
+        serviceList: [
+          {id:Number(this.Infoscontratdutravail.value.uniteTechnique)}
+        ],
+        processList: [
+          {id:Number(this.Infoscontratdutravail.value.typeProcessus)}
+        ],
 
-        employeeAttributionList: [attribu],
+        eapList: [
+          {
+            description: null,
+            dateEap: this.Infoscontratdutravail.value.dateEap,
+            attachedDocs: this.shortLinkeapf$,
+          },
+        ],
+        employeeFormationList: forma,
+        employeeDiplomaList: diplo,
+
+        employeeAttributionList: attribu,
       };
+      console.log(arrayObj);
 
       this.employservice
         .create(
@@ -874,28 +881,66 @@ export class AddEmployeComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             console.log(res);
-            this.submitted = true;
+            window.location.reload();
           },
           error: (err) => {
-            console.log(arrayObj);
-            console.log('adding failed ');
+            console.log('adding Employee failed ');
             this.errorMessage = err.error.message;
             this.isaddedfailed = true;
           },
-        });*/
+        });
     }
+
+    this.resetshortlinks();
   }
 
   onChange(e: any) {
     this.typeAuth = e.target.value;
+    if(this.typeAuth==="mdp"){
+      this.athpassd=true;
+    }else{
+      this.athpassd=false;
+    }
+    console.log( this.typeAuth)
+
+    this.Infosdesecurite.valueChanges.subscribe(c=> {
+      if(this.athpassd){
+        console.log(this.athpassd);
+
+        this.Infosdesecurite.get('password').setValidators(Validators.required)
+        c['confirmPassword'].setValidators([Validators.required])
+      }else{
+        console.log(this.athpassd);
+
+        c['password'].reset();
+        c['confirmPassword'].reset();
+
+      }
+    });
   }
 
-  onChangeperiodique(e: any, i: any) {
-    if (e.target.value == 'true') {
-      this.periodiq[i] = true;
+  onChangeperiodique(e: any) {
+    if (e.target.value === 'true') {
+      this.periodiq = true;
+      /*this.formation["periodec"].controls[0].setValidators([ Validators.required]);*/
+
     } else {
-      this.periodiq[i] = false;
+
+      this.periodiq = false;
     }
     console.log(this.periodiq);
+  }
+
+  resetshortlinks() {
+    console.log('reseting short links ');
+    this.shortLinkcontratConfidentialite$ = [];
+    this.shortLinkcontratImpartialite$ = [];
+    this.shortLinkhabilitationFile$ = [];
+    this.shortLinkformationFile$ = [];
+    this.shortLinkdiplomefile$ = [];
+    this.shortLinkAttributionf$ = [];
+    this.shortLinkeapf$ = [];
+    this.shortLinkvisiteMedicalesf$ = [];
+    this.shortLinkremisematerielf$ = [];
   }
 }

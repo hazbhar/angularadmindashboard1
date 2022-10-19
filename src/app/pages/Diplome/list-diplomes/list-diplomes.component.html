@@ -1,1 +1,55 @@
-<p>list-diplomes works!</p>
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Diploms List</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Diploms</li>
+        <li class="breadcrumb-item active">List</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="list row">
+
+      <div class="col-md-6">
+        <h4>Diploms List</h4>
+
+        <ul class="">
+          <li
+            class="list-group-item"
+            *ngFor="let dipl of diploms; let i= index"
+            [class.active]="i == currentIndex"
+            (click)="setActivediplom(dipl, i)">
+            <div class="container">
+              <div class="row ">
+                <div class="col">
+                  <span> {{ dipl.title }}</span>
+                </div>
+                <div class="col-md-auto">
+
+
+                  <a routerLink="/employe-details/{{dipl.id }}"> <i
+                      class="bi bi-file-diff-fill"></i><span>EDIT</span> </a>
+                </div>
+                <div class="col col-lg-2" >
+                  <a  (click)="deletediplom(dipl.id)" routerLink="/diplom-list" >
+                  <i class="bi bi-trash-fill"></i><span   class="" >Delete</span>
+                </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+
+      </div>
+
+      <div class="col-md-6">
+        <!--<app-edit-diplome
+          [viewMode]="true"
+          [currentdiplom]="currentdiplom"></app-edit-diplome>-->
+      </div>
+    </div>
+  </section>
+</main>

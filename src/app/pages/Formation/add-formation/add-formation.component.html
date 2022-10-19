@@ -1,69 +1,146 @@
-
-<main id="main" class="main">
+[<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Add Formation</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Formation</li>
+        <li class="breadcrumb-item active">Add</li>
+      </ol>
+    </nav>
+  </div>
   <section class="section">
-
-
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Add new Formation</h5>
     <div *ngIf="!submitted">
-      <div class="form-group">
-        <div class="d-flex justify-content-between">
+    <form [formGroup]="Competences"  id="msform">
+      <fieldset >
+        <div formArrayName="formation">
+          <div *ngFor="let item of format.controls;let i=index">
+            <div [formGroupName]="i">
+              <h2 class="fs-title">Competences</h2>
 
-          <label for="title">Titre</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            required
-            [(ngModel)]="formation.title"
-            name="title"
-            />
+              <!--        validators       -->
 
-          <label for="description">Description</label>
-          <input
-            class="form-control"
-            id="password"
-            required
-            [(ngModel)]="formation.description"
-            name="password"
-            />
+              <!--        formgroup       -->
 
-          <div>
-            <button class="btn btn-success" (click)="addFormation()">Add</button>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Titre</label>
+                <div class="col-sm-10"> <input class="form-control" type="text"
+                    formControlName="title" name="title"
+                    id="title" placeholder="titre..." required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">periodique</label>
+                <div class="form-check form-check-inline">
+                  <div class="custom-control custom-radio
+                    custom-control-inline">
+                    <input type="radio" class="custom-control-input"
+                      formControlName="periodec" name="periodec"
+                      id="periodec" value="true"
+                      (change)="onChangeperiodique($event)" required>
+                    <label class="custom-control-label" for="periodec">Oui</label>
+                  </div>
+                  <!-- Default inline 2-->
+                  <div class="custom-control custom-radio
+                    custom-control-inline">
+                    <input type="radio" class="custom-control-input"
+                      formControlName="periodec" name="periodec"
+                      id="periodec" value="false"
+                      (change)="onChangeperiodique($event)" required>
+                    <label class="custom-control-label" for="periodec">Non</label>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="periodiq" class="row mb-3">
+                <label class="col-sm-2 col-form-label">date de Renouvellement</label>
+                <div class="col-sm-10"> <input class="form-control"
+                    formControlName="dateRenouvellement" type="date"
+                    name="dateRenouvellement" id="dateRenouvellement"
+                    placeholder="date de Renouvellement..."
+                    [required]="periodiq">
+                </div>
+              </div>
+
+              <div *ngIf="!periodiq" class="row mb-3" style="display: none;">
+                <label class="col-sm-2 col-form-label">date de Renouvellement</label>
+                <div class="col-sm-10"> <input class="form-control"
+                    formControlName="dateRenouvellement" type="date"
+                    name="dateRenouvellement" id="dateRenouvellement"
+                    placeholder="date de Renouvellement..."
+                    [required]="periodiq">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">formation File</label>
+                <div class="col-sm-10"> <input class="form-control" type="file"
+                    formControlName="formationFile" name="formationFile" (change)="handleFileInputformationFile($event)"
+                    id="formationFile" placeholder="formation File..." required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">habilitation</label>
+                <div class="col-sm-10"> <input class="form-control" type="text"
+                    formControlName="habilitation" name="habilitation"
+                    id="habilitation" placeholder="habilitation..." required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">date Habilitation</label>
+                <div class="col-sm-10"> <input class="form-control" type="date"
+                    formControlName="dateHabilitation" name="dateHabilitation"
+                    id="dateHabilitation" placeholder="date Habilitation..."
+                    required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">date ReHabilitation</label>
+                <div class="col-sm-10"> <input class="form-control" type="date"
+                    formControlName="dateRenHabi" name="dateRenHabi"
+                    id="dateRenHabi" placeholder="date ReHabilitation..."
+                    required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">habilitation File</label>
+                <div class="col-sm-10"> <input class="form-control" type="file"  (change)="handleFileInputhabilitationFile($event)"
+                    formControlName="habilitationFile" name="habilitationFile"
+                    id="habilitationFile" placeholder="habilitation File..."
+                    required>
+                </div>
+              </div>
+            </div>
+            <button *ngIf="i!=0" (click)="delnewformat(i)" class="btn
+              btn-danger">remove (-)</button>
           </div>
+        </div>
+        <div class="center">
+          <button (click)="saveformation()" [disabled]="!Competences.valid"
+          type="submit" name="submit" class="submit">Submit</button>
+          <button type="reset" name="next" class="reset">reset</button>
+  </div>
+               <div class="row mb-3" *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
+                Adding Formation failed: {{ errorMessage }}
+              </div>
 
-        </div></div>
+              <div class="row mb-3" *ngIf="submitted">
+                <h4>Formation was submitted successfully!</h4>
+              </div>
+
+      </fieldset>
+    </form>
+    </div>
+      </div>
     </div>
   </section>
-  <!--
-<form>
-<div class="form-group">
-  <label for="firstname">Firstname</label>
-  <div class="input-group">
-    <input id="fname" class="form-control">
-  </div>
-</div>
-<div class="form-group">
-  <label for="lastname">Lastname</label>
-  <div class="input-group">
-    <input id="lname" class="form-control">
-  </div>
-</div>
-<div class="form-group">
-  <label for="department">Department</label>
-  <div class="input-group">
-    <input id="dept" class="form-control">
-  </div>
-</div>
-<div class="form-group">
-  <label>Email</label>
-  <div class="input-group">
-    <input id="email2" class="form-control">
-  </div>
-</div>
-<div class="form-group">
-  <label> Country</label>
-  <div class="input-group">
-    <input id="cntry" class="form-control">
-  </div>
-</div>
-</form>S
--->
+  </main>
+

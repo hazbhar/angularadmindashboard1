@@ -50,6 +50,7 @@ export class AppComponent {
     this.authService.logout().subscribe({
       next: (res) => {
         console.log(res);
+        this.isLoggedIn = false;
         this.storageService.clean();
 
         window.location.reload();

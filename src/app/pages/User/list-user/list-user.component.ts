@@ -25,6 +25,9 @@ export class ListUserComponent implements OnInit {
     roles: undefined,
     privileges: undefined,
   };
+  deleted=false;
+  isdeletedfailed=false;
+  errorMessage="";
   currentIndex = -1;
   username = '';
   constructor(private userService: UserService, private router: Router) {}
@@ -61,13 +64,20 @@ export class ListUserComponent implements OnInit {
     };
     this.currentIndex = -1;
   }
-  deleteUser(id: any): void {
+  deleteUser(id: any) {
     this.userService.delete(id).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate(['/listusers']);
+        this.deleted = true;
+        this.isdeletedfailed=false;
+        this.retrieveUsers();
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        console.error(e),
+        this.errorMessage=e.message;
+        this.isdeletedfailed=true;
+        this.deleted=false;
+      }
     });
   }
   setActiveUser(user: User, index: number): void {

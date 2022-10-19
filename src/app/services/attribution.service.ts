@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
-import { Contract } from '../models/Contract';
+import { Attribution } from '../models/Attribution';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContratService {
+export class AttributionService {
+
   addHttpOption = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
@@ -19,16 +20,17 @@ export class ContratService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll() {
-    return this.http.get<Contract[]>(this.config.API_DIPLOME + 'getall');
+    return this.http.get<Attribution[]>(this.config.API_DIPLOME + 'getall');
   }
 
-  get(id: any): Observable<Contract> {
-    return this.http.get<Contract>(this.config.API_DIPLOME + id);
+  get(id: any): Observable<Attribution> {
+    return this.http.get<Attribution>(this.config.API_DIPLOME + id);
   }
 
-  create(employeeId: any,contractTypeId: any,frequenceId: any, data: any): Observable<any> {
-
-    return this.http.post(this.config.API_DIPLOME + 'add?frequenceId=', frequenceId+'&contractTypeId='+contractTypeId+'&employeeId='+employeeId,data);
+  create(data: any, id: any): Observable<any> {
+    let httpParams = new HttpParams();
+    httpParams = httpParams.append('typeForId', id);
+    return this.http.post(this.config.API_DIPLOME + 'add?typeForId=1', data);
   }
 
   update(id: any, data: any): Observable<any> {

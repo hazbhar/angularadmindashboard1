@@ -1,36 +1,67 @@
 
 <main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Formations List</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item">Formations</li>
+        <li class="breadcrumb-item active">List</li>
+      </ol>
+    </nav>
+  </div>
   <section class="section">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">id</th>
-          <th scope="col">Titre</th>
-          <th scope="col">Description</th>
-          <th scope="col">action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let formation of formations">
-          <th scope="row">{{formation.id}}</th>
-          <td>{{formation.title}}</td>
-          <td>{{formation.description}}</td>
-          <td>
-            <div>
-              <button class="btn btn-sm btn-warning"
-                routerLink="/edit-formation/{{formation.id}}">
-                <i class="fa fa-edit"></i>Update</button>
-              <button class="btn btn-sm btn-danger">
-                <i class="fa fa-remove"(click)="deleteFormation(formation)">Delete
-                </i></button>
+    <div class="row mb-3" *ngIf="isdeletedfailed" class="alert alert-danger" role="alert">
+      Deleting Formation failed: {{ errorMessage }}
+    </div>
+
+    <div class="row mb-3" *ngIf="deleted">
+      <h4>Formation was Deleted successfully!</h4>
+    </div>
+
+    <div class="list row">
+
+      <div class="col-md-6">
+        <h4>User List</h4>
+
+        <ul class="">
+
+
+          <li
+            class="list-group-item"
+            *ngFor="let forma of formations; let i= index"
+            [class.active]="i == currentIndex"
+            (click)="setActiveForma(forma, i)">
+            <div class="container">
+              <div class="row ">
+                <div class="col">
+                  <span> {{forma.title}}</span>
+
+                </div>
+                <div class="col-md-auto">
+
+
+                  <a routerLink="/userdetails/{{currentformation.id}}"> <i
+                      class="bi bi-file-diff-fill"></i><span>EDIT</span> </a>
+                </div>
+                <div class="col col-lg-2">
+                   <i
+                      class="bi bi-trash-fill"></i><span class="" (click)="deleteFormation(forma.id)">Delete</span>
+
+                </div>
+              </div>
             </div>
+          </li>
+        </ul>
 
-          </td>
 
-
-        </tr>
-
-      </tbody>
-    </table>
+      </div>
+      <div class="col-md-6">
+      <!--  <app-edit-formation
+          [viewMode]="true"
+          [currentformation]="currentformation"></app-edit-formation>-->
+      </div>
+    </div>
   </section>
 </main>
+
