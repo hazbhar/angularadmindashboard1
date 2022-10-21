@@ -4,6 +4,10 @@
   position: relative;
   margin-top: 30px;
 }
+#msform label, legend{
+  text-align: left;
+  position: relative;
+}
 #msform fieldset {
   background: white;
   border: 0 none;
@@ -98,6 +102,7 @@
 }
 /*progressbar*/
 #progressbar {
+  margin-left: 15%;
   margin-bottom: 30px;
   overflow: hidden;
   /*CSS counters to number the steps*/

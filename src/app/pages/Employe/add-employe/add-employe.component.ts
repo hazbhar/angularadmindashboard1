@@ -73,7 +73,7 @@ export class AddEmployeComponent implements OnInit {
 /**
  * add employe step value
  */
-  step = 5;
+  step = 1;
 
 /**
  * observable variables
@@ -725,15 +725,19 @@ export class AddEmployeComponent implements OnInit {
           diploma: {
             title: dip.title,
             speciality: dip.specialite,
-            periodec: this.periodiq,
-            enabled: true,
-            attacheDocsList: this.shortLinkdiplomefile$,
+            dateObtained:null,
+            attachedDocsList: this.shortLinkdiplomefile$[indexdiplom],
+
           },
         });
         attribu.push({
+          employee:null,
+          attribution:{
           title: dip.attribution,
           dateAttribution: null,
-          attacheDocsList: this.shortLinkAttributionf$,
+          attachedDocsList:
+           this.shortLinkAttributionf$[indexdiplom]
+          }
         });
         indexdiplom++;
       }
@@ -761,12 +765,13 @@ export class AddEmployeComponent implements OnInit {
                 title: format.habilitation,
                 habilitationDate: format.dateHabilitation,
                 habilitationRenewalDate: format.dateRenHabi,
-                validity: true,
-                attacheDocsList:
-                  this.shortLinkhabilitationFile$,
+                attachedDocsList:
+                  this.shortLinkhabilitationFile$[indexformation],
+
               },
             ],
-            attacheDocsList: this.shortLinkformationFile$,
+            attachedDocsList: this.shortLinkformationFile$[indexformation],
+
           },
           formationRenewalDate: format.dateRenouvellement,
         });
@@ -826,7 +831,9 @@ export class AddEmployeComponent implements OnInit {
 
         impartialityContract: this.shortLinkcontratImpartialite$,
         privacyContract: this.shortLinkcontratConfidentialite$,
-        user: this.usr$,
+        user: {
+          id:this.usr$.id
+        },
         contractList: [
           {
             startDate: this.Infoscontratdutravail.value.DateDebutContrat,
@@ -841,12 +848,16 @@ export class AddEmployeComponent implements OnInit {
             dateofMv: this.Infoscontratdutravail.value.DateVisiteMedicale,
             dateofNextMv:
               this.Infoscontratdutravail.value.DateProchVisiteMedicale,
-            attachedDocs: this.shortLinkvisiteMedicalesf$,
+              attachedDocsList: this.shortLinkvisiteMedicalesf$,
           },
         ],
         handedOverList: [
           {
-            attachedDocs: this.shortLinkremisematerielf$,
+            obtained:null,
+            returned:null,
+            status:null,
+            material:null,
+            attachedDocsList: this.shortLinkremisematerielf$,
           },
         ],
         serviceList: [
@@ -860,7 +871,7 @@ export class AddEmployeComponent implements OnInit {
           {
             description: null,
             dateEap: this.Infoscontratdutravail.value.dateEap,
-            attachedDocs: this.shortLinkeapf$,
+            attachedDocsList: this.shortLinkeapf$,
           },
         ],
         employeeFormationList: forma,
@@ -903,20 +914,7 @@ export class AddEmployeComponent implements OnInit {
     }
     console.log( this.typeAuth)
 
-    this.Infosdesecurite.valueChanges.subscribe(c=> {
-      if(this.athpassd){
-        console.log(this.athpassd);
 
-        this.Infosdesecurite.get('password').setValidators(Validators.required)
-        c['confirmPassword'].setValidators([Validators.required])
-      }else{
-        console.log(this.athpassd);
-
-        c['password'].reset();
-        c['confirmPassword'].reset();
-
-      }
-    });
   }
 
   onChangeperiodique(e: any) {

@@ -24,13 +24,13 @@ export class DiplomaService {
   }
 
   get(id: any): Observable<Diploma> {
-    return this.http.get<Diploma>(this.config.API_DIPLOME + id);
+    return this.http.get<Diploma>(this.config.API_DIPLOME + 'getById?id='+id);
   }
 
   create(data: any, id: any): Observable<any> {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('typeForId', id);
-    return this.http.post(this.config.API_DIPLOME + 'add?typeForId=1', data);
+    return this.http.post(this.config.API_DIPLOME + 'add', data);
   }
 
   update(id: any, data: any): Observable<any> {

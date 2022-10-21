@@ -40,6 +40,7 @@ import { AddContratComponent } from './pages/Contrat/add-contrat/add-contrat.com
 import { ListContratComponent } from './pages/Contrat/list-contrat/list-contrat.component';
 import { EditContratComponent } from './pages/Contrat/edit-contrat/edit-contrat.component';
 import { DashbordEmpComponent } from './pages/dashbord-emp/dashbord-emp.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { DashbordEmpComponent } from './pages/dashbord-emp/dashbord-emp.componen
     RouterModule,
     HttpClientModule
   ],
-  providers: [Constants,AuthService],
+  providers: [Constants,AuthService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

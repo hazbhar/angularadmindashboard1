@@ -4,8 +4,8 @@ import {ContractType} from "./ContractType";
 
 export class Contract{
   id!:number;
-  startDate?:Date;
-  endDate?:Date;
+  startDate:Date;
+  endDate:Date;
   frequence:Frequence;
   employee:Employe;
   contractType:ContractType;

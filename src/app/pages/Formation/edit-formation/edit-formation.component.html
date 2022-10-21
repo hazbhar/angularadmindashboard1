@@ -1,6 +1,6 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Edit Formation</h1>
+    <h1>Formation</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -10,12 +10,15 @@
     </nav>
   </div>
   <section class="section">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Edit Formation</h5>
     <form>
 
       <h4>Formation</h4>
 
-      <div class="form-group">
-        <label for="title">Titre</label>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Titre</label>
         <input
           type="text"
           class="form-control"
@@ -24,8 +27,8 @@
           name="title"
           />
       </div>
-      <div class="form-group">
-        <label for="description">Description</label>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label"> Description</label>
         <input
           type="text"
           class="form-control"
@@ -34,12 +37,99 @@
           name="description"
           />
       </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">periodique</label>
+        <div class="form-check form-check-inline">
+          <div class="custom-control custom-radio
+            custom-control-inline">
+            <input type="radio" class="custom-control-input"
+              name="periodec"
+              id="periodec" value="true"
+              (change)="onChangeperiodique($event)" [checked]="formation.periodec">
+            <label class="custom-control-label" for="periodec">Oui</label>
+          </div>
+          <!-- Default inline 2-->
+          <div class="custom-control custom-radio
+            custom-control-inline">
+            <input type="radio" class="custom-control-input"
+               name="periodec"
+              id="periodec" value="false"
+              (change)="onChangeperiodique($event)" [checked]="!formation.periodec" required>
+            <label class="custom-control-label" for="periodec">Non</label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="formation.periodec" class="row mb-3">
+        <label class="col-sm-3 col-form-label">date de Renouvellement</label>
+        <div class="col-sm-9"> <input class="form-control"
+             type="date"
+            name="dateRenouvellement" id="dateRenouvellement"
+            placeholder="date de Renouvellement..."
+            [required]="periodiq">
+        </div>
+      </div>
+
+      <div *ngIf="!periodiq" class="row mb-3" style="display: none;">
+        <label class="col-sm-3 col-form-label">date de Renouvellement</label>
+        <div class="col-sm-9"> <input class="form-control"
+             type="date"
+            name="dateRenouvellement" id="dateRenouvellement"
+            placeholder="date de Renouvellement..."
+            [required]="periodiq">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">formation File</label>
+        <div class="col-sm-9"> <input class="form-control" type="file"
+             name="formationFile" (change)="handleFileInputformationFile($event)"
+            id="formationFile" placeholder="formation File..." required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">habilitation</label>
+        <div class="col-sm-9"> <input class="form-control" type="text"
+             name="habilitation"
+            id="habilitation" placeholder="habilitation..." required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">date Habilitation</label>
+        <div class="col-sm-9"> <input class="form-control" type="date"
+             name="dateHabilitation"
+            id="dateHabilitation" placeholder="date Habilitation..."
+            required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">date ReHabilitation</label>
+        <div class="col-sm-9"> <input class="form-control" type="date"
+             name="dateRenHabi"
+            id="dateRenHabi" placeholder="date ReHabilitation..."
+            required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">habilitation File</label>
+        <div class="col-sm-9"> <input class="form-control" type="file"  (change)="handleFileInputhabilitationFile($event)"
+             name="habilitationFile"
+            id="habilitationFile" placeholder="habilitation File..."
+            required>
+        </div>
+      </div>
       <div class="form-group">
 
-        <button class="btn btn-sm btn-danger">
+        <button class="btn btn-sm btn-success">
           <i class="fa fa-remove"(click)="editFormation(formation)">Mettre à
             jour </i></button>
       </div>
     </form>
+    </div>
+    </div>
   </section>
 </main>

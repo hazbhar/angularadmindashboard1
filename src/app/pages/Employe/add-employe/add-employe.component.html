@@ -13,7 +13,7 @@
 
     <form [formGroup]="Infosgenerales" id="msform">
       <!-- progressbar -->
-      <ul id="progressbar" class="center">
+      <ul id="progressbar" >
         <li [ngClass]="step>=1 ? 'active ' : 'inactive'">Infos générales</li>
         <li [ngClass]="step>=2 ? 'active' : 'inactive'">Infos contrat du travail</li>
         <li [ngClass]="step>=3 ? 'active' : 'inactive'">Infos des diplomes</li>
@@ -48,16 +48,16 @@
         <!--        formgroup       -->
 
         <div class="row mb-3">
-          <label for="Nom" class="col-sm-2 col-form-label">Nom *</label>
-          <div class="col-sm-10"> <input type="text" class="form-control"
+          <label for="Nom" class="col-sm-3 col-form-label">Nom *</label>
+          <div class="col-sm-9"> <input type="text" class="form-control"
               name="Nom" id="Nom" placeholder="Nom..." formControlName="Nom"
               required>
           </div>
 
         </div>
         <div class="row mb-3">
-          <label for="Prenom" class="col-sm-2 col-form-label">Prenom *</label>
-          <div class="col-sm-10"> <input type="text" class="form-control"
+          <label for="Prenom" class="col-sm-3 col-form-label">Prenom *</label>
+          <div class="col-sm-9"> <input type="text" class="form-control"
               name="Prenom" id="Prenom" formControlName="Prenom"
               placeholder="Prenom..." required>
           </div>
@@ -65,9 +65,9 @@
         </div>
 
         <div class="row mb-3">
-          <label for="DateNaissance" class="col-sm-2 col-form-label">Date Naissance
+          <label for="DateNaissance" class="col-sm-3 col-form-label">Date Naissance
             *</label>
-          <div class="col-sm-10"> <input type="date" class="form-control"
+          <div class="col-sm-9"> <input type="date" class="form-control"
               name="Cin" id="DateNaissance"
               formControlName="DateNaissance" placeholder="Date Naissance..."
               required>
@@ -75,16 +75,16 @@
 
         </div>
         <div class="row mb-3">
-          <label for="Cin" class="col-sm-2 col-form-label">Cin *</label>
-          <div class="col-sm-10"> <input type="number" class="form-control"
+          <label for="Cin" class="col-sm-3 col-form-label">Cin *</label>
+          <div class="col-sm-9"> <input type="number" class="form-control"
               name="Cin" id="Cin" formControlName="Cin" placeholder="Cin..."
               required>
           </div>
 
         </div>
         <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">Etat civil</legend>
-          <div class="col-sm-10">
+          <legend class="col-sm-3 col-form-label ">Etat civil</legend>
+          <div class="col-sm-9">
             <select class="form-select" formControlName="civilState"
               name="etatcivil" id="etatcivil"
               aria-label="Default select example">
@@ -209,17 +209,17 @@
         <!--        formgroup       -->
 
         <div class="row mb-3">
-          <label for="inputNumber" class="col-sm-2 col-form-label">Date Debut
-            Contrat</label>
-          <div class="col-sm-10"> <input type="date" name="DateDebutContrat"
+          <label for="inputNumber" class="col-sm-3 col-form-label">Date Debut
+            Contrat *</label>
+          <div class="col-sm-9"> <input type="date" name="DateDebutContrat"
               formControlName="DateDebutContrat" id="DateDebutContrat"
               class="form-control" placeholder="DateDebutContrat..." required>
           </div>
 
         </div>
         <div class="row mb-3">
-          <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
-          <div class="col-sm-10">
+          <legend class="col-form-label col-sm-3 pt-0">type Contrat *</legend>
+          <div class="col-sm-9">
             <select class="form-select" [(ngModel)]="typcontid"
               formControlName="idtypcont" name="id" id="id" aria-label="Default
               select example" required>
@@ -231,9 +231,9 @@
         </div>
 
         <div *ngIf="typcontid!=12" class="row mb-3">
-          <label for="DateFinContrat" class="col-sm-2 col-form-label">Date Fin
-            Contrat</label>
-          <div class="col-sm-10"> <input type="date" name="DateFinContrat"
+          <label for="DateFinContrat" class="col-sm-3 col-form-label">Date Fin
+            Contrat *</label>
+          <div class="col-sm-9"> <input type="date" name="DateFinContrat"
               formControlName="DateFinContrat" id="DateFinContrat"
               class="form-control" placeholder="DateFinContrat..."
               [required]="typcontid!=12">
@@ -241,8 +241,8 @@
         </div>
 
         <div *ngIf="typcontid==3" class="row mb-3">
-          <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
-          <div class="col-sm-10">
+          <label for="inputColor" class="col-sm-3 col-form-label">frequence *</label>
+          <div class="col-sm-9">
             <select class="form-select" [(ngModel)]="freque"
               formControlName="frequence" name="frequence" id="frequence"
               aria-label="Default select example" [required]="typcontid==3">
@@ -254,8 +254,8 @@
         </div>
 
         <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">type Personnel</legend>
-          <div class="col-sm-10">
+          <legend class="col-sm-3 col-form-label ">type Personnel *</legend>
+          <div class="col-sm-9">
             <select class="form-select" [(ngModel)]="typePersonnel"
               formControlName="typePersonnel" name="typePersonnel"
               id="typePersonnel" aria-label="Default select example" required>
@@ -267,8 +267,8 @@
 
         </div>
         <div *ngIf="typePersonnel==2" class="row mb-3">
-          <legend class="col-form-label col-sm-2 pt-0">Mise a disposition</legend>
-          <div class="col-sm-10">
+          <legend class="col-form-label col-sm-3 pt-0">Mise a disposition *</legend>
+          <div class="col-sm-9">
             <div class="form-check form-check-inline">
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input"
@@ -288,8 +288,8 @@
         </div>
 
         <div *ngIf="typePersonnel==2" class="row mb-3">
-          <label class="col-sm-2 col-form-label">nom Societe</label>
-          <div class="col-sm-10"> <input class="form-control"
+          <label class="col-sm-3 col-form-label">nom Societe</label>
+          <div class="col-sm-9"> <input class="form-control"
               formControlName="nomSociete" type="text" name="nomSociete"
               id="nomSociete" placeholder="nom Societe..."
               [required]="typePersonnel==2">
@@ -297,8 +297,8 @@
         </div>
 
         <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">type Processus</legend>
-          <div class="col-sm-10">
+          <legend class="col-sm-3 col-form-label ">type Processus *</legend>
+          <div class="col-sm-9">
             <select multiple class="form-select" name="typeProcessus"
               formControlName="typeProcessus" id="typeProcessus"
               aria-label="Default select example" required>
@@ -310,8 +310,8 @@
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">unite Technique</label>
-          <div class="col-sm-10"> <select class="form-select"
+          <label class="col-sm-3 col-form-label">unite Technique *</label>
+          <div class="col-sm-9"> <select class="form-select"
               formControlName="uniteTechnique" name="uniteTechnique"
               id="uniteTechnique" aria-label="Default select example" required>
               <option value="-1" disabled selected>Choisir de la liste</option>
@@ -322,8 +322,8 @@
         </div>
 
         <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">Site</legend>
-          <div class="col-sm-10">
+          <legend class="col-sm-3 col-form-label ">Site *</legend>
+          <div class="col-sm-9">
             <select class="form-select" [(ngModel)]="siteid" name="sitetid"
               id="site"
               formControlName="sitetid" aria-label="Default select example"
@@ -335,16 +335,16 @@
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Remise de matériel</label>
-          <div class="col-sm-10"> <input multiple class="form-control"
+          <label class="col-sm-3 col-form-label">Remise de matériel</label>
+          <div class="col-sm-9"> <input multiple class="form-control"
               formControlName="remisemateriel" type="file" (change)="handleFileInputremisemateriel($event)" name="remisemateriel"
               id="remisemateriel" placeholder="Remise de matériel..." required>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">contrat Impartialite</label>
-          <div class="col-sm-10"> <input class="form-control" type="file"
+          <label class="col-sm-3 col-form-label">contrat Impartialite *</label>
+          <div class="col-sm-9"> <input class="form-control" type="file"
               formControlName="contratImpartialite" (change)="handleFileInputfileTocontratImpartialite($event)" name="contratImpartialite"
               id="contratImpartialite" placeholder="contrat Impartialite..."
               required>
@@ -352,8 +352,8 @@
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">contrat Confidentialite</label>
-          <div class="col-sm-10"> <input class="form-control" type="file"
+          <label class="col-sm-3 col-form-label">contrat Confidentialite *</label>
+          <div class="col-sm-9"> <input class="form-control" type="file"
               formControlName="contratConfidentialite" (change)="handleFileInputcontratConfidentialite($event)"
               name="contratConfidentialite" id="contratConfidentialite"
               placeholder="contrat Confidentialite..." required>
@@ -361,8 +361,8 @@
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">visite Medicales</label>
-          <div class="col-sm-10"> <input multiple class="form-control"
+          <label class="col-sm-3 col-form-label">visite Medicales *</label>
+          <div class="col-sm-9"> <input multiple class="form-control"
               type="file" formControlName="visiteMedicales" (change)="handleFileIvisiteMedicales($event)"
               name="visiteMedicales" id="visiteMedicales" placeholder="visite
               Medicales..." required>
@@ -370,9 +370,9 @@
         </div>
 
         <div class="row mb-3">
-          <label for="DateFinContrat" class="col-sm-2 col-form-label">Date
-            visite Medicale </label>
-          <div class="col-sm-10"> <input type="date" name="DateFinContrat"
+          <label for="DateFinContrat" class="col-sm-3 col-form-label">Date
+            visite Medicale *</label>
+          <div class="col-sm-9"> <input type="date" name="DateFinContrat"
               formControlName="DateVisiteMedicale" id="DateFinContrat"
               class="form-control" placeholder="Date visite Medicale..."
               required>
@@ -380,9 +380,9 @@
 
         </div>
         <div class="row mb-3">
-          <label for="DateProchVisiteMedicale" class="col-sm-2 col-form-label">Date
-            Prochaine visite Medicale</label>
-          <div class="col-sm-10"> <input type="date"
+          <label for="DateProchVisiteMedicale" class="col-sm-3 col-form-label">Date
+            Prochaine visite Medicale *</label>
+          <div class="col-sm-9"> <input type="date"
               name="DateProchVisiteMedicale"
               formControlName="DateProchVisiteMedicale"
               id="DateProchVisiteMedicale"
@@ -392,16 +392,16 @@
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Eap</label>
-          <div class="col-sm-10"> <input class="form-control" type="file" (change)="handleFileInputeap($event)"
+          <label class="col-sm-3 col-form-label">Eap *</label>
+          <div class="col-sm-9"> <input class="form-control" type="file" (change)="handleFileInputeap($event)"
               formControlName="eap" name="eap" id="eap" placeholder="eap..."
               required>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">date Eap</label>
-          <div class="col-sm-10"> <input class="form-control" type="date"
+          <label class="col-sm-3 col-form-label">date Eap *</label>
+          <div class="col-sm-9"> <input class="form-control" type="date"
               formControlName="dateEap" name="dateEap" id="dateEap"
               placeholder="date Eap..." required>
           </div>
@@ -427,37 +427,37 @@
 
               <!--        formgroup       -->
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Titre</label>
-                <div class="col-sm-10"> <input class="form-control" type="text"
+                <label class="col-sm-3 col-form-label">Titre *</label>
+                <div class="col-sm-9"> <input class="form-control" type="text"
                     formControlName="title" name="title"
                     id="title" placeholder="titre..." required>
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Spécialité :</label>
-                <div class="col-sm-10"> <input class="form-control"
+                <label class="col-sm-3 col-form-label">Spécialité *</label>
+                <div class="col-sm-9"> <input class="form-control"
                     formControlName="specialite" type="text" name="specialite"
                     id="specialite" placeholder="specialite..." required>
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">diplome file</label>
-                <div class="col-sm-10"> <input class="form-control"
+                <label class="col-sm-3 col-form-label">diplome file *</label>
+                <div class="col-sm-9"> <input class="form-control"
                     formControlName="diplomefile" type="file" (change)="handleFileInputdiplomefile($event)"
                     name="diplomesfile" id="diplomesfile"
                     placeholder="diplomes..." required>
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Attribution:</label>
-                <div class="col-sm-10"> <input class="form-control" type="text"
+                <label class="col-sm-3 col-form-label">Attribution *</label>
+                <div class="col-sm-9"> <input class="form-control" type="text"
                     formControlName="attribution" name="attribution"
                     id="attribution" placeholder="attribution..." required>
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Attribution File</label>
-                <div class="col-sm-10"> <input class="form-control" type="file"
+                <label class="col-sm-3 col-form-label">Attribution File *</label>
+                <div class="col-sm-9"> <input class="form-control" type="file"
                     formControlName="Attributionf" name="Attributionf" (change)="handleFileInputAttributionf($event)"
                     id="Attributionf" placeholder="Attribution..." required>
                 </div>
@@ -490,15 +490,15 @@
               <!--        formgroup       -->
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Titre</label>
-                <div class="col-sm-10"> <input class="form-control" type="text"
+                <label class="col-sm-3 col-form-label">Titre *</label>
+                <div class="col-sm-9"> <input class="form-control" type="text"
                     formControlName="title" name="title"
                     id="title" placeholder="titre..." required>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">periodique</label>
+                <label class="col-sm-3 col-form-label">periodique *</label>
                 <div class="form-check form-check-inline">
                   <div class="custom-control custom-radio
                     custom-control-inline">
@@ -520,19 +520,9 @@
                 </div>
               </div>
 
-              <div *ngIf="periodiq" class="row mb-3">
-                <label class="col-sm-2 col-form-label">date de Renouvellement</label>
-                <div class="col-sm-10"> <input class="form-control"
-                    formControlName="dateRenouvellement" type="date"
-                    name="dateRenouvellement" id="dateRenouvellement"
-                    placeholder="date de Renouvellement..."
-                    [required]="periodiq">
-                </div>
-              </div>
-
               <div *ngIf="!periodiq" class="row mb-3" style="display: none;">
-                <label class="col-sm-2 col-form-label">date de Renouvellement</label>
-                <div class="col-sm-10"> <input class="form-control"
+                <label class="col-sm-3 col-form-label">date de Renouvellement *</label>
+                <div class="col-sm-9"> <input class="form-control"
                     formControlName="dateRenouvellement" type="date"
                     name="dateRenouvellement" id="dateRenouvellement"
                     placeholder="date de Renouvellement..."
@@ -541,24 +531,24 @@
               </div>
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">formation File</label>
-                <div class="col-sm-10"> <input class="form-control" type="file"
+                <label class="col-sm-3 col-form-label">formation File *</label>
+                <div class="col-sm-9"> <input class="form-control" type="file"
                     formControlName="formationFile" name="formationFile" (change)="handleFileInputformationFile($event)"
                     id="formationFile" placeholder="formation File..." required>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">habilitation</label>
-                <div class="col-sm-10"> <input class="form-control" type="text"
+                <label class="col-sm-3 col-form-label">habilitation *</label>
+                <div class="col-sm-9"> <input class="form-control" type="text"
                     formControlName="habilitation" name="habilitation"
                     id="habilitation" placeholder="habilitation..." required>
                 </div>
               </div>
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">date Habilitation</label>
-                <div class="col-sm-10"> <input class="form-control" type="date"
+                <label class="col-sm-3 col-form-label">date Habilitation *</label>
+                <div class="col-sm-9"> <input class="form-control" type="date"
                     formControlName="dateHabilitation" name="dateHabilitation"
                     id="dateHabilitation" placeholder="date Habilitation..."
                     required>
@@ -566,8 +556,8 @@
               </div>
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">date ReHabilitation</label>
-                <div class="col-sm-10"> <input class="form-control" type="date"
+                <label class="col-sm-3 col-form-label">date ReHabilitation *</label>
+                <div class="col-sm-9"> <input class="form-control" type="date"
                     formControlName="dateRenHabi" name="dateRenHabi"
                     id="dateRenHabi" placeholder="date ReHabilitation..."
                     required>
@@ -575,8 +565,8 @@
               </div>
 
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">habilitation File</label>
-                <div class="col-sm-10"> <input class="form-control" type="file"  (change)="handleFileInputhabilitationFile($event)"
+                <label class="col-sm-3 col-form-label">habilitation File *</label>
+                <div class="col-sm-9"> <input class="form-control" type="file"  (change)="handleFileInputhabilitationFile($event)"
                     formControlName="habilitationFile" name="habilitationFile"
                     id="habilitationFile" placeholder="habilitation File..."
                     required>
@@ -631,37 +621,37 @@
         <!--        formgroup       -->
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">user name</label>
-          <div class="col-sm-10"> <input class="form-control" type="text"
+          <label class="col-sm-3 col-form-label">user name *</label>
+          <div class="col-sm-9"> <input class="form-control" type="text"
               formControlName="username" name="username" id="username"
               placeholder="user name..." required>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10"> <input class="form-control" type="email"
+          <label class="col-sm-3 col-form-label">Email *</label>
+          <div class="col-sm-9"> <input class="form-control" type="email"
               formControlName="email" name="email" id="email"
               placeholder="Email..." required>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">confirm Email</label>
-          <div class="col-sm-10"> <input class="form-control" type="email"
+          <label class="col-sm-3 col-form-label">confirm Email *</label>
+          <div class="col-sm-9"> <input class="form-control" type="email"
               formControlName="confirmEmail" name="confirmEmail"
               id="confirmEmail" placeholder="confirm Email..." required>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">type Auth</label>
+          <label class="col-sm-3 col-form-label">type Auth *</label>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" name="typeAuth"
               formControlName="typeAuth" id="typeAuth" value="mdp"
               [(ngModel)]="typeAuth" (change)="onChange($event)" checked
               required>
-            <label class="custom-control-label" for="typeAuth">Mot de passe</label>
+            <label class="custom-control-label" for="typeAuth">Mot de passe </label>
           </div>
           <!-- Default inline 2-->
           <div class="custom-control custom-radio custom-control-inline">
@@ -673,8 +663,8 @@
 
         </div>
         <div *ngIf="typeAuth=='mdp'" class="row mb-3">
-          <label class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-10"> <input class="form-control" type="password"
+          <label class="col-sm-3 col-form-label">Password *</label>
+          <div class="col-sm-9"> <input class="form-control" type="password"
               formControlName="password" name="password" id="password"
               placeholder="Password..."
               >
@@ -682,8 +672,8 @@
         </div>
 
         <div *ngIf="typeAuth=='mdp'" class="row mb-3">
-          <label class="col-sm-2 col-form-label">confirm Password</label>
-          <div class="col-sm-10"> <input class="form-control" type="password"
+          <label class="col-sm-3 col-form-label">confirm Password *</label>
+          <div class="col-sm-9"> <input class="form-control" type="password"
               formControlName="confirmPassword" name="confirmPassword"
               id="confirmPassword" placeholder="confirm Password..."
               >
@@ -691,8 +681,8 @@
         </div>
 
         <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">Role</legend>
-          <div class="col-sm-10">
+          <legend class="col-sm-3 col-form-label ">Role *</legend>
+          <div class="col-sm-9">
             <select multiple class="form-select" name="role"
               formControlName="role" id="role"
               aria-label="Default select example" required>
@@ -704,8 +694,8 @@
         </div>
 
         <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">privileges</legend>
-          <div class="col-sm-10">
+          <legend class="col-sm-3 col-form-label ">privileges *</legend>
+          <div class="col-sm-9">
             <select multiple class="form-select" name="privilege"
               formControlName="privilege" id="privilege"
               aria-label="Default select example" required>

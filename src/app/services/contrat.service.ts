@@ -19,27 +19,27 @@ export class ContratService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll() {
-    return this.http.get<Contract[]>(this.config.API_DIPLOME + 'getall');
+    return this.http.get<Contract[]>(this.config.API_Contrat + 'getall');
   }
 
   get(id: any): Observable<Contract> {
-    return this.http.get<Contract>(this.config.API_DIPLOME + id);
+    return this.http.get<Contract>(this.config.API_Contrat +"getContract?id="+ id,this.addHttpOption);
   }
 
   create(employeeId: any,contractTypeId: any,frequenceId: any, data: any): Observable<any> {
 
-    return this.http.post(this.config.API_DIPLOME + 'add?frequenceId=', frequenceId+'&contractTypeId='+contractTypeId+'&employeeId='+employeeId,data);
+    return this.http.post(this.config.API_Contrat + 'add?frequenceId=', frequenceId+'&contractTypeId='+contractTypeId+'&employeeId='+employeeId,data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_DIPLOME}/{id}`, data);
+    return this.http.put(`${this.config.API_Contrat}/{id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(this.config.API_DIPLOME + 'delete?id=' + id);
+    return this.http.delete(this.config.API_Contrat + 'delete?id=' + id);
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(this.config.API_DIPLOME);
+    return this.http.delete(this.config.API_Contrat);
   }
 }
