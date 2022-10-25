@@ -45,7 +45,7 @@
                   <div class="col-12"> <button class="btn btn-primary w-100"
                       type="submit">Login</button></div>
                       <div class="form-group">
-                        <div *ngIf="submitted && isLoginFailed" class="alert alert-danger" role="alert">
+                        <div *ngIf=" isLoginFailed" class="alert alert-danger" role="alert">
                           Login failed: {{ errorMessage }}
                         </div>
                       </div>

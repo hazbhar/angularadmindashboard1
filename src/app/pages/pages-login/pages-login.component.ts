@@ -28,7 +28,7 @@ export class PagesLoginComponent implements OnInit {
 
 
   isLoggedIn = false;
-  isLoginFailed = true;
+  isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
   loginInput: LoginRequest;
@@ -55,7 +55,6 @@ export class PagesLoginComponent implements OnInit {
           console.warn(apiReponse);
           this.storageService.saveUser(apiReponse);
 
-          this.isLoginFailed = false;
           this.isLoggedIn = true;
           this.roles = this.storageService.getUser().roles;
           console.log('authh fnsh');

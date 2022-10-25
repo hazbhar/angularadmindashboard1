@@ -1,6 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Authentification } from 'src/app/models/Authentification';
+import { Privilege } from 'src/app/models/Privilege';
+import { Role } from 'src/app/models/Role';
 import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
+import { PrivilegeService } from 'src/app/services/privilege.service';
+import { RoleService } from 'src/app/services/role.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -26,20 +34,34 @@ export class DetailsUserComponent implements OnInit {
     roles: undefined,
     privileges: undefined,
   };
-
+  errorMessage = '';
+  isaddedfailed = false;
+  privileges$!: Privilege[];
+  role$!:Role[];
+  user:User;
+  typeAuth: any;
+  authtypeid$!: Authentification[];
   message = '';
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userservice: UserService,
+    private storageService: StorageService,
+    private privilegeService: PrivilegeService,
+    private roleService: RoleService,
+    private autheService: AuthService
   ) {}
 
   ngOnInit(): void {
-    if (!this.viewMode) {
-      this.message = '';
+
       this.getUser(this.route.snapshot.params['id']);
-    }
+      this.retrieveroles();
+      this.retrievePrivileges();
+      this.retrievetypAuth();
+
   }
 
   getUser(id: string): void {
@@ -127,5 +149,39 @@ export class DetailsUserComponent implements OnInit {
       },
       error: (e) => console.error(e),
     });
+  }
+
+  retrieveroles(): void {
+    this.roleService.getAll().subscribe({
+      next: (data: any) => {
+        this.role$ = data;
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  retrievePrivileges(): void {
+    this.privilegeService.getAll().subscribe({
+      next: (data: any) => {
+        this.privileges$ = data;
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  retrievetypAuth(): void {
+    this.autheService.getAll().subscribe({
+      next: (data: any) => {
+        this.authtypeid$ = data;
+        console.log('auth');
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
+  }
+  onChange(e: any) {
+    this.typeAuth = e.target.value;
   }
 }

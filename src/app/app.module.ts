@@ -41,6 +41,11 @@ import { ListContratComponent } from './pages/Contrat/list-contrat/list-contrat.
 import { EditContratComponent } from './pages/Contrat/edit-contrat/edit-contrat.component';
 import { DashbordEmpComponent } from './pages/dashbord-emp/dashbord-emp.component';
 import { DatePipe } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatTableModule ,MatTableDataSource} from '@angular/material/table'
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -81,7 +86,13 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule ,
+    MatFormFieldModule,
+    MatTableModule,
+    MatInputModule
+
   ],
   providers: [Constants,AuthService,DatePipe],
   bootstrap: [AppComponent]

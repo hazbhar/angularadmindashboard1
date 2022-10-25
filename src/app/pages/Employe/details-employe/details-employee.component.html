@@ -16,19 +16,23 @@
             <div *ngIf="viewMode; else editable">
               <div *ngIf="currentEmployee.id">
                 <h4>{{currentEmployee.initial}}</h4>
-                <div>
-                <label><strong>CIN:</strong></label>
-                {{currentEmployee.natioIdCard }}
-              </div>
+
 
                 <div>
-                  <label><strong>Company Name:</strong></label>
-                  {{ currentEmployee.companyName }}
+                  <label><strong>First Name:</strong></label>
+                  {{ currentEmployee.firstName }}
                 </div>
-
+                <div>
+                  <label><strong>Last Name:</strong></label>
+                  {{ currentEmployee.lastName }}
+                </div>
                 <div>
                   <label><strong>username:</strong></label>
                   {{ currentEmployee.user!.username}}
+                </div>
+                <div>
+                  <label><strong>Company Name:</strong></label>
+                  {{ currentEmployee.companyName }}
                 </div>
               </div>
 

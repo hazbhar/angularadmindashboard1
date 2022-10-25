@@ -10,7 +10,7 @@
     </nav>
   </div>
   <section class="section">
-
+<div *ngIf="!submitted">
     <form [formGroup]="Infosgenerales" id="msform">
       <!-- progressbar -->
       <ul id="progressbar" >
@@ -520,13 +520,13 @@
                 </div>
               </div>
 
-              <div *ngIf="!periodiq" class="row mb-3" style="display: none;">
+              <div *ngIf="formation.value.periodec" class="row mb-3" style="display: none;">
                 <label class="col-sm-3 col-form-label">date de Renouvellement *</label>
                 <div class="col-sm-9"> <input class="form-control"
                     formControlName="dateRenouvellement" type="date"
                     name="dateRenouvellement" id="dateRenouvellement"
                     placeholder="date de Renouvellement..."
-                    [required]="periodiq">
+                    >
                 </div>
               </div>
 
@@ -714,15 +714,16 @@
           type="submit" name="submit" class="submit">Submit</button>
         <button type="reset" name="next" class="reset">reset</button>
 
-        <div *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
-          Adding Employe failed
-        </div>
-
-        <div *ngIf="submitted">
-          <h4>Employee was submitted successfully!</h4>
-        </div>
       </fieldset>
+      <div *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
+        Adding Employe failed
+      </div>
+
+      <div *ngIf="submitted" class="alert alert-success" role="alert">
+        <h4>Employee was submitted successfully!</h4>
+      </div>
     </form>
+  </div>
 
   </section>
 </main>

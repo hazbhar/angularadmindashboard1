@@ -1,6 +1,6 @@
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Diploms List</h1>
+    <h1>Diploms </h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -10,45 +10,75 @@
     </nav>
   </div>
   <section class="section">
-    <div class="list row">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3" *ngIf="isdeletedfailed" class="alert alert-danger"
+          role="alert">
+          Deleting Diploms failed: {{ errorMessage }}
+        </div>
 
-      <div class="col-md-6">
-        <h4>Diploms List</h4>
-
-        <ul class="">
-          <li
-            class="list-group-item"
-            *ngFor="let dipl of diploms; let i= index"
-            [class.active]="i == currentIndex"
-            (click)="setActivediplom(dipl, i)">
-            <div class="container">
-              <div class="row ">
-                <div class="col">
-                  <span> {{ dipl.title }}</span>
-                </div>
-                <div class="col-md-auto">
+        <div class="row mb-3" *ngIf="deleted" class="alert alert-success">
+          <h4>Diploms was Deleted successfully!</h4>
+        </div>
 
 
-                  <a routerLink="/diplomedetails/{{dipl.id }}"> <i
-                      class="bi bi-file-diff-fill"></i><span>EDIT</span> </a>
-                </div>
-                <div class="col col-lg-2" >
-                  <a  (click)="deletediplom(dipl.id)" routerLink="/diplom-list" >
-                  <i class="bi bi-trash-fill"></i><span   class="" >Delete</span>
-                </a>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <mat-form-field appearance="standard">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia"
+            #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
 
 
-      </div>
 
-      <div class="col-md-6">
-        <!--<app-edit-diplome
-          [viewMode]="true"
-          [currentdiplom]="currentdiplom"></app-edit-diplome>-->
+            <!-- title Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Titre </th>
+              <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+            </ng-container>
+
+            <!-- title Column -->
+            <ng-container matColumnDef="speciality">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Spécialité  </th>
+              <td mat-cell *matCellDef="let row"> {{row.speciality}} </td>
+            </ng-container>
+
+            <!-- Edit Column -->
+            <ng-container matColumnDef="Edit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit</th>
+              <td mat-cell *matCellDef="let row"> <button
+                  routerLink="/diplomedetails/{{row.id}}">Edit</button> </td>
+            </ng-container>
+
+            <!-- Delete Column -->
+            <ng-container matColumnDef="Delete">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete
+              </th>
+              <td mat-cell *matCellDef="let row"> <button
+                  (click)="deletediplom(row.id)">delete</button> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+            </tr>
+
+          </table>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter
+              "{{input.value}}"</td>
+          </tr>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select
+            page of users"></mat-paginator>
+
+
+        </div>
+
       </div>
     </div>
   </section>

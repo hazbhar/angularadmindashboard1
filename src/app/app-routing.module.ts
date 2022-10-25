@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
 
-  { path: 'dashboardEmp', component: DashbordEmpComponent },
+  { path: 'dashboardEmp/:id', component: DashbordEmpComponent },
 
   { path: 'pages-blank', component: PagesBlankComponent },
 

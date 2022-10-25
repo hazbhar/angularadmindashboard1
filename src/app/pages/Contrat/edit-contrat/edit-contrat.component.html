@@ -14,229 +14,238 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Edit Contrat</h5>
-    <form   id="msform">
+        <form id="msform">
 
 
 
-      <div class="form-group">
-        <div class="row mb-3">
-          <label for="inputNumber" class="col-sm-2 col-form-label">Date Debut
-            Contrat</label>
-          <div class="col-sm-10"> <input type="date" name="DateDebutContrat"
-               id="DateDebutContrat"
-              class="form-control" [(ngModel)]="startDate" required>
-          </div>
-
-        </div>
-        <div class="row mb-3">
-          <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
-          <div class="col-sm-10">
-            <select class="form-select"
-               name="id" id="id" aria-label="Default
-              select example" required>
-
-              <option *ngFor="let typcont of typecontrat$; let i= index"
-                [value]="typcont.id" [selected]="typcont.id==contrat.id">{{typcont.title}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div *ngIf="typcontid!=12" class="row mb-3">
-          <label for="DateFinContrat" class="col-sm-2 col-form-label">Date Fin
-            Contrat</label>
-          <div class="col-sm-10"> <input type="date" name="DateFinContrat"
-               id="DateFinContrat"
-              class="form-control" [(ngModel)]="endDate" placeholder="DateFinContrat..."
-              [required]="typcontid!=12">
-          </div>
-        </div>
-
-        <div *ngIf="typcontid==3" class="row mb-3">
-          <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
-          <div class="col-sm-10">
-            <select class="form-select" [(ngModel)]="freque"
-              name="frequence" id="frequence"
-              aria-label="Default select example" [required]="typcontid==3">
-              <option value="-1" disabled selected>Choisir de la liste</option>
-              <option *ngFor="let frequ of frequence$; let i= index"
-                [value]="frequ.id">{{frequ.description}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">type Personnel</legend>
-          <div class="col-sm-10">
-            <select class="form-select" [(ngModel)]="typePersonnel"
-             name="typePersonnel"
-              id="typePersonnel" aria-label="Default select example" required>
-              <option value="-1" disabled selected>Choisir de la liste</option>
-              <option *ngFor="let typepers of typeperso$; let i= index"
-                [value]="typepers.id">{{typepers.job}}</option>
-            </select>
-          </div>
-
-        </div>
-        <div *ngIf="typePersonnel==2" class="row mb-3">
-          <legend class="col-form-label col-sm-2 pt-0">Mise a disposition</legend>
-          <div class="col-sm-10">
-            <div class="form-check form-check-inline">
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input"
-                 name="available" id="available"
-                  value="true" [required]="typePersonnel==2">
-                <label class="custom-control-label" for="defaultInline1">Oui</label>
+          <div class="form-group">
+            <div class="row mb-3">
+              <label for="inputNumber" class="col-sm-2 col-form-label">Date
+                Debut
+                Contrat</label>
+              <div class="col-sm-10"> <input type="date" name="DateDebutContrat"
+                  id="DateDebutContrat"
+                  class="form-control" [(ngModel)]="startDate" required>
               </div>
-              <!-- Default inline 2-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input"
-                   name="available" id="available"
-                  value="false" [required]="typePersonnel==2">
-                <label class="custom-control-label" for="defaultInline2">Non</label>
-              </div>
+
             </div>
-          </div>
-        </div>
+            <div class="row mb-3">
+              <legend class="col-form-label col-sm-2 pt-0">type Contrat</legend>
+              <div class="col-sm-10">
+                <select class="form-select"
+                  name="id" id="id" aria-label="Default
+                  select example" required>
 
-        <div *ngIf="typePersonnel==2" class="row mb-3">
-          <label class="col-sm-2 col-form-label">nom Societe</label>
-          <div class="col-sm-10"> <input class="form-control"
-              type="text" name="nomSociete"
-              id="nomSociete"
-              [required]="typePersonnel==2">
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">type Processus</legend>
-          <div class="col-sm-10">
-            <select multiple class="form-select" name="typeProcessus"
-              id="typeProcessus"
-              aria-label="Default select example" required>
-              <option value="-1" disabled selected>Choisir de la liste</option>
-              <option *ngFor="let typproces of typprocesus$; let i= index"
-                [value]="typproces.id">{{typproces.content}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">unite Technique</label>
-          <div class="col-sm-10"> <select class="form-select"
-               name="uniteTechnique"
-              id="uniteTechnique" aria-label="Default select example" required>
-              <option value="-1" disabled selected>Choisir de la liste</option>
-              <option *ngFor="let unitete of unitetech$; let i= index"
-                [value]="unitete.id">{{unitete.technicalTerm}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <legend class="col-sm-2 col-form-label ">Site</legend>
-          <div class="col-sm-10">
-            <select class="form-select" [(ngModel)]="siteid" name="sitetid"
-              id="site"
-               aria-label="Default select example"
-              required>
-              <option value="-1" disabled selected>Choisir de la liste</option>
-              <option *ngFor="let sit of site$; let i= index" [value]="sit.id">{{sit.siteName}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Remise de matériel</label>
-          <div class="col-sm-10"> <input multiple class="form-control"
-               type="file" (change)="handleFileInputremisemateriel($event)" name="remisemateriel"
-              id="remisemateriel"  required>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">contrat Impartialite</label>
-          <div class="col-sm-10"> <input class="form-control" type="file"
-              (change)="handleFileInputfileTocontratImpartialite($event)" name="contratImpartialite"
-              id="contratImpartialite"
-              required>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">contrat Confidentialite</label>
-          <div class="col-sm-10"> <input class="form-control" type="file"
-               (change)="handleFileInputcontratConfidentialite($event)"
-              name="contratConfidentialite" id="contratConfidentialite"
-               required>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">visite Medicales</label>
-          <div class="col-sm-10"> <input multiple class="form-control"
-              type="file" (change)="handleFileIvisiteMedicales($event)"
-              name="visiteMedicales" id="visiteMedicales"  required>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label for="DateFinContrat" class="col-sm-2 col-form-label">Date
-            visite Medicale </label>
-          <div class="col-sm-10"> <input type="date" name="DateFinContrat"
-               id="DateFinContrat"
-              class="form-control"
-              required>
-          </div>
-
-        </div>
-        <div class="row mb-3">
-          <label for="DateProchVisiteMedicale" class="col-sm-2 col-form-label">Date
-            Prochaine visite Medicale</label>
-          <div class="col-sm-10"> <input type="date"
-              name="DateProchVisiteMedicale"
-
-              id="DateProchVisiteMedicale"
-              class="form-control"  required>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">Eap</label>
-          <div class="col-sm-10"> <input class="form-control" type="file" (change)="handleFileInputeap($event)"
-               name="eap" id="eap"
-              required>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="col-sm-2 col-form-label">date Eap</label>
-          <div class="col-sm-10"> <input class="form-control" type="date"
-              name="dateEap" id="dateEap"
-               required>
-          </div>
-        </div>
-
-        <button class="btn btn-sm btn-success">
-          <i class="fa fa-remove"(click)="editContrat(contrat)">Mettre à jour
-          </i></button>
-
-               <div class="row mb-3" *ngIf="isupdatedfailed" class="alert alert-danger" role="alert">
-                Adding Contrat failed: {{ errorMessage }}
-              </div>
-
-              <div class="row mb-3" *ngIf="submitted">
-                <h4>Contrat was submitted successfully!</h4>
+                  <option *ngFor="let typcont of typecontrat$; let i= index"
+                    [value]="typcont.id" [selected]="typcont.id==contrat.id">{{typcont.title}}</option>
+                </select>
               </div>
             </div>
 
-    </form>
+            <div *ngIf="typcontid!=12" class="row mb-3">
+              <label for="DateFinContrat" class="col-sm-2 col-form-label">Date
+                Fin
+                Contrat</label>
+              <div class="col-sm-10"> <input type="date" name="DateFinContrat"
+                  id="DateFinContrat"
+                  class="form-control" [(ngModel)]="endDate"
+                  placeholder="DateFinContrat..."
+                  [required]="typcontid!=12">
+              </div>
+            </div>
+
+            <div *ngIf="typcontid==3" class="row mb-3">
+              <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
+              <div class="col-sm-10">
+                <select class="form-select" [(ngModel)]="freque"
+                  name="frequence" id="frequence"
+                  aria-label="Default select example" [required]="typcontid==3">
+                  <option value="-1" disabled selected>Choisir de la liste</option>
+                  <option *ngFor="let frequ of frequence$; let i= index"
+                    [value]="frequ.id">{{frequ.description}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <legend class="col-sm-2 col-form-label ">type Personnel</legend>
+              <div class="col-sm-10">
+                <select class="form-select" [(ngModel)]="typePersonnel"
+                  name="typePersonnel"
+                  id="typePersonnel" aria-label="Default select example"
+                  required>
+                  <option value="-1" disabled selected>Choisir de la liste</option>
+                  <option *ngFor="let typepers of typeperso$; let i= index"
+                    [value]="typepers.id">{{typepers.job}}</option>
+                </select>
+              </div>
+
+            </div>
+            <div *ngIf="typePersonnel==2" class="row mb-3">
+              <legend class="col-form-label col-sm-2 pt-0">Mise a disposition</legend>
+              <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                  <div class="custom-control custom-radio
+                    custom-control-inline">
+                    <input type="radio" class="custom-control-input"
+                      name="available" id="available"
+                      value="true" [required]="typePersonnel==2">
+                    <label class="custom-control-label" for="defaultInline1">Oui</label>
+                  </div>
+                  <!-- Default inline 2-->
+                  <div class="custom-control custom-radio
+                    custom-control-inline">
+                    <input type="radio" class="custom-control-input"
+                      name="available" id="available"
+                      value="false" [required]="typePersonnel==2">
+                    <label class="custom-control-label" for="defaultInline2">Non</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="typePersonnel==2" class="row mb-3">
+              <label class="col-sm-2 col-form-label">nom Societe</label>
+              <div class="col-sm-10"> <input class="form-control"
+                  type="text" name="nomSociete"
+                  id="nomSociete"
+                  [required]="typePersonnel==2">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <legend class="col-sm-2 col-form-label ">type Processus</legend>
+              <div class="col-sm-10">
+                <select multiple class="form-select" name="typeProcessus"
+                  id="typeProcessus"
+                  aria-label="Default select example" required>
+                  <option value="-1" disabled selected>Choisir de la liste</option>
+                  <option *ngFor="let typproces of typprocesus$; let i= index"
+                    [value]="typproces.id">{{typproces.content}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">unite Technique</label>
+              <div class="col-sm-10"> <select class="form-select"
+                  name="uniteTechnique"
+                  id="uniteTechnique" aria-label="Default select example"
+                  required>
+                  <option value="-1" disabled selected>Choisir de la liste</option>
+                  <option *ngFor="let unitete of unitetech$; let i= index"
+                    [value]="unitete.id">{{unitete.technicalTerm}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <legend class="col-sm-2 col-form-label ">Site</legend>
+              <div class="col-sm-10">
+                <select class="form-select" [(ngModel)]="siteid" name="sitetid"
+                  id="site"
+                  aria-label="Default select example"
+                  required>
+                  <option value="-1" disabled selected>Choisir de la liste</option>
+                  <option *ngFor="let sit of site$; let i= index"
+                    [value]="sit.id">{{sit.siteName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Remise de matériel</label>
+              <div class="col-sm-10"> <input multiple class="form-control"
+                  type="file" (change)="handleFileInputremisemateriel($event)"
+                  name="remisemateriel"
+                  id="remisemateriel" required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">contrat Impartialite</label>
+              <div class="col-sm-10"> <input class="form-control" type="file"
+                  (change)="handleFileInputfileTocontratImpartialite($event)"
+                  name="contratImpartialite"
+                  id="contratImpartialite"
+                  required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">contrat Confidentialite</label>
+              <div class="col-sm-10"> <input class="form-control" type="file"
+                  (change)="handleFileInputcontratConfidentialite($event)"
+                  name="contratConfidentialite" id="contratConfidentialite"
+                  required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">visite Medicales</label>
+              <div class="col-sm-10"> <input multiple class="form-control"
+                  type="file" (change)="handleFileIvisiteMedicales($event)"
+                  name="visiteMedicales" id="visiteMedicales" required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="DateFinContrat" class="col-sm-2 col-form-label">Date
+                visite Medicale </label>
+              <div class="col-sm-10"> <input type="date" name="DateFinContrat"
+                  id="DateFinContrat"
+                  class="form-control"
+                  required>
+              </div>
+
+            </div>
+            <div class="row mb-3">
+              <label for="DateProchVisiteMedicale" class="col-sm-2
+                col-form-label">Date
+                Prochaine visite Medicale</label>
+              <div class="col-sm-10"> <input type="date"
+                  name="DateProchVisiteMedicale"
+
+                  id="DateProchVisiteMedicale"
+                  class="form-control" required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">Eap</label>
+              <div class="col-sm-10"> <input class="form-control" type="file"
+                  (change)="handleFileInputeap($event)"
+                  name="eap" id="eap"
+                  required>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label">date Eap</label>
+              <div class="col-sm-10"> <input class="form-control" type="date"
+                  name="dateEap" id="dateEap"
+                  required>
+              </div>
+            </div>
 
 
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="submit"(click)="editContrat(contrat)">Update </button>
+                    </div>
 
+            <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+              alert-danger" role="alert">
+              Adding Contrat failed: {{ errorMessage }}
+            </div>
 
+            <div class="row mb-3" *ngIf="submitted">
+              <h4>Contrat was submitted successfully!</h4>
+            </div>
+          </div>
 
-
-
+        </form>
       </div>
     </div>
   </section>
