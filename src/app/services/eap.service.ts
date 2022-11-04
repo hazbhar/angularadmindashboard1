@@ -29,7 +29,7 @@ export class EapService {
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_Eap}update${id}`, data,this.addHttpOption);
+    return this.http.put(`${this.config.API_Eap}update?id=${id}`, data,this.addHttpOption);
   }
 
   delete(id: any): Observable<any> {

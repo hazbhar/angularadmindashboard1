@@ -42,31 +42,39 @@ import { DiplomaService } from 'src/app/services/diplome.service';
 import { Diploma } from 'src/app/models/Diploma';
 import { FormationService } from 'src/app/services/formation.service';
 import { Formation } from 'src/app/models/Formation';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { AttributionService } from 'src/app/services/attribution.service';
 import { MedicalVisiteService } from 'src/app/services/medical-visite.service';
 import { EapService } from 'src/app/services/eap.service';
 
 animations: [
   trigger('detailExpand', [
-  state('collapsed', style({height: '0px', minHeight: '0'})),
-  state('expanded', style({height: '*'})),
-  transition('expanded <=> collapsed', animate('225ms cubicbezier(0.4, 0.0, 0.2, 1)')),
+    state('collapsed', style({ height: '0px', minHeight: '0' })),
+    state('expanded', style({ height: '*' })),
+    transition(
+      'expanded <=> collapsed',
+      animate('225ms cubicbezier(0.4, 0.0, 0.2, 1)')
+    ),
   ]),
-]
+];
 @Component({
   selector: 'app-details-employee',
   templateUrl: './details-employee.component.html',
   styleUrls: ['./details-employee.component.css'],
 })
 export class DetailsEmployeeComponent implements OnInit {
-
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   toolbar!: MatToolbar;
   isChecked = true;
   title = 'angularcrud';
-  currentEmployee: any;
+  currentEmployee$: any;
   page: any = 'Info';
   diploma: any;
   contrat: Contract;
@@ -80,6 +88,7 @@ export class DetailsEmployeeComponent implements OnInit {
   empid: number = 0;
   diplome: Diploma;
   periodiq: boolean = false;
+  datePipe = new DatePipe('en-US');
 
   etatcivil$!: CivilState[];
   frequence$!: Frequence[];
@@ -97,7 +106,7 @@ export class DetailsEmployeeComponent implements OnInit {
   typePersonnel: any;
   typeProcessus: any;
   freque: any;
-  typeAuth: any;
+  typeAuth: boolean;
 
   shortLinkcontratConfidentialite$: any;
   shortLinkcontratImpartialite$: any;
@@ -113,7 +122,7 @@ export class DetailsEmployeeComponent implements OnInit {
   startDate: any;
   endDate: any;
   employee: any;
-  formation: Formation;
+  formation$: Formation;
 
   fileToUploadAttributionf: File[] = [];
   fileToUploaddiplomefile: File[] = [];
@@ -126,12 +135,18 @@ export class DetailsEmployeeComponent implements OnInit {
 
   shortLinkhabilitationFile$: any = [];
   shortLinkformationFile$: any = [];
-  formations: any[]=[];
-  diploms: any[]=[];
-  contras: any[]=[];
-  Attributions:any[]=[];
-  medicalvisit:any[]=[];
-  eaplist:any[]=[];
+  formations$: any[] = [];
+  diploms$: any[] = [];
+  contras$: any[] = [];
+  Attributions$: any[] = [];
+  medicalvisit$: any[] = [];
+  eaplist$: any[] = [];
+  empuser:any;
+
+  privileges$!: Privilege[];
+  role$!:Role[];
+  authtypeid$!: Authentification[];
+  message = '';
   constructor(
     private fb: FormBuilder,
     private observer: BreakpointObserver,
@@ -149,9 +164,13 @@ export class DetailsEmployeeComponent implements OnInit {
     private diplomeService: DiplomaService,
     private formationService: FormationService,
     private etatcivilService: EtatcivilService,
-    private attributionService:AttributionService,
-    private medicalVisiteService:MedicalVisiteService,
-    private eapService:EapService
+    private attributionService: AttributionService,
+    private medicalVisiteService: MedicalVisiteService,
+    private eapService: EapService,
+    private privilegeService: PrivilegeService,
+    private roleService: RoleService,
+    private autheService: AuthService,
+    private userService: UserService,
 
   ) {}
 
@@ -180,7 +199,7 @@ export class DetailsEmployeeComponent implements OnInit {
   getEmployee(id: string): void {
     this.employeeService.get(id).subscribe({
       next: (data) => {
-        this.currentEmployee = data;
+        this.currentEmployee$ = data;
         console.log(data);
       },
       error: (e) => console.error(e),
@@ -189,61 +208,91 @@ export class DetailsEmployeeComponent implements OnInit {
   openPage(pg: any) {
     this.page = pg;
 
-    if(pg=='Formations'){
-    for(let i=0;i<this.currentEmployee['employeeFormationList'].length;i++){
-      console.log("this.currentFormation");
-      console.log(this.currentEmployee['employeeFormationList'].length);
-      console.log("yoooo")
-      console.log(this.currentEmployee['employeeFormationList'][i])
-      let id=this.currentEmployee['employeeFormationList'][i]
-      this.getFormations(id['id'],i)}
-    }
-    if(pg=='Diploms'){
-      for(let i=0;i<this.currentEmployee['employeeDiplomaList'].length;i++){
-        console.log("this.employeeDiplomaList");
-        console.log(this.currentEmployee['employeeDiplomaList'].length);
-        console.log("yoooo")
-        console.log(this.currentEmployee['employeeDiplomaList'][i])
-        let id=this.currentEmployee['employeeDiplomaList'][i]
-        this.getdiplomss(id['id'],i)}
+    if (pg == 'Formations') {
+      for (
+        let i = 0;
+        i < this.currentEmployee$['employeeFormationList'].length;
+        i++
+      ) {
+        console.log('this.currentFormation');
+        console.log(this.currentEmployee$['employeeFormationList'].length);
+        console.log('yoooo');
+        console.log(this.currentEmployee$['employeeFormationList'][i]);
+        let id = this.currentEmployee$['employeeFormationList'][i];
+        this.getFormations(id['id'], i);
       }
-      if(pg=='Contrats'){
-        for(let i=0;i<this.currentEmployee['contractList'].length;i++){
-          console.log("this.contractList");
-          console.log(this.currentEmployee['contractList'].length);
-          console.log("yoooo")
-          console.log(this.currentEmployee['contractList'][i])
-          let id=this.currentEmployee['contractList'][i]
-          this.getContratss(id['id'],i)}
-        }
-        if(pg=='Attribution'){
-          for(let i=0;i<this.currentEmployee['employeeAttributionList'].length;i++){
-            console.log("this.employeeAttributionList");
-            console.log(this.currentEmployee['employeeAttributionList'].length);
-            console.log("yoooo")
-            console.log(this.currentEmployee['employeeAttributionList'][i])
-            let id=this.currentEmployee['employeeAttributionList'][i]
-            this.getAttributions(id['id'],i)}
-          }
-          if(pg=='VisitMedical'){
-            for(let i=0;i<this.currentEmployee['medicalVisitList'].length;i++){
-              console.log("this.medicalVisitList");
-              console.log(this.currentEmployee['medicalVisitList'].length);
-              console.log("yoooo")
-              console.log(this.currentEmployee['medicalVisitList'][i])
-              let id=this.currentEmployee['medicalVisitList'][i]
-              this.getMedicalvisits(id['id'],i)}
-            }
-            if(pg=='Eap'){
-              for(let i=0;i<this.currentEmployee['eapList'].length;i++){
-                console.log("this.eapList");
-                console.log(this.currentEmployee['eapList'].length);
-                console.log("yoooo")
-                console.log(this.currentEmployee['eapList'][i])
-                let id=this.currentEmployee['eapList'][i]
-                this.getEaps(id['id'],i)}
-              }
-    console.log(this.page);
+    }
+    if (pg == 'Diploms') {
+      for (
+        let i = 0;
+        i < this.currentEmployee$['employeeDiplomaList'].length;
+        i++
+      ) {
+        console.log('this.employeeDiplomaList');
+        console.log(this.currentEmployee$['employeeDiplomaList'].length);
+        console.log('yoooo');
+        console.log(this.currentEmployee$['employeeDiplomaList'][i]);
+        let id = this.currentEmployee$['employeeDiplomaList'][i];
+        this.getdiplomss(id['id'], i);
+      }
+    }
+    if (pg == 'Contrats') {
+      for (let i = 0; i < this.currentEmployee$['contractList'].length; i++) {
+        console.log('this.contractList');
+        console.log(this.currentEmployee$['contractList'].length);
+        console.log('yoooo');
+        console.log(this.currentEmployee$['contractList'][i]);
+        let id = this.currentEmployee$['contractList'][i];
+        this.getContratss(id['id'], i);
+      }
+    }
+    if (pg == 'User') {
+      this.empuser=this.currentEmployee$.user
+      this.retrieveroles();
+      this.retrievePrivileges();
+      this.retrievetypAuth();
+      console.log(this.empuser);
+
+    }
+    if (pg == 'Attribution') {
+      for (
+        let i = 0;
+        i < this.currentEmployee$['employeeAttributionList'].length;
+        i++
+      ) {
+        console.log('this.employeeAttributionList');
+        console.log(this.currentEmployee$['employeeAttributionList'].length);
+        console.log('yoooo');
+        console.log(this.currentEmployee$['employeeAttributionList'][i]);
+        let id = this.currentEmployee$['employeeAttributionList'][i];
+        this.getAttributions(id['id'], i);
+      }
+    }
+    if (pg == 'VisitMedical') {
+      for (
+        let i = 0;
+        i < this.currentEmployee$['medicalVisitList'].length;
+        i++
+      ) {
+        console.log('this.medicalVisitList');
+        console.log(this.currentEmployee$['medicalVisitList'].length);
+        console.log('yoooo');
+        console.log(this.currentEmployee$['medicalVisitList'][i]);
+        let id = this.currentEmployee$['medicalVisitList'][i];
+        this.getMedicalvisits(id['id'], i);
+      }
+    }
+    if (pg == 'Eap') {
+      for (let i = 0; i < this.currentEmployee$['eapList'].length; i++) {
+        console.log('this.eapList');
+        console.log(this.currentEmployee$['eapList'].length);
+        console.log('yoooo');
+        console.log(this.currentEmployee$['eapList'][i]);
+        let id = this.currentEmployee$['eapList'][i];
+        this.getEaps(id['id'], i);
+      }
+    }
+
   }
   retrievesites(): void {
     this.siteService.getAll().subscribe({
@@ -445,10 +494,13 @@ export class DetailsEmployeeComponent implements OnInit {
   }
   editContrat(contrat: Contract) {}
 
-  updatediplom(): void {
+  updatediplom(id:any,i:any): void {
     // romove displayed data in console & add id
     console.log('test ');
-    this.diplomeService.update(this.diplome.id, this.diplome).subscribe({
+    console.log(i);
+    console.log(id);
+    console.log(this.diploms$);
+    this.diplomeService.update(id, i).subscribe({
       next: (res: any) => {
         console.log(res);
         this.submitted = true;
@@ -460,7 +512,7 @@ export class DetailsEmployeeComponent implements OnInit {
       },
     });
   }
-  async getDiplomeById(id: any,i:any) {
+  async getDiplomeById(id: any, i: any) {
     this.diplomeService
       .get(id)
       .toPromise()
@@ -605,50 +657,44 @@ export class DetailsEmployeeComponent implements OnInit {
         console.log('ici');
 
         console.log(data);
-        this.formation = data;
+        this.formation$ = data;
       },
       error: (e: any) => console.error(e),
     });
   }
-  getFormations(id:any,x:any): any {
-
+  getFormations(id: any, x: any): any {
     this.formationService.get(id).subscribe(
       (data: any) => {
-
-       this.formations[x]=(data)
-        console.log("this.currentFormation");
-        console.log(data)
-        console.log(this.formations)
+        this.formations$[x] = data;
+        console.log('this.currentFormation');
+        console.log(data);
+        console.log(this.formations$);
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-  getdiplomss(id:any,x:any): any {
-
+  getdiplomss(id: any, x: any): any {
     this.diplomeService.get(id).subscribe(
       (data: any) => {
-
-       this.diploms[x]=(data)
-        console.log("this.currentFormation");
-        console.log(data)
-        console.log(this.formations)
+        this.diploms$[x] = data;
+        console.log('this.diploms');
+        console.log(data);
+        console.log(this.diploms$);
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-  getContratss(id:any,x:any): any {
-
+  getContratss(id: any, x: any): any {
     this.contratService.get(id).subscribe(
       (data: any) => {
-
-       this.contras[x]=(data)
-        console.log("this.currentFormation");
-        console.log(data)
-        console.log(this.formations)
+        this.contras$[x] = data;
+        console.log('this.contras');
+        console.log(data);
+        console.log(this.contras$);
       },
       (error: any) => {
         console.log(error);
@@ -656,45 +702,39 @@ export class DetailsEmployeeComponent implements OnInit {
     );
   }
 
-  getAttributions(id:any,x:any): any {
-
+  getAttributions(id: any, x: any): any {
     this.attributionService.get(id).subscribe(
       (data: any) => {
-
-       this.Attributions[x]=(data)
-        console.log("this.currentFormation");
-        console.log(data)
-        console.log(this.formations)
+        this.Attributions$[x] = data;
+        console.log('this.Attributions');
+        console.log(data);
+        console.log(this.Attributions$);
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-  getMedicalvisits(id:any,x:any): any {
-
+  getMedicalvisits(id: any, x: any): any {
     this.medicalVisiteService.get(id).subscribe(
       (data: any) => {
-
-       this.medicalvisit[x]=(data)
-        console.log("this.medicalVisiteService");
-        console.log(data)
-        console.log(this.formations)
+        this.medicalvisit$[x] = data;
+        console.log('this.medicalVisiteService');
+        console.log(data);
+        console.log(this.medicalvisit$);
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-  getEaps(id:any,x:any): any {
-
+  getEaps(id: any, x: any): any {
     this.eapService.get(id).subscribe(
       (data: any) => {
-
-       this.eaplist[x]=(data)
-        console.log("this.eapService");
-        console.log(data)
-        console.log(this.formations)
+        this.eaplist$[x] = data;
+        console.log('this.eapService');
+        console.log(data);
+        console.log(this.eaplist$);
       },
       (error: any) => {
         console.log(error);
@@ -705,20 +745,127 @@ export class DetailsEmployeeComponent implements OnInit {
     // this.formationService.get(1);
     this.formationService.delete(id).subscribe({
       next: (res) => {
-        this.deleted=true;
+        this.deleted = true;
         console.log(res);
       },
       error: (e) => {
-        this.isdeletedfailed=true;
-        this.errorMessage=e.message;
-        console.error(e)},
+        this.isdeletedfailed = true;
+        this.errorMessage = e.message;
+        console.error(e);
+      },
     });
   }
 
+  updateEnability(status: boolean): void {
+    const data = {
+      username: this.empuser.username,
+      password: this.empuser.password,
+      enability: status,
+    };
+
+    this.message = '';
+
+    this.userService.update(this.empuser.id, data).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.empuser.enabled = status;
+        this.message = res.message
+          ? res.message
+          : 'The enability was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  updateUser(): void {
+    this.message = '';
+
+    this.userService.update(this.empuser.id, this.empuser).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.message = res.message
+          ? res.message
+          : 'This user was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  retrieveroles(): void {
+    this.roleService.getAll().subscribe({
+      next: (data: any) => {
+        this.role$ = data;
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  retrievePrivileges(): void {
+    this.privilegeService.getAll().subscribe({
+      next: (data: any) => {
+        this.privileges$ = data;
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  retrievetypAuth(): void {
+    this.autheService.getAll().subscribe({
+      next: (data: any) => {
+        this.authtypeid$ = data;
+        console.log('auth');
+        console.log(data);
+      },
+      error: (e) => console.error(e),
+    });
+  }
+  onChange(e: any) {
+    this.typeAuth = e.target.value;
+  }
+  updateAttribution(id:any,i:any):void {
+    this.message = '';
+
+    this.attributionService.update(id, i).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.message = res.message
+          ? res.message
+          : 'This attribution was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
+  updateVistMed(med:any){
+    this.message = '';
+
+    this.medicalVisiteService.update(med.id,med).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.message = res.message
+          ? res.message
+          : 'This medical visit was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
+  updateEap(eap:any){
+    this.message = '';
+
+eap.dateEap=this.datePipe.transform(eap.dateEap, 'dd-MM-yyyy')
+    this.eapService.update(eap.id,eap).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.message = res.message
+          ? res.message
+          : 'This eap was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
   delnewdipl() {}
   addnewdipl() {}
   addnewformat() {}
   editEmp() {}
-  editUser(user: any) {}
-  onChange(e: any) {}
 }

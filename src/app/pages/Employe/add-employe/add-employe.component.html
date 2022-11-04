@@ -527,40 +527,43 @@
                     <div class="custom-control custom-radio
                       custom-control-inline">
                       <input type="radio" class="custom-control-input"
-                        formControlName="periodec" name="periodec"
-                        id="periodec" value="true"
-                        (change)="onChangeperiodique($event)" required>
+                         name="periodec{{i}}"
+                        id="periodec{{i}}" value=true
+                        [checked]="periodiq[i]"
+                        (change)="onChangeperiodique($event,i)" required>
                       <label class="custom-control-label" for="periodec">Oui</label>
                     </div>
                     <!-- Default inline 2-->
                     <div class="custom-control custom-radio
                       custom-control-inline">
                       <input type="radio" class="custom-control-input"
-                        formControlName="periodec" name="periodec"
-                        id="periodec" value="false"
-                        (change)="onChangeperiodique($event)" required>
+                        name="periodec{{i}}"
+                        id="periodec{{i}}" value=false
+
+                        [checked]="!periodiq[i]"
+                        (change)="onChangeperiodique($event,i)" required>
                       <label class="custom-control-label" for="periodec">Non</label>
                     </div>
                   </div>
                 </div>
 
-                <div *ngIf="formation.value.periodec" class="row mb-3"
-                  style="display: none;">
+                <div *ngIf="periodiq[i]" class="row mb-3"
+                 >
                   <label class="col-sm-3 col-form-label">date de Renouvellement
                     *</label>
                   <div class="col-sm-9"> <input class="form-control"
                       formControlName="dateRenouvellement" type="date"
-                      name="dateRenouvellement" id="dateRenouvellement"
-                      placeholder="date de Renouvellement...">
+                      name="dateRenouvellement{{i}}" id="dateRenouvellement{{i}}"
+                      placeholder="date de Renouvellement..." required>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">formation File *</label>
                   <div class="col-sm-9"> <input class="form-control" type="file"
-                      formControlName="formationFile" name="formationFile"
+                      formControlName="formationFile" name="formationFile{{i}}"
                       (change)="handleFileInputformationFile($event)"
-                      id="formationFile" placeholder="formation File..."
+                      id="formationFile{{i}}" placeholder="formation File..."
                       required>
                   </div>
                 </div>
@@ -568,16 +571,16 @@
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">habilitation *</label>
                   <div class="col-sm-9"> <input class="form-control" type="text"
-                      formControlName="habilitation" name="habilitation"
-                      id="habilitation" placeholder="habilitation..." required>
+                      formControlName="habilitation" name="habilitation{{i}}"
+                      id="habilitation{{i}}" placeholder="habilitation..." required>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">date Habilitation *</label>
                   <div class="col-sm-9"> <input class="form-control" type="date"
-                      formControlName="dateHabilitation" name="dateHabilitation"
-                      id="dateHabilitation" placeholder="date Habilitation..."
+                      formControlName="dateHabilitation" name="dateHabilitation{{i}}"
+                      id="dateHabilitation{{i}}" placeholder="date Habilitation..."
                       required>
                   </div>
                 </div>
@@ -585,8 +588,8 @@
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">date ReHabilitation *</label>
                   <div class="col-sm-9"> <input class="form-control" type="date"
-                      formControlName="dateRenHabi" name="dateRenHabi"
-                      id="dateRenHabi" placeholder="date ReHabilitation..."
+                      formControlName="dateRenHabi" name="dateRenHabi{{i}}"
+                      id="dateRenHabi{{i}}" placeholder="date ReHabilitation..."
                       required>
                   </div>
                 </div>
@@ -595,8 +598,8 @@
                   <label class="col-sm-3 col-form-label">habilitation File *</label>
                   <div class="col-sm-9"> <input class="form-control" type="file"
                       (change)="handleFileInputhabilitationFile($event)"
-                      formControlName="habilitationFile" name="habilitationFile"
-                      id="habilitationFile" placeholder="habilitation File..."
+                      formControlName="habilitationFile" name="habilitationFile{{i}}"
+                      id="habilitationFile{{i}}" placeholder="habilitation File..."
                       required>
                   </div>
                 </div>
@@ -697,7 +700,7 @@
             <label class="col-sm-3 col-form-label">Password *</label>
             <div class="col-sm-9"> <input class="form-control" type="password"
                 formControlName="password" name="password" id="password"
-                placeholder="Password...">
+                placeholder="Password..." required>
             </div>
           </div>
 
@@ -705,7 +708,7 @@
             <label class="col-sm-3 col-form-label">confirm Password *</label>
             <div class="col-sm-9"> <input class="form-control" type="password"
                 formControlName="confirmPassword" name="confirmPassword"
-                id="confirmPassword" placeholder="confirm Password...">
+                id="confirmPassword" placeholder="confirm Password..." required>
             </div>
           </div>
 

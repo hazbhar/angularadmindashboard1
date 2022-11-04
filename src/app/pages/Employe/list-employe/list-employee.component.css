@@ -22,8 +22,11 @@ td, th {
 }
 
 .mat-row:nth-child(n+1){
-  background-color: #ececec;
+  background-color: #f5f5f5;
 }
 .mat-row:not(:nth-child(2n+1)){
   background-color:#ffffff;
+}
+mat-paginator{
+  background-color:#365b85;
 }

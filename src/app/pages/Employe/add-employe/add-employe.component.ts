@@ -61,7 +61,7 @@ export class AddEmployeComponent implements OnInit {
 /**
  * boolean array for periodic formation wich can be  multiple
  */
-  periodiq: boolean = false;
+  periodiq: boolean []=[];
 
   /**
    * variables to register from forms to test their values
@@ -75,7 +75,7 @@ export class AddEmployeComponent implements OnInit {
 /**
  * add employe step value
  */
-  step = 1;
+  step =4;
 
 /**
  * observable variables
@@ -166,6 +166,7 @@ export class AddEmployeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.periodiq[0]=false;
     this.resetshortlinks();
     /**
      * services to get from API
@@ -907,13 +908,13 @@ export class AddEmployeComponent implements OnInit {
 
   }
 
-  onChangeperiodique(e: any) {
+  onChangeperiodique(e: any ,i:any) {
     if (e.target.value === 'true') {
-      this.periodiq = true;
+      this.periodiq [i]= true;
 
     } else {
 
-      this.periodiq = false;
+      this.periodiq [i]= false;
     }
     console.log(this.periodiq);
   }
