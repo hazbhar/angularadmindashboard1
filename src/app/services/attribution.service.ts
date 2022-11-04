@@ -20,28 +20,28 @@ export class AttributionService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll() {
-    return this.http.get<Attribution[]>(this.config.API_DIPLOME + 'getall');
+    return this.http.get<Attribution[]>(this.config.API_Attrub + 'getall',this.addHttpOption);
   }
 
   get(id: any): Observable<Attribution> {
-    return this.http.get<Attribution>(this.config.API_DIPLOME + id);
+    return this.http.get<Attribution>(this.config.API_Attrub +"getAttribution?id="+ id,this.addHttpOption);
   }
 
   create(data: any, id: any): Observable<any> {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('typeForId', id);
-    return this.http.post(this.config.API_DIPLOME + 'add?typeForId=1', data);
+    httpParams = httpParams.append('empId', id);
+    return this.http.post(this.config.API_Attrub + 'add?empId=1', data,this.addHttpOption);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_DIPLOME}/{id}`, data);
+    return this.http.put(`${this.config.API_Attrub}/{id}`, data,this.addHttpOption);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(this.config.API_DIPLOME + 'delete?id=' + id);
+    return this.http.delete(this.config.API_Attrub + 'delete?id=' + id);
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(this.config.API_DIPLOME);
+    return this.http.delete(this.config.API_Attrub);
   }
 }

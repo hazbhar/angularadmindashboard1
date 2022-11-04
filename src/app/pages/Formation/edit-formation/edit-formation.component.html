@@ -14,11 +14,9 @@
       <div class="card-body">
         <h5 class="card-title">Edit Formation</h5>
     <form>
-
-
-
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Titre</label>
+        <div class="col-sm-9">
         <input
           type="text"
           class="form-control"
@@ -27,8 +25,10 @@
           name="title"
           />
       </div>
-      <div class="row mb-3">
+    </div>
+      <div  class="row mb-3">
         <label class="col-sm-3 col-form-label"> Description</label>
+        <div class="col-sm-9">
         <input
           type="text"
           class="form-control"
@@ -37,6 +37,7 @@
           name="description"
           />
       </div>
+    </div>
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">periodique</label>
         <div class="form-check form-check-inline">
@@ -60,25 +61,19 @@
         </div>
       </div>
 
-      <div *ngIf="formation.periodec" class="row mb-3">
+      <div class="row mb-3" *ngFor="let d of formation.employeeFormationList">
         <label class="col-sm-3 col-form-label">date de Renouvellement</label>
         <div class="col-sm-9"> <input class="form-control"
              type="date"
+             locale="en-US"
+             [value]="d.formationRenewalDate | date"
             name="dateRenouvellement" id="dateRenouvellement"
             placeholder="date de Renouvellement..."
-            [required]="periodiq">
+            >
         </div>
       </div>
 
-      <div *ngIf="!periodiq" class="row mb-3" style="display: none;">
-        <label class="col-sm-3 col-form-label">date de Renouvellement</label>
-        <div class="col-sm-9"> <input class="form-control"
-             type="date"
-            name="dateRenouvellement" id="dateRenouvellement"
-            placeholder="date de Renouvellement..."
-            [required]="periodiq">
-        </div>
-      </div>
+
 
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">formation File</label>
@@ -87,12 +82,16 @@
             id="formationFile" placeholder="formation File..." required>
         </div>
       </div>
-
-      <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">habilitation</label>
-        <div class="col-sm-9"> <input class="form-control" type="text"
-             name="habilitation"
-            id="habilitation" placeholder="habilitation..." required>
+      <div *ngFor="let h of formation.habilitationList">
+      <div  class="row mb-3">
+        <label class="col-sm-3 col-form-label">titr habilitation</label>
+        <div class="col-sm-9"><input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="h.title"
+          name="description"
+          />
         </div>
       </div>
 
@@ -100,7 +99,9 @@
         <label class="col-sm-3 col-form-label">date Habilitation</label>
         <div class="col-sm-9"> <input class="form-control" type="date"
              name="dateHabilitation"
-            id="dateHabilitation" placeholder="date Habilitation..."
+             locale="en-US"
+             [(ngModel)]="h.habilitationDate"
+            id="dateHabilitation"  placeholder="date Habilitation..."
             required>
         </div>
       </div>
@@ -109,6 +110,7 @@
         <label class="col-sm-3 col-form-label">date ReHabilitation</label>
         <div class="col-sm-9"> <input class="form-control" type="date"
              name="dateRenHabi"
+             [(ngModel)]="h.habilitationRenewalDate"
             id="dateRenHabi" placeholder="date ReHabilitation..."
             required>
         </div>
@@ -122,6 +124,7 @@
             required>
         </div>
       </div>
+    </div>
       <div class="form-group">
 
        <div class="text-center">

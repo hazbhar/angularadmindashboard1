@@ -52,20 +52,6 @@ export class AddFormationComponent implements OnInit {
     this.addnewformat();
   }
 
-  addFormation(): void {
-    const data = {
-      title: this.formation.title,
-      description: this.formation.description,
-    };
-
-    this.formationService.create(data, 1).subscribe({
-      next: (res: any) => {
-        console.log(res);
-        this.submitted = true;
-      },
-      error: (e: any) => console.error(e),
-    });
-  }
 
   addnewformat() {
     this.formatitems = this.Competences.get('formation') as FormArray;

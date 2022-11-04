@@ -23,7 +23,7 @@ export class SiteService {
     return this.http.get<any>(`${this.config.API_Site}getById?id=${id}`,this.addHttpOption);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Site + 'add?', data,this.addHttpOption);
+    return this.http.post(this.config.API_Site + 'add', data,this.addHttpOption);
   }
 
   update(id: any, data: any): Observable<any> {

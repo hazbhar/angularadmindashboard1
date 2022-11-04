@@ -1,91 +1,840 @@
-<main id="main" class="main" style="position: fixed">
-      <div class="pagetitle">
-        <h1>Employee Details</h1>
-        <nav>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item">Employee</li>
-            <li class="breadcrumb-item active">Details</li>
-          </ol>
-        </nav>
-      </div>
-      <section class="section">
-        <div class="card" style=" justify-content: center;">
-          <div class="card-body">
-            <h5 class="card-title">Employee Details</h5>
-            <div *ngIf="viewMode; else editable">
-              <div *ngIf="currentEmployee.id">
-                <h4>{{currentEmployee.initial}}</h4>
+<main id="main" class="main">
+
+  <section>
+    <mat-toolbar class="mat-elevation-z8">
+      <button mat-icon-button *ngIf="sidenav.mode === 'over'"
+        (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+          menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+          close
+        </mat-icon>
+      </button> Edit {{page}}
+    </mat-toolbar>
+    <mat-sidenav-container style="background:white;">
+
+      <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8"
+        style="box-shadow: none;visibility:
+        visible;">
+
+        <img class="avatar mat-elevation-z8" src="assets/img/profile-img.jpg" />
+        <h4 class="name">{{currentEmployee.firstName}}
+          {{currentEmployee.lastName}} </h4>
+        <p class="designation">{{currentEmployee.initial}}</p>
+
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button" (click)="openPage('Info')">
+          <mat-icon>assignment_ind</mat-icon>
+          <span>Info</span>
+        </button>
+        <button mat-button class="menu-button" (click)="openPage('Contrats')">
+          <mat-icon>gavel</mat-icon>
+          <span>Contrats</span>
+        </button>
+        <button mat-button class="menu-button" (click)="openPage('User')">
+          <mat-icon>person</mat-icon>
+          <span>User</span>
+        </button>
+        <button mat-button class="menu-button" (click)="openPage('Diploms')">
+          <mat-icon>school</mat-icon>
+          <span>Diploms</span>
+        </button>
+        <button mat-button class="menu-button" (click)="openPage('Formations')">
+          <mat-icon>assignment_turned_in</mat-icon>
+          <span>Formations</span>
+        </button>
+        <button mat-button class="menu-button"
+          (click)="openPage('Attribution')">
+          <mat-icon>assignment</mat-icon>
+          <span>Attributions</span>
+        </button>
+        <button mat-button class="menu-button"
+          (click)="openPage('VisitMedical')">
+          <mat-icon> local_hospital</mat-icon>
+          <span>Visite Medicale</span>
+        </button>
+        <button mat-button class="menu-button" (click)="openPage('Eap')">
+          <mat-icon> business</mat-icon>
+          <span>Eap</span>
+        </button>
 
 
-                <div>
-                  <label><strong>First Name:</strong></label>
-                  {{ currentEmployee.firstName }}
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div class="content mat-elevation-z8 ">
+          <div *ngIf="page=='Info'">
+            <form id="msform">
+              <h2 class="fs-title">Infos General </h2>
+
+              <div class="row mb-3">
+                <label for="Nom" class="col-sm-3 col-form-label">Nom *</label>
+                <div class="col-sm-9"> <input type="text" class="form-control"
+                    name="Nom" id="Nom" placeholder="Nom..."
+                    [(ngModel)]="currentEmployee.firstName"
+                    required>
                 </div>
-                <div>
-                  <label><strong>Last Name:</strong></label>
-                  {{ currentEmployee.lastName }}
+
+              </div>
+              <div class="row mb-3">
+                <label for="Prenom" class="col-sm-3 col-form-label">Prenom *</label>
+                <div class="col-sm-9"> <input type="text" class="form-control"
+                    name="Prenom" id="Prenom"
+                    [(ngModel)]="currentEmployee.lastName"
+                    placeholder="Prenom..." required>
                 </div>
-                <div>
-                  <label><strong>username:</strong></label>
-                  {{ currentEmployee.user!.username}}
-                </div>
-                <div>
-                  <label><strong>Company Name:</strong></label>
-                  {{ currentEmployee.companyName }}
-                </div>
+
               </div>
 
-                <div *ngIf="!currentEmployee">
-                  <br/>
-                    <p>Please click on a User...</p>
-                  </div>
+              <div class="row mb-3">
+                <label for="DateNaissance" class="col-sm-3 col-form-label">Date
+                  Naissance
+                  *</label>
+                <div class="col-sm-9"> <input type="date" class="form-control"
+                    name="Cin" id="DateNaissance"
+                    [(ngModel)]="currentEmployee.dateOfBirth"
+                    placeholder="Date Naissance..."
+                    required>
                 </div>
 
-              <!---------------------------------    ng-template   --------------------------------->
-              <ng-template #editable>
-                <div *ngIf="currentEmployee.id" class="edit-form">
-                  <form>
-                    <div class="form-group">
-                      <label for="usernameed">First Name</label>
-                      <input type="text" class="form-control" id="usernameed"
-                        [(ngModel)]="currentEmployee.firstName"
-                        name="usernameed"/>
-                    </div>
-                    <div class="form-group">
-                      <label for="lastNameed">Last Name</label>
-                      <input type="text" class="form-control" id="lastNameed"
-                        [(ngModel)]="currentEmployee.lastName"
-                        name="lastNameed"/>
-                    </div>
+              </div>
+              <div class="row mb-3">
+                <label for="Cin" class="col-sm-3 col-form-label">Cin *</label>
+                <div class="col-sm-9"> <input type="number" class="form-control"
+                    name="Cin" id="Cin" placeholder="Cin..."
+                    [(ngModel)]="currentEmployee.natioIdCard"
+                    required>
+                </div>
+
+              </div>
+              <div class="row mb-3">
+                <legend class="col-sm-3 col-form-label ">Etat civil</legend>
+                <div class="col-sm-9">
+                  <select class="form-select"
+                    name="etatcivil" id="etatcivil"
+                    aria-label="Default select example">
+                    <option value="" disabled selected>Choisir de la liste</option>
+                    <option *ngFor="let etatciv of etatcivil$ ; let i index"
+                      [value]="etatciv.id">{{etatciv.state}}</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="submit"(click)="editEmp()">Update </button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="page=='Contrats'">
+            <table style="width:100%">
+              <tr *ngFor="let element of contras">
+                <td>
+                  <br>
+                  <form id="msform">
 
 
+                    <h2 class="fs-title">Infos Contrats </h2>
+
                     <div class="form-group">
-                      <label><strong>Date of birth:</strong></label>
-                      <input type="date" class="form-control" value="{{ currentEmployee.dateOfBirth}}"/>
+                      <div class="row mb-3">
+                        <label for="inputNumber" class="col-sm-2
+                          col-form-label">Date
+                          Debut
+                          Contrat</label>
+                        <div class="col-sm-10"> <input type="date"
+                            name="DateDebutContrat"
+                            id="DateDebutContrat"
+                            class="form-control"  [(ngModel)]="element.startDate"
+                            required>
+                        </div>
+
+                      </div>
+                      <div class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">type
+                          Contrat</legend>
+                        <div class="col-sm-10">
+                          <select class="form-select"
+                            name="id" id="id" aria-label="Default
+                            select example" required>
+
+                            <option *ngFor="let typcont of typecontrat$; let i=
+                              index"
+                              [value]="typcont.id" [selected]="typcont.id">{{typcont.title}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div *ngIf="typcontid!=12" class="row mb-3">
+                        <label for="DateFinContrat" class="col-sm-2
+                          col-form-label">Date
+                          Fin
+                          Contrat</label>
+                        <div class="col-sm-10"> <input type="date"
+                            name="DateFinContrat"
+                            id="DateFinContrat"
+                            class="form-control"
+                            [(ngModel)]="element.endDate"
+                            placeholder="DateFinContrat..."
+                            [required]="typcontid!=12">
+                        </div>
+                      </div>
+
+                      <div *ngIf="typcontid==3" class="row mb-3">
+                        <label for="inputColor" class="col-sm-2 col-form-label">frequence</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" [(ngModel)]="freque"
+                            name="frequence" id="frequence"
+                            aria-label="Default select example"
+                            [required]="typcontid==3">
+                            <option value="-1" disabled selected>Choisir de la
+                              liste</option>
+                            <option *ngFor="let frequ of frequence$; let i=
+                              index"
+                              [value]="frequ.id">{{frequ.description}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <legend class="col-sm-2 col-form-label ">type Personnel</legend>
+                        <div class="col-sm-10">
+                          <select class="form-select"
+                            [(ngModel)]="typePersonnel"
+                            name="typePersonnel"
+                            id="typePersonnel" aria-label="Default select
+                            example"
+                            required>
+                            <option value="-1" disabled selected>Choisir de la
+                              liste</option>
+                            <option *ngFor="let typepers of typeperso$; let i=
+                              index"
+                              [value]="typepers.id">{{typepers.job}}</option>
+                          </select>
+                        </div>
+
+                      </div>
+                      <div *ngIf="typePersonnel==2" class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">Mise a
+                          disposition</legend>
+                        <div class="col-sm-10">
+                          <div class="form-check form-check-inline">
+                            <div class="custom-control custom-radio
+                              custom-control-inline">
+                              <input type="radio" class="custom-control-input"
+                                name="available" id="available"
+                                value="true" [required]="typePersonnel==2">
+                              <label class="custom-control-label"
+                                for="defaultInline1">Oui</label>
+                            </div>
+                            <!-- Default inline 2-->
+                            <div class="custom-control custom-radio
+                              custom-control-inline">
+                              <input type="radio" class="custom-control-input"
+                                name="available" id="available"
+                                value="false" [required]="typePersonnel==2">
+                              <label class="custom-control-label"
+                                for="defaultInline2">Non</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="typePersonnel==2" class="row mb-3">
+                        <label class="col-sm-2 col-form-label">nom Societe</label>
+                        <div class="col-sm-10"> <input class="form-control"
+                            type="text" name="nomSociete"
+                            id="nomSociete"
+                            [required]="typePersonnel==2">
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <legend class="col-sm-2 col-form-label ">type Processus</legend>
+                        <div class="col-sm-10">
+                          <select multiple class="form-select"
+                            name="typeProcessus"
+                            id="typeProcessus"
+                            aria-label="Default select example" required>
+                            <option value="-1" disabled selected>Choisir de la
+                              liste</option>
+                            <option *ngFor="let typproces of typprocesus$; let
+                              i=
+                              index"
+                              [value]="typproces.id">{{typproces.content}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">unite Technique</label>
+                        <div class="col-sm-10"> <select class="form-select"
+                            name="uniteTechnique"
+                            id="uniteTechnique" aria-label="Default select
+                            example"
+                            required>
+                            <option value="-1" disabled selected>Choisir de la
+                              liste</option>
+                            <option *ngFor="let unitete of unitetech$; let i=
+                              index"
+                              [value]="unitete.id">{{unitete.technicalTerm}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <legend class="col-sm-2 col-form-label ">Site</legend>
+                        <div class="col-sm-10">
+                          <select class="form-select" [(ngModel)]="siteid"
+                            name="sitetid"
+                            id="site"
+                            aria-label="Default select example"
+                            required>
+                            <option value="-1" disabled selected>Choisir de la
+                              liste</option>
+                            <option *ngFor="let sit of site$; let i= index"
+                              [value]="sit.id">{{sit.siteName}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Remise de
+                          matériel</label>
+                        <div class="col-sm-10"> <input multiple
+                            class="form-control"
+                            type="file"
+                            (change)="handleFileInputremisemateriel($event)"
+                            name="remisemateriel"
+                            id="remisemateriel" required>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">contrat
+                          Impartialite</label>
+                        <div class="col-sm-10"> <input class="form-control"
+                            type="file"
+                            (change)="handleFileInputfileTocontratImpartialite($event)"
+                            name="contratImpartialite"
+                            id="contratImpartialite"
+                            required>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">contrat
+                          Confidentialite</label>
+                        <div class="col-sm-10"> <input class="form-control"
+                            type="file"
+                            (change)="handleFileInputcontratConfidentialite($event)"
+                            name="contratConfidentialite"
+                            id="contratConfidentialite"
+                            required>
+                        </div>
+                      </div>
+
+
+                      <div class="text-center">
+                        <button
+                          type="submit"
+                          class="submit"(click)="editContrat(contrat)">Update
+                        </button>
+                      </div>
+
+                      <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+                        alert-danger" role="alert">
+                        Adding Contrat failed: {{ errorMessage }}
+                      </div>
+
+                      <div class="row mb-3" *ngIf="submitted">
+                        <h4>Contrat was submitted successfully!</h4>
+                      </div>
                     </div>
 
                   </form>
+                </td>
+              </tr>
+              <tr><button (click)="addnewformat()" class="add">add (+)</button></tr>
+            </table>
+          </div>
+          <div *ngIf="page=='User'">
+            <form id="msform">
+
+              <h2 class="fs-title">Infos de sécurité </h2>
 
 
-                  <div class="text-center">
-                    <button
-                      type="submit"
-                      class="submit"
-                      (click)="updateEmployee()">
-                      Update
-                    </button>
-                    <p>{{ message }}</p>
-                  </div>
+              <!--        formgroup       -->
+
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">user name *</label>
+                <div class="col-sm-9"> <input class="form-control" type="text"
+                    name="username" id="username"
+                    [(ngModel)]="currentEmployee.user.username"
+                    placeholder="user name..." required>
                 </div>
-                <div *ngIf="!currentEmployee.id">
-                  <br />
-                  <div class="text-center">
-                    <p>Cannot access this Employee...</p>
-                  </div>
-                </div>
-                </ng-template>
               </div>
-            </div>
-          </section>
-        </main>
+
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email *</label>
+                <div class="col-sm-9"> <input class="form-control" type="email"
+                    name="email" id="email"
+                    [(ngModel)]="currentEmployee.user.email"
+                    placeholder="Email..." required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">confirm Email *</label>
+                <div class="col-sm-9"> <input class="form-control" type="email"
+                    name="confirmEmail"
+                    [(ngModel)]="currentEmployee.user.email"
+
+                    id="confirmEmail" placeholder="confirm Email..." required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">type Auth</label>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input"
+                    name="typeAuth"
+                    id="typeAuth" value="mdp"
+                    [(ngModel)]="typeAuth" (change)="onChange($event)"
+                    [checked]="currentEmployee.user.password"
+                    required>
+                  <label class="custom-control-label" for="typeAuth">Mot de
+                    passe</label>
+                </div>
+                <!-- Default inline 2-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input"
+                    name="typeAuth"
+                    id="typeAuth" value="ldap"
+                    [checked]="!currentEmployee.user.password"
+                    [(ngModel)]="typeAuth" (change)="onChange($event)" required>
+                  <label class="custom-control-label" for="typeAuth">LDAP</label>
+                </div>
+
+
+              </div>
+
+              <div class="row mb-3">
+                <legend class="col-sm-3 col-form-label ">Role *</legend>
+                <div class="col-sm-9">
+                  <select multiple class="form-select" name="role"
+                    id="role"
+                    aria-label="Default select example" required>
+                    <option value="-1" disabled selected>Choisir de la liste</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <legend class="col-sm-3 col-form-label ">privileges *</legend>
+                <div class="col-sm-9">
+                  <select multiple class="form-select" name="privilege"
+                    id="privilege"
+                    aria-label="Default select example" required>
+                    <option value="-1" disabled selected>Choisir de la liste</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="submit"(click)="editUser('user')">Update </button>
+              </div>
+
+            </form>
+          </div>
+          <div *ngIf="page=='Diploms'">
+            <table style="width:100%">
+              <td *ngFor="let element of diploms">
+                <form id="msform">
+                  <h2 class="fs-title">Infos des Diplomes </h2>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Titre</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="text"
+                        name="title"
+                        id="title" [(ngModel)]="element.title" required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Spécialité :</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="text" name="specialite"
+                        id="specialite" [(ngModel)]="element.speciality"
+                        required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">diplome file</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="file"
+                        (change)="handleFileInputdiplomefile($event)"
+                        name="diplomesfile" id="diplomesfile"
+                        required>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button (click)="updatediplom()"
+                      type="submit" name="submit" class="submit">Update</button>
+                  </div>
+                  <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+                    alert-danger" role="alert">
+                    Adding Diplome failed: {{ errorMessage }}
+                  </div>
+
+                  <div class="row mb-3" *ngIf="submitted">
+                    <h4>Diplome was submitted successfully!</h4>
+                  </div>
+                  <div class="text-center">
+                    <button (click)="delnewdipl()" class="btn
+                      btn-danger">remove (-)</button>
+
+
+
+
+                  </div>
+                </form>
+              </td>
+              <tr><button (click)="addnewdipl()" class="add">add (+)</button></tr>
+            </table>
+          </div>
+          <div *ngIf="page=='Formations'">
+            <table style="width:100%">
+              <td *ngFor="let element of formations">
+                <form id="msform" *ngFor="let element of formations">
+                  <h2 class="fs-title">Infos des Formations </h2>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Titre</label>
+                    <div class="col-sm-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        [(ngModel)]="element.title"
+                        name="title"
+                        />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label"> Description</label>
+                    <div class="col-sm-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="description"
+                        [(ngModel)]="element.description"
+                        name="description"
+                        />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">periodique</label>
+                    <div class="form-check form-check-inline">
+                      <div class="custom-control custom-radio
+                        custom-control-inline">
+                        <input type="radio" class="custom-control-input"
+                          name="periodec"
+                          id="periodec" value="true"
+                          (change)="onChangeperiodique($event)"
+                          [checked]="element.periodec">
+                        <label class="custom-control-label" for="periodec">Oui</label>
+                      </div>
+                      <!-- Default inline 2-->
+                      <div class="custom-control custom-radio
+                        custom-control-inline">
+                        <input type="radio" class="custom-control-input"
+                          name="periodec"
+                          id="periodec" value="false"
+                          (change)="onChangeperiodique($event)"
+                          [checked]="!element.periodec" required>
+                        <label class="custom-control-label" for="periodec">Non</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3" *ngFor="let d of
+                    element.employeeFormationList">
+                    <label class="col-sm-3 col-form-label">date de
+                      Renouvellement</label>
+                    <div class="col-sm-9"> <input class="form-control"
+                        type="date"
+                        locale="en-US"
+                        [value]="d.formationRenewalDate | date"
+                        name="dateRenouvellement" id="dateRenouvellement"
+                        placeholder="date de Renouvellement...">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">formation File</label>
+                    <div class="col-sm-9"> <input class="form-control"
+                        type="file"
+                        name="formationFile"
+                        (change)="handleFileInputformationFile($event)"
+                        id="formationFile" placeholder="formation File..."
+                        required>
+                    </div>
+                  </div>
+                  <div *ngFor="let h of element.habilitationList">
+                    <div class="row mb-3">
+                      <label class="col-sm-3 col-form-label">titr habilitation</label>
+                      <div class="col-sm-9"><input
+                          type="text"
+                          class="form-control"
+                          id="description"
+                          [(ngModel)]="h.title"
+                          name="description"
+                          />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label class="col-sm-3 col-form-label">date Habilitation</label>
+                      <div class="col-sm-9"> <input class="form-control"
+                          type="date"
+                          name="dateHabilitation"
+                          locale="en-US"
+                          [(ngModel)]="h.habilitationDate"
+                          id="dateHabilitation" placeholder="date
+                          Habilitation..."
+                          required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label class="col-sm-3 col-form-label">date ReHabilitation</label>
+                      <div class="col-sm-9"> <input class="form-control"
+                          type="date"
+                          name="dateRenHabi"
+                          [(ngModel)]="h.habilitationRenewalDate"
+                          id="dateRenHabi" placeholder="date ReHabilitation..."
+                          required>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label class="col-sm-3 col-form-label">habilitation File</label>
+                      <div class="col-sm-9"> <input class="form-control"
+                          type="file"
+                          (change)="handleFileInputhabilitationFile($event)"
+                          name="habilitationFile"
+                          id="habilitationFile" placeholder="habilitation
+                          File..."
+                          required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        class="submit"(click)="editFormation(formation)">Update
+                      </button>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn
+                      btn-danger">remove (-)</button>
+
+
+                  </div>
+
+                </form>
+              </td>
+              <tr> <button (click)="addnewformat()" class="add">add (+)</button>
+              </tr>
+            </table>
+          </div>
+
+          <div *ngIf="page=='Attribution'">
+            <table style="width:100%">
+              <td *ngFor="let element of Attributions">
+                <form id="msform" >
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Attribution:</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="text"
+                        [(ngModel)]="element.title"
+                        name="attribution"
+                        id="attribution" placeholder="attribution..." required>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Attribution File</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="file"
+                        [(ngModel)]="element.title"
+
+                        name="Attributionf"
+                        (change)="handleFileInputAttributionf($event)"
+                        id="Attributionf" placeholder="Attribution..." required>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div class="text-center">
+                    <button (click)="updatediplom()"
+                      type="submit" name="submit" class="submit">Update</button>
+                  </div>
+                  <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+                    alert-danger" role="alert">
+                    Adding Diplome failed: {{ errorMessage }}
+                  </div>
+
+                  <div class="row mb-3" *ngIf="submitted">
+                    <h4>Diplome was submitted successfully!</h4>
+                  </div>
+                  <div class="text-center">
+                    <button (click)="delnewdipl()" class="btn
+                      btn-danger">remove (-)</button>
+
+
+
+                  </div>
+
+                </form>
+              </td>
+              <tr> <button (click)="addnewformat()" class="add">add (+)</button>
+              </tr>
+            </table>
+          </div>
+
+          <div *ngIf="page=='VisitMedical'">
+            <table style="width:100%">
+              <td *ngFor="let element of medicalvisit">
+                <form id="msform">
+                  <h2 class="fs-title">Infos desvisite Medicales </h2>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">visite Medicales</label>
+
+                    <div class="col-sm-10"> <input multiple
+                        class="form-control"
+                        type="file"
+                        (change)="handleFileIvisiteMedicales($event)"
+                        name="visiteMedicales" id="visiteMedicales"
+                        required>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="DateFinContrat" class="col-sm-2
+                      col-form-label">Date
+                      visite Medicale </label>
+                    <div class="col-sm-10"> <input type="date"
+                        name="DateFinContrat"
+                        id="DateFinContrat"
+                        class="form-control"
+                        [(ngModel)]="element.dateOfMv"
+                        required>
+                    </div>
+
+                  </div>
+                  <div class="row mb-3">
+                    <label for="DateProchVisiteMedicale" class="col-sm-2
+                      col-form-label">Date
+                      Prochaine visite Medicale</label>
+                    <div class="col-sm-10"> <input type="date"
+                        name="DateProchVisiteMedicale"
+                        id="DateProchVisiteMedicale"
+                        [(ngModel)]="element.dateOfNextMv"
+
+                        class="form-control" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        class="submit"(click)="editFormation(formation)">Update
+                      </button>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn
+                      btn-danger">remove (-)</button>
+
+
+                  </div>
+
+                </form>
+              </td>
+              <tr> <button (click)="addnewformat()" class="add">add (+)</button>
+              </tr>
+            </table>
+          </div>
+
+          <div *ngIf="page=='Eap'">
+            <table style="width:100%">
+              <td *ngFor="let element of eaplist">
+                <form id="msform" >
+                  <h2 class="fs-title">Infos des Formations </h2>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Eap</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="file"
+                        (change)="handleFileInputeap($event)"
+                        name="eap" id="eap"
+
+                        required>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">date Eap</label>
+                    <div class="col-sm-10"> <input class="form-control"
+                        type="date"
+                        name="dateEap" id="dateEap"
+                        [(ngModel)]="element.dateEap"
+
+                        required>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        class="submit"(click)="editFormation(formation)">Update
+                      </button>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn
+                      btn-danger">remove (-)</button>
+
+
+                  </div>
+
+                </form>
+              </td>
+              <tr> <button (click)="addnewformat()" class="add">add (+)</button>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      </mat-sidenav-content>
+
+    </mat-sidenav-container>
+  </section>
+</main>

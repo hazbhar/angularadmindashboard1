@@ -2,11 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from '../config/constant';
+import { Habilitation } from '../models/Habilitation';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class ServiceService {
+export class HabilitaionService {
   addHttpOption = {
     headers: new HttpHeaders({
       'Content-type': 'application/json',
@@ -17,20 +18,21 @@ export class ServiceService {
   constructor(private http: HttpClient, private config: Constants) {}
 
   getAll(): Observable<any[]> {
-    return this.http.get<any>(this.config.API_Service + 'getall',this.addHttpOption);
+    return this.http.get<any>(this.config.API_Habili + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
-    return this.http.get<any>(`${this.config.API_Service}getById?id=${id}`,this.addHttpOption);
+    return this.http.get<any>(`${this.config.API_Habili}getById?id=${id}`,this.addHttpOption);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Service + 'add', data,this.addHttpOption);
+    return this.http.post(this.config.API_Habili + 'add', data,this.addHttpOption);
   }
-
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_Service}/update${id}`, data,this.addHttpOption);
+  update(data: Habilitation): Observable<any> {
+    return this.http.put(
+      `${this.config.API_Habili}update?id=` + data.id,
+      data
+    );
   }
-
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.config.API_Service}delete?id=${id}`,this.addHttpOption);
+    return this.http.delete(`${this.config.API_Habili}delete?id=${id}`,this.addHttpOption);
   }
 }

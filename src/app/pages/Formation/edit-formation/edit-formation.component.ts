@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { Formation } from 'src/app/models/Formation';
+import { Habilitation } from 'src/app/models/Habilitation';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { FormationService } from 'src/app/services/formation.service';
 
@@ -13,6 +15,8 @@ import { FormationService } from 'src/app/services/formation.service';
   styleUrls: ['./edit-formation.component.css'],
 })
 export class EditFormationComponent implements OnInit {
+  datePipe = new DatePipe('en-US');
+
   submitted = false;
   periodiq: boolean = false;
   errorMessage='';
@@ -28,28 +32,15 @@ export class EditFormationComponent implements OnInit {
     private router: Router,
     private fileUploadService: FileUploadService
   ) {}
-  formation: Formation = {
-    id: 0,
-    title: undefined,
-    description: undefined,
-    periodec: undefined,
-    enabled: undefined,
-    employeeFormationList: undefined,
-    habilitationList: undefined,
-    attachedDocsList: undefined,
-  };
+  formation: Formation
 
   ngOnInit(): void {
     this.getFormationById(this.route.snapshot.params['id']);
-  }
 
+  }
 
   editFormation(formation: Formation): void {
     console.log('test ');
-    //const data = {
-    //title: this.formation.title,
-    //description: this.formation.description
-    //};
 
     this.formationService.update(formation).subscribe({
       next: (res: any) => {
@@ -126,12 +117,15 @@ export class EditFormationComponent implements OnInit {
   }
   getFormationById(id: any) {
     console.log("ici")
+
+
     this.formationService.get(id).subscribe({
       next: (data: any) => {
         console.log("ici")
 
         console.log(data);
         this.formation = data;
+
       },
       error: (e: any) => console.error(e),
     });

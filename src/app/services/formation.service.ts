@@ -34,9 +34,9 @@ export class FormationService {
 
   create(data: any, id: any): Observable<any> {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('typeForId', id);
+    httpParams = httpParams.append('empId', id);
     return this.http.post(
-      this.config.API_FORMATION + 'add?typeForId=' + id,
+      this.config.API_FORMATION + 'add',
       data
     );
   }

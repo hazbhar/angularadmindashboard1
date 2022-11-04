@@ -816,7 +816,7 @@ export class AddEmployeComponent implements OnInit {
         impartialityContract: this.shortLinkcontratImpartialite$['urlFile'],
         privacyContract: this.shortLinkcontratConfidentialite$['urlFile'],
         user: {
-          id:this.usr$.id
+          id:Number(this.usr$.id)
         },
         contractList: [
           {
@@ -871,7 +871,7 @@ export class AddEmployeComponent implements OnInit {
 
       this.employservice
         .create(
-          curentuser.id,
+          Number(this.usr$.id),
           this.siteid,
           this.Infosgenerales.value.civilState,
           this.typePersonnel,
@@ -885,12 +885,14 @@ export class AddEmployeComponent implements OnInit {
           },
           error: (err) => {
             console.log('adding Employee failed ');
+            console.log(err.message);
+            console.log(err.message.message);
             this.errorMessage = err.message;
             this.isaddedfailed=true;
           },
         });
     }
-
+    this.resetshortlinks();
   }
 
   onChange(e: any) {

@@ -21,17 +21,17 @@ export class EtatcivilService {
     return this.http.get<any>(this.config.API_EtatCivil + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
-    return this.http.get<any>(`${this.config.API_EtatCivil}getById?id=${id}`);
+    return this.http.get<any>(`${this.config.API_EtatCivil}getById?id=${id}`,this.addHttpOption);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_EtatCivil + 'add?', data);
+    return this.http.post(this.config.API_EtatCivil + 'add?', data,this.addHttpOption);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_EtatCivil}/update${id}`, data);
+    return this.http.put(`${this.config.API_EtatCivil}/update${id}`, data,this.addHttpOption);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.config.API_EtatCivil}delete?id=${id}`);
+    return this.http.delete(`${this.config.API_EtatCivil}delete?id=${id}`,this.addHttpOption);
   }
 }

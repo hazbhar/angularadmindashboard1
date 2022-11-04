@@ -1,9 +1,11 @@
 import { FormationService } from './../../../services/formation.service';
 import { Formation } from './../../../models/Formation';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { StorageService } from 'src/app/services/storage.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-formations',
@@ -11,59 +13,53 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./list-formations.component.css'],
 })
 export class ListFormationsComponent implements OnInit {
-
-  displayedColumns: string[] = ['title', 'description','Edit','Delete'];
-
+  perpage:any;
+  page=1;
+  totalpag:any
+  itemsPerPage:any;
+  totalItems:any
+  listitemperpage=[5,10,25]
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @Input() currentFormation?: Formation[] ;
 
-  dataSource: MatTableDataSource<any>;
-
-  formations?: Formation[];
-  currentformation: Formation = {
-    id: 0,
-    title: undefined,
-    description: undefined,
-    periodec: undefined,
-    enabled: undefined,
-    employeeFormationList: undefined,
-    habilitationList: undefined,
-    attachedDocsList: undefined,
-  };
-
+   test: any[]=[];
+  formation:any;
+  emp:any
   deleted=false;
   isdeletedfailed=false;
   errorMessage="";
   currentIndex = -1;
-  constructor(private formationService: FormationService) {
+  formalength: any;
+  constructor(private formationService: FormationService,private storageService: StorageService) {
 
   }
 
   ngOnInit(): void {
-    this.getFormations();
-    this.ngAfterViewInit() ;
+    this.emp=this.storageService.getEmp();
+    console.log(this.emp);
+    //listidattr
+    for(let i=0;i<this.emp['employeeFormationList'].length;i++){
+      console.log(this.emp['employeeFormationList'][i])
+      let id=this.emp['employeeFormationList'][i]
+      this.getFormations(id['id'],i)}
+
+    console.log("this.currentFormation");
+
+
 
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  getFormations(id:any,x:any): any {
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-  getFormations(): any {
-    this.formationService.getAll().subscribe(
+    this.formationService.get(id).subscribe(
       (data: any) => {
-        this.formations = data;
-        this.dataSource=data;
-        console.log(this.dataSource)
+
+       this.test[x]=(data)
+        console.log("this.currentFormation");
+        console.log(data)
+        console.log(this.test)
       },
       (error: any) => {
         console.log(error);
@@ -84,8 +80,5 @@ export class ListFormationsComponent implements OnInit {
         console.error(e)},
     });
   }
-  setActiveForma(formation: Formation, index: number): void {
-    this.currentformation = formation;
-    this.currentIndex = index;
-  }
+
 }

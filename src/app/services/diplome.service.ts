@@ -29,12 +29,12 @@ export class DiplomaService {
 
   create(data: any, id: any): Observable<any> {
     let httpParams = new HttpParams();
-    httpParams = httpParams.append('typeForId', id);
+    httpParams = httpParams.append('empId', id);
     return this.http.post(this.config.API_DIPLOME + 'add', data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_DIPLOME}/{id}`, data);
+    return this.http.put(this.config.API_DIPLOME+'update?id='+id, data);
   }
 
   delete(id: any): Observable<any> {

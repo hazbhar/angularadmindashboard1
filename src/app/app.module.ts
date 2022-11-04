@@ -46,6 +46,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule ,MatTableDataSource} from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -88,10 +96,18 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatPaginatorModule ,
+    MatPaginatorModule,
     MatFormFieldModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    NgxPaginationModule,
+    MatStepperModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
 
   ],
   providers: [Constants,AuthService,DatePipe],

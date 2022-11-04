@@ -20,17 +20,17 @@ export class RoleService {
     return this.http.get<any>(this.config.API_Role + 'getall',this.addHttpOption);
   }
   get(id: any): Observable<any> {
-    return this.http.get<any>(`${this.config.API_Role}getById?id=${id}`);
+    return this.http.get<any>(`${this.config.API_Role}getById?id=${id}`,this.addHttpOption);
   }
   create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Role + 'add?', data);
+    return this.http.post(this.config.API_Role + 'add', data,this.addHttpOption);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_Role}update${id}`, data);
+    return this.http.put(`${this.config.API_Role}update${id}`, data,this.addHttpOption);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.config.API_Role}delete?id=${id}`);
+    return this.http.delete(`${this.config.API_Role}delete?id=${id}`,this.addHttpOption);
   }
 }
