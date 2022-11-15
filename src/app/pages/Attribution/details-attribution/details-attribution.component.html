@@ -1,0 +1,120 @@
+<table style="width:100%" *ngIf="Attributions$.length!=0">
+  <div *ngIf="Attributions$.length==0">
+    <tr>
+      <div class="row mb-3" class="alert
+        alert-danger"
+        role="alert">
+        No Attributions Available
+      </div>
+    </tr>
+  </div>
+  <tr *ngFor="let element of Attributions$;let attr as index">
+    <td>
+    <form id="msform">
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Attribution *:</label>
+        <div class="col-sm-9"> <input class="form-control"
+            type="text"
+            [(ngModel)]="element.title"
+            name="attribution"
+            id="attribution" placeholder="attribution..." required>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Attribution File *</label>
+        <div class="col-sm-9"> <input class="form-control"
+            type="file"
+
+            name="Attributionf"
+            (change)="handleFileInputAttributionf($event)"
+            id="Attributionf" placeholder="Attribution..." required>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button (click)="updateAttribution(element.id,element)"
+          type="submit" name="submit" class="submit">Update</button>
+          <button (click)="delAttribu(element.id)" class="btn
+          btn-danger">Delete (-)</button>
+
+      </div>
+      <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+        alert-danger" role="alert">
+        Updating Attribution failed: {{ errorMessage }}
+      </div>
+
+      <div class="row mb-3" *ngIf="submitted">
+        <h4>Attribution was Updated successfully!</h4>
+      </div>
+
+
+    </form>
+  </td>
+  </tr>
+
+</table>
+<table *ngIf="Attributions$.length==0">
+  <td><div class=" col-sm-9" class="alert
+      alert-danger"
+      role="alert">
+      No Attributions Available
+    </div></td>
+</table>
+<table style="width:100%">
+  <td *ngIf="addatrribution">
+    <form [formGroup]="AttributionForm" id="msform">
+
+      <div formArrayName="attributfrm">
+        <div *ngFor="let item of AttributionsContr.controls;let
+          i=index">
+          <div [formGroupName]="i">
+            <h2 class="fs-title">Attributions</h2>
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Attribution *:</label>
+              <div class="col-sm-9"> <input class="form-control"
+                  type="text"
+                  name="attribution"
+                  formControlName="title"
+                  id="attribution" placeholder="attribution..."
+                  required>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-3 col-form-label">Attribution
+                File *</label>
+              <div class="col-sm-9"> <input class="form-control"
+                  type="file"
+                  formControlName="attribfile"
+                  name="Attributionf"
+                  (change)="handleFileInputAttributionf($event)"
+                  id="Attributionf" placeholder="Attribution..."
+                  required>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button *ngIf="addatrribution"
+              (click)="delnewAttribu(i)" class="btn
+              btn-danger">remove (-)</button></div>
+          <div class="text-center">
+            <button (click)="saveAttribution()"
+              [disabled]="!AttributionsContr.valid"
+              type="submit" name="submit" class="submit">Submit</button>
+            <button type="reset" name="next" class="reset">reset</button>
+          </div>
+          <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+            alert-danger" role="alert">
+            Adding Attributions failed: {{ errorMessage }}
+          </div>
+
+          <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+            <h4>Attributions was submitted successfully!</h4>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </td>
+</table>
+<tr> <button *ngIf="!addatrribution" (click)="addnewAttribu()"
+    class="add">add (+)</button> </tr>

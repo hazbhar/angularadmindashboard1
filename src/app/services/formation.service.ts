@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, ObservableInput, retry } from 'rxjs';
 import { Formation } from '../models/Formation';
 import { Constants } from '../config/constant';
 
@@ -16,43 +16,47 @@ export class FormationService {
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     }),
   };
+  errorHandl: (err: any, caught: Observable<any>) => ObservableInput<any>;
 
   constructor(private http: HttpClient, private config: Constants) {}
 
-  getAll() {
+  getAll(): Observable<Formation[]>  {
     return this.http.get<Formation[]>(
       this.config.API_FORMATION + 'getall',
       this.addHttpOption
-    );
+    ).pipe(retry(1), catchError(this.errorHandl));
   }
 
   get(id: any): Observable<Formation> {
     return this.http.get<Formation>(
       this.config.API_FORMATION + 'getById?id=' + id
-    );
+    ).pipe(retry(1), catchError(this.errorHandl));
   }
-
+  getByRelationEmpId(id: any): Observable<Formation> {
+    return this.http.get<Formation>(
+      this.config.API_FORMATION + 'getByIdFormationEmployee?id=' + id
+    ).pipe(retry(1), catchError(this.errorHandl));
+  }
   create(data: any, id: any): Observable<any> {
-    let httpParams = new HttpParams();
-    httpParams = httpParams.append('empId', id);
-    return this.http.post(
-      this.config.API_FORMATION + 'add',
+
+    return this.http.post<any>(
+      this.config.API_FORMATION + 'add?empId='+id,
       data
-    );
+    ).pipe(retry(1), catchError(this.errorHandl));
   }
 
   update(data: Formation): Observable<any> {
-    return this.http.put(
+    return this.http.put<any>(
       `${this.config.API_FORMATION}update?id=` + data.id,
       data
-    );
+    ).pipe(retry(1), catchError(this.errorHandl));
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(this.config.API_FORMATION + 'delete?id=' + id);
+    return this.http.delete<any>(this.config.API_FORMATION + 'delete?id=' + id).pipe(retry(1), catchError(this.errorHandl));
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(this.config.API_FORMATION);
+    return this.http.delete<any>(this.config.API_FORMATION).pipe(retry(1), catchError(this.errorHandl));
   }
 }

@@ -1,128 +1,134 @@
-<main id="main" class="main" >
-  <div class="pagetitle">
-    <h1>Users Details</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item">User</li>
-        <li class="breadcrumb-item active">Details</li>
-      </ol>
-    </nav>
+<div *ngIf="!empuser">
+  <div class="row mb-3" class="alert
+    alert-danger"
+    role="alert">
+    No User Available
   </div>
-  <section class="section">
+</div>
+<div *ngIf="empuser">
+  <form id="msform">
 
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Edit User</h5>
-            <form >
-
-
-            <!--        validators       -->
-
-            <!--        formgroup       -->
-
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">user name</label>
-              <div class="col-sm-10"> <input
-                type="text"
-                class="form-control"
-                id="username"
-                [(ngModel)]="currentUser.username"
-                name="username"
-                />
-              </div>
-            </div>
-
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">Email</label>
-              <div class="col-sm-10"><input
-                type="text"
-                class="form-control"
-                id="username"
-                [(ngModel)]="currentUser.email"
-                name="username"
-                />
-              </div>
-            </div>
+    <h2 class="fs-title">Infos de sécurité </h2>
 
 
-            <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">type Auth</label>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" name="typeAuth"
-                  id="typeAuth" value="mdp"
-                  [(ngModel)]="typeAuth" (change)="onChange($event)" [checked]="currentUser.password"
-                  required>
-                <label class="custom-control-label" for="typeAuth">Mot de passe</label>
-              </div>
-              <!-- Default inline 2-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" name="typeAuth"
-                 id="typeAuth" value="ldap" [checked]="!currentUser.password"
-                  [(ngModel)]="typeAuth" (change)="onChange($event)" required>
-                <label class="custom-control-label" for="typeAuth">LDAP</label>
-              </div>
+    <!--        formgroup       -->
 
-            </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">user name *</label>
+      <div class="col-sm-9"> <input class="form-control" type="text"
+          name="username" id="username"
+          [(ngModel)]="empuser.username"
+          placeholder="user name..." required>
+      </div>
+    </div>
 
-            <div class="row mb-3">
-              <legend class="col-sm-2 col-form-label ">Role</legend>
-              <div class="col-sm-10">
-                <select multiple class="form-select" name="role"
-                 id="role"
-                  aria-label="Default select example" required>
-                  <option value="-1" disabled selected>Choisir de la liste</option>
-                  <option *ngFor="let rol of role$; let i= index"
-                    [value]="rol.id">{{rol.roleName}}</option>
-                </select>
-              </div>
-            </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">Email *</label>
+      <div class="col-sm-9"> <input class="form-control"
+          type="email"
+          name="email" id="email"
+          [(ngModel)]="empuser.email"
+          placeholder="Email..." required>
+      </div>
+    </div>
 
-            <div class="row mb-3">
-              <legend class="col-sm-2 col-form-label ">privileges</legend>
-              <div class="col-sm-10">
-                <select multiple class="form-select" name="privilege"
-                   id="privilege"
-                  aria-label="Default select example" required>
-                  <option value="-1" disabled selected>Choisir de la liste</option>
-                  <option *ngFor="let privilege of privileges$; let i= index"
-                    [value]="privilege.id">{{privilege.privName}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row mb-3">
-              <label class="col-sm-2 col-form-label"><strong>enable:</strong></label>
-              <div class="form-check form-switch col-sm-10" style="padding-top: 6px"> <input
-                  class="form-check-input" type="checkbox" name="enabled"
-                  id="enable" [(ngModel)]="currentUser.enabled" [checked]="currentUser.enabled"> <label class="form-check-label"
-                  for="enable">switch to change </label></div>
-            </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">confirm Email *</label>
+      <div class="col-sm-9"> <input class="form-control"
+          type="email"
+          name="confirmEmail"
+          [(ngModel)]="empuser.email"
 
-            <div class="form-group row mb-3">
-              <label  class="col-sm-2 col-form-label"><strong>valide: </strong></label>
-              <div class="form-check form-switch col-sm-10" style="padding-top: 6px"> <input
-                  class="form-check-input" type="checkbox" name="valide"
-                  id="valide" [(ngModel)]="currentUser.validity" [checked]="currentUser.validity"> <label class="form-check-label"
-                  for="valide"> switch to change</label></div>
-            </div>
-                <div class="text-center">
-                  <button
-                    type="submit"
-                    class="submit"
-                    (click)="updateUser()">
-                    Update
-                  </button>
-                  <p>{{ message }}</p>
-                </div>
+          id="confirmEmail" placeholder="confirm Email..." required>
+      </div>
+    </div>
 
-              <div *ngIf="!currentUser.id">
-                <br />
-                <div class="text-center">
-                  <p>Cannot access this User...</p>
-                </div>
-              </div>
-            </form>
-          </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label ">type Auth
+        *</label>
+      <div class="col-sm-9" >
+        <div *ngFor="let i of this.authtypeid$" >
+        <div class="custom-control custom-radio
+          custom-control-inline"
+          style="text-align: left;" *ngIf="i.password">
+          <input type="radio" class="custom-control-input"
+            name="typeAuth"
+            id="typeAuth"
+            [value]="i.id"
+            [(ngModel)]="empuser.authentifications.id" (change)="onChange($event)"
+            [checked]="empuser.authentifications.id==i.id"
+            required style="width: inherit;margin-right: 10px">
+          <label class="custom-control-label" for="typeAuth">Mot de
+            passe</label>
         </div>
-  </section>
-</main>
+        <!-- Default inline 2-->
+        <div class="custom-control custom-radio
+          custom-control-inline"
+          style="text-align: left;" *ngIf="i.ldap">
+          <input type="radio" class="custom-control-input"
+            name="typeAuth"
+            [value]="i.id"
+            id="typeAuth"
+            [checked]="empuser.authentifications.id==i.id"
+            [(ngModel)]="empuser.authentifications.id" (change)="onChange($event)"
+            required style="width: inherit;margin-right: 10px">
+          <label class="custom-control-label" for="typeAuth">LDAP</label>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row mb-3">
+      <legend class="col-sm-3 col-form-label ">Role *</legend>
+      <div class="col-sm-9" style="border-style: groove;">
+      <div class="custom-control custom-radio
+          custom-control-inline"
+          style="text-align: left;" *ngFor="let rol of role$; let i= index; ">
+        <input class="custom-control-input" type="checkbox" id="rol.id" name="rol.id" [value]="rol.id" [checked]="checkrole(rol.id)" style="width: inherit;margin-right: 10px">
+        <label class="custom-control-label" for="rol.id">{{rol.roleName}}</label>
+      </div>
+      </div>
+      </div>
+
+    <div class="row mb-3">
+      <legend class="col-sm-3 col-form-label ">privileges *</legend>
+      <div class="col-sm-9" style="border-style: groove;">
+        <div>
+      <div class="custom-control custom-radio
+          custom-control-inline"
+          style="text-align: left;" *ngFor="let privilege of privileges$; let i=
+          index;">
+        <input class="custom-control-input" type="checkbox" id="privilege.id" name="privilege.id" [value]="privilege.id" [checked]="checkprev(privilege.id)" style="width: inherit;margin-right: 10px">
+        <label class="custom-control-label" for="privilege.id">{{privilege.privName}}</label>
+        </div>
+        </div>
+      </div>
+      </div>
+
+    <div class="form-group row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>enable:</strong></label>
+      <div class="form-check form-switch col-sm-9"
+        style="padding-top:
+        6px"> <input
+          class="form-check-input" type="checkbox" name="enabled"
+          id="enable" [(ngModel)]="empuser.enabled"
+          [checked]="empuser.enabled"> </div>
+    </div>
+
+    <div class="form-group row mb-3">
+      <label class="col-sm-3 col-form-label"><strong>valide:
+        </strong></label>
+      <div class="form-check form-switch col-sm-9"
+        style="padding-top:
+        6px;"> <input
+          class="form-check-input" type="checkbox" name="valide"
+          id="valide" [(ngModel)]="empuser.validity"
+          [checked]="empuser.validity"> </div>
+    </div>
+    <div class="text-center">
+      <button
+        type="submit"
+        class="submit"(click)="updateUser()">Update </button>
+    </div>
+
+  </form>
+</div>

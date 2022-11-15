@@ -1,14 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Authentification } from 'src/app/models/Authentification';
 import { Privilege } from 'src/app/models/Privilege';
 import { Role } from 'src/app/models/Role';
-import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PrivilegeService } from 'src/app/services/privilege.service';
 import { RoleService } from 'src/app/services/role.service';
-import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,138 +13,73 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./details-user.component.css'],
 })
 export class DetailsUserComponent implements OnInit {
-  @Input() viewMode = false;
+@Input() currentEmployee:any
 
-  @Input() currentUser: User = {
-    id: undefined,
-    username: undefined,
-    password: undefined,
-    confPassword: undefined,
-    email: undefined,
-    confEmail: undefined,
-    lastconnection: undefined,
-    validity: undefined,
-    enabled: undefined,
-    authentifications: undefined,
-    employee: undefined,
-    roles: undefined,
-    privileges: undefined,
-  };
-  errorMessage = '';
+isupdatedfailed = false;
   isaddedfailed = false;
-  privileges$!: Privilege[];
-  role$!:Role[];
-  user:User;
-  typeAuth: any;
-  authtypeid$!: Authentification[];
+  submitted = false;
+  deleted = false;
+  isdeletedfailed = false;
+  errorMessage = '';
   message = '';
 
+  empuser: any;
+
+  privileges$!: Privilege[];
+  role$!: Role[];
+  authtypeid$!: Authentification[];
+
+  typeAuth: any;
+  authidty:any;
+
   constructor(
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private userservice: UserService,
-    private storageService: StorageService,
-    private privilegeService: PrivilegeService,
+private privilegeService: PrivilegeService,
     private roleService: RoleService,
-    private autheService: AuthService
-  ) {}
+    private autheService: AuthService,
+    private userService: UserService,
+  ) {
+    this.retrieveroles();
+    this.retrievePrivileges();
+    this.retrievetypAuth();
+  }
 
   ngOnInit(): void {
 
-      this.getUser(this.route.snapshot.params['id']);
-      this.retrieveroles();
-      this.retrievePrivileges();
-      this.retrievetypAuth();
+    this.empuser = this.currentEmployee.user;
+
+    console.log(this.empuser);
+    console.log(this.empuser);
 
   }
 
-  getUser(id: string): void {
-    this.userService.get(id).subscribe({
-      next: (data) => {
-        this.currentUser = data;
-        console.log(data);
-      },
-      error: (e) => console.error(e),
-    });
+  checkrole(id:any){
+    for(let roleuser of this.empuser.roles){
+      if (roleuser.id==id)return true
+    }
+    return false
+  }
+  checkprev(id:any){
+    for(let prevuser of this.empuser.privileges){
+      if(prevuser.id==id)return true
+    }
+    return false
   }
 
-  updateValidity(status: boolean): void {
-    const data = {
-      username: this.currentUser.username,
-      password: this.currentUser.password,
-      validity: status,
-    };
-
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, data).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.currentUser.validity = status;
-        this.message = res.message
-          ? res.message
-          : 'The validity was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  updateVisibility(status: boolean): void {
-    const data = {
-      username: this.currentUser.username,
-      password: this.currentUser.password,
-      visibility: status,
-    };
-
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, data).subscribe({
-      next: (res) => {
-        console.log(res);
-        //this.currentUser.visibility = status;
-        this.message = res.message
-          ? res.message
-          : 'The visibility was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  updateEnability(status: boolean): void {
-    const data = {
-      username: this.currentUser.username,
-      password: this.currentUser.password,
-      enability: status,
-    };
-
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, data).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.currentUser.enabled = status;
-        this.message = res.message
-          ? res.message
-          : 'The enability was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  updateUser(): void {
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, this.currentUser).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.message = res.message
-          ? res.message
-          : 'This user was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
+  checkauthtyp(){
+    for (let i of this.authtypeid$) {
+      if (this.typeAuth == 'ldap') {
+        if (i.ldap) {
+          this.authidty = i.id;
+          return true
+        }
+      } else {
+        if (i.password) {
+          this.authidty = i.id;
+          return true
+        }
+      }
+    }
+    return false
   }
 
   retrieveroles(): void {
@@ -183,5 +114,55 @@ export class DetailsUserComponent implements OnInit {
   }
   onChange(e: any) {
     this.typeAuth = e.target.value;
+    for (let i of this.authtypeid$) {
+      if (this.typeAuth == 'ldap') {
+        if (i.ldap) {
+          this.authidty = i.id;
+
+        }
+      } else {
+        if (i.password) {
+          this.authidty = i.id;
+
+        }
+      }
+    }
   }
+
+  updateEnability(status: boolean): void {
+    const data = {
+      username: this.empuser.username,
+      password: this.empuser.password,
+      enability: status,
+    };
+
+    this.message = '';
+
+    this.userService.update(this.empuser.id, data).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.empuser.enabled = status;
+        this.message = res.message
+          ? res.message
+          : 'The enability was updated successfully!';
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  updateUser(): void {
+    this.message = '';
+
+    this.userService.update(this.empuser.id, this.empuser).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.message = res.message
+          ? res.message
+          : 'This user was updated successfully!';
+          window.location.reload();
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
 }

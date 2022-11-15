@@ -25,6 +25,7 @@ import { AddContratComponent } from './pages/Contrat/add-contrat/add-contrat.com
 import { EditContratComponent } from './pages/Contrat/edit-contrat/edit-contrat.component';
 import { DashbordEmpComponent } from './pages/dashbord-emp/dashbord-emp.component';
 import { EditDiplomeComponent } from './pages/Diplome/edit-diplome/edit-diplome.component';
+import { EditUserComponent } from './pages/User/edit-user/edit-user.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'listusers', component: ListUserComponent },
   { path: 'userdetails/:id', component: DetailsUserComponent },
   { path: 'adduser', component: AddUserComponent },
+  { path: 'edit-user/:id', component: EditUserComponent },
 
   { path: 'employe-add', component: AddEmployeComponent },
   { path: 'employe-details/:id', component: DetailsEmployeeComponent },

@@ -11,7 +11,7 @@
   </div>
   <section class="section">
     <div *ngIf="!submitted">
-      <form [formGroup]="Infosgenerales" id="msform">
+      <form id="msform">
         <!-- progressbar -->
         <ul id="progressbar">
           <li [ngClass]="step>=1 ? 'active ' : 'inactive'">Infos générales</li>
@@ -21,42 +21,26 @@
           <li [ngClass]="step>=4 ? 'active' : 'inactive'"> Competences</li>
           <li [ngClass]="step>=5 ? 'active' : 'inactive'">Infos de sécurité</li>
         </ul>
-
+      </form>
+      <form [formGroup]="Infosgenerales" id="msform" novalidate>
         <fieldset *ngIf="step == 1">
           <h2 class="fs-title">Infos générales</h2>
-          <!--        validators       -->
-          <div *ngIf="Infosgenerales.controls['Nom'].invalid &&
-            (Infosgenerales.controls['Nom'].dirty ||
-            Infosgenerales.controls['Nom'].touched)
-            || Infosgenerales.controls['Prenom'].invalid &&
-            (Infosgenerales.controls['Prenom'].dirty ||
-            Infosgenerales.controls['Prenom'].touched)
-            || Infosgenerales.controls['DateNaissance'].invalid &&
-            (Infosgenerales.controls['DateNaissance'].dirty ||
-            Infosgenerales.controls['DateNaissance'].touched)
-            || Infosgenerales.controls['Cin'].invalid &&
-            (Infosgenerales.controls['Cin'].dirty ||
-            Infosgenerales.controls['Cin'].touched)
-            "
-            class="alert alert-danger">
-            <div *ngIf="Infosgenerales.controls['Nom'].errors "> Name is
-              required.</div>
-            <div *ngIf="Infosgenerales.controls['Prenom'].errors "> Prenom is
-              required.</div>
-            <div *ngIf="Infosgenerales.controls['DateNaissance'].errors ">
-              DateNaissance is required.</div>
-            <div *ngIf="Infosgenerales.controls['Cin'].errors "> Cin is
-              required.</div>
-          </div>
           <!--        formgroup       -->
-
           <div class="row mb-3">
             <label for="Nom" class="col-sm-3 col-form-label">Nom *</label>
             <div class="col-sm-9"> <input type="text" class="form-control"
                 name="Nom" id="Nom" placeholder="Nom..." formControlName="Nom"
                 required>
             </div>
-
+            <!--        validators       -->
+            <div *ngIf="Infosgenerales.controls['Nom'].invalid &&
+              (Infosgenerales.controls['Nom'].dirty ||
+              Infosgenerales.controls['Nom'].touched)" class="alert
+              alert-danger">
+              <div *ngIf="Infosgenerales.controls['Nom'].errors">
+                Name is required.
+              </div>
+            </div>
           </div>
           <div class="row mb-3">
             <label for="Prenom" class="col-sm-3 col-form-label">Prenom *</label>
@@ -64,9 +48,16 @@
                 name="Prenom" id="Prenom" formControlName="Prenom"
                 placeholder="Prenom..." required>
             </div>
-
           </div>
-
+          <!--        validators       -->
+          <div *ngIf="Infosgenerales.controls['Prenom'].invalid &&
+            (Infosgenerales.controls['Prenom'].dirty ||
+            Infosgenerales.controls['Prenom'].touched)" class="alert
+            alert-danger">
+            <div *ngIf="Infosgenerales.controls['Prenom'].errors">
+              Prenom is required.
+            </div>
+          </div>
           <div class="row mb-3">
             <label for="DateNaissance" class="col-sm-3 col-form-label">Date
               Naissance
@@ -76,7 +67,15 @@
                 formControlName="DateNaissance" placeholder="Date Naissance..."
                 required>
             </div>
-
+          </div>
+          <!--        validators       -->
+          <div *ngIf="Infosgenerales.controls['DateNaissance'].invalid &&
+            (Infosgenerales.controls['DateNaissance'].dirty ||
+            Infosgenerales.controls['DateNaissance'].touched)" class="alert
+            alert-danger">
+            <div *ngIf="Infosgenerales.controls['DateNaissance'].errors">
+              Date Naissance is required.
+            </div>
           </div>
           <div class="row mb-3">
             <label for="Cin" class="col-sm-3 col-form-label">Cin *</label>
@@ -84,7 +83,14 @@
                 name="Cin" id="Cin" formControlName="Cin" placeholder="Cin..."
                 required>
             </div>
-
+          </div>
+          <!--        validators       -->
+          <div *ngIf="Infosgenerales.controls['Cin'].invalid &&
+            (Infosgenerales.controls['Cin'].dirty ||
+            Infosgenerales.controls['Cin'].touched)" class="alert alert-danger">
+            <div *ngIf="Infosgenerales.controls['Cin'].errors">
+              Cin is required.
+            </div>
           </div>
           <div class="row mb-3">
             <legend class="col-sm-3 col-form-label ">Etat civil</legend>
@@ -95,11 +101,10 @@
                 <option value="" disabled selected>Choisir de la liste</option>
                 <option *ngFor="let etatciv of etatcivil$ ; let i index"
                   [value]="etatciv.id">{{etatciv.state}}</option>
-
               </select>
             </div>
-
           </div>
+
           <input (click)="next()" type="button" name="next"
             [disabled]="!Infosgenerales.valid"
             class="next action-button"
@@ -430,14 +435,14 @@
           </div>
 
           <input (click)="previous()" type="button" name="previous"
-            class="previous action-button-previous" value="Previous"/>
+            class="previous action-button-previous"
+            [disabled]="!Infoscontratdutravail.valid" value="Previous"/>
           <input (click)="next()"
             type="button" name="next" class="next
             action-button" value="Next"/>
           <button type="reset" name="next" class="reset">reset</button>
         </fieldset>
       </form>
-
 
       <form [formGroup]="Infosdesdiplomes" id="msform">
         <fieldset *ngIf="step == 3">
@@ -527,7 +532,7 @@
                     <div class="custom-control custom-radio
                       custom-control-inline">
                       <input type="radio" class="custom-control-input"
-                         name="periodec{{i}}"
+                        name="periodec{{i}}"
                         id="periodec{{i}}" value=true
                         [checked]="periodiq[i]"
                         (change)="onChangeperiodique($event,i)" required>
@@ -547,13 +552,13 @@
                   </div>
                 </div>
 
-                <div *ngIf="periodiq[i]" class="row mb-3"
-                 >
+                <div *ngIf="periodiq[i]" class="row mb-3">
                   <label class="col-sm-3 col-form-label">date de Renouvellement
                     *</label>
                   <div class="col-sm-9"> <input class="form-control"
                       formControlName="dateRenouvellement" type="date"
-                      name="dateRenouvellement{{i}}" id="dateRenouvellement{{i}}"
+                      name="dateRenouvellement{{i}}"
+                      id="dateRenouvellement{{i}}"
                       placeholder="date de Renouvellement..." required>
                   </div>
                 </div>
@@ -572,15 +577,18 @@
                   <label class="col-sm-3 col-form-label">habilitation *</label>
                   <div class="col-sm-9"> <input class="form-control" type="text"
                       formControlName="habilitation" name="habilitation{{i}}"
-                      id="habilitation{{i}}" placeholder="habilitation..." required>
+                      id="habilitation{{i}}" placeholder="habilitation..."
+                      required>
                   </div>
                 </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">date Habilitation *</label>
                   <div class="col-sm-9"> <input class="form-control" type="date"
-                      formControlName="dateHabilitation" name="dateHabilitation{{i}}"
-                      id="dateHabilitation{{i}}" placeholder="date Habilitation..."
+                      formControlName="dateHabilitation"
+                      name="dateHabilitation{{i}}"
+                      id="dateHabilitation{{i}}" placeholder="date
+                      Habilitation..."
                       required>
                   </div>
                 </div>
@@ -598,8 +606,10 @@
                   <label class="col-sm-3 col-form-label">habilitation File *</label>
                   <div class="col-sm-9"> <input class="form-control" type="file"
                       (change)="handleFileInputhabilitationFile($event)"
-                      formControlName="habilitationFile" name="habilitationFile{{i}}"
-                      id="habilitationFile{{i}}" placeholder="habilitation File..."
+                      formControlName="habilitationFile"
+                      name="habilitationFile{{i}}"
+                      id="habilitationFile{{i}}" placeholder="habilitation
+                      File..."
                       required>
                   </div>
                 </div>
@@ -624,33 +634,8 @@
           <h2 class="fs-title">Infos de sécurité </h2>
 
           <!--        validators       -->
-          <div *ngIf="Infosdesecurite.controls['username'].invalid &&
-            (Infosdesecurite.controls['username'].dirty ||
-            Infosdesecurite.controls['username'].touched)
-            || Infosdesecurite.controls['email'].invalid &&
-            (Infosdesecurite.controls['email'].dirty ||
-            Infosdesecurite.controls['email'].touched)
-            || Infosdesecurite.controls['confirmEmail'].invalid &&
-            (Infosdesecurite.controls['confirmEmail'].dirty ||
-            Infosdesecurite.controls['confirmEmail'].touched)
-            || Infosdesecurite.controls['typeAuth'].invalid &&
-            (Infosdesecurite.controls['typeAuth'].dirty ||
-            Infosdesecurite.controls['typeAuth'].touched)
 
-            "
-            class="alert alert-danger">
-            <div *ngIf="Infosdesecurite.controls['username'].errors "> username
-              is
-              required.</div>
-            <div *ngIf="Infosdesecurite.controls['email'].errors "> email is
-              required.</div>
-            <div *ngIf="Infosdesecurite.controls['confirmEmail'].errors ">
-              confirmEmail is required.</div>
-            <div *ngIf="Infosdesecurite.controls['typeAuth'].errors "> typeAuth
-              is
-              required.</div>
 
-          </div>
           <!--        formgroup       -->
 
           <div class="row mb-3">
@@ -743,12 +728,17 @@
           <button (click)="submit()" [disabled]="!Infosdesecurite.valid"
             type="submit" name="submit" class="submit">Submit</button>
           <button type="reset" name="next" class="reset">reset</button>
-          <div *ngIf="isaddedfailed" class="alert alert-danger" role="alert">
-            Adding Employe failed
+          <div *ngIf="employyeefailedadd" class="alert alert-danger" role="alert">
+            <h4> Adding Employe failed</h4>
           </div>
-
-          <div *ngIf="submitted" class="alert alert-success" role="alert">
-            <h4>Employee was submitted successfully!</h4>
+          <div *ngIf="employyeeadded && useradded" class="alert alert-success" role="alert">
+            <h4>Employe was submitted successfully!</h4>
+          </div>
+          <div *ngIf="useradded && !userdeleted && employyeefailedadd" class="alert alert-success" role="alert">
+            <h4>user was submitted successfully!</h4>
+          </div>
+          <div *ngIf="userfailedadd" class="alert alert-danger" role="alert">
+            <h4>Adding user failed!</h4>
           </div>
         </fieldset>
 

@@ -1,7 +1,9 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable ,ObservableInput,throwError } from 'rxjs';
 import { Constants } from '../config/constant';
+import { Eap } from '../models/Eap';
+import { retry, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +17,25 @@ export class EapService {
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     }),
   };
+  errorHandl: (err: any, caught: Observable<any>) => ObservableInput<any>;
 
   constructor(private http: HttpClient, private config: Constants) {}
 
-  getAll(): Observable<any[]> {
-    return this.http.get<any>(this.config.API_Eap + 'getall',this.addHttpOption);
+  getAll(): Observable<Eap[]> {
+    return this.http.get<Eap[]>(this.config.API_Eap + 'getall',this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
-  get(id: any): Observable<any> {
-    return this.http.get<any>(`${this.config.API_Eap}getById?id=${id}`,this.addHttpOption);
+  get(id: any): Observable<Eap> {
+    return this.http.get<Eap>(this.config.API_Eap+"getById?id="+id,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
-  create(id: any, data: any): Observable<any> {
-    return this.http.post(this.config.API_Eap + 'add?', data,this.addHttpOption);
+  create( data: any): Observable<any> {
+    return this.http.post<any>(this.config.API_Eap + 'add', data,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${this.config.API_Eap}update?id=${id}`, data,this.addHttpOption);
+    return this.http.put<any>(this.config.API_Eap+"update?id="+id, data,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.config.API_Eap}delete?id=${id}`,this.addHttpOption);
+    return this.http.delete<any>(`${this.config.API_Eap}delete?id=${id}`,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
 }

@@ -1,0 +1,127 @@
+<form [formGroup]="Infoscontratdutravail" id="msform">
+  <h2 class="fs-title">Infos Contrats </h2>
+                    <div class="form-group">
+                      <div class="row mb-3">
+                        <label for="inputNumber" class="col-sm-3
+                          col-form-label">Date
+                          Debut
+                          Contrat *</label>
+                          <div class="col-sm-9"> <input type="date"
+                            name="DateDebutContrat"
+                            id="DateDebutContrat"
+                            class="form-control"
+                            formControlName="dateDeb"
+                            required>
+                        </div>
+
+                      </div>
+                      <div class="row mb-3">
+                        <legend class="col-form-label col-sm-3 pt-0">type
+                          Contrat *</legend>
+                        <div class="col-sm-9">
+                          <select class="form-select"
+                            name="id" id="id" aria-label="Default
+                            select example" required
+                            formControlName="typcont"
+                            [(ngModel)]="typcont"
+                            required>
+                            <option *ngFor="let typcont of typecontrat$; let i=
+                              index"
+                              [value]="typcont.id" >{{typcont.title}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div *ngIf="typcont!=12" class="row mb-3">
+                        <label for="DateFinContrat" class="col-sm-3
+                          col-form-label">Date
+                          Fin
+                          Contrat</label>
+                        <div class="col-sm-9"> <input type="date"
+                            name="DateFinContrat"
+                            id="DateFinContrat"
+                            class="form-control"
+                            formControlName="datefin"
+                            required
+                            >
+                        </div>
+                      </div>
+
+                      <div *ngIf="typcont==3" class="row mb-3">
+                        <label for="inputColor" class="col-sm-3 col-form-label">frequence</label>
+                        <div class="col-sm-9">
+                          <select class="form-select"
+                            name="frequence" id="frequence"
+                            aria-label="Default select example"
+                            [required]="typcont==3"
+                            formControlName="frequence"
+                            required>
+                            <option value="-1" disabled selected>Choisir de la
+                              liste</option>
+                            <option *ngFor="let frequ of frequence$; let i=
+                              index"
+                              [value]="frequ.id">{{frequ.description}}</option>
+                          </select>
+                        </div>
+                      </div>
+
+
+
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Remise de
+                          matériel *</label>
+                        <div class="col-sm-9"> <input multiple
+                            class="form-control"
+                            type="file"
+                            (change)="handleFileInputremisemateriel($event)"
+                            name="remisemateriel"
+                            id="remisemateriel"
+                            formControlName="remisemateriel"
+                            required>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">contrat
+                          Impartialite *</label>
+                        <div class="col-sm-9"> <input class="form-control"
+                            type="file"
+                            (change)="handleFileInputfileTocontratImpartialite($event)"
+                            name="contratImpartialite"
+                            id="contratImpartialite"
+                            formControlName="contratImpartialite" required>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">contrat
+                          Confidentialite *</label>
+                        <div class="col-sm-9"> <input class="form-control"
+                            type="file"
+                            (change)="handleFileInputcontratConfidentialite($event)"
+                            name="contratConfidentialite"
+                            id="contratConfidentialite"
+                            formControlName="contratConfidentialite" required>
+
+                        </div>
+                      </div>
+
+
+                      <div class="text-center">
+                        <button
+                          type="submit"
+                          class="submit"(click)="addContrat()" [disabled]="!Infoscontratdutravail.valid">Submit
+                        </button>
+
+                      </div>
+
+                      <div class="row mb-3" *ngIf="submitted" class="alert
+                        alert-danger" role="alert">
+                        Adding Contrat failed: {{ errorMessage }}
+                      </div>
+
+                      <div class="row mb-3" *ngIf="submitted">
+                        <h4>Contrat was submitted successfully!</h4>
+                      </div>
+                    </div>
+</form>

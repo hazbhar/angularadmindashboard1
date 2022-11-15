@@ -4,6 +4,9 @@
   position: relative;
   margin-top: 30px;
 }
+/**input.ng-invalid {
+  background-color: pink;
+}*/
 #msform label, legend{
   text-align: left;
   position: relative;

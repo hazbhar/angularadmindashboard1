@@ -44,7 +44,7 @@ import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatTableModule ,MatTableDataSource} from '@angular/material/table'
+import { MatTableModule} from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -54,7 +54,17 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-
+import { DetailsContratComponent } from './pages/Contrat/details-contrat/details-contrat.component';
+import { EditUserComponent } from './pages/User/edit-user/edit-user.component';
+import { DetailsAttributionComponent } from './pages/Attribution/details-attribution/details-attribution.component';
+import { DetailsVisitMedComponent } from './pages/VisiteMedicale/details-visit-med/details-visit-med.component';
+import { DetailsEapComponent } from './pages/Eap/details-eap/details-eap.component';
+import { DeatilsAddEapComponent } from './pages/Eap/deatils-add-eap/deatils-add-eap.component';
+import { DeatilsAddFormationComponent } from './pages/Formation/deatils-add-formation/deatils-add-formation.component';
+import { DeatilsAddAttributionComponent } from './pages/Attribution/deatils-add-attribution/deatils-add-attribution.component';
+import { DeatilsAddContratComponent } from './pages/Contrat/deatils-add-contrat/deatils-add-contrat.component';
+import { DetailsAddVisitMedicaleComponent } from './pages/VisiteMedicale/details-add-visit-medicale/details-add-visit-medicale.component';
+import { DetailsAddDiplomeComponent } from './pages/Diplome/details-add-diplome/details-add-diplome.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,12 +73,10 @@ import {MatDividerModule} from '@angular/material/divider';
     SidebarComponent,
     DashboardComponent,
     UsersProfileComponent,
-
     PagesLoginComponent,
     PagesError404Component,
     PagesBlankComponent,
     ListEmployeeComponent,
-
     AddFormationComponent,
     DetailsFormationComponent,
     EditFormationComponent,
@@ -86,6 +94,17 @@ import {MatDividerModule} from '@angular/material/divider';
     ListContratComponent,
     EditContratComponent,
     DashbordEmpComponent,
+    DetailsContratComponent,
+    EditUserComponent,
+    DetailsAttributionComponent,
+    DetailsVisitMedComponent,
+    DetailsEapComponent,
+    DeatilsAddEapComponent,
+    DeatilsAddFormationComponent,
+    DeatilsAddAttributionComponent,
+    DeatilsAddContratComponent,
+    DetailsAddVisitMedicaleComponent,
+    DetailsAddDiplomeComponent,
 
   ],
   imports: [

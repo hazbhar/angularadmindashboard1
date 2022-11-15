@@ -1,0 +1,149 @@
+<table *ngIf="medicalvisit$.length==0">
+  <td><div class=" col-sm-9" class="alert
+      alert-danger"
+      role="alert">
+      No visite Medicales Available
+    </div></td>
+</table>
+<table style="width:100%" *ngIf="medicalvisit$.length!=0">
+  <tr *ngFor="let element of medicalvisit$;let medicv= index">
+    <td>
+      <div class="borderd">
+      <label ><strong> Vsite de {{element.dateOfMv | date}}</strong></label>
+      <button class="btn btn-outline-primary" type="button" data-toggle="collapse"
+      attr.data-target="#collapseExample{{medicv}}" aria-expanded="true" attr.aria-controls="collapseExample{{medicv}}"  >
+        SHOW
+      </button>
+    </div>
+      <div class="collapse " id="collapseExample{{medicv}}" >
+        <form id="msform" >
+          <h2 class="fs-title">Infos des visite Medicales </h2>
+          <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">visite Medicales *</label>
+            <div class="col-sm-9"> <input multiple
+                class="form-control"
+                type="file"
+                (change)="handleFileIvisiteMedicales($event)"
+                name="visiteMedicales" id="visiteMedicales"
+                required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="DateFinContrat" class="col-sm-3
+              col-form-label">Date
+              visite Medicale *</label>
+            <div class="col-sm-9"> <input type="date"
+                name="DateFinContrat"
+                id="DateFinContrat"
+                class="form-control"
+                [(ngModel)]="element.dateOfMv"
+                required>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="DateProchVisiteMedicale" class="col-sm-3
+              col-form-label">Date
+              Prochaine visite Medicale *</label>
+            <div class="col-sm-9"> <input type="date"
+                name="DateProchVisiteMedicale"
+                id="DateProchVisiteMedicale"
+                [(ngModel)]="element.dateOfNextMv"
+                class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="text-center">
+              <button
+                type="submit"
+                class="submit"(click)="updateVistMed(element)">Update
+              </button>
+              <button class="btn
+              btn-danger" (click)="deleteVisitMed(element.id)">Delete</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table style="width:100%" *ngIf="addVisitMed">
+
+  <tr>
+    <td>
+      <form [formGroup]="VesitMed" id="msform">
+        <div formArrayName="vesitmed">
+          <div *ngFor="let item of VesitMedsform.controls;let
+            i=index">
+            <div [formGroupName]="i">
+              <h2 class="fs-title">Infos des visite Medicales </h2>
+
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">visite Medicales *</label>
+                <div class="col-sm-9"> <input multiple
+                    class="form-control"
+                    type="file"
+                    (change)="handleFileIvisiteMedicales($event)"
+                    name="visiteMedicales" id="visiteMedicales"
+                    formControlName="visiteMedicales"
+                    required>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label for="DateFinContrat" class="col-sm-3
+                  col-form-label">Date
+                  visite Medicale *</label>
+                <div class="col-sm-9"> <input type="date"
+                    name="DateFinContrat"
+                    id="DateFinContrat"
+                    class="form-control"
+                    formControlName="DateVisiteMedicale"
+                    required>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="DateProchVisiteMedicale" class="col-sm-3
+                  col-form-label">Date
+                  Prochaine visite Medicale *</label>
+                <div class="col-sm-9"> <input type="date"
+                    name="DateProchVisiteMedicale"
+                    id="DateProchVisiteMedicale"
+                    formControlName="DateProchVisiteMedicale"
+                    class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="text-center">
+                  <button
+                    [disabled]="!VesitMedsform.valid"
+                    type="submit"
+                    class="submit"(click)="saveVistMed()">Submit
+                  </button>
+                  <button class="btn
+                  btn-danger"
+                  (click)="delnewVesitMed(i)">remove (-)</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+        alert-danger" role="alert">
+        Adding Medical Visit failed: {{ errorMessage }}
+      </div>
+
+      <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+        <h4>Medical Visit was submitted successfully!</h4>
+      </div>
+      </form>
+    </td>
+  </tr>
+
+</table>
+<tr> <button *ngIf="!addVisitMed" (click)="addnewVesitMed()" class="add">add (+)</button>
+</tr>

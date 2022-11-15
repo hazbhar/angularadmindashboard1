@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, ObservableInput, retry } from 'rxjs';
 import { Constants } from '../config/constant';
 
 @Injectable({
@@ -14,6 +14,7 @@ export class FileUploadService {
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     }),
   };
+  errorHandl: (err: any, caught: Observable<Object>) => ObservableInput<any>;
   constructor(private http: HttpClient, private config: Constants) {}
 
   // Returns an observable
@@ -32,6 +33,9 @@ export class FileUploadService {
 
     // Make http post request over api
     // with formData as req
-    return this.http.post(this.config.API_UploadFile + 'documents', file);
+    return this.http.post(this.config.API_UploadFile + 'documents', file).pipe(retry(1), catchError(this.errorHandl));
+  }
+  getFiles(): Observable<any> {
+    return this.http.get(`${this.config.API_UploadFile}/files`);
   }
 }

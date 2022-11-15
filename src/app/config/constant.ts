@@ -43,6 +43,7 @@ export class Constants {
   public readonly API_Eap: string = this.API_ENDPOINT + 'eap/';
 
   public readonly API_MedVis: string = this.API_ENDPOINT + 'medicalVisit/';
+  public readonly API_Habili: string = this.API_ENDPOINT + '/';
 
 
 }
