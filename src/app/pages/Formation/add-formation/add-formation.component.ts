@@ -1,18 +1,21 @@
 import { FormationService } from 'src/app/services/formation.service';
 import { Formation } from 'src/app/models/Formation';
-import { Component, Input, OnInit } from '@angular/core';
-import { EmployeeFormation } from '../../../models/EmployeeFormation';
-import { AttachedDocs } from '../../../models/AttachedDocs';
+import { Component, Input, OnInit ,ViewEncapsulation } from '@angular/core';
+
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { EmployeService } from 'src/app/services/employe.service';
 
 @Component({
   selector: 'app-add-formation',
   templateUrl: './add-formation.component.html',
   styleUrls: ['./add-formation.component.css'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class AddFormationComponent implements OnInit {
   empid:number=0;
+  EmpData$:any;
 
   /**
  * boolean array for periodic formation wich can be  multiple
@@ -42,10 +45,13 @@ export class AddFormationComponent implements OnInit {
 
   errorMessage: any;
   isaddedfailed: any;
-  constructor(private formationService: FormationService,private formBuilder: FormBuilder,    private fileUploadService: FileUploadService
-    ) {}
+  constructor(private formationService: FormationService,private formBuilder: FormBuilder,    private fileUploadService: FileUploadService,private employeService : EmployeService
+    ) {
+    }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.EmpData$=await this.getemployees();
+
     this.Competences = this.formBuilder.group({
       formation: new FormArray([]),
     });
@@ -150,6 +156,9 @@ export class AddFormationComponent implements OnInit {
   }
   handleFileInputhabilitationFile(event: any) {
     this.fileToUploadhabilitationFile.push(<File>event.target.files[0]);
+  }
+  getemployees(){
+    return this.employeService.getAll().toPromise()
   }
 saveformation(){
   this.uploadhabilitationFile(this.fileToUploadhabilitationFile);

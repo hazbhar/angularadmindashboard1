@@ -65,6 +65,8 @@ import { DeatilsAddAttributionComponent } from './pages/Attribution/deatils-add-
 import { DeatilsAddContratComponent } from './pages/Contrat/deatils-add-contrat/deatils-add-contrat.component';
 import { DetailsAddVisitMedicaleComponent } from './pages/VisiteMedicale/details-add-visit-medicale/details-add-visit-medicale.component';
 import { DetailsAddDiplomeComponent } from './pages/Diplome/details-add-diplome/details-add-diplome.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +129,6 @@ import { DetailsAddDiplomeComponent } from './pages/Diplome/details-add-diplome/
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-
   ],
   providers: [Constants,AuthService,DatePipe],
   bootstrap: [AppComponent]
