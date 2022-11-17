@@ -37,10 +37,10 @@ export class FormationService {
       this.config.API_FORMATION + 'getByIdFormationEmployee?id=' + id
     ).pipe(retry(1), catchError(this.errorHandl));
   }
-  create(data: any, id: any): Observable<any> {
+  create(data: any, id: any,formationRenewalDate:any): Observable<any> {
 
     return this.http.post<any>(
-      this.config.API_FORMATION + 'add?empId='+id,
+      this.config.API_FORMATION + 'add?empId='+id+"&formationRenewalDate="+formationRenewalDate,
       data
     ).pipe(retry(1), catchError(this.errorHandl));
   }

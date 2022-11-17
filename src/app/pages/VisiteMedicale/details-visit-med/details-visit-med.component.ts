@@ -154,14 +154,13 @@ VesitMed!: FormGroup;
 
    updateVistMed(med: any) {
     this.message = '';
-
+    console.log(med);
     this.medicalVisiteService.update(med.id, med).subscribe({
       next: (res) => {
         console.log(res);
         this.message = res.message
           ? res.message
           : 'This medical visit was updated successfully!';
-          window.location.reload();
       },
       error: (e) => console.error(e),
     });
@@ -171,15 +170,13 @@ VesitMed!: FormGroup;
    saveVistMed() {
     this.uploadvisiteMedicalesf(this.fileToUploadvisiteMedicales);
     const vesMid = {
-      dateOfMv: this.datePipe.transform(
+      dateOfMv:
         this.VesitMedsform.value[0].DateVisiteMedicale,
-        'dd-MM-yyyy'
-      ),
-      dateOfNextMv: this.datePipe.transform(
+        dateOfNextMv:
         this.VesitMedsform.value[0].DateProchVisiteMedicale,
-        'dd-MM-yyyy'
-      ),
-      attachedDocsList: this.shortLinkvisiteMedicalesf$,
+
+
+        attachedDocsList: this.shortLinkvisiteMedicalesf$,
     };
     console.log(vesMid);
     this.medicalVisiteService

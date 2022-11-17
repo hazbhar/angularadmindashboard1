@@ -11,6 +11,7 @@
                             id="DateDebutContrat"
                             class="form-control"
                             formControlName="dateDeb"
+                            [(ngModel)]="startdate"
                             required>
                         </div>
 
@@ -42,7 +43,8 @@
                             id="DateFinContrat"
                             class="form-control"
                             formControlName="datefin"
-                            required
+                            [(ngModel)]="endate"
+
                             >
                         </div>
                       </div>
@@ -55,6 +57,7 @@
                             aria-label="Default select example"
                             [required]="typcont==3"
                             formControlName="frequence"
+                            [(ngModel)]="frequ"
                             required>
                             <option value="-1" disabled selected>Choisir de la
                               liste</option>
@@ -115,12 +118,16 @@
 
                       </div>
 
-                      <div class="row mb-3" *ngIf="submitted" class="alert
+                      <div class="row mb-3" *ngIf="isaddedfailed" class="alert
                         alert-danger" role="alert">
                         Adding Contrat failed: {{ errorMessage }}
                       </div>
-
-                      <div class="row mb-3" *ngIf="submitted">
+                      <div class="row mb-3" *ngIf="fileisaddedfailed" class="alert
+                      alert-danger" role="alert">
+                      Adding Contrat failed: {{ errorMessage }}
+                    </div>
+                      <div class="row mb-3" *ngIf="submitted" class="alert
+                      alert-success">
                         <h4>Contrat was submitted successfully!</h4>
                       </div>
                     </div>

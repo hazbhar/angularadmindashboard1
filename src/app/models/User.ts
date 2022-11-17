@@ -13,8 +13,8 @@ export class User{
   lastconnection?: Date;
   validity?: boolean ;
   enabled?: boolean ;
-  authentifications?:Authentification;
+  authentifications:Authentification;
   employee?:Employe;
-  roles?: Array<Role> ;
-  privileges ?:Array<Privilege>;
+  roles: Array<Role> ;
+  privileges :Array<Privilege>;
 }

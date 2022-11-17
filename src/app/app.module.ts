@@ -66,6 +66,10 @@ import { DeatilsAddContratComponent } from './pages/Contrat/deatils-add-contrat/
 import { DetailsAddVisitMedicaleComponent } from './pages/VisiteMedicale/details-add-visit-medicale/details-add-visit-medicale.component';
 import { DetailsAddDiplomeComponent } from './pages/Diplome/details-add-diplome/details-add-diplome.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { authInterceptorProviders } from './helpers/auth.interceptors';
 
 @NgModule({
   declarations: [
@@ -129,8 +133,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule,
+    NgSelectModule
   ],
-  providers: [Constants,AuthService,DatePipe],
+  providers: [authInterceptorProviders,Constants,AuthService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

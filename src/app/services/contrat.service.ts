@@ -29,11 +29,11 @@ export class ContratService {
 
   create(employeeId: any,contractTypeId: any,frequenceId: any, data: any): Observable<any> {
 
-    return this.http.post<any>(this.config.API_Contrat + 'add?frequenceId=', frequenceId+'&contractTypeId='+contractTypeId+'&employeeId='+employeeId,data).pipe(retry(1), catchError(this.errorHandl));
+    return this.http.post<any>(this.config.API_Contrat + 'add?frequenceId='+frequenceId+'&contractTypeId='+contractTypeId+'&employeeId='+employeeId,data).pipe(retry(1), catchError(this.errorHandl));
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put<any>(this.config.API_Contrat+"update?id="+id, data).pipe(retry(1), catchError(this.errorHandl));
+  update(id: any, data: any,frequenceId:any,employeeId :any): Observable<any> {
+    return this.http.put<any>(this.config.API_Contrat+"update?id="+id+'&frequenceId='+frequenceId+'&employeeId='+employeeId+"&contractTypeId="+data.contractType.id, data).pipe(retry(1), catchError(this.errorHandl));
   }
 
   delete(id: any): Observable<any> {

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Authentification } from 'src/app/models/Authentification';
 import { Privilege } from 'src/app/models/Privilege';
 import { Role } from 'src/app/models/Role';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PrivilegeService } from 'src/app/services/privilege.service';
 import { RoleService } from 'src/app/services/role.service';
@@ -23,7 +24,7 @@ isupdatedfailed = false;
   errorMessage = '';
   message = '';
 
-  empuser: any;
+  empuser: User;
 
   privileges$!: Privilege[];
   role$!: Role[];
@@ -138,7 +139,7 @@ private privilegeService: PrivilegeService,
 
     this.message = '';
 
-    this.userService.update(this.empuser.id, data).subscribe({
+    this.userService.update(this.empuser.id, data,this.empuser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         this.empuser.enabled = status;
@@ -152,16 +153,16 @@ private privilegeService: PrivilegeService,
 
   updateUser(): void {
     this.message = '';
-
-    this.userService.update(this.empuser.id, this.empuser).subscribe({
+    console.log(JSON.stringify(this.empuser))
+    this.userService.update(this.empuser.id, this.empuser,this.empuser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         this.message = res.message
           ? res.message
           : 'This user was updated successfully!';
-          window.location.reload();
+          this.submitted=true
       },
-      error: (e) => console.error(e),
+      error: (e) =>{ console.error(e);this.isaddedfailed=true},
     });
   }
 

@@ -55,7 +55,7 @@ errorMessage = '';
 
     for (let i = 0; i < this.currentEmployee['contractList'].length; i++) {
       let id = this.currentEmployee['contractList'][i];
-     await this.getContratss(id['id'], i);
+      this.getContratss(id['id'], i);
     }
   }
   getContratbyid(id: any) {
@@ -72,7 +72,20 @@ errorMessage = '';
     });
   }
   editContrat(contrat: Contract) {
-    window.location.reload();
+    console.log(contrat)
+    let freqid;
+    if (!contrat.frequence) freqid='';
+    else  freqid=contrat.frequence.id;
+    this.contratService.update(contrat.id,contrat,freqid,this.currentEmployee.id).subscribe({
+      next:()=>{
+        console.log("updateted")
+        this.submitted=true;
+      },
+      error:(err)=>{
+        console.log("updating failed")
+        this.isupdatedfailed=true;
+      }
+    })
   }
 
   retrievefrequences(): void {

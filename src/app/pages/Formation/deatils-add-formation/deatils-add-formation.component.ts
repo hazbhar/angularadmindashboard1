@@ -34,6 +34,7 @@ export class DeatilsAddFormationComponent implements OnInit {
   ngOnInit(): void {
     this.Competences = this.formBuilder.group({
       title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
       periodec: new FormControl(''),
       dateRenouvellement: new FormControl(''),
       formationFile: new FormControl('', Validators.required),
@@ -118,11 +119,11 @@ export class DeatilsAddFormationComponent implements OnInit {
       this.uploadhabilitationFile(this.fileToUploadhabilitationFile);
       this.uploadformationFile(this.fileToUploadformationFile);
 
-      const forma = {
-        formation: {
+      const forma =
+         {
           title: this.Competences.value.title,
           description: this.Competences.value.description,
-          periodec: this.Competences.value.periodic,
+          periodec: this.periodiq,
           enabled: true,
 
           habilitationList: [
@@ -135,14 +136,11 @@ export class DeatilsAddFormationComponent implements OnInit {
             },
           ],
           attacheDocsList: this.shortLinkformationFile$,
-        },
-        formationRenewalDate: this.datePipe.transform(
-          this.Competences.value.dateRenouvellement,
-          'dd-MM-yyyy'
-        ),
+
+
       };
       console.log(forma);
-      this.formationService.create(forma, this.currentEmployeeid).subscribe({
+      this.formationService.create(forma, this.currentEmployeeid,this.Competences.value.dateRenouvellement).subscribe({
         next: (res: any) => {
           console.log(res);
           this.submitted = true;

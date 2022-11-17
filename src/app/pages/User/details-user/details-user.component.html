@@ -32,16 +32,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
-      <label class="col-sm-3 col-form-label">confirm Email *</label>
-      <div class="col-sm-9"> <input class="form-control"
-          type="email"
-          name="confirmEmail"
-          [(ngModel)]="empuser.email"
 
-          id="confirmEmail" placeholder="confirm Email..." required>
-      </div>
-    </div>
 
     <div class="row mb-3">
       <label class="col-sm-3 col-form-label ">type Auth
@@ -77,6 +68,7 @@
       </div>
     </div>
     </div>
+
     <div class="row mb-3">
       <legend class="col-sm-3 col-form-label ">Role *</legend>
       <div class="col-sm-9" style="border-style: groove;">
@@ -124,6 +116,14 @@
           id="valide" [(ngModel)]="empuser.validity"
           [checked]="empuser.validity"> </div>
     </div>
+    <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+    alert-danger" role="alert">
+    Updating User  failed: {{ errorMessage }}
+  </div>
+
+  <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+    <h4>User  was Updated successfully!</h4>
+  </div>
     <div class="text-center">
       <button
         type="submit"

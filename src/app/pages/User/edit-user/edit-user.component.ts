@@ -19,21 +19,7 @@ import { UserService } from 'src/app/services/user.service';
 export class EditUserComponent implements OnInit {
   @Input() viewMode = false;
 
-  @Input() currentUser: User = {
-    id: undefined,
-    username: undefined,
-    password: undefined,
-    confPassword: undefined,
-    email: undefined,
-    confEmail: undefined,
-    lastconnection: undefined,
-    validity: undefined,
-    enabled: undefined,
-    authentifications: undefined,
-    employee: undefined,
-    roles: undefined,
-    privileges: undefined,
-  };
+  @Input() currentUser: User ;
   errorMessage = '';
   isaddedfailed = false;
   privileges$!: Privilege[];
@@ -83,7 +69,7 @@ export class EditUserComponent implements OnInit {
 
     this.message = '';
 
-    this.userService.update(this.currentUser.id, data).subscribe({
+    this.userService.update(this.currentUser.id, data,this.currentUser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         this.currentUser.validity = status;
@@ -104,7 +90,7 @@ export class EditUserComponent implements OnInit {
 
     this.message = '';
 
-    this.userService.update(this.currentUser.id, data).subscribe({
+    this.userService.update(this.currentUser.id, data,this.currentUser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         //this.currentUser.visibility = status;
@@ -125,7 +111,7 @@ export class EditUserComponent implements OnInit {
 
     this.message = '';
 
-    this.userService.update(this.currentUser.id, data).subscribe({
+    this.userService.update(this.currentUser.id, data,this.currentUser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         this.currentUser.enabled = status;
@@ -140,7 +126,7 @@ export class EditUserComponent implements OnInit {
   updateUser(): void {
     this.message = '';
 
-    this.userService.update(this.currentUser.id, this.currentUser).subscribe({
+    this.userService.update(this.currentUser.id, this.currentUser,this.currentUser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         this.message = res.message

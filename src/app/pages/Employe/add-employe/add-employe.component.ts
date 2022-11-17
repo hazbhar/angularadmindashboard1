@@ -206,11 +206,11 @@ export class AddEmployeComponent implements OnInit {
     this.Infosdesecurite = this.formBuilder.group(
       {
         username: new FormControl('', Validators.required),
-        email: new FormControl('', Validators.required),
-        confirmEmail: new FormControl('', Validators.required),
+        email: new FormControl(['', [Validators.required,Validators.email]]),
+        confirmEmail: new FormControl(['', [Validators.required,Validators.email]]),
         typeAuth: new FormControl('', Validators.required),
-        password: new FormControl(''),
-        confirmPassword: new FormControl(''),
+        password: new FormControl(['',[ Validators.minLength(6)]]),
+        confirmPassword: new FormControl(['',[ Validators.minLength(6)]]),
         role: new FormControl('', Validators.required),
         privilege: new FormControl('', Validators.required),
       },

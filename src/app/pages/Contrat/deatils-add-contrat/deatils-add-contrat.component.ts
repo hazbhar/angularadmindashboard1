@@ -26,9 +26,16 @@ fileToUploadcontratImpartialite: File;
 fileToUploadcontratConfidentialite: File;
 shortLinkcontratConfidentialite$: any;
 shortLinkcontratImpartialite$: any;
-
+fileisaddedfailed=false
 isaddedfailed = false;
 submitted = false;
+
+
+nomSociete:any;
+availability:any;
+startdate:any;
+endate:any;
+frequ='';
 
 errorMessage = '';
 typcont:any;
@@ -36,9 +43,6 @@ typcont:any;
     private formBuilder: FormBuilder) {
     this.retrievetypecontrats();
     this.retrievefrequences();
-  }
-
-  ngOnInit(): void {
 
     this.Infoscontratdutravail = this.formBuilder.group({
       dateDeb: new FormControl('', Validators.required),
@@ -51,11 +55,10 @@ typcont:any;
     });
 
   }
-  get infodescontrats() {
-    return this.Infoscontratdutravail.controls;
-  }
-  get contras() {
-    return this.Infoscontratdutravail.get('contr') as FormArray;
+
+  ngOnInit(): void {
+
+
   }
 
   handleFileInputfileTocontratImpartialite(event: any) {
@@ -65,7 +68,7 @@ typcont:any;
   handleFileInputcontratConfidentialite(event: any) {
     this.fileToUploadcontratConfidentialite = <File>event.target.files[0];
   }
-  handleFileInputremisemateriel(event: any) {
+   handleFileInputremisemateriel(event: any) {
     for (var i = 0; i < event.target.files.length; i++) {
       this.fileToUploadremisemateriel.push(<File>event.target.files[i]);
     }
@@ -87,7 +90,7 @@ typcont:any;
         })
         .catch((error) => {
           this.errorMessage = error.message;
-          this.isaddedfailed = true;
+          this.fileisaddedfailed = true;
         });
     }
   }
@@ -102,7 +105,7 @@ typcont:any;
       })
       .catch((error) => {
         this.errorMessage = error.message;
-        this.isaddedfailed = true;
+        this.fileisaddedfailed = true;
       });
   }
   async uploadcontratConfidentialite(fil: File) {
@@ -116,7 +119,7 @@ typcont:any;
       })
       .catch((error) => {
         this.errorMessage = error.message;
-        this.isaddedfailed = true;
+        this.fileisaddedfailed = true;
       });
   }
 
@@ -147,5 +150,42 @@ typcont:any;
       error: (e) => console.error(e),
     });
   }
-  addContrat(){}
+  async addContrat(){
+   await this.uploadremisematerielf(this.fileToUploadremisemateriel);
+   await  this.uploadcontratConfidentialite(this.fileToUploadcontratConfidentialite);
+   await this.uploadcontratImpartialite(this.fileToUploadcontratImpartialite);
+   const contrat= {
+        companyName: this.nomSociete,
+        availability: Boolean(this.availability),
+        impartialityContract: this.shortLinkcontratImpartialite$,
+        privacyContract: this.shortLinkcontratConfidentialite$,
+
+            startDate: this.startdate,
+            endDate: this.endate,
+
+
+
+
+        handedOverList: [
+          {
+            attachedDocs: this.shortLinkremisematerielf$,
+          },
+        ],
+
+
+
+      }
+      console.log(contrat)
+    this.contratService.create(this.currentEmployeeid,Number(this.typcont),this.frequ,contrat).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.submitted = true;
+      },
+      error: (err) => {
+        console.log('adding Contrat failed ');
+        this.errorMessage = err.error.message;
+        this.isaddedfailed = true;
+      },
+    });
+  }
 }

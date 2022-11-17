@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeService } from '../../../services/employe.service';
 import { CivilState } from 'src/app/models/CivilState';
 import { Process } from 'src/app/models/Process';
@@ -64,7 +64,7 @@ export class DetailsEmployeeComponent implements OnInit {
   typePersonnel: any;
   typeProcessus: any;
 
-  currentEmployee$: any;
+  currentEmployee$: any=undefined;
 
   constructor(
     private observer: BreakpointObserver,
@@ -73,17 +73,17 @@ export class DetailsEmployeeComponent implements OnInit {
     private unitetechservice: ServiceService,
     private siteService: SiteService,
     private typepersoService: TypepersonnelService,
-
+    private router: Router,
     private route: ActivatedRoute,
     private etatcivilService: EtatcivilService,
 
 
   ) {
+    this.getEmployee(this.route.snapshot.params['id']);
 
     /*
      * consum api and collect data from data base
      */
-    this.getEmployee(this.route.snapshot.params['id']);
     this.retrieveunitetech();
     this.retrievetypprocesus();
 
@@ -93,7 +93,7 @@ export class DetailsEmployeeComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
     /**
      * open employee menu
@@ -114,10 +114,16 @@ export class DetailsEmployeeComponent implements OnInit {
       }
     });
   }
-  getEmployee(id: string): void {
-    this.employeeService.get(id).subscribe((data: {}) => {
+  async getEmployee(id: string): Promise<void> {
+    this.employeeService.get(id).subscribe({
+      next:(data: any) =>{
       this.currentEmployee$ = data;
+      console.log("this.currentEmployee$");
       console.log(this.currentEmployee$);
+    },
+    error : (er)=>{
+      console.log("error getting employee");
+      this.router.navigate(['/pages-error404', { }]);}
     });
   }
 
@@ -185,8 +191,7 @@ export class DetailsEmployeeComponent implements OnInit {
   checktypprocess(id:any){
 
       for(let procesemp of this.currentEmployee$.processList){
-        console.log(procesemp.id)
-        console.log(id)
+
         if(procesemp.id==id)return true
       }
       return false

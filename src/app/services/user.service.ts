@@ -33,8 +33,11 @@ export class UserService {
     return this.http.post<any>(this.config.API_USER + 'add?authId=' + id, data,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put<any>(`${this.config.API_USER}update?id=${id}`, data,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
+  update(id: any, data: any,authId:any): Observable<any> {
+    return this.http.put<any>(`${this.config.API_USER}update?id=${id}&authId=${authId}`, data,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
+  }
+  updatePass(id: any, oldpassword: any,password:any,confpassword:any): Observable<any> {
+    return this.http.put<any>(`${this.config.API_USER}updatePassword?id=${id}&oldpassword=${oldpassword}&password=${password}&confpassword=${confpassword}`,this.addHttpOption).pipe(retry(1), catchError(this.errorHandl));
   }
 
   delete(id: any): Observable<any> {

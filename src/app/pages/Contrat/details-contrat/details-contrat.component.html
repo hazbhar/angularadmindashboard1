@@ -123,11 +123,12 @@
 
                       <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
                         alert-danger" role="alert">
-                        Adding Contrat failed: {{ errorMessage }}
+                        Updating Contrat failed: {{ errorMessage }}
                       </div>
 
-                      <div class="row mb-3" *ngIf="submitted">
-                        <h4>Contrat was submitted successfully!</h4>
+                      <div class="row mb-3" *ngIf="submitted" lass="alert
+                      alert-success">
+                        <h4>Contrat was Updated successfully!</h4>
                       </div>
                     </div>
 
@@ -147,7 +148,7 @@
             <table style="width:100%">
             <tr *ngIf="addcontrat" >
               <td>
-             <app-deatils-add-contrat></app-deatils-add-contrat>
+             <app-deatils-add-contrat [currentEmployeeid]="currentEmployee.id"></app-deatils-add-contrat>
             </td>
             </tr>
             <tr *ngIf="!addcontrat"><td> <button (click)="addcontrat=true" class="add">add (+)</button></td>

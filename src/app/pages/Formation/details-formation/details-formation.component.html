@@ -9,7 +9,8 @@
       </div>
     </tr>
   </div>
-  <td *ngFor="let element of formations$;let f as index">
+  <tr *ngFor="let element of formations$;let f as index">
+    <td>
     <form id="msform">
       <h2 class="fs-title">Infos des Formations </h2>
 
@@ -163,7 +164,7 @@
 
     </form>
   </td>
-
+</tr>
 </table>
 <table *ngIf="formations$.length==0">
   <td><div class=" col-sm-9" class="alert

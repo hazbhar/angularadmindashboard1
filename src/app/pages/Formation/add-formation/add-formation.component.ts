@@ -5,6 +5,7 @@ import { Component, Input, OnInit ,ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { EmployeService } from 'src/app/services/employe.service';
+import { Employe } from 'src/app/models/Employe';
 
 @Component({
   selector: 'app-add-formation',
@@ -14,8 +15,12 @@ import { EmployeService } from 'src/app/services/employe.service';
 
 })
 export class AddFormationComponent implements OnInit {
-  empid:number=0;
   EmpData$:any;
+/**
+ * test ng select
+ */
+
+ selected:Employe[] = [];
 
   /**
  * boolean array for periodic formation wich can be  multiple
@@ -47,50 +52,31 @@ export class AddFormationComponent implements OnInit {
   isaddedfailed: any;
   constructor(private formationService: FormationService,private formBuilder: FormBuilder,    private fileUploadService: FileUploadService,private employeService : EmployeService
     ) {
+      this.getemployees();
+      this.Competences = this.formBuilder.group({
+        title:['', Validators.required],
+        periodec: ['', Validators.required],
+        dateRenouvellement:['', Validators.required],
+        formationFile: ['', Validators.required],
+        habilitation: ['', Validators.required],
+        dateHabilitation: ['', Validators.required],
+        dateRenHabi: ['', Validators.required],
+        habilitationFile:['', Validators.required],
+      });
     }
 
-  async ngOnInit(): Promise<void> {
-    this.EmpData$=await this.getemployees();
+   ngOnInit() {
 
-    this.Competences = this.formBuilder.group({
-      formation: new FormArray([]),
-    });
-    this.addnewformat();
+
   }
 
 
-  addnewformat() {
-    this.formatitems = this.Competences.get('formation') as FormArray;
-    this.formatitems.push(this.gennewformat());
-  }
-/**
-   * function to add new form group diplome in the form array
-   */
-  delnewformat(index: any) {
-    this.formatitems = this.Competences.get('formation') as FormArray;
-    this.formatitems.removeAt(index);
-  }
-/**
-   * function to generate new form group diplome before adding it to the form array
-   */
-  gennewformat(): FormGroup {
-    return new FormGroup({
-      title: new FormControl('', Validators.required),
-      periodec: new FormControl(''),
-      dateRenouvellement: new FormControl(''),
-      formationFile: new FormControl('', Validators.required),
-      habilitation: new FormControl('', Validators.required),
-      dateHabilitation: new FormControl('', Validators.required),
-      dateRenHabi: new FormControl('', Validators.required),
-      habilitationFile: new FormControl('', Validators.required),
-    });
-  }
 
   onChangeperiodique(e: any) {
     if (e.target.value === 'true') {
       this.periodiq = true;
       /*this.formation["periodec"].controls[0].setValidators([ Validators.required]);*/
-
+console.log(this.selected)
     } else {
 
       this.periodiq = false;
@@ -158,7 +144,17 @@ export class AddFormationComponent implements OnInit {
     this.fileToUploadhabilitationFile.push(<File>event.target.files[0]);
   }
   getemployees(){
-    return this.employeService.getAll().toPromise()
+     this.employeService.getAll().subscribe({
+      next: (data) =>{
+        this.EmpData$=data;
+        console.log(this.EmpData$)
+
+      },
+      error:(err)=>{
+        console.log(err.message)
+
+      }
+    })
   }
 saveformation(){
   this.uploadhabilitationFile(this.fileToUploadhabilitationFile);
@@ -167,16 +163,16 @@ saveformation(){
   const forma={
     employee: null,
     formation: {
-      title: this.format.value.title,
-      description: this.format.value.description,
-      periodec: this.format.value.periodic,
+      title: this.Competences.value.title,
+      description: this.Competences.value.description,
+      periodec: this.Competences.value.periodic,
       enabled: true,
 
       habilitationList: [
         {
-          title: this.format.value.habilitation,
-          habilitationDate: this.format.value.dateHabilitation,
-          habilitationRenewalDate: this.format.value.dateRenHabi,
+          title: this.Competences.value.habilitation,
+          habilitationDate: this.Competences.value.dateHabilitation,
+          habilitationRenewalDate: this.Competences.value.dateRenHabi,
           validity: true,
           attacheDocsList:
             this.shortLinkhabilitationFile$,
@@ -184,9 +180,13 @@ saveformation(){
       ],
       attacheDocsList: this.shortLinkformationFile$,
     },
-    formationRenewalDate: this.format.value.dateRenouvellement,
+
   };
-  this.formationService.create(forma,this.empid).subscribe({
+  console.log(forma)
+  for(let emp of this.selected){
+    console.log (emp.id)
+
+  this.formationService.create(forma,emp.id,this.Competences.value.dateRenouvellement,).subscribe({
     next: (res: any) => {
       console.log(res);
       this.submitted = true;
@@ -197,5 +197,6 @@ saveformation(){
       this.isaddedfailed = true;
     },
   });
+}
 }
 }

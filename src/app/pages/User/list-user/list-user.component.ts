@@ -20,21 +20,7 @@ export class ListUserComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   users?: User[];
-  currentUser: User = {
-    id: undefined,
-    username: undefined,
-    password: undefined,
-    confPassword: undefined,
-    email: undefined,
-    confEmail: undefined,
-    lastconnection: undefined,
-    validity: undefined,
-    enabled: undefined,
-    authentifications: undefined,
-    employee: undefined,
-    roles: undefined,
-    privileges: undefined,
-  };
+  currentUser: User
   deleted=false;
   isdeletedfailed=false;
   errorMessage="";
@@ -72,25 +58,7 @@ export class ListUserComponent implements OnInit {
     });
   }
 
-  refreshList(): void {
-    this.retrieveUsers();
-    this.currentUser = {
-      id: undefined,
-      username: undefined,
-      password: undefined,
-      confPassword: undefined,
-      email: undefined,
-      confEmail: undefined,
-      lastconnection: undefined,
-      validity: undefined,
-      enabled: undefined,
-      authentifications: undefined,
-      employee: undefined,
-      roles: undefined,
-      privileges: undefined,
-    };
-    this.currentIndex = -1;
-  }
+
   deleteUser(id: any) {
     if(confirm("Are you sure to delete ")) {
     this.userService.delete(id).subscribe({

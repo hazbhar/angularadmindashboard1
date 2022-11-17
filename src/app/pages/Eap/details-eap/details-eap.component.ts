@@ -94,8 +94,8 @@ eaplist$: Eap[] = [];
   }
   updateEap(eap: any) {
     this.message = '';
-
-    eap.dateEap = this.datePipe.transform(eap.dateEap, 'dd-MM-yyyy');
+    console.log(eap)
+    eap.dateEap = eap.dateEap;
     this.eapService.update(eap.id, eap).subscribe({
       next: (res) => {
         console.log(res);
