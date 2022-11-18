@@ -1,4 +1,4 @@
-<table style="width:100%">
+<table *ngIf="diploms$.length!=0"  style="width:100%">
 
   <tr *ngFor="let element of diploms$;let dip as index">
     <td>
@@ -52,7 +52,7 @@
   </tr>
 
 </table>
-<div *ngIf="diploms$.length==0">
+<table *ngIf="diploms$.length==0" style="width:100%">
   <tr>
     <div class="row mb-3" class="alert
       alert-danger"
@@ -60,67 +60,13 @@
       No Diploms Available
     </div>
   </tr>
-</div>
+</table>
 <table style="width:100%">
   <td *ngIf="adddimplome">
-    <form [formGroup]="Infosdesdiplomes" id="msform">
-      <div formArrayName="diplom">
-        <div *ngFor="let item of diplom.controls;let i=index">
-          <div [formGroupName]="i">
-
-            <!--        validators       -->
-
-            <!--        formgroup       -->
-            <div class="row mb-3">
-              <label class="col-sm-3 col-form-label">Titre</label>
-              <div class="col-sm-9"> <input class="form-control"
-                  type="text"
-                  formControlName="title" name="title"
-                  id="title" placeholder="titre..." required>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-3 col-form-label">Spécialité :</label>
-              <div class="col-sm-9"> <input class="form-control"
-                  formControlName="specialite" type="text"
-                  name="specialite"
-                  id="specialite" placeholder="specialite..."
-                  required>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-3 col-form-label">diplome file</label>
-              <div class="col-sm-9"> <input class="form-control"
-                  formControlName="diplomefile" type="file"
-                  (change)="handleFileInputdiplomefile($event)"
-                  name="diplomesfile" id="diplomesfile"
-                  placeholder="diplomes..." required>
-              </div>
-            </div>
-
-            <button (click)="delnewdipl(i)" class="btn
-              btn-danger">remove (-)</button>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="center">
-        <button (click)="savediplom()"
-          [disabled]="!Infosdesdiplomes.valid"
-          type="submit" name="submit" class="submit">Submit</button>
-        <button type="reset" name="next" class="reset">reset</button>
-      </div>
-      <div class="row mb-3" *ngIf="isaddedfailed" class="alert
-        alert-danger" role="alert">
-        Adding Diplome failed: {{ errorMessage }}
-      </div>
-
-      <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
-        <h4>Diplome was submitted successfully!</h4>
-      </div>
-    </form>
+    <app-details-add-diplome [currentEmployee]="currentEmployee"></app-details-add-diplome>
   </td>
 </table>
-<tr><button *ngIf="!adddimplome" (click)="addnewdipl()" class="add">add
-    (+)</button></tr>
+<tr><button *ngIf="!adddimplome" (click)="adddimplome=true" class="add">add
+    (+)</button>
+    <button *ngIf="adddimplome" (click)="adddimplome=false" class="btn
+          btn-danger">remove (-)</button></tr>

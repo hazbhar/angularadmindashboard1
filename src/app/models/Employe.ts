@@ -14,28 +14,28 @@ import {TypeOfStaff} from "./TypeOfStaff";
 
 export class Employe {
 
-  id?: any;
-  firstName?: string;
-  lastName?: string;
-  initial?: string;
-  dateOfBirth?: Date;
-  natioIdCard?: string;
+  id: any;
+  firstName: string;
+  lastName: string;
+  initial: string;
+  dateOfBirth: Date;
+  natioIdCard: string;
   availability: any;
-  companyName?: string;
-  impartialityContract?: string;
-  privacyContract?:string
-  user!: any;
-  contractList!: any;
-  medicalVisitList?: Array<MedicalVisit>;
-  handedOverList?: Array<HandedOver>;
-  serviceList?: Array<Service>;
-  processList?: Array<Process>;
-  site?: Array<Site>;
-  eapList?: Array<Eap>;
-  employeeFormationList?: Array<EmployeeFormation>;
-  employeeDiplomaList?: Array<EmployeeDiploma>;
-  employeeAttributionList?: Array<EmployeeAttribution>;
-  civilState?: CivilState;
-  typeOfStaff?: TypeOfStaff;
+  companyName: string;
+  impartialityContract: string;
+  privacyContract:string
+  user: any;
+  contractList: any;
+  medicalVisitList: Array<MedicalVisit>;
+  handedOverList: Array<HandedOver>;
+  serviceList: Array<Service>;
+  processList: Array<Process>;
+  site: Site;
+  eapList: Array<Eap>;
+  employeeFormationList: Array<EmployeeFormation>;
+  employeeDiplomaList: Array<EmployeeDiploma>;
+  employeeAttributionList: Array<EmployeeAttribution>;
+  civilState: CivilState;
+  typeOfStaff: TypeOfStaff;
 
 }

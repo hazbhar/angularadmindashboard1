@@ -1,6 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+} from '@angular/forms';
+import { Employe } from 'src/app/models/Employe';
 import { Formation } from 'src/app/models/Formation';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { FormationService } from 'src/app/services/formation.service';
@@ -8,12 +11,11 @@ import { FormationService } from 'src/app/services/formation.service';
 @Component({
   selector: 'app-details-formation',
   templateUrl: './details-formation.component.html',
-  styleUrls: ['./details-formation.component.css']
+  styleUrls: ['./details-formation.component.css'],
 })
 export class DetailsFormationComponent implements OnInit {
-  @Input() currentEmployee:any
+  @Input() currentEmployee: Employe;
   addformation = false;
-
 
   formation$: Formation;
 
@@ -24,9 +26,9 @@ export class DetailsFormationComponent implements OnInit {
   shortLinkformationFile$: any = [];
 
   formations$: Formation[] = [];
-  isaddedfailed=false;
+  isaddedfailed = false;
   isupdatedfailed = false;
-  submitted=false;
+  submitted = false;
   deleted = false;
   isdeletedfailed = false;
   errorMessage = '';
@@ -35,19 +37,20 @@ export class DetailsFormationComponent implements OnInit {
 
   datePipe = new DatePipe('en-US');
 
-  constructor(    private formationService: FormationService,private formBuilder: FormBuilder,private fileUploadService: FileUploadService,    public datepipe: DatePipe,
+  constructor(
+    private formationService: FormationService,
+    private fileUploadService: FileUploadService,
+    public datepipe: DatePipe
+  ) {}
 
-    ) { }
-
-    async ngOnInit() {
-
+  async ngOnInit() {
     for (
       let i = 0;
       i < this.currentEmployee['employeeFormationList'].length;
       i++
     ) {
       let id = this.currentEmployee['employeeFormationList'][i];
-     await this.getFormations(id['id'], i);
+      await this.getFormations(id['id'], i);
     }
   }
   editFormation(formation: Formation): void {
@@ -71,9 +74,6 @@ export class DetailsFormationComponent implements OnInit {
     }
     console.log(this.periodic);
   }
-
-
-
 
   handleFileInputformationFile(event: any) {
     this.fileToUploadformationFile.push(<File>event.target.files[0]);
@@ -142,10 +142,12 @@ export class DetailsFormationComponent implements OnInit {
     });
   }
   async getFormations(id: any, x: any) {
-    this.formationService.getByRelationEmpId(id).subscribe((data: Formation) => {
-      this.formations$[x] = data;
-      console.log(this.formations$[x]);
-    });
+    this.formationService
+      .getByRelationEmpId(id)
+      .subscribe((data: Formation) => {
+        this.formations$[x] = data;
+        console.log(this.formations$[x]);
+      });
   }
   deleteFormation(id: number): void {
     // this.formationService.get(1);
@@ -162,12 +164,10 @@ export class DetailsFormationComponent implements OnInit {
     });
   }
 
+  resetshortlinks() {
+    console.log('reseting short links ');
 
-    resetshortlinks() {
-      console.log('reseting short links ');
-
-      this.shortLinkhabilitationFile$ = [];
-      this.shortLinkformationFile$ = [];
-
-    }
+    this.shortLinkhabilitationFile$ = [];
+    this.shortLinkformationFile$ = [];
+  }
 }

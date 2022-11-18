@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Employe } from 'src/app/models/Employe';
 import { Frequence } from 'src/app/models/Frequence';
 import { typeContrat } from 'src/app/models/TypeContrat';
 import { ContratService } from 'src/app/services/contrat.service';
@@ -13,7 +14,7 @@ import { TypecontratService } from 'src/app/services/typecontrat.service';
   styleUrls: ['./deatils-add-contrat.component.css']
 })
 export class DeatilsAddContratComponent implements OnInit {
-  @Input() currentEmployeeid:any;
+  @Input() currentEmployeeid:Employe;
 
   Infoscontratdutravail!: FormGroup;
 

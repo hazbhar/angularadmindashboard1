@@ -6,6 +6,6 @@ export class Attribution{
   title:string;
   dateAttribution:Date;
   employeeAttributionList:Array<EmployeeAttribution>;
-  attachedDocsList?:Array<AttachedDocs>;
+  attachedDocsList:Array<AttachedDocs>;
 
 }

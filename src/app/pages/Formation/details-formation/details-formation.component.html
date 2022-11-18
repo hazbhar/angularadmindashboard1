@@ -1,14 +1,16 @@
 
+
+ <table *ngIf="formations$.length==0" style="width:100%">
+  <tr>
+    <div class="row mb-3" class="alert
+      alert-danger"
+      role="alert">
+      No Formations Available
+    </div>
+  </tr>
+</table>
 <table style="width:100%" *ngIf="formations$.length!=0">
-  <div *ngIf="formations$.length==0">
-    <tr>
-      <div class="row mb-3" class="alert
-        alert-danger"
-        role="alert">
-        No Formations Available
-      </div>
-    </tr>
-  </div>
+
   <tr *ngFor="let element of formations$;let f as index">
     <td>
     <form id="msform">
@@ -166,13 +168,7 @@
   </td>
 </tr>
 </table>
-<table *ngIf="formations$.length==0">
-  <td><div class=" col-sm-9" class="alert
-      alert-danger"
-      role="alert">
-      No formations Available
-    </div></td>
-</table>
+
 <table style="width:100%">
   <tr *ngIf="addformation">
     <td>

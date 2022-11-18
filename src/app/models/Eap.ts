@@ -3,8 +3,8 @@ import {AttachedDocs} from "./AttachedDocs";
 
 export class Eap{
   id:number;
-  description?: string;
-  dateEap?:Date;
+  description: string;
+  dateEap:Date;
   employee:Employe;
   attachedDocs:Array<AttachedDocs>;
 

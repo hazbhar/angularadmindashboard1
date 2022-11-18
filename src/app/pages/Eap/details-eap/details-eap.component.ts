@@ -29,7 +29,7 @@ addEap = false;
 
 EapFrm!: FormGroup;
 
-Eapitems!: FormArray;
+
 
 shortLinkeapf$: any;
 
@@ -40,9 +40,6 @@ eaplist$: Eap[] = [];
   constructor(private eapService: EapService,private fileUploadService: FileUploadService,public datepipe: DatePipe, private formBuilder: FormBuilder) { }
 
   async ngOnInit() {
-    this.EapFrm = this.formBuilder.group({
-      eapfr: new FormArray([]),
-    });
 
     for (let i = 0; i < this.currentEmployee['eapList'].length; i++) {
       let id = this.currentEmployee['eapList'][i];
@@ -56,14 +53,7 @@ eaplist$: Eap[] = [];
     formData.append('document', fil);
     await this.fileUploadService
       .upload(formData)
-      .toPromise()
-      .then((res) => {
-        this.shortLinkeapf$ = res;
-      })
-      .catch((error) => {
-        this.errorMessage = error.message;
-        this.isaddedfailed = true;
-      });
+
   }
 
 
@@ -73,10 +63,15 @@ eaplist$: Eap[] = [];
 
 
   async getEaps(id: any, x: any) {
-    this.eapService.get(id).subscribe((data: Eap) => {
-      this.eaplist$[x] = data;
+   await this.eapService.get(id).toPromise()
+   .then((data : any) => {
+    this.eaplist$[x] = data;
       console.log(this.eaplist$[x]);
-    });
+   })
+   .catch((error) => {
+     this.errorMessage = error.message;
+   });
+
   }
   deleteEap(id:any){
     this.eapService.delete(id).subscribe({
@@ -92,7 +87,7 @@ eaplist$: Eap[] = [];
       }
     });
   }
-  updateEap(eap: any) {
+ async updateEap(eap: any) {
     this.message = '';
     console.log(eap)
     eap.dateEap = eap.dateEap;
@@ -109,72 +104,6 @@ eaplist$: Eap[] = [];
   }
 
 
-  get infodesEap() {
-    return this.EapFrm.controls;
-  }
-  get Eaps() {
-    return this.EapFrm.get('eapfr') as FormArray;
-  }
-
-
-    /**
-   * function to add new form group Eap in the form array
-   */
-     addnewEap() {
-      this.Eapitems = this.EapFrm.get('eapfr') as FormArray;
-      this.Eapitems.push(this.gennewEap());
-      this.addEap = true;
-    }
-    /**
-     * function to add new form group Eap in the form array
-     */
-    delnewEap(index: any) {
-      this.Eapitems = this.EapFrm.get('eapfr') as FormArray;
-      this.Eapitems.removeAt(index);
-      this.addEap = false;
-    }
-    /**
-     * function to generate new form group Eap before adding it to the form array
-     */
-    gennewEap(): FormGroup {
-      return new FormGroup({
-        eap: new FormControl('', Validators.required),
-        dateEap: new FormControl(''),
-      });
-    }
-
-    saveEap() {
-      this.uploadeapf(this.fileToUploadeap);
-      const Eap = {
-        description: 'test',
-        dateEap: this.datePipe.transform(
-          this.Eaps.value[0].dateEap,
-          'dd-MM-yyyy'
-        ),
-        employee: {
-          id: Number(this.currentEmployee.id),
-        },
-        attachedDocsList: [
-          {
-            urlFile: this.shortLinkeapf$,
-          },
-        ],
-      };
-      console.log(Eap);
-
-      this.eapService.create(Eap).subscribe({
-        next: (res: any) => {
-          console.log(res);
-          this.submitted = true;
-        },
-        error: (err) => {
-          console.log('adding Eap failed ');
-          this.errorMessage = err.error.message;
-          this.isaddedfailed = true;
-        },
-      });
-      this.shortLinkeapf$ = [];
-    }
   resetshortlinks() {
     console.log('reseting short links ');
 

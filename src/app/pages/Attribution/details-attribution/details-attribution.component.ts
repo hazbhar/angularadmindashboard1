@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Attribution } from 'src/app/models/Attribution';
+import { Employe } from 'src/app/models/Employe';
 import { AttributionService } from 'src/app/services/attribution.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 
@@ -10,7 +11,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
   styleUrls: ['./details-attribution.component.css']
 })
 export class DetailsAttributionComponent implements OnInit {
-@Input() currentEmployee:any;
+@Input() currentEmployee:Employe;
 
 isupdatedfailed = false;
 isaddedfailed = false;
@@ -25,7 +26,7 @@ addatrribution = false;
 
 AttributionForm!: FormGroup;
 
-Attributionitems!: FormArray;
+
 
 fileToUploadAttributionf: File[] = [];
 
@@ -35,10 +36,8 @@ Attributions$: Attribution[] = [];
 
   constructor(private attributionService: AttributionService,private fileUploadService: FileUploadService,private formBuilder: FormBuilder) { }
 
-  async ngOnInit(): Promise<void> {
-    this.AttributionForm = this.formBuilder.group({
-      attributfrm: new FormArray([]),
-    });
+  async ngOnInit() {
+
 
     for (
       let i = 0;
@@ -79,42 +78,6 @@ Attributions$: Attribution[] = [];
   }
 
 
-  get infodesAttribution() {
-    return this.AttributionForm.controls;
-  }
-  get AttributionsContr() {
-    return this.AttributionForm.get('attributfrm') as FormArray;
-  }
-
-  /**
-   * function to add new form group Attribution in the form array
-   */
-   addnewAttribu() {
-    this.Attributionitems = this.AttributionForm.get(
-      'attributfrm'
-    ) as FormArray;
-    this.Attributionitems.push(this.gennewAttribu());
-    this.addatrribution = true;
-  }
-  /**
-   * function to add new form group Attribution in the form array
-   */
-  delnewAttribu(index: any) {
-    this.Attributionitems = this.AttributionForm.get(
-      'attributfrm'
-    ) as FormArray;
-    this.Attributionitems.removeAt(index);
-    this.addatrribution = false;
-  }
-  /**
-   * function to generate new form group Attribution before adding it to the form array
-   */
-  gennewAttribu(): FormGroup {
-    return new FormGroup({
-      title: new FormControl('', Validators.required),
-      attribfile: new FormControl('', Validators.required),
-    });
-  }
 
 
   async getAttributions(id: any, x: any) {
@@ -124,10 +87,10 @@ Attributions$: Attribution[] = [];
     });
   }
 
-  updateAttribution(id: any, i: any): void {
+  async updateAttribution(id: any, i: any): Promise<void> {
     this.message = '';
 
-    this.attributionService.update(id, i).subscribe({
+     this.attributionService.update(id, i).subscribe({
       next: (res) => {
         console.log(res);
         this.message = res.message
@@ -140,32 +103,10 @@ Attributions$: Attribution[] = [];
   }
 
 
-  saveAttribution() {
-    this.uploadAttributionf(this.fileToUploadAttributionf);
-
-    const attribu = {
-      title: this.AttributionsContr.value[0].title,
-      dateAttribution: null,
-      attacheDocsList: this.shortLinkAttributionf$,
-    };
-    console.log(attribu);
-    this.attributionService
-      .create(attribu, this.currentEmployee.id)
-      .subscribe({
-        next: (res: any) => {
-          console.log(res);
-          this.submitted = true;
-        },
-        error: (err) => {
-          console.log('adding Employee failed ');
-          this.errorMessage = err.error.message;
-          this.isaddedfailed = true;
-        },
-      });
-  }
 
 
-  delAttribu(id: any) {
+
+  async delAttribu(id: any) {
     this.attributionService.delete(id).subscribe({
       next: (res: any) => {
         console.log(res);
@@ -173,7 +114,7 @@ Attributions$: Attribution[] = [];
         window.location.reload();
       },
       error: (err) => {
-        console.log('deleting Dipl failed ');
+        console.log('deleting Attribution failed ');
         this.errorMessage = err.error.message;
         this.isdeletedfailed = true;
       },

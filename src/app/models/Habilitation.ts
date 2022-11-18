@@ -4,9 +4,9 @@ import {Formation} from "./Formation";
 export class Habilitation{
   id:number;
   title:string;
-  habilitationDate?:Date;
-  habilitationRenewalDate?:Date;
+  habilitationDate:Date;
+  habilitationRenewalDate:Date;
   validity:boolean;
-  attachedDocsList?:Array<AttachedDocs>;
-  formation?:Formation;
+  attachedDocsList:Array<AttachedDocs>;
+  formation:Formation;
 }

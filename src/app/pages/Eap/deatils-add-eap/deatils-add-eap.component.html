@@ -1,1 +1,46 @@
-<p>deatils-add-eap works!</p>
+<form [formGroup]="EapFrm" id="msform">
+
+        <h2 class="fs-title">Infos des Eaps </h2>
+
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">Eap *</label>
+          <div class="col-sm-9"> <input class="form-control"
+              type="file"
+              (change)="handleFileInputeap($event)"
+              name="eap" id="eap"
+              formControlName="eap"
+              required>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">date Eap *</label>
+          <div class="col-sm-9"> <input class="form-control"
+              type="date"
+              name="dateEap" id="dateEap"
+              formControlName="dateEap"
+              required>
+          </div>
+        </div>
+
+  <div class="form-group">
+
+    <div class="text-center">
+      <button
+      [disabled]="!EapFrm.valid"
+        type="submit"
+        class="submit"(click)="saveEap()">Submit
+      </button>
+
+    </div>
+  </div>
+
+  <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+  alert-danger" role="alert">
+  Adding Eap failed: {{ errorMessage }}
+</div>
+
+<div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+  <h4>Eap was submitted successfully!</h4>
+</div>
+</form>

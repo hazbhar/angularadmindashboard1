@@ -68,14 +68,14 @@
                   <!-- info generale interface -->
 
           <div *ngIf="page=='Info'">
-            <div *ngIf="!currentEmployee$ || !currentEmployee$.serviceList[0] || currentEmployee$==undefined ">
+            <div *ngIf="!currentEmployee$ || !currentEmployee$.serviceList[0] || currentEmployee$==null ">
               <div class="row mb-3" class="alert
                 alert-danger"
                 role="alert">
                 Cannot acess Employee!
               </div>
             </div>
-            <div *ngIf="currentEmployee$ && currentEmployee$.serviceList[0] && currentEmployee$!=undefined">
+            <div *ngIf="currentEmployee$ && currentEmployee$.serviceList[0] && currentEmployee$!=null">
               <form id="msform">
                 <h2 class="fs-title">Infos General </h2>
 

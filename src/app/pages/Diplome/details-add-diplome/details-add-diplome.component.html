@@ -1,1 +1,44 @@
-<p>details-add-diplome works!</p>
+<form [formGroup]="Infosdesdiplomes" id="msform">
+
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">Titre</label>
+          <div class="col-sm-9"> <input class="form-control"
+              type="text"
+              formControlName="title" name="title"
+              id="title" placeholder="titre..." required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">Spécialité :</label>
+          <div class="col-sm-9"> <input class="form-control"
+              formControlName="specialite" type="text"
+              name="specialite"
+              id="specialite" placeholder="specialite..."
+              required>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">diplome file</label>
+          <div class="col-sm-9"> <input class="form-control"
+              formControlName="diplomefile" type="file"
+              (change)="handleFileInputdiplomefile($event)"
+              name="diplomesfile" id="diplomesfile"
+              placeholder="diplomes..." required>
+          </div>
+        </div>
+
+  <div class="center">
+    <button (click)="savediplom()"
+      [disabled]="!Infosdesdiplomes.valid"
+      type="submit" name="submit" class="submit">Submit</button>
+    <button type="reset" name="next" class="reset">reset</button>
+  </div>
+  <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+    alert-danger" role="alert">
+    Adding Diplome failed: {{ errorMessage }}
+  </div>
+
+  <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+    <h4>Diplome was submitted successfully!</h4>
+  </div>
+</form>

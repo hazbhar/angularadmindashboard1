@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Authentification } from 'src/app/models/Authentification';
+import { Employe } from 'src/app/models/Employe';
 import { Privilege } from 'src/app/models/Privilege';
 import { Role } from 'src/app/models/Role';
 import { User } from 'src/app/models/User';
@@ -14,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./details-user.component.css'],
 })
 export class DetailsUserComponent implements OnInit {
-@Input() currentEmployee:any
+@Input() currentEmployee:Employe
 
 isupdatedfailed = false;
   isaddedfailed = false;

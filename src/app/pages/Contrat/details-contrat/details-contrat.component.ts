@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Contract } from 'src/app/models/Contract';
+import { Employe } from 'src/app/models/Employe';
 import { Frequence } from 'src/app/models/Frequence';
 import { typeContrat } from 'src/app/models/TypeContrat';
 import { ContratService } from 'src/app/services/contrat.service';
@@ -14,7 +15,7 @@ import { TypecontratService } from 'src/app/services/typecontrat.service';
   styleUrls: ['./details-contrat.component.css']
 })
 export class DetailsContratComponent implements OnInit {
-@Input() currentEmployee:any;
+@Input() currentEmployee:Employe;
 
 contrat: Contract;
 typecontrat$!: typeContrat[];

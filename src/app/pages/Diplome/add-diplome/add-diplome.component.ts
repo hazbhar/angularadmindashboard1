@@ -17,8 +17,8 @@ export class AddDiplomeComponent implements OnInit {
   diplitems!: FormArray;
   submitted = false;
   empid:number=0;
-  errorMessage: any;
-  isaddedfailed: any;
+  errorMessage: '';
+  isaddedfailed= false;
 
   fileToUploadAttributionf: File[] = [];
   fileToUploaddiplomefile: File[] = [];

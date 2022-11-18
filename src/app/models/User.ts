@@ -5,16 +5,16 @@ import {Privilege} from "./Privilege";
 
 export class User{
   id:any;
-  username?: String;
-  password?: String;
-  confPassword?: String;
-  email?: String;
-  confEmail?:string;
-  lastconnection?: Date;
-  validity?: boolean ;
-  enabled?: boolean ;
+  username: String;
+  password: String;
+  confPassword: String;
+  email: String;
+  confEmail:string;
+  lastconnection: Date;
+  validity: boolean ;
+  enabled: boolean ;
   authentifications:Authentification;
-  employee?:Employe;
+  employee:Employe;
   roles: Array<Role> ;
   privileges :Array<Privilege>;
 }

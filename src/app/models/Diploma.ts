@@ -4,8 +4,8 @@ import {AttachedDocs} from "./AttachedDocs";
 export class Diploma{
   id:number;
   title:string;
-  speciality?:string;
+  speciality:string;
   dateObtained?:Date;
-  employeeDiplomaList?:Array<EmployeeDiploma>;
-  attachedDocsList?:Array<AttachedDocs>
+  employeeDiplomaList:Array<EmployeeDiploma>;
+  attachedDocsList:Array<AttachedDocs>
 }

@@ -27,16 +27,7 @@ export class AddFormationComponent implements OnInit {
  */
    periodiq: boolean = false;
 
-  formation: Formation = {
-    id: 0,
-    title: undefined,
-    description: undefined,
-    periodec: undefined,
-    enabled: undefined,
-    employeeFormationList: undefined,
-    habilitationList: undefined,
-    attachedDocsList: undefined,
-  };
+
   fileToUploadformationFile: File[] = [];
   fileToUploadhabilitationFile: File[] = [];
 

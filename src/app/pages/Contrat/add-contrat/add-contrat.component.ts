@@ -56,8 +56,8 @@ export class AddContratComponent implements OnInit {
  * variables to define the response from services
  */
  submitted = false;
- errorMessage: any;
- isaddedfailed: any;
+ errorMessage="";
+ isaddedfailed=false;
 
   constructor(    private formBuilder: FormBuilder,
     private typrocesService: ProcessService,

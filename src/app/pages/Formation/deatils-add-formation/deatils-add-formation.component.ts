@@ -10,7 +10,7 @@ import { FormationService } from 'src/app/services/formation.service';
   styleUrls: ['./deatils-add-formation.component.css']
 })
 export class DeatilsAddFormationComponent implements OnInit {
-  @Input() currentEmployeeid : any;
+  @Input() currentEmployeeid : number;
   Competences!: FormGroup;
   formatitems!: FormArray;
 

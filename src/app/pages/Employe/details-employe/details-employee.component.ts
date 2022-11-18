@@ -21,6 +21,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+import { Employe } from 'src/app/models/Employe';
 
 animations: [
   trigger('detailExpand', [
@@ -42,7 +43,7 @@ export class DetailsEmployeeComponent implements OnInit {
   sidenav!: MatSidenav;
   toolbar!: MatToolbar;
   isChecked = true;
-  page: any = 'Info';
+  page= 'Info';
   isupdatedfailed = false;
   isaddedfailed = false;
   submitted = false;
@@ -64,7 +65,7 @@ export class DetailsEmployeeComponent implements OnInit {
   typePersonnel: any;
   typeProcessus: any;
 
-  currentEmployee$: any=undefined;
+  currentEmployee$: Employe;
 
   constructor(
     private observer: BreakpointObserver,
@@ -79,22 +80,24 @@ export class DetailsEmployeeComponent implements OnInit {
 
 
   ) {
-    this.getEmployee(this.route.snapshot.params['id']);
 
-    /*
-     * consum api and collect data from data base
-     */
-    this.retrieveunitetech();
-    this.retrievetypprocesus();
 
-    this.retrievesites();
-    this.retrievetypeperso();
-    this.retrieveetacivil();
+
 
   }
 
   async ngOnInit(): Promise<void> {
+    await this.getEmployee(this.route.snapshot.params['id']);
 
+        /*
+     * consum api and collect data from data base
+     */
+        await this.retrieveunitetech();
+        await this.retrievetypprocesus();
+
+        await this.retrievesites();
+        await this.retrievetypeperso();
+        await this.retrieveetacivil();
     /**
      * open employee menu
      */
@@ -114,18 +117,21 @@ export class DetailsEmployeeComponent implements OnInit {
       }
     });
   }
-  async getEmployee(id: string): Promise<void> {
-    this.employeeService.get(id).subscribe({
-      next:(data: any) =>{
-      this.currentEmployee$ = data;
+  async getEmployee(id: string){
+    await this.employeeService.get(id)
+    .toPromise()
+    .then((res :any) => {
+      this.currentEmployee$ = res;
       console.log("this.currentEmployee$");
       console.log(this.currentEmployee$);
-    },
-    error : (er)=>{
+    })
+    .catch((error) => {
       console.log("error getting employee");
-      this.router.navigate(['/pages-error404', { }]);}
-    });
-  }
+      this.router.navigate(['/pages-error404', { }])
+      ;
+  })
+    }
+
 
   /**
    * specify pages
@@ -137,8 +143,8 @@ export class DetailsEmployeeComponent implements OnInit {
   /**
    * consuming api functions
    */
-  retrievesites(): void {
-    this.siteService.getAll().subscribe({
+  async retrievesites(): Promise<void> {
+   await this.siteService.getAll().subscribe({
       next: (data: any) => {
         this.site$ = data;
         console.log(data);
@@ -148,8 +154,8 @@ export class DetailsEmployeeComponent implements OnInit {
   }
 
 
-  retrieveetacivil(): void {
-    this.etatcivilService.getAll().subscribe({
+  async retrieveetacivil(): Promise<void> {
+    await  this.etatcivilService.getAll().subscribe({
       next: (data: any) => {
         this.etatcivil$ = data;
         console.log(data);
@@ -158,8 +164,8 @@ export class DetailsEmployeeComponent implements OnInit {
     });
   }
 
-  retrievetypeperso(): void {
-    this.typepersoService.getAll().subscribe({
+  async retrievetypeperso(): Promise<void> {
+    await this.typepersoService.getAll().subscribe({
       next: (data: any) => {
         this.typeperso$ = data;
         console.log(data);
@@ -168,8 +174,8 @@ export class DetailsEmployeeComponent implements OnInit {
     });
   }
 
-  retrieveunitetech(): void {
-    this.unitetechservice.getAll().subscribe({
+  async retrieveunitetech(): Promise<void> {
+    await this.unitetechservice.getAll().subscribe({
       next: (data: any) => {
         this.unitetech$ = data;
         console.log(data);
@@ -178,8 +184,8 @@ export class DetailsEmployeeComponent implements OnInit {
       error: (e) => console.error(e),
     });
   }
-  retrievetypprocesus(): void {
-    this.typrocesService.getAll().subscribe({
+  async retrievetypprocesus(): Promise<void> {
+    await this.typrocesService.getAll().subscribe({
       next: (data: any) => {
         this.typprocesus$ = data;
         console.log(data);

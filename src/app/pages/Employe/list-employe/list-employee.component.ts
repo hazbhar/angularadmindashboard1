@@ -24,30 +24,6 @@ export class ListEmployeeComponent implements OnInit {
   employeeList: Employe[] = [];
   currentIndex = -1;
   username = '';
-  currentEmployee: Employe = {
-    id: undefined,
-    firstName: undefined,
-    lastName: undefined,
-    initial: undefined,
-    dateOfBirth: undefined,
-    natioIdCard: undefined,
-    availability: undefined,
-    companyName: undefined,
-    impartialityContract: undefined,
-    user: undefined,
-    contractList: undefined,
-    medicalVisitList: undefined,
-    handedOverList: undefined,
-    serviceList: undefined,
-    processList: undefined,
-    site: undefined,
-    eapList: undefined,
-    employeeFormationList: undefined,
-    employeeDiplomaList: undefined,
-    employeeAttributionList: undefined,
-    civilState: undefined,
-    typeOfStaff: undefined,
-  };
   deleted=false;
   isdeletedfailed=false;
   errorMessage="";
@@ -93,39 +69,6 @@ export class ListEmployeeComponent implements OnInit {
     });
   }
 
-  refreshList(): void {
-    this.retrieveEmployees();
-    this.currentEmployee = {
-      id: undefined,
-      firstName: undefined,
-      lastName: undefined,
-      initial: undefined,
-      dateOfBirth: undefined,
-      natioIdCard: undefined,
-      availability: undefined,
-      companyName: undefined,
-      impartialityContract: undefined,
-      user: undefined,
-      contractList: undefined,
-      medicalVisitList: undefined,
-      handedOverList: undefined,
-      serviceList: undefined,
-      processList: undefined,
-      site: undefined,
-      eapList: undefined,
-      employeeFormationList: undefined,
-      employeeDiplomaList: undefined,
-      employeeAttributionList: undefined,
-      civilState: undefined,
-      typeOfStaff: undefined,
-    };
-    this.currentIndex;
-  }
-
-  setActiveEmployee(employee: Employe, index: number): void {
-    this.currentEmployee = employee;
-    this.currentIndex = index;
-  }
 
   deleteEmployee(id:any): void {
     this.employeeService.delete(id).subscribe({

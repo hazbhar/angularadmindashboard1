@@ -1,1 +1,42 @@
-<p>deatils-add-attribution works!</p>
+<form [formGroup]="AttributionForm" id="msform">
+
+  <h2 class="fs-title">Attributions</h2>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Attribution *:</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="text"
+        name="attribution"
+        formControlName="title"
+        id="attribution" placeholder="attribution..."
+        required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Attribution
+      File *</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="file"
+        formControlName="attribfile"
+        name="Attributionf"
+        (change)="handleFileInputAttributionf($event)"
+        id="Attributionf" placeholder="Attribution..."
+        required>
+    </div>
+  </div>
+<div class="text-center">
+  <button (click)="saveAttribution()"
+    [disabled]="!AttributionForm.valid"
+    type="submit" name="submit" class="submit">Submit</button>
+  <button type="reset" name="next" class="reset">reset</button>
+</div>
+<div class="row mb-3" *ngIf="isaddedfailed" class="alert
+  alert-danger" role="alert">
+  Adding Attributions failed: {{ errorMessage }}
+</div>
+
+<div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+  <h4>Attributions was submitted successfully!</h4>
+</div>
+
+
+</form>

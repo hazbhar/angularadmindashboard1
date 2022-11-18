@@ -45,4 +45,7 @@ export class UsersProfileComponent implements OnInit {
       },
     })
   }
+  updateinfo(){
+
+  }
 }
