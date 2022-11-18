@@ -13,63 +13,53 @@
   <section class="section">
     <div class="card">
       <div class="card-body">
-        <div *ngIf="test!=undefined" >
-        <div class="row mb-3" *ngIf="isdeletedfailed" class="alert alert-danger"
-          role="alert">
-          Deleting Formation failed: {{ errorMessage }}
+        <div *ngIf="test==undefined">
+          <div class="alert alert-danger">
+          NO Formation Available
         </div>
-
-        <div class="row mb-3" *ngIf="deleted" class="alert alert-success">
-          <h4>Formation was Deleted successfully!</h4>
         </div>
-        <div *ngIf="test!=undefined" >
-          <div class="row mb-3" *ngIf="isdeletedfailed" class="alert alert-danger"
+        <div *ngIf="test!=undefined">
+          <div class="row mb-3" *ngIf="isdeletedfailed" class="alert
+            alert-danger"
             role="alert">
-            Deleting Habilitations failed: {{ errorMessage }}
+            Deleting Formation failed: {{ errorMessage }}
           </div>
 
           <div class="row mb-3" *ngIf="deleted" class="alert alert-success">
-            <h4>Habilitations was Deleted successfully!</h4>
+            <h4>Formation was Deleted successfully!</h4>
           </div>
-
-
 
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
-              <th scope="col">title</th>
-              <th scope="col">description
-              </th>
-
-          </tr>
-          </thead>
-          <tbody>
-              <tr
-              *ngFor="
-                let item of test
+                  <th scope="col">title</th>
+                  <th scope="col">description
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                  let item of test
                   | paginate
-                    : {
-                      itemsPerPage: itemsPerPage,
-                        currentPage: page,
-                        totalItems: totalItems
-                      }
-              "
-            >
-            <td>{{item.title}}</td>
-            <td>{{item.description}}</td>
-            <td><button class="button condensed edit" routerLink="/edit-formation/{{item.id}}">Edit</button></td>
-            <td><button class="button condensed delete" (click)="deleteFormation(item.id)">Delete</button></td>
-          </tr>
-        </tbody>
-          </table>
-
-
-
-
-            </div>
-          </div>
+                  : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: totalItems
+                  }
+                  ">
+                  <td>{{item.title}}</td>
+                  <td>{{item.description}}</td>
+                  <td><button class="button condensed edit"
+                      routerLink="/edit-formation/{{item.id}}">Edit</button></td>
+                  <td><button class="button condensed delete"
+                      (click)="deleteFormation(item.id)">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
         </div>
-
       </div>
+
+    </div>
   </section>
 </main>

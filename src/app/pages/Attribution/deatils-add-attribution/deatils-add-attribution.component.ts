@@ -64,7 +64,7 @@ shortLinkAttributionf$: any = [];
    await this.uploadAttributionf(this.fileToUploadAttributionf);
 
     const attribu = {
-      title: this.AttributionForm.value[0].title,
+      title: this.AttributionForm.value.title,
       dateAttribution: null,
       attacheDocsList: this.shortLinkAttributionf$,
     };

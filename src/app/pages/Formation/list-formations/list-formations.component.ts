@@ -3,9 +3,7 @@ import { Formation } from './../../../models/Formation';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { StorageService } from 'src/app/services/storage.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-formations',
@@ -23,43 +21,30 @@ export class ListFormationsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() currentFormation?: Formation[] ;
 
-   test: any[]=[];
-  formation:any;
-  emp:any
+   test: any;
   deleted=false;
   isdeletedfailed=false;
   errorMessage="";
-  currentIndex = -1;
-  formalength: any;
+
   constructor(private formationService: FormationService,private storageService: StorageService) {
 
   }
 
-  ngOnInit(): void {
-    this.emp=this.storageService.getEmp();
-    console.log(this.emp);
+ async ngOnInit() {
+
     //listidattr
-    for(let i=0;i<this.emp['employeeFormationList'].length;i++){
-      console.log(this.emp['employeeFormationList'][i])
-      let id=this.emp['employeeFormationList'][i]
-      this.getFormations(id['id'],i)}
 
-    console.log("this.currentFormation");
-
-
+     await this.getFormations()
 
   }
 
 
-  getFormations(id:any,x:any): any {
+ async getFormations() {
 
-    this.formationService.get(id).subscribe(
-      (data: any) => {
+    await this.formationService.getAll().subscribe(
+      (data: {}) => {
+       this.test=data
 
-       this.test[x]=(data)
-        console.log("this.currentFormation");
-        console.log(data)
-        console.log(this.test)
       },
       (error: any) => {
         console.log(error);

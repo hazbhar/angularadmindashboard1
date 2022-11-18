@@ -1,9 +1,6 @@
-import { AfterViewInit,Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { EmployeService } from '../../../services/employe.service';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { Employe } from '../../../models/Employe';
-import { User } from '../../../models/User';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -29,7 +26,6 @@ export class ListEmployeeComponent implements OnInit {
   errorMessage="";
 
   constructor(
-    private router: Router,
     private employeeService: EmployeService
   ) {
 

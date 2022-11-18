@@ -13,70 +13,76 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Edit Formation</h5>
-    <form>
+        <form *ngIf="!formation">
+          <div class="alert
+          alert-danger">
+            <label>cannot Access this Formation</label>
+          </div>
+        </form>
+    <form *ngIf="formation" id="msform">
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Titre</label>
+        <label class="col-sm-3 col-form-label">Titre *</label>
         <div class="col-sm-9">
         <input
           type="text"
           class="form-control"
           id="title"
           [(ngModel)]="formation.title"
-          name="title"
+          name="title" required
           />
       </div>
     </div>
       <div  class="row mb-3">
-        <label class="col-sm-3 col-form-label"> Description</label>
+        <label class="col-sm-3 col-form-label"> Description *</label>
         <div class="col-sm-9">
         <input
           type="text"
           class="form-control"
           id="description"
           [(ngModel)]="formation.description"
-          name="description"
+          name="description" required
           />
       </div>
     </div>
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">periodique</label>
-        <div class="form-check form-check-inline">
+        <label class="col-sm-3 col-form-label">periodique *</label>
+        <div class="col-sm-9" >
           <div class="custom-control custom-radio
-            custom-control-inline">
+            custom-control-inline" style="text-align: left;">
             <input type="radio" class="custom-control-input"
               name="periodec"
               id="periodec" value="true"
-              (change)="onChangeperiodique($event)" [checked]="formation.periodec">
+              (change)="onChangeperiodique($event)" [checked]="formation.periodec" style="width: inherit;margin-right: 10px">
             <label class="custom-control-label" for="periodec">Oui</label>
           </div>
           <!-- Default inline 2-->
           <div class="custom-control custom-radio
-            custom-control-inline">
+            custom-control-inline"  style="text-align: left;">
             <input type="radio" class="custom-control-input"
                name="periodec"
               id="periodec" value="false"
-              (change)="onChangeperiodique($event)" [checked]="!formation.periodec" required>
+              (change)="onChangeperiodique($event)" [checked]="!formation.periodec" required style="width: inherit;margin-right: 10px">
             <label class="custom-control-label" for="periodec">Non</label>
           </div>
         </div>
       </div>
 
-      <div class="row mb-3" *ngFor="let d of formation.employeeFormationList">
-        <label class="col-sm-3 col-form-label">date de Renouvellement</label>
+      <div class="row mb-3" >
+        <label class="col-sm-3 col-form-label">date de Renouvellement </label>
         <div class="col-sm-9"> <input class="form-control"
              type="date"
              locale="en-US"
-             [value]="d.formationRenewalDate | date"
+
             name="dateRenouvellement" id="dateRenouvellement"
             placeholder="date de Renouvellement..."
-            >
+             >
         </div>
       </div>
 
 
 
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">formation File</label>
+        <label class="col-sm-3 col-form-label">formation File *</label>
         <div class="col-sm-9"> <input class="form-control" type="file"
              name="formationFile" (change)="handleFileInputformationFile($event)"
             id="formationFile" placeholder="formation File..." required>
@@ -91,12 +97,12 @@
           id="description"
           [(ngModel)]="h.title"
           name="description"
-          />
+          required/>
         </div>
       </div>
 
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">date Habilitation</label>
+        <label class="col-sm-3 col-form-label">date Habilitation *</label>
         <div class="col-sm-9"> <input class="form-control" type="date"
              name="dateHabilitation"
              locale="en-US"
@@ -107,7 +113,7 @@
       </div>
 
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">date ReHabilitation</label>
+        <label class="col-sm-3 col-form-label">date ReHabilitation *</label>
         <div class="col-sm-9"> <input class="form-control" type="date"
              name="dateRenHabi"
              [(ngModel)]="h.habilitationRenewalDate"
@@ -117,7 +123,7 @@
       </div>
 
       <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">habilitation File</label>
+        <label class="col-sm-3 col-form-label">habilitation File *</label>
         <div class="col-sm-9"> <input class="form-control" type="file"  (change)="handleFileInputhabilitationFile($event)"
              name="habilitationFile"
             id="habilitationFile" placeholder="habilitation File..."
@@ -126,12 +132,19 @@
       </div>
     </div>
       <div class="form-group">
-
        <div class="text-center">
         <button
           type="submit"
           class="submit"(click)="editFormation(formation)">Update </button>
-            </div>
+          </div>
+          <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+          alert-danger" role="alert">
+          Updating Formation failed: {{ errorMessage }}
+        </div>
+
+        <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+          <h4>Formation was Updated successfully!</h4>
+        </div>
       </div>
     </form>
     </div>

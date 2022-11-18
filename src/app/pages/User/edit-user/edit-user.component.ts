@@ -22,6 +22,7 @@ export class EditUserComponent implements OnInit {
   @Input() currentUser: User ;
   errorMessage = '';
   isaddedfailed = false;
+  submitted=false
   privileges$!: Privilege[];
   role$!:Role[];
   user:User;
@@ -81,59 +82,21 @@ export class EditUserComponent implements OnInit {
     });
   }
 
-  updateVisibility(status: boolean): void {
-    const data = {
-      username: this.currentUser.username,
-      password: this.currentUser.password,
-      visibility: status,
-    };
-
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, data,this.currentUser.authentifications.id).subscribe({
-      next: (res) => {
-        console.log(res);
-        //this.currentUser.visibility = status;
-        this.message = res.message
-          ? res.message
-          : 'The visibility was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  updateEnability(status: boolean): void {
-    const data = {
-      username: this.currentUser.username,
-      password: this.currentUser.password,
-      enability: status,
-    };
-
-    this.message = '';
-
-    this.userService.update(this.currentUser.id, data,this.currentUser.authentifications.id).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.currentUser.enabled = status;
-        this.message = res.message
-          ? res.message
-          : 'The enability was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
 
   updateUser(): void {
     this.message = '';
-
+    this.isaddedfailed=false
+    this.submitted=false
     this.userService.update(this.currentUser.id, this.currentUser,this.currentUser.authentifications.id).subscribe({
       next: (res) => {
         console.log(res);
         this.message = res.message
           ? res.message
           : 'This user was updated successfully!';
+          this.submitted=true
       },
-      error: (e) => console.error(e),
+      error: (e) => {console.error(e)
+        this.isaddedfailed=true}
     });
   }
 

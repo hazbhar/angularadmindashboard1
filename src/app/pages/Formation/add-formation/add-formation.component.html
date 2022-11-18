@@ -13,7 +13,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Add new Formation</h5>
-        <div *ngIf="!submitted">
+        <div >
            <!-- Using Items Input -->
            <h5>Select Employees</h5>
            <ng-select
@@ -41,7 +41,19 @@
                         Please provide a title.
                       </div>
                     </div>
-
+                    <div class="row mb-3">
+                      <label class="col-sm-2 col-form-label">Description *</label>
+                      <div class="col-sm-10"> <input class="form-control"
+                          type="text"
+                          formControlName="description" name="description"
+                          id="description" placeholder="description..." required>
+                      </div>
+                      <div *ngIf="Competences.controls['description'].invalid &&
+                        (Competences.controls['description'].dirty ||
+                        Competences.controls['description'].touched)" class="alert">
+                        Please provide a description.
+                      </div>
+                    </div>
                     <div class="row mb-3">
                       <label class="col-sm-3 col-form-label">periodique *</label>
                       <div class="col-sm-9" >

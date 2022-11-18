@@ -47,6 +47,7 @@ export class AddFormationComponent implements OnInit {
       this.Competences = this.formBuilder.group({
         title:['', Validators.required],
         periodec: ['', Validators.required],
+        description: ['', Validators.required],
         dateRenouvellement:['', Validators.required],
         formationFile: ['', Validators.required],
         habilitation: ['', Validators.required],
@@ -152,8 +153,7 @@ saveformation(){
   this.uploadformationFile(this.fileToUploadformationFile);
 
   const forma={
-    employee: null,
-    formation: {
+
       title: this.Competences.value.title,
       description: this.Competences.value.description,
       periodec: this.Competences.value.periodic,
@@ -170,7 +170,6 @@ saveformation(){
         },
       ],
       attacheDocsList: this.shortLinkformationFile$,
-    },
 
   };
   console.log(forma)

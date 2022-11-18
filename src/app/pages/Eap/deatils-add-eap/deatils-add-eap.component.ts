@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Employe } from 'src/app/models/Employe';
 import { EapService } from 'src/app/services/eap.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 
@@ -10,7 +11,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
   styleUrls: ['./deatils-add-eap.component.css']
 })
 export class DeatilsAddEapComponent implements OnInit {
-  @Input() currentEmployee:any
+  @Input() currentEmployee:Employe
 
   datePipe = new DatePipe('en-US');
 
@@ -63,14 +64,12 @@ export class DeatilsAddEapComponent implements OnInit {
     this.fileToUploadeap = <File>event.target.files[0];
   }
 
-  saveEap() {
+  async saveEap() {
     this.uploadeapf(this.fileToUploadeap);
     const Eap = {
       description: 'test',
-      dateEap: this.datePipe.transform(
+      dateEap:
         this.EapFrm.value.dateEap,
-        'dd-MM-yyyy'
-      ),
       employee: {
         id: Number(this.currentEmployee.id),
       },

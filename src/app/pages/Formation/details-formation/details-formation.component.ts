@@ -142,12 +142,18 @@ export class DetailsFormationComponent implements OnInit {
     });
   }
   async getFormations(id: any, x: any) {
-    this.formationService
-      .getByRelationEmpId(id)
-      .subscribe((data: Formation) => {
+   await this.formationService
+      .getByRelationEmpId(id).toPromise()
+      .then((data : any) => {
         this.formations$[x] = data;
         console.log(this.formations$[x]);
+      })
+      .catch((error) => {
+        this.isdeletedfailed = true;
+          this.errorMessage = error.message;
+          console.error(error);
       });
+
   }
   deleteFormation(id: number): void {
     // this.formationService.get(1);

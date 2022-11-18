@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Eap } from 'src/app/models/Eap';
+import { Employe } from 'src/app/models/Employe';
 import { EapService } from 'src/app/services/eap.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 
@@ -11,7 +12,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
   styleUrls: ['./details-eap.component.css']
 })
 export class DetailsEapComponent implements OnInit {
-@Input() currentEmployee:any
+@Input() currentEmployee:Employe
 
 datePipe = new DatePipe('en-US');
 

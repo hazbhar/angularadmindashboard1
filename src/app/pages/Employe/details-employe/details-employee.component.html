@@ -243,6 +243,14 @@
                     type="submit"
                     class="submit"(click)="editEmp()">Update </button>
                 </div>
+                <div class="row mb-3" *ngIf="isaddedfailed" class="alert
+                alert-danger" role="alert">
+                Updating Employee failed: {{ errorMessage }}
+              </div>
+
+              <div class="row mb-3" *ngIf="submitted" class="alert alert-success">
+                <h4>Employee was Updated successfully!</h4>
+              </div>
               </form>
             </div>
           </div>

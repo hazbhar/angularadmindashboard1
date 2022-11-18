@@ -15,6 +15,6 @@ export class User{
   enabled: boolean ;
   authentifications:Authentification;
   employee:Employe;
-  roles: Array<Role> ;
-  privileges :Array<Privilege>;
+  roles: Role[] ;
+  privileges :Privilege[];
 }

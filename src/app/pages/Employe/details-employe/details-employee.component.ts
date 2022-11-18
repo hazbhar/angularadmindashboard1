@@ -203,7 +203,21 @@ export class DetailsEmployeeComponent implements OnInit {
       return false
   }
 
-  editEmp() {window.location.reload();}
+  editEmp() {
+    console.log(JSON.stringify(this.currentEmployee$))
+    this.submitted=false
+    this.isupdatedfailed=false
+    this.employeeService.update(this.currentEmployee$.id,this.currentEmployee$).subscribe({
+      next:(data:any)=>{
+        console.log(data)
+        this.submitted=true
+      },
+      error:(error)=>{
+        console.log(error)
+        this.isupdatedfailed=true
+      }
+    })
+  }
 
 
 }

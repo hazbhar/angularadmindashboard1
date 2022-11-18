@@ -1,5 +1,4 @@
 import { DatePipe } from '@angular/common';
-import { JSDocComment } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -8,7 +7,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { delay } from 'rxjs';
 import { Authentification } from 'src/app/models/Authentification';
 import { CivilState } from 'src/app/models/CivilState';
 
@@ -20,6 +18,7 @@ import { Service } from 'src/app/models/Service';
 import { Site } from 'src/app/models/Site';
 import { typeContrat } from 'src/app/models/TypeContrat';
 import { TypeOfStaff } from 'src/app/models/TypeOfStaff';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmployeService } from 'src/app/services/employe.service';
 import { EtatcivilService } from 'src/app/services/etatcivil.service';
@@ -83,7 +82,6 @@ export class AddEmployeComponent implements OnInit {
    * add employe step value
    */
   step = 1;
-
   /**
    * observable variables
    */
@@ -134,24 +132,9 @@ export class AddEmployeComponent implements OnInit {
   loading: boolean = false; // Flag variable
 
   /**
-   * user to get from form step 5
-   */
-  user: {
-    username: any;
-    password: any;
-    confPassword: any;
-    email: any;
-    confEmail: any;
-    enabled: boolean;
-    validity: boolean;
-    visibility: boolean;
-    roles: any;
-    privileges: any;
-  };
-  /**
    * observable user from add user in add employee
    */
-  usr$: any;
+  usr$: User;
   athpassd: boolean = false;
 
   constructor(
@@ -175,11 +158,11 @@ export class AddEmployeComponent implements OnInit {
      * creating forms groups
      */
     this.Infosgenerales = this.formBuilder.group({
-      Nom: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+')]],
-      Prenom: ['', [Validators.required, Validators.pattern("^[a-zA-Z -']+")]],
-      DateNaissance: ['', Validators.required],
-      Cin: ['', Validators.required],
-      civilState: [''],
+      Nom: new FormControl('',[Validators.required, Validators.pattern('^[a-zA-Z ]+')]),
+      Prenom: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z -']+")]),
+      DateNaissance:new FormControl( '', [Validators.required]),
+      Cin:new FormControl( '', Validators.required),
+      civilState:new FormControl(''),
     });
 
     this.Infoscontratdutravail = this.formBuilder.group({
@@ -206,11 +189,11 @@ export class AddEmployeComponent implements OnInit {
     this.Infosdesecurite = this.formBuilder.group(
       {
         username: new FormControl('', Validators.required),
-        email: new FormControl(['', [Validators.required,Validators.email]]),
-        confirmEmail: new FormControl(['', [Validators.required,Validators.email]]),
+        email: new FormControl('', [Validators.required,Validators.email]),
+        confirmEmail: new FormControl('', [Validators.required,Validators.email]),
         typeAuth: new FormControl('', Validators.required),
-        password: new FormControl(['',[ Validators.minLength(6)]]),
-        confirmPassword: new FormControl(['',[ Validators.minLength(6)]]),
+        password: new FormControl('',[ Validators.minLength(6)]),
+        confirmPassword: new FormControl('',[ Validators.minLength(6)]),
         role: new FormControl('', Validators.required),
         privilege: new FormControl('', Validators.required),
       },
@@ -849,7 +832,6 @@ export class AddEmployeComponent implements OnInit {
 
       })
       .catch((error) => {
-        console.log(this.user);
         console.log('adding emp failed ');
         this.errorMessage = error.message;
         this.employyeefailedadd=true;
@@ -880,7 +862,7 @@ export class AddEmployeComponent implements OnInit {
       }
     }
 
-    this.user = {
+      const user = {
       username: this.Infosdesecurite.value.username,
       password: this.Infosdesecurite.value.password,
       confPassword: this.Infosdesecurite.value.confirmPassword,
@@ -894,7 +876,7 @@ export class AddEmployeComponent implements OnInit {
     };
 
     this.userService
-      .create(authidty, this.user)
+      .create(authidty, user)
       .toPromise()
       .then((res) => {
         console.log(res);
@@ -904,7 +886,7 @@ export class AddEmployeComponent implements OnInit {
 
       })
       .catch((error) => {
-        console.log(this.user);
+        console.log(user);
         console.log('adding user failed ');
         this.errorMessage = error.message;
         this.userfailedadd=false;
@@ -921,7 +903,6 @@ deleteuser(id:any){
     this.userdeleted=true;
   })
   .catch((error) => {
-    console.log(this.user);
     console.log('deleting user failed ');
     this.errorMessage = error.message;
     this.userdeleted=false;

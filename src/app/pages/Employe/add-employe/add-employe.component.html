@@ -285,26 +285,24 @@
           <div *ngIf="typePersonnel==2" class="row mb-3">
             <legend class="col-form-label col-sm-3 pt-0">Mise a disposition *</legend>
             <div class="col-sm-9">
-              <div class="form-check form-check-inline">
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input"
+                <div class="custom-control custom-radio custom-control-inline" style="text-align: left;">
+                  <input type="radio" class="custom-control-input" style="width: inherit;margin-right: 10px"
                     formControlName="available" name="available" id="available"
                     value="true" [required]="typePersonnel==2">
                   <label class="custom-control-label" for="defaultInline1">Oui</label>
                 </div>
                 <!-- Default inline 2-->
-                <div class="custom-control custom-radio custom-control-inline">
+                <div class="custom-control custom-radio custom-control-inline" style="text-align: left;">
                   <input type="radio" class="custom-control-input"
                     formControlName="available" name="available" id="available"
-                    value="false" [required]="typePersonnel==2">
+                    value="false" [required]="typePersonnel==2" style="width: inherit;margin-right: 10px">
                   <label class="custom-control-label" for="defaultInline2">Non</label>
                 </div>
               </div>
-            </div>
           </div>
 
           <div *ngIf="typePersonnel==2" class="row mb-3">
-            <label class="col-sm-3 col-form-label">nom Societe</label>
+            <label class="col-sm-3 col-form-label">nom Societe *</label>
             <div class="col-sm-9"> <input class="form-control"
                 formControlName="nomSociete" type="text" name="nomSociete"
                 id="nomSociete" placeholder="nom Societe..."
@@ -528,25 +526,25 @@
 
                 <div class="row mb-3">
                   <label class="col-sm-3 col-form-label">periodique *</label>
-                  <div class="form-check form-check-inline">
+                  <div class="col-sm-9" >
                     <div class="custom-control custom-radio
-                      custom-control-inline">
+                      custom-control-inline" style="text-align: left;">
                       <input type="radio" class="custom-control-input"
                         name="periodec{{i}}"
                         id="periodec{{i}}" value=true
                         [checked]="periodiq[i]"
-                        (change)="onChangeperiodique($event,i)" required>
+                        (change)="onChangeperiodique($event,i)" required style="width: inherit;margin-right: 10px">
                       <label class="custom-control-label" for="periodec">Oui</label>
                     </div>
                     <!-- Default inline 2-->
                     <div class="custom-control custom-radio
-                      custom-control-inline">
+                      custom-control-inline" style="text-align: left;">
                       <input type="radio" class="custom-control-input"
                         name="periodec{{i}}"
                         id="periodec{{i}}" value=false
 
                         [checked]="!periodiq[i]"
-                        (change)="onChangeperiodique($event,i)" required>
+                        (change)="onChangeperiodique($event,i)" required style="width: inherit;margin-right: 10px">
                       <label class="custom-control-label" for="periodec">Non</label>
                     </div>
                   </div>
@@ -664,22 +662,23 @@
 
           <div class="row mb-3">
             <label class="col-sm-3 col-form-label">type Auth *</label>
-            <div class="custom-control custom-radio custom-control-inline">
+            <div class="col-sm-9" >
+            <div class="custom-control custom-radio custom-control-inline" style="text-align: left;">
               <input type="radio" class="custom-control-input" name="typeAuth"
                 formControlName="typeAuth" id="typeAuth" value="mdp"
                 [(ngModel)]="typeAuth" (change)="onChange($event)" checked
-                required>
+                required style="width: inherit;margin-right: 10px">
               <label class="custom-control-label" for="typeAuth">Mot de passe
               </label>
             </div>
             <!-- Default inline 2-->
-            <div class="custom-control custom-radio custom-control-inline">
+            <div class="custom-control custom-radio custom-control-inline" style="text-align: left;">
               <input type="radio" class="custom-control-input" name="typeAuth"
                 formControlName="typeAuth" id="typeAuth" value="ldap"
-                [(ngModel)]="typeAuth" (change)="onChange($event)" required>
+                [(ngModel)]="typeAuth" (change)="onChange($event)" required style="width: inherit;margin-right: 10px">
               <label class="custom-control-label" for="typeAuth">LDAP</label>
             </div>
-
+          </div>
           </div>
           <div *ngIf="typeAuth=='mdp'" class="row mb-3">
             <label class="col-sm-3 col-form-label">Password *</label>

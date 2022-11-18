@@ -41,13 +41,15 @@ export class EditFormationComponent implements OnInit {
 
   editFormation(formation: Formation): void {
     console.log('test ');
-
+    formation.periodec=this.periodiq
     this.formationService.update(formation).subscribe({
       next: (res: any) => {
         console.log(res);
         this.submitted = true;
       },
-      error: (e: any) => console.error(e),
+      error: (e: any) =>{ console.error(e);
+        this.isaddedfailed=true
+      }
     });
   }
 

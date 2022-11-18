@@ -14,59 +14,60 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Edit User</h5>
-            <form >
-
-
-            <!--        validators       -->
-
-            <!--        formgroup       -->
-
+            <form *ngIf="!currentUser">
+              <div class="alert
+              alert-danger">
+                <label>cannot Access this User</label>
+              </div>
+            </form>
+            <form *ngIf="currentUser" id="msform">
             <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">user name</label>
+              <label class="col-sm-2 col-form-label">user name *</label>
               <div class="col-sm-10"> <input
                 type="text"
                 class="form-control"
                 id="username"
                 [(ngModel)]="currentUser.username"
-                name="username"
+                name="username" required
                 />
               </div>
             </div>
 
             <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">Email</label>
+              <label class="col-sm-2 col-form-label">Email *</label>
               <div class="col-sm-10"><input
                 type="text"
                 class="form-control"
-                id="username"
+                id="email"
                 [(ngModel)]="currentUser.email"
-                name="username"
-                />
+                name="email"
+                required />
               </div>
             </div>
 
 
             <div class="row mb-3">
-              <label class="col-sm-2 col-form-label">type Auth</label>
-              <div class="custom-control custom-radio custom-control-inline">
+              <label class="col-sm-2 col-form-label">type Auth *</label>
+              <div class="col-sm-9" >
+              <div class="custom-control custom-radio custom-control-inline" style="text-align: left;">
                 <input type="radio" class="custom-control-input" name="typeAuth"
                   id="typeAuth" value="mdp"
                   [(ngModel)]="typeAuth" (change)="onChange($event)" [checked]="currentUser.password"
-                  required>
+                  required style="width: inherit;margin-right: 10px">
                 <label class="custom-control-label" for="typeAuth">Mot de passe</label>
               </div>
               <!-- Default inline 2-->
-              <div class="custom-control custom-radio custom-control-inline">
+              <div class="custom-control custom-radio custom-control-inline" style="text-align: left;">
                 <input type="radio" class="custom-control-input" name="typeAuth"
                  id="typeAuth" value="ldap" [checked]="!currentUser.password"
-                  [(ngModel)]="typeAuth" (change)="onChange($event)" required>
+                  [(ngModel)]="typeAuth" (change)="onChange($event)" required style="width: inherit;margin-right: 10px">
                 <label class="custom-control-label" for="typeAuth">LDAP</label>
               </div>
-
+            </div>
             </div>
 
             <div class="row mb-3">
-              <legend class="col-sm-2 col-form-label ">Role</legend>
+              <legend class="col-sm-2 col-form-label ">Role *</legend>
               <div class="col-sm-10">
                 <select multiple class="form-select" name="role"
                  id="role"
@@ -79,7 +80,7 @@
             </div>
 
             <div class="row mb-3">
-              <legend class="col-sm-2 col-form-label ">privileges</legend>
+              <legend class="col-sm-2 col-form-label ">privileges *</legend>
               <div class="col-sm-10">
                 <select multiple class="form-select" name="privilege"
                    id="privilege"
@@ -94,16 +95,14 @@
               <label class="col-sm-2 col-form-label"><strong>enable:</strong></label>
               <div class="form-check form-switch col-sm-10" style="padding-top: 6px"> <input
                   class="form-check-input" type="checkbox" name="enabled"
-                  id="enable" [(ngModel)]="currentUser.enabled" [checked]="currentUser.enabled"> <label class="form-check-label"
-                  for="enable">switch to change </label></div>
+                  id="enable" [(ngModel)]="currentUser.enabled" [checked]="currentUser.enabled" required> </div>
             </div>
 
             <div class="form-group row mb-3">
               <label  class="col-sm-2 col-form-label"><strong>valide: </strong></label>
               <div class="form-check form-switch col-sm-10" style="padding-top: 6px"> <input
                   class="form-check-input" type="checkbox" name="valide"
-                  id="valide" [(ngModel)]="currentUser.validity" [checked]="currentUser.validity"> <label class="form-check-label"
-                  for="valide"> switch to change</label></div>
+                  id="valide" [(ngModel)]="currentUser.validity" [checked]="currentUser.validity" required> </div>
             </div>
                 <div class="text-center">
                   <button
@@ -112,9 +111,10 @@
                     (click)="updateUser()">
                     Update
                   </button>
-                  <p>{{ message }}</p>
-                </div>
 
+                </div>
+<div *ngIf="submitted" class="alert alert-success"><label>this User was Updated successfully</label></div>
+<div *ngIf="isaddedfailed" class="alert alert-danger">Error wihle Updating</div>
               <div *ngIf="!currentUser.id">
                 <br />
                 <div class="text-center">

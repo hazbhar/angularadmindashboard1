@@ -32,7 +32,7 @@ export class EmployeService {
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put<any>(this.config.API_EMPLOYE+"update?id="+id, data).pipe(retry(1), catchError(this.errorHandl));
+    return this.http.put<any>(this.config.API_EMPLOYE+"update?id="+id+"&siteId="+data.site.id+"&civilStateId="+data.civilState.id+"&typeStaffId="+data.typeOfStaff.id, data).pipe(retry(1), catchError(this.errorHandl));
   }
 
   delete(id: any): Observable<any> {
