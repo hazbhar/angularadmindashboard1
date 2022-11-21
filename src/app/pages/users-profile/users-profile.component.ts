@@ -19,8 +19,15 @@ export class UsersProfileComponent implements OnInit {
   newpassword:any;
   confnewpass:any
 
+  oldemail:any;
+  newemail:any;
+  confnewemail:any
+
   updatePass=false;
   faildupdatpass=false;
+
+  updateEmail=false;
+  faildupdatEamil=false;
 
   constructor(private storageService: StorageService,private userService:UserService) {}
 
@@ -45,6 +52,11 @@ export class UsersProfileComponent implements OnInit {
       },
     })
   }
+
+  updateEamill(){
+
+  }
+
   updateinfo(){
 
   }

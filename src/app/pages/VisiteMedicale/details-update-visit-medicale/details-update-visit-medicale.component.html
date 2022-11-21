@@ -1,0 +1,65 @@
+<form id="msform" >
+  <h2 class="fs-title">Infos des visite Medicales </h2>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">visite Medicales *</label>
+    <div class="col-sm-9"> <input multiple
+        class="form-control"
+        type="file"
+        (change)="handleFileIvisiteMedicales($event)"
+        name="visiteMedicales" id="visiteMedicales"
+        required>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="DateFinContrat" class="col-sm-3
+      col-form-label">Date
+      visite Medicale *</label>
+    <div class="col-sm-9"> <input type="date"
+        name="DateFinContrat"
+        id="DateFinContrat"
+        class="form-control"
+        [(ngModel)]="element.dateOfMv"
+        required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="DateProchVisiteMedicale" class="col-sm-3
+      col-form-label">Date
+      Prochaine visite Medicale *</label>
+    <div class="col-sm-9"> <input type="date"
+        name="DateProchVisiteMedicale"
+        id="DateProchVisiteMedicale"
+        [(ngModel)]="element.dateOfNextMv"
+        class="form-control" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="text-center">
+      <button
+        type="submit"
+        class="submit"(click)="updateVistMed(element)">Update
+      </button>
+      <button class="btn
+      btn-danger" (click)="deleteVisitMed(element.id)">Delete</button>
+    </div>
+  </div>
+  <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+alert-danger" role="alert">
+Updating visite Medicale  failed: {{ errorMessage }}
+</div>
+
+<div class="row mb-3" *ngIf="submitted" class="alert
+alert-success">
+<h4>visite Medicale  was Updated successfully!</h4>
+</div>
+  <div class="row mb-3" *ngIf="deleted" class="alert
+alert-success">
+<h4>visite Medicale was deleted successfully!</h4>
+</div>
+<div class="row mb-3" *ngIf="isdeletedfailed" class="alert
+alert-danger" role="alert">
+deleting visite Medicale failed: {{ errorMessage }}
+</div>
+</form>

@@ -1,0 +1,39 @@
+<form id="msform">
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Attribution *:</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="text"
+        [(ngModel)]="element.title"
+        name="attribution"
+        id="attribution" placeholder="attribution..." required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Attribution File *</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="file"
+
+        name="Attributionf"
+        (change)="handleFileInputAttributionf($event)"
+        id="Attributionf" placeholder="Attribution..." required>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button (click)="updateAttribution(element.id,element)"
+      type="submit" name="submit" class="submit">Update</button>
+      <button (click)="delAttribu(element.id)" class="btn
+      btn-danger">Delete (-)</button>
+
+  </div>
+  <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+    alert-danger" role="alert">
+    Updating Attribution failed: {{ errorMessage }}
+  </div>
+
+  <div class="row mb-3" *ngIf="submitted">
+    <h4>Attribution was Updated successfully!</h4>
+  </div>
+
+
+</form>

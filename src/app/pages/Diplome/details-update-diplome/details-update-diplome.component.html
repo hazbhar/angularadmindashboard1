@@ -1,0 +1,54 @@
+<form id="msform" >
+  <h2 class="fs-title">Infos des Diplomes </h2>
+
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Titre *</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="text"
+        name="title"
+        id="title" [(ngModel)]="element.title" required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Spécialité *:</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="text" name="specialite"
+        id="specialite" [(ngModel)]="element.speciality"
+        required>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">diplome file *</label>
+    <div class="col-sm-9"> <input class="form-control"
+        type="file"
+        (change)="handleFileInputdiplomefile($event)"
+        name="diplomesfile" id="diplomesfile"
+        required>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button (click)="updatediplom(element.id,element)"
+      type="submit" name="submit" class="submit">Update</button>
+      <button class="btn
+      btn-danger"
+      (click)="deletediplom(element.id)">Delete </button>
+  </div>
+  <div class="row mb-3" *ngIf="isupdatedfailed" class="alert
+    alert-danger" role="alert">
+    Updating Diplome failed: {{ errorMessage }}
+  </div>
+
+  <div class="row mb-3" *ngIf="submitted" class="alert
+  alert-success">
+    <h4>Diplome was updated successfully!</h4>
+  </div>
+  <div class="row mb-3" *ngIf="deleted" class="alert
+  alert-success">
+    <h4>Diplome was deleted successfully!</h4>
+  </div>
+  <div class="row mb-3" *ngIf="isdeletedfailed" class="alert
+  alert-danger" role="alert">
+  Deleting Diplome failed: {{ errorMessage }}
+</div>
+</form>

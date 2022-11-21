@@ -14,29 +14,16 @@ import { MedicalVisiteService } from 'src/app/services/medical-visite.service';
 export class DetailsVisitMedComponent implements OnInit {
 @Input() currentEmployee:Employe
 
-datePipe = new DatePipe('en-US');
-
-isupdatedfailed = false;
-isaddedfailed = false;
-submitted = false;
-deleted = false;
-isdeletedfailed = false;
 errorMessage = '';
-message = '';
 
 addVisitMed = false;
 
 
 
-  shortLinkvisiteMedicalesf$: any = [];
-
-
-  fileToUploadvisiteMedicales: File[] = [];
-
   medicalvisit$: MedicalVisit[] = [];
   visible = true;
 
-  constructor( private medicalVisiteService: MedicalVisiteService,private fileUploadService: FileUploadService, public datepipe: DatePipe,private formBuilder: FormBuilder) { }
+  constructor( private medicalVisiteService: MedicalVisiteService) { }
 
   toggleCollapse(): void {
     this.visible = !this.visible;
@@ -55,85 +42,16 @@ addVisitMed = false;
   }
 
 
-  handleFileIvisiteMedicales(event: any) {
-    for (var i = 0; i < event.target.files.length; i++) {
-      this.fileToUploadvisiteMedicales.push(<File>event.target.files[i]);
-    }
-  }
-
-
-
-  async uploadvisiteMedicalesf(fil: File[]) {
-    console.log('uploadvisiteMedicalesf');
-    console.log(fil);
-    console.log(fil.length);
-    for (let f of fil) {
-      const formData = new FormData();
-
-      formData.append('document', f);
-
-      await this.fileUploadService
-        .upload(formData)
-        .toPromise()
-        .then((res) => {
-          console.log(res);
-
-          this.shortLinkvisiteMedicalesf$.push(res);
-        })
-        .catch((error) => {
-          this.errorMessage = error.message;
-          this.isaddedfailed = true;
-        });
-    }
-  }
-
-
-
   async  getMedicalvisits(id: any, x: any) {
-   await this.medicalVisiteService.get(id).subscribe({
-    next: (data) => {
-      this.medicalvisit$[x] = data;
-      console.log(this.medicalvisit$[x]);
-    },
-    error: (e) => console.error(e),
-  });
+   await this.medicalVisiteService.get(id).toPromise()
+   .then((data :any) => {
+    this.medicalvisit$[x] = data;
+    console.log(this.medicalvisit$[x]);
+   })
+   .catch((error) => {
+     this.errorMessage = error.message;
+
+   });
 }
 
-  /**
-   * getting values inserted in the forms
-   */
-
-   updateVistMed(med: any) {
-    this.message = '';
-    console.log(med);
-    this.medicalVisiteService.update(med.id, med).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.message = res.message
-          ? res.message
-          : 'This medical visit was updated successfully!';
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-
-  deleteVisitMed(id : any){
-    this.medicalVisiteService.delete(id).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.message = res.message
-          ? res.message
-          : 'This medical visit was deleted successfully!';
-          this.isdeletedfailed=true;
-      },
-      error: (e) => console.error(e),
-    });
-  }
-
-  resetshortlinks() {
-    console.log('reseting short links ');
-
-    this.shortLinkvisiteMedicalesf$ = [];
-  }
 }

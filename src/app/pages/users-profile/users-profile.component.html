@@ -35,6 +35,9 @@
               <li class="nav-item"> <button class="nav-link"
                   data-bs-toggle="tab"
                   data-bs-target="#profile-change-password">Change Password</button></li>
+                  <li class="nav-item"> <button class="nav-link"
+                    data-bs-toggle="tab"
+                    data-bs-target="#profile-change-email">Change Email</button></li>
             </ul>
             <div class="tab-content pt-2">
               <div class="tab-pane fade show active profile-overview"
@@ -54,10 +57,12 @@
                   <div class="col-lg-3 col-md-4 label">Date de Naissance </div>
                   <div class="col-lg-9 col-md-8">{{employe.dateOfBirth}}</div>
                 </div>
+
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-3 col-md-4 label">Email </div>
                   <div class="col-lg-9 col-md-8">{{user.email}}</div>
                 </div>
+
               </div>
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                 <form>
@@ -98,13 +103,7 @@
                       type="Date" class="form-control" id="dateOfBirth"
                       value="{{employe.dateOfBirth}}"></div>
                   </div>
-                  <div class="row mb-3">
-                    <label for="Email" class="col-md-4 col-lg-3
-                      col-form-label">Email</label>
-                    <div class="col-md-8 col-lg-9"> <input name="Email"
-                        type="text" class="form-control" id="Email"
-                        value="{{user.email}}"></div>
-                  </div>
+
                   <div class="text-center"> <button type="submit" class="btn
                       btn-primary">Save Changes</button></div>
                 </form>
@@ -135,6 +134,40 @@
                   </div>
                   <div class="text-center"> <button type="submit" class="btn
                       btn-primary" (click)="updatePassword()">Change Password</button></div>
+                </form>
+              </div>
+              <div class="tab-pane fade pt-3" id="profile-change-email">
+                <form>
+                  <div class="row mb-3">
+                    <label for="currentEmil" class="col-md-4 col-lg-3
+                      col-form-label">Current Email</label>
+                    <div class="col-md-8 col-lg-9"> <input name="email"
+                        type="email" class="form-control"
+                        id="currentEamil" [(ngModel)]="oldemail" required></div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="currentPassword" class="col-md-4 col-lg-3
+                      col-form-label">Current Password</label>
+                    <div class="col-md-8 col-lg-9"> <input name="password"
+                        type="password" class="form-control"
+                        id="currentPassword" [(ngModel)]="oldpassword" required></div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="newEmail" class="col-md-4 col-lg-3
+                      col-form-label">New Email</label>
+                    <div class="col-md-8 col-lg-9"> <input name="newemail"
+                        type="email" class="form-control" id="newEamil"
+                        [(ngModel)]="newemail" required></div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="renewEmail" class="col-md-4 col-lg-3
+                      col-form-label">Re-enter New Email</label>
+                    <div class="col-md-8 col-lg-9"> <input name="renewemail"
+                        type="email" class="form-control" id="renewEmail"
+                        [(ngModel)]="confnewemail" required></div>
+                  </div>
+                  <div class="text-center"> <button type="submit" class="btn
+                      btn-primary" >Change Email</button></div>
                 </form>
               </div>
             </div>

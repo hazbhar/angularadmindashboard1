@@ -203,7 +203,7 @@ export class DetailsEmployeeComponent implements OnInit {
       return false
   }
 
-  editEmp() {
+ async editEmp() {
     console.log(JSON.stringify(this.currentEmployee$))
     this.submitted=false
     this.isupdatedfailed=false

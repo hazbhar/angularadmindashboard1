@@ -103,6 +103,7 @@ export class DetailsAddVisitMedicaleComponent implements OnInit {
           console.log('adding Visite Medical failed ');
           this.errorMessage = err.error.message;
           this.isaddedfailed = true;
+
         },
       });
     this.shortLinkvisiteMedicalesf$ = [];

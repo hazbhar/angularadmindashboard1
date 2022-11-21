@@ -70,6 +70,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { authInterceptorProviders } from './helpers/auth.interceptors';
+import { DetailsUpdateDiplomeComponent } from './pages/Diplome/details-update-diplome/details-update-diplome.component';
+import { DetailsUpdateContratComponent } from './pages/Contrat/details-update-contrat/details-update-contrat.component';
+import { DetailsUpdateAttributionComponent } from './pages/Attribution/details-update-attribution/details-update-attribution.component';
+import { DetailsUpdateFormationComponent } from './pages/Formation/details-update-formation/details-update-formation.component';
+import { DetailsUpdateEapComponent } from './pages/Eap/details-update-eap/details-update-eap.component';
+import { DetailsUpdateVisitMedicaleComponent } from './pages/VisiteMedicale/details-update-visit-medicale/details-update-visit-medicale.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +117,12 @@ import { authInterceptorProviders } from './helpers/auth.interceptors';
     DeatilsAddContratComponent,
     DetailsAddVisitMedicaleComponent,
     DetailsAddDiplomeComponent,
+    DetailsUpdateDiplomeComponent,
+    DetailsUpdateContratComponent,
+    DetailsUpdateAttributionComponent,
+    DetailsUpdateFormationComponent,
+    DetailsUpdateEapComponent,
+    DetailsUpdateVisitMedicaleComponent,
 
   ],
   imports: [

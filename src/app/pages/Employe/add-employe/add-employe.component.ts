@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { Authentification } from 'src/app/models/Authentification';
 import { CivilState } from 'src/app/models/CivilState';
-
 import { Frequence } from 'src/app/models/Frequence';
 import { Privilege } from 'src/app/models/Privilege';
 import { Process } from 'src/app/models/Process';
@@ -659,14 +658,12 @@ export class AddEmployeComponent implements OnInit {
     await this.uploadeapf(this.fileToUploadeap);
     await this.uploadvisiteMedicalesf(this.fileToUploadvisiteMedicales);
 
-
     if (this.step == 5) {
       await this.adduser();
-
-
     }
     this.resetshortlinks();
   }
+
   async addemploye() {
     let diplo = [];
     let forma = [];
@@ -815,7 +812,7 @@ export class AddEmployeComponent implements OnInit {
 
       employeeAttributionList: attribu,
     };
-    this.employservice
+   await this.employservice
       .create(
         Number(this.usr$.id),
         this.siteid,
@@ -838,7 +835,7 @@ export class AddEmployeComponent implements OnInit {
         this.deleteuser(Number(this.usr$.id))
       });
   }
-  async  adduser() {
+  async adduser() {
     let prvgl = [];
     let authidty;
 

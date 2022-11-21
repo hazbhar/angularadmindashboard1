@@ -14,31 +14,13 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 export class DetailsEapComponent implements OnInit {
 @Input() currentEmployee:Employe
 
-datePipe = new DatePipe('en-US');
-
-
-isupdatedfailed = false;
-isaddedfailed = false;
-submitted = false;
-deleted = false;
-isdeletedfailed = false;
-isdeleted=false
-errorMessage = '';
-message = '';
-
 addEap = false;
 
-EapFrm!: FormGroup;
-
-
-
-shortLinkeapf$: any;
-
-fileToUploadeap: File;
+errorMessage = '';
 
 eaplist$: Eap[] = [];
 
-  constructor(private eapService: EapService,private fileUploadService: FileUploadService,public datepipe: DatePipe, private formBuilder: FormBuilder) { }
+  constructor(private eapService: EapService) { }
 
   async ngOnInit() {
 
@@ -49,18 +31,6 @@ eaplist$: Eap[] = [];
 
   }
 
-  async uploadeapf(fil: File) {
-    const formData = new FormData();
-    formData.append('document', fil);
-    await this.fileUploadService
-      .upload(formData)
-
-  }
-
-
-  handleFileInputeap(event: any) {
-    this.fileToUploadeap = <File>event.target.files[0];
-  }
 
 
   async getEaps(id: any, x: any) {
@@ -74,40 +44,5 @@ eaplist$: Eap[] = [];
    });
 
   }
-  deleteEap(id:any){
-    this.eapService.delete(id).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.message = res.message
-          ? res.message
-          : 'This eap was deleted successfully!';
-          this.isdeleted=true;
-      },
-      error: (e) => {console.error(e);
-        this.isdeletedfailed=true;
-      }
-    });
-  }
- async updateEap(eap: any) {
-    this.message = '';
-    console.log(eap)
-    eap.dateEap = eap.dateEap;
-    this.eapService.update(eap.id, eap).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.message = res.message
-          ? res.message
-          : 'This eap was updated successfully!';
-          window.location.reload();
-      },
-      error: (e) => console.error(e),
-    });
-  }
 
-
-  resetshortlinks() {
-    console.log('reseting short links ');
-
-    this.shortLinkeapf$ = [];
-  }
 }
